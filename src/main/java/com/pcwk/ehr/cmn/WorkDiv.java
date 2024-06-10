@@ -2,7 +2,7 @@ package com.pcwk.ehr.cmn;
 
 import java.util.List;
 
-public interface WorkDlv<T> extends PLog {
+public interface WorkDiv<T> extends PLog {
 /* WorkDlv  : 재정의하기위해. 
  *  
  *   +-+-+-+-+ +-+-+-+-+ +-+-+-+-+-+-+-+
