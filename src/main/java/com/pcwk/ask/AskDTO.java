@@ -1,6 +1,6 @@
-package ask;
+package com.pcwk.ask;
 
-import cmn.DTO;
+import com.pcwk.ehr.cmn.DTO;
 
 public class AskDTO extends DTO {
 		
