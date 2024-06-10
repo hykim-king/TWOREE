@@ -5,10 +5,16 @@ import com.pcwk.ehr.cmn.DTO;
 public class OffDayDTO extends DTO {
 	private int offDaySeq;
 	private int shopNo;
-	private String clesedDay;
+	private String closedDay;
 	public OffDayDTO() {
 		super();
 		// TODO Auto-generated constructor stub
+	}
+	public OffDayDTO(int offDaySeq, int shopNo, String clesedDay) {
+		super();
+		this.offDaySeq = offDaySeq;
+		this.shopNo = shopNo;
+		this.closedDay = clesedDay;
 	}
 	public int getOffDaySeq() {
 		return offDaySeq;
@@ -22,15 +28,15 @@ public class OffDayDTO extends DTO {
 	public void setShopNo(int shopNo) {
 		this.shopNo = shopNo;
 	}
-	public String getClesedDay() {
-		return clesedDay;
+	public String getClosedDay() {
+		return closedDay;
 	}
-	public void setClesedDay(String clesedDay) {
-		this.clesedDay = clesedDay;
+	public void setClosedDay(String closedDay) {
+		this.closedDay = closedDay;
 	}
 	@Override
 	public String toString() {
-		return "OffDayDTO [offDaySeq=" + offDaySeq + ", shopNo=" + shopNo + ", clesedDay=" + clesedDay + "]";
+		return "OffDayDTO [offDaySeq=" + offDaySeq + ", shopNo=" + shopNo + ", closedDay=" + closedDay + "]";
 	}
 
 }
