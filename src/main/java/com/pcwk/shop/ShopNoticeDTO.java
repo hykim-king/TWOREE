@@ -1,6 +1,6 @@
-package com.pcwk.ehr.shop_eom;
+package com.pcwk.shop;
 
-import com.pcwk.ehr.cmn_eom.DTO;
+import com.pcwk.ehr.cmn.DTO;
 
 public class ShopNoticeDTO extends DTO{
 
