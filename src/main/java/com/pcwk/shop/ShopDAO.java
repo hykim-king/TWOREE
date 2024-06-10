@@ -1,11 +1,21 @@
 package com.pcwk.shop;
 
+import java.sql.Connection;
+
 import java.util.List;
 
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.WorkDiv;
+import com.pcwk.user.ConnectionMaker;
 
 public class ShopDAO implements WorkDiv<ShopDTO>{
+
+	//connectionmaker 생성
+	private ConnectionMaker connectionMaker;
+	
+	public ShopDAO() {
+		connectionMaker = new ConnectionMaker();
+	}
 
 	@Override
 	public List<ShopDTO> doRetrieve(DTO search) {
@@ -15,7 +25,10 @@ public class ShopDAO implements WorkDiv<ShopDTO>{
 
 	@Override
 	public int doSave(ShopDTO param) {
-		// TODO Auto-generated method stub
+		int flag = 0;
+		
+		Connection conn = connectionMaker.getConnection();
+		
 		return 0;
 	}
 

@@ -39,9 +39,5 @@ public class ConnectionMaker implements PLog {
 		}
 		return conn;
 	}
-	
-	
-	
-	
 
 }

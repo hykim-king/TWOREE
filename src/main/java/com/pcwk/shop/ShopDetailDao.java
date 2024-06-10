@@ -2,10 +2,11 @@ package com.pcwk.shop;
 
 import java.util.List;
 
-import com.pcwk.ehr.cmn.DTO;
-import com.pcwk.ehr.cmn.WorkDlv;
 
-public class ShopDetailDao implements WorkDlv<ShopDetailDTO> {
+import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.cmn.WorkDiv;
+
+public class ShopDetailDao implements WorkDiv<ShopDetailDTO> {
 
 	@Override
 	public List<ShopDetailDTO> doRetrieve(DTO search) {
