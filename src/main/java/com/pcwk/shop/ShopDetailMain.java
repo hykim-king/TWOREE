@@ -9,7 +9,7 @@ public class ShopDetailMain implements PLog{
 	
 	public ShopDetailMain() {
 		sdao = new ShopDetailDao();
-		sdto = new ShopDetailDTO(0, "엄기은", "111-111", "서울", "오전근무", "주정차금지", "패널티적용", "", "");
+		sdto = new ShopDetailDTO(0, "엄기은", "111-111", "서울", "오전근무", "주정차금지", "패널티적용", "8", "18");
 	}
 	
 	public void doSave() {

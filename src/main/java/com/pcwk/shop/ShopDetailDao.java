@@ -5,13 +5,11 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
-
-//<<<<<<< HEAD
+ 
 import com.pcwk.ehr.cmn.DBUtil;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.WorkDiv;
-import com.pcwk.user.ConnectionMaker; 
-//>>>>>>> 503b81bacdfe55ab3a4d97d13aefea9397daa76f
+import com.pcwk.user.ConnectionMaker;  
 
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.WorkDiv;
@@ -55,8 +53,8 @@ public class ShopDetailDao implements WorkDiv<ShopDetailDTO> {
 		sb.append("     ?,                        \n");
 		sb.append("     ?,                        \n");
 		sb.append("     ?,                        \n");
-		sb.append("     SYSDATE,                  \n");
-		sb.append("     SYSDATE                   \n");
+		sb.append("     ?,                        \n");
+		sb.append("     ?                         \n");
 		sb.append(" )                             \n");
 		
 		log.debug("1. SQL : {}", sb.toString());
@@ -76,7 +74,7 @@ public class ShopDetailDao implements WorkDiv<ShopDetailDTO> {
 			pstmt.setString(6, param.getParkInfo()); 
 			pstmt.setString(7, param.getReserverInfo()); 
 			pstmt.setString(8, param.getOpenTime()); 
-			pstmt.setString(8, param.getCloseTime());
+			pstmt.setString(9, param.getCloseTime());
 			 
 			flag = pstmt.executeUpdate();  
 			

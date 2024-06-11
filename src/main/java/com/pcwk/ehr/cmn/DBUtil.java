@@ -7,7 +7,6 @@ import java.sql.SQLException;
 
 public class DBUtil {
 	
-<<<<<<< HEAD
 	public static void close(Connection conn, PreparedStatement pstmt ) {
 	
 		if (null != pstmt) {
@@ -20,28 +19,10 @@ public class DBUtil {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-=======
-	//close
-	public static void close(Connection conn,PreparedStatement pstmt) {
-		if(null != pstmt) {
-			try {
-				pstmt.close();
-			} catch (SQLException e) {
-				
-			}
-		}
-		
-		if(null != conn) {
-			try {
-				conn.close();
-			} catch(SQLException e) {
-				
->>>>>>> 64e3eb2f8f15f3fb08af85f73d09ec41131a5ce7
 			}
 		}
 	}
 	
-<<<<<<< HEAD
 	public static void close(Connection conn, PreparedStatement pstmt,ResultSet rs) {
 		if (null != rs) {
 			try {
@@ -61,34 +42,10 @@ public class DBUtil {
 			try {
 				conn.close();
 			} catch (SQLException e) {
-=======
-	public static void close(Connection conn,PreparedStatement pstmt,ResultSet rs) {
-		if(null != pstmt) {
-			try {
-				pstmt.close();
-			} catch (SQLException e) {
-				
-			}
-		}
-		
-		if(null != conn) {
-			try {
-				conn.close();
-			} catch(SQLException e) {
-				
-			}
-		}
-		
-		if(null != rs) {
-			try {
-				rs.close();
-			} catch(SQLException e) {
->>>>>>> 64e3eb2f8f15f3fb08af85f73d09ec41131a5ce7
 				
 			}
 		}
 	}
-<<<<<<< HEAD
 }
 
 
@@ -96,7 +53,3 @@ public class DBUtil {
 
 
 
-=======
-
-}
->>>>>>> 64e3eb2f8f15f3fb08af85f73d09ec41131a5ce7
