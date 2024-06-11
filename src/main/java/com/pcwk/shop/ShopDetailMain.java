@@ -9,27 +9,42 @@ public class ShopDetailMain implements PLog{
 	
 	public ShopDetailMain() {
 		sdao = new ShopDetailDao();
-		sdto = new ShopDetailDTO(0, "¾ö±âÀº", "111-111", "¼­¿ï", "¿ÀÀü±Ù¹«", "ÁÖÁ¤Â÷±İÁö", "ÆĞ³ÎÆ¼Àû¿ë", "8", "18");
+		sdto = new ShopDetailDTO(2, "EOMGIEUN", "000-2222-2222", "ì„œìš¸", "ì˜¤ì „ê·¼ë¬´", "ì£¼ì •ì°¨ê¸ˆì§€", "íŒ¨ë„í‹°ì ìš©", "0800", "1800");
 	}
 	
 	public void doSave() {
 		log.debug("doSave()");
 		int flag = sdao.doSave(sdto);
 		if(1 == flag) {
-			log.debug("¼º°ø:{}",flag);
+			log.debug("success:{}",flag);
 			
 		}else {
-			log.debug("½ÇÆĞ:{}",flag);
+			log.debug("fail:{}",flag);
 		}
 	}
+	
+	public void doUpdate() {
+		log.debug("doUpdate()"); 
+		String updateStr = "_U";
+		sdto.setShopLoc(sdto.getShopLoc()    +updateStr);
+		sdao.doUpdate(sdto);
+		int flag = sdao.doUpdate(sdto);
+		if(1 == flag) {
+			log.debug("success:{}",flag);
+			
+		}else {
+			log.debug("fail:{}",flag);
+		}
+	}
+		 
 	
 	public static void main(String[] args) { 
 		
 		ShopDetailMain m = new ShopDetailMain();
 		//m.doUpdateReadCnt();
 		//m.doRetrieve();
-		//m.doUpdate();
-		m.doSave();
+		m.doUpdate();
+		//m.doSave();
 		//m.doDelete();
 		//m.doSelectOne();
 		//m.addAndGet();

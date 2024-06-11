@@ -3,6 +3,7 @@ package com.pcwk.shop;
 import java.sql.Connection;
 
 
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List; 
@@ -33,12 +34,7 @@ public class ShopDetailDao implements WorkDiv<ShopDetailDTO> {
 		connectionMaker = new ConnectionMaker();
 	}
 	
-	@Override 
-	public List<ShopDetailDTO> doRetrieve(DTO search) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
+	 
 	@Override
 	public int doSave(ShopDetailDTO param) { 
 		int flag = 0;
@@ -103,8 +99,53 @@ public class ShopDetailDao implements WorkDiv<ShopDetailDTO> {
 
 	@Override
 	public int doUpdate(ShopDetailDTO param) {
-		// TODO Auto-generated method stub
-		return 0;
+		int flag = 0;
+		Connection conn = connectionMaker.getConnection();
+		PreparedStatement pstmt = null;
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append(" UPDATE shop_detail      \n");
+		sb.append(" SET                     \n");
+		sb.append("      owner_name   = ?,  \n");
+		sb.append("      shop_tel     = ?,  \n");
+		sb.append("      shop_loc     = ?,  \n");
+		sb.append("      shop_rule    = ?,  \n");
+		sb.append("      park_info    = ?,  \n");
+		sb.append("      reserve_info = ?,  \n");
+		sb.append("      open_time    = ?,  \n");
+		sb.append("      close_time   = ?   \n");
+		sb.append(" WHERE                   \n");
+		sb.append("      shop_no      = ?   \n");
+		
+		log.debug("1. SQL : {}", sb.toString());
+		log.debug("2. Conn : {}", conn);
+		log.debug("3. param : {}", param);
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());  
+			log.debug("4. pstmt : {}", pstmt);
+		
+			pstmt.setString(1, param.getOwnerName());
+			pstmt.setString(2, param.getShopTel()); 
+			pstmt.setString(3, param.getShopLoc()); 
+			pstmt.setString(4, param.getShopRule()); 
+			pstmt.setString(5, param.getParkInfo()); 
+			pstmt.setString(6, param.getReserverInfo()); 
+			pstmt.setString(7, param.getOpenTime()); 
+			pstmt.setString(8, param.getCloseTime());
+			pstmt.setInt(9, param.getShopNo()); 
+			flag = pstmt.executeUpdate();  
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(conn, pstmt);
+			log.debug("5. finally : conn : {} pstmt : {}", conn, pstmt);
+		}
+		log.debug("6. flag : {}", flag);
+		
+		return flag;
+		 
 	}
 
 	@Override
@@ -117,12 +158,20 @@ public class ShopDetailDao implements WorkDiv<ShopDetailDTO> {
 	public ShopDetailDTO doSelectOne(ShopDetailDTO param) {
 		// TODO Auto-generated method stub
 		return null;
+		//#no
 	}
 
 	@Override
 	public int doUpdateReadCnt(ShopDetailDTO param) {
 		// TODO Auto-generated method stub
 		return 0;
+	}
+
+
+	@Override
+	public List<ShopDetailDTO> doRetrieve(DTO search) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }
