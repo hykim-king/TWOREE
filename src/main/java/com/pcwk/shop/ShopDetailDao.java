@@ -6,14 +6,10 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
 
-<<<<<<< HEAD
+import com.pcwk.ehr.cmn.ConnectionMaker;
 //import com.pcwk.ehr.board.DBUtil;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.WorkDlv;
-import com.pcwk.user.ConnectionMaker;
-=======
->>>>>>> 503b81bacdfe55ab3a4d97d13aefea9397daa76f
-
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.WorkDiv;
 
