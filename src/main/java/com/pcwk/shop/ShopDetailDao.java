@@ -6,14 +6,12 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.List;
- 
+import java.util.List; 
 import com.pcwk.ehr.cmn.DBUtil;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.WorkDiv;
-
-
-import com.pcwk.ehr.cmn.ConnectionMaker;
-//import com.pcwk.ehr.board.DBUtil;
+import com.pcwk.ehr.cmn.ConnectionMaker;   
+import com.pcwk.ehr.cmn.ConnectionMaker; 
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.WorkDiv;
 
@@ -22,10 +20,12 @@ import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.WorkDiv;
 import com.pcwk.ehr.cmn.ConnectionMaker; 
 
+import com.pcwk.ehr.cmn.WorkDiv; 
+ 
 
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.WorkDiv;
-
+//왜 자꾸 늘어나는거야
 public class ShopDetailDao implements WorkDiv<ShopDetailDTO> {
 
     private ConnectionMaker connectionMaker;
