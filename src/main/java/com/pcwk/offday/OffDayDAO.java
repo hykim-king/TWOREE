@@ -12,7 +12,6 @@ import com.pcwk.ehr.cmn.DBUtil;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.SearchDTO;
 import com.pcwk.ehr.cmn.WorkDiv;
-import com.pcwk.menu.MenuDTO;
 
 public class OffDayDAO implements WorkDiv<OffDayDTO> {
 	ConnectionMaker connectionMaker;
