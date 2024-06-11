@@ -1,7 +1,7 @@
 package com.pcwk.shop;
 
 import java.sql.Connection;
-
+import java.sql.PreparedStatement;
 import java.util.List;
 
 import com.pcwk.ehr.cmn.DTO;
@@ -28,7 +28,14 @@ public class ShopDAO implements WorkDiv<ShopDTO>{
 		int flag = 0;
 		
 		Connection conn = connectionMaker.getConnection();
+		PreparedStatement pstmt = null;
 		
+		StringBuilder sb = new StringBuilder();
+		
+		
+		log.debug("1. SQL : {}", sb.toString());
+		log.debug("2. Conn : {}", conn);
+		log.debug("3. param : {}", param);
 		return 0;
 	}
 
