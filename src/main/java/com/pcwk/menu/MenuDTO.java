@@ -8,19 +8,22 @@ public class MenuDTO extends DTO {
 	private String menuName;
 	private String menuInfo;
 	private int price;
-	private String regId;
 	public MenuDTO() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public MenuDTO(int menuNO, int shopNo, String menuName, String menuInfo, int price, String regId) {
+	public MenuDTO(int menuNO, int shopNo, String menuName, String menuInfo, int price) {
 		super();
 		this.menuNO = menuNO;
 		this.shopNo = shopNo;
 		this.menuName = menuName;
 		this.menuInfo = menuInfo;
 		this.price = price;
-		this.regId = regId;
+	}
+	@Override
+	public String toString() {
+		return "MenuDTO [menuNO=" + menuNO + ", shopNo=" + shopNo + ", menuName=" + menuName + ", menuInfo=" + menuInfo
+				+ ", price=" + price + "]";
 	}
 	public int getMenuNO() {
 		return menuNO;
@@ -51,12 +54,6 @@ public class MenuDTO extends DTO {
 	}
 	public void setPrice(int price) {
 		this.price = price;
-	}
-	public String getRegId() {
-		return regId;
-	}
-	public void setRegId(String regId) {
-		this.regId = regId;
 	}
 
 }

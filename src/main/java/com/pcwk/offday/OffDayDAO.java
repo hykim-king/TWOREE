@@ -44,48 +44,7 @@ public class OffDayDAO implements WorkDiv<OffDayDTO> {
 
 	@Override
 	public int doSave(OffDayDTO param) {
-		int flag = 0;
-		Connection conn = getConnection();
-		PreparedStatement pstmt = null; // SQL+PARAM
-
-		StringBuilder sb = new StringBuilder(300);
-		sb.append(" INSERT INTO menu ( \n");
-		sb.append("     shop_no,       \n");
-		sb.append("     menu_name,     \n");
-		sb.append("     menu_info,     \n");
-		sb.append("     price          \n");
-		sb.append(" ) VALUES (         \n");
-		sb.append("     ?,             \n");
-		sb.append("     ?,             \n");
-		sb.append("     ?,             \n");
-		sb.append("     ?              \n");
-		sb.append(" )                 \n");
-
-		log.debug("1.sql:{}", sb.toString());
-		log.debug("2.conn:{}", conn);
-		log.debug("3.param:{}", param);
-
-		try {
-			pstmt = conn.prepareStatement(sb.toString());
-			log.debug("4.pstmt:{}", pstmt);
-			/*
-			pstmt.setInt(1, param.getSeq());
-			pstmt.setString(2, param.getContents());
-			pstmt.setInt(3, param.getBoardSeq());
-			pstmt.setString(4, param.getRegId());
-			*/
-			flag = pstmt.executeUpdate();
-
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			DBUtil.close(conn, pstmt);
-			log.debug("5.finally conn:{} pstmt:{}", conn, pstmt);
-		}
-
-		log.debug("6.flag:{}", flag);
-
-		return flag;
+		return 0;
 	}
 
 	@Override
