@@ -1,7 +1,10 @@
 package com.pcwk.offday;
 
+import java.util.List;
+
 import com.pcwk.ehr.cmn.PLog;
 import com.pcwk.ehr.cmn.SearchDTO;
+import com.pcwk.menu.MenuDTO;
 
 
 public class OffDayMain implements PLog {
@@ -37,10 +40,25 @@ public class OffDayMain implements PLog {
 		}
 	}
 	
+	public void doRetrieve() {
+		log.debug(" doRetrieve()");
+		searchVO = new SearchDTO();
+
+		searchVO.setSearchSeq(2);
+		//searchVO.setSearchDiv(null);
+		List <OffDayDTO> list = dao.doRetrieve(searchVO);
+		int i = 0;
+		for (OffDayDTO vo : list) {
+			log.debug("i: {}, vo: {}", ++i, vo);
+		}
+
+	}
+	
 	public static void main(String[] args) {
 		OffDayMain m = new OffDayMain();
 		//m.doSave();
 		//m.doDelete();
+		m.doRetrieve();
 		
 
 	}
