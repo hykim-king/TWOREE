@@ -5,7 +5,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-//왜 자꾸늘어나는거야
 public class DBUtil {
 	
 	public static void close(Connection conn, PreparedStatement pstmt ) {
@@ -23,7 +22,6 @@ public class DBUtil {
 			}
 		}
 	}
-	
 	public static void close(Connection conn, PreparedStatement pstmt,ResultSet rs) {
 		if (null != rs) {
 			try {
@@ -48,9 +46,3 @@ public class DBUtil {
 		}
 	}
 }
-
-
-
-
-
-
