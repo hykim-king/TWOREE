@@ -3,6 +3,7 @@ package com.pcwk.shop;
 import java.util.List;
 
 import com.pcwk.ehr.cmn.PLog;
+import com.pcwk.ehr.cmn.SearchDTO;
 
 public class ShopMain implements PLog{
 	
@@ -63,13 +64,14 @@ public class ShopMain implements PLog{
 	public void doRetrieve() {
 		log.debug("doRetrieve()");
 		
-		ShopDTO searchVO = new ShopDTO();
+		SearchDTO searchVO = new SearchDTO();
 		searchVO.setPageNo(1);
 		searchVO.setPageSize(10);
 		
-		//검색 구분
-		searchVO.setSearchDiv("10");
-		searchVO.setSearchWord("제목");
+		//검색 구분 
+		//10 : 가게 이름으로 검색, 20 : 리뷰 갯수 검색, 30 : 별점순 검색
+		searchVO.setSearchDiv("20");
+		searchVO.setSearchWord("4");
 		List<ShopDTO> list = dao.doRetrieve(searchVO);
 		
 		int i = 0;
@@ -86,7 +88,8 @@ public class ShopMain implements PLog{
 		//m.doSave();
 		//m.doUpdate();
 		//m.doDelete();
-		m.doSelectOne();
+		//m.doSelectOne();
+		m.doRetrieve();
 	}
 
 }

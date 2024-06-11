@@ -239,11 +239,13 @@ public class ShopDAO implements WorkDiv<ShopDTO>{
 //	     --WHERE REVIEW_CNT LIKE :searchWord||'%' "20"
 //	     --WHERE SCORE   = :searchWord			"30"
 		if(null != searchVO.getSearchDiv() &&searchVO.getSearchDiv().equals("10")) {
-			sbWhere.append("WHERE shop_name LIKE ? || '%' ASC\n");
+			sbWhere.append("WHERE shop_name LIKE ? || '%' \n");
 		}else if(null != searchVO.getSearchDiv() &&searchVO.getSearchDiv().equals("20")) {
-			sbWhere.append("WHERE REVIEW_CNT LIKE ? || '%' ASC\n");
+			sbWhere.append("WHERE REVIEW_CNT LIKE ? || '%' \n");
+			sbWhere.append("ORDER BY REVIEW_CNT ASC, SCORE DESC \n");
 		}else if(null != searchVO.getSearchDiv() &&searchVO.getSearchDiv().equals("30")) {
-			sbWhere.append("WHERE SCORE LIKE ? ASC\n");
+			sbWhere.append("WHERE SCORE LIKE ? || '%' \n");
+			sbWhere.append("ORDER BY SCORE ASC, REVIEW_CNT DESC \n");
 		}
 		
 		List<ShopDTO> list = new ArrayList<ShopDTO>();
@@ -293,14 +295,10 @@ public class ShopDAO implements WorkDiv<ShopDTO>{
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			log.debug("4. pstmt : {}", pstmt);
-			try {
-				pstmt = conn.prepareStatement(sb.toString());
-				log.debug("4. pstmt : {}", pstmt);
-				
-				
+						
 				//가게 이름으로 검색
 				if(null != searchVO.getSearchDiv() && searchVO.getSearchDiv().equals("10")) {
-					log.debug("4.1 searchDiv : {}", searchVO.getSearchDiv());
+					log.debug("4.1 searchDiv : 가게명으로 검색 {}", searchVO.getSearchDiv());
 					
 					pstmt.setString(1,  searchVO.getSearchWord());
 					
@@ -317,9 +315,9 @@ public class ShopDAO implements WorkDiv<ShopDTO>{
 					
 				//리뷰 갯수로 검색
 				}else if(null != searchVO.getSearchDiv() && searchVO.getSearchDiv().equals("20")) {
-					log.debug("4.2 searchDiv : {}", searchVO.getSearchDiv());
+					log.debug("4.2 searchDiv : 리뷰 갯수로 검색 {}", searchVO.getSearchDiv());
 					
-					pstmt.setString(1,  searchVO.getSearchWord());
+					pstmt.setString(1,  (String)searchVO.getSearchWord());
 					
 					//ROWNUM
 					pstmt.setInt(2, searchVO.getPageSize());
@@ -330,11 +328,11 @@ public class ShopDAO implements WorkDiv<ShopDTO>{
 					pstmt.setInt(5, searchVO.getPageSize());
 					pstmt.setInt(6, searchVO.getPageNo());
 					
-					pstmt.setString(7,  searchVO.getSearchWord());
+					pstmt.setString(7,  (String)searchVO.getSearchWord());
 					
 				//별점 순서로 검색
 				}else if(null != searchVO.getSearchDiv() && searchVO.getSearchDiv().equals("30")) {
-					log.debug("4.3 searchDiv : {}", searchVO.getSearchDiv());
+					log.debug("4.3 searchDiv : 별점 순서로 검색 {}", searchVO.getSearchDiv());
 					
 					pstmt.setString(1,  searchVO.getSearchWord());
 					
@@ -358,35 +356,37 @@ public class ShopDAO implements WorkDiv<ShopDTO>{
 					pstmt.setInt(4, searchVO.getPageSize());
 					pstmt.setInt(5, searchVO.getPageNo());				
 				}
+			
 			//select 실행
 			rs = pstmt.executeQuery(); 
 			log.debug("5. rs : {}", rs);
 			
 			while(rs.next()) {
 				ShopDTO outVO = new ShopDTO();
-				outVO.setNum(rs.getInt("no"));
-				outVO.setSeq(rs.getInt("seq"));
-				outVO.setContents(rs.getString("Contents"));
-				outVO.setBoardSeq(rs.getInt("board_seq"));
-				outVO.setModId(rs.getString("mod_id"));
-				outVO.setModDt(rs.getString("mod_dt"));
-				
+				outVO.setShopName(rs.getString("shop_name"));
+				log.debug("5.1 성공! shopname : {}, ", rs.getString("shop_name"));
+				outVO.setScore(rs.getInt("score"));
+				log.debug("5.2 성공! score : {}, ", rs.getString("score"));
+				outVO.setReviewCnt(rs.getInt("review_cnt"));
+				log.debug("5.3 성공! review_cnt : {}, ", rs.getString("review_cnt"));
 				list.add(outVO);
-				
 			}
 		}catch(SQLException e) {
 			e.printStackTrace();
 		}finally {
 			DBUtil.close(conn, pstmt, rs);
 		}
+		
 		return list;
+		
 	}
-	
+
+
 	
 	@Override
 	public int doUpdateReadCnt(ShopDTO param) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
 }
+
