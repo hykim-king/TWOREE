@@ -1,26 +1,26 @@
 package com.pcwk.shop;
 
 import com.pcwk.ehr.cmn.DTO;
-
+//update 0611 0630
 public class ShopNoticeDTO extends DTO{
 
 	private     int     noticeNo       ;
 	private     int     shopNo         ;
 	private     String  noticeTitle    ;
-	private     String  noticeWatDate  ;
+	private     String  noticeWrtDate  ;
 	private     String  content        ;
 	private     String  fixed          ;
 	
 	public ShopNoticeDTO() { 
 	}
 
-	public ShopNoticeDTO(int noticeNo, int shopNo, String noticeTitle, String noticeWatDate, String content,
+	public ShopNoticeDTO(int noticeNo, int shopNo, String noticeTitle, String noticeWrtDate, String content,
 			String fixed) {
 		super();
 		this.noticeNo = noticeNo;
 		this.shopNo = shopNo;
 		this.noticeTitle = noticeTitle;
-		this.noticeWatDate = noticeWatDate;
+		this.noticeWrtDate = noticeWrtDate;
 		this.content = content;
 		this.fixed = fixed;
 	}
@@ -49,12 +49,12 @@ public class ShopNoticeDTO extends DTO{
 		this.noticeTitle = noticeTitle;
 	}
 
-	public String getNoticeWatDate() {
-		return noticeWatDate;
+	public String getNoticeWrtDate() {
+		return noticeWrtDate;
 	}
 
-	public void setNoticeWatDate(String noticeWatDate) {
-		this.noticeWatDate = noticeWatDate;
+	public void setNoticeWrtDate(String noticeWrtDate) {
+		this.noticeWrtDate = noticeWrtDate;
 	}
 
 	public String getContent() {
@@ -76,14 +76,7 @@ public class ShopNoticeDTO extends DTO{
 	@Override
 	public String toString() {
 		return "ShopNoticeDTO [noticeNo=" + noticeNo + ", shopNo=" + shopNo + ", noticeTitle=" + noticeTitle
-				+ ", noticeWatDate=" + noticeWatDate + ", content=" + content + ", fixed=" + fixed + ", getTotalCnt()="
-				+ getTotalCnt() + "]";
+				+ ", noticeWrtDate=" + noticeWrtDate + ", content=" + content + ", fixed=" + fixed + "]";
 	}
-	
-	
-	
-	
-	
-	
-	
+ 
 }
