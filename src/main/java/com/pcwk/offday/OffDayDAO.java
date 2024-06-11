@@ -1,46 +1,46 @@
-package com.pcwk.reserve;
+package com.pcwk.offday;
 
 import java.util.List;
 
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.WorkDiv;
 
-public class ReserveDao implements WorkDiv<ReserveDTO> {
+public class OffDayDAO implements WorkDiv<OffDayDTO> {
 
 	@Override
-	public List<ReserveDTO> doRetrieve(DTO search) {
+	public int doUpdate(OffDayDTO param) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public int doUpdateReadCnt(OffDayDTO param) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List<OffDayDTO> doRetrieve(DTO search) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int doSave(ReserveDTO param) {
+	public int doSave(OffDayDTO param) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int doUpdate(ReserveDTO param) {
+	public int doDelete(OffDayDTO param) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int doDelete(ReserveDTO param) {
-		// TODO Auto-generated method stub
-		return 0;
-	}
-
-	@Override
-	public ReserveDTO doSelectOne(ReserveDTO param) {
+	public OffDayDTO doSelectOne(OffDayDTO param) {
 		// TODO Auto-generated method stub
 		return null;
-	}
-
-	@Override
-	public int doUpdateReadCnt(ReserveDTO param) {
-		// TODO Auto-generated method stub
-		return 0;
 	}
 
 }

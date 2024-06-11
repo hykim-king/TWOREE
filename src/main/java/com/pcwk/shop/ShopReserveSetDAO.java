@@ -2,46 +2,45 @@ package com.pcwk.shop;
 
 import java.util.List;
 
-
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.WorkDiv;
 
-public class ShopNoticeDao implements WorkDiv<ShopNoticeDTO> {
+public class ShopReserveSetDAO implements WorkDiv<ShopReserveSetDTO>{
 
 	@Override
-	public List<ShopNoticeDTO> doRetrieve(DTO search) {
+	public List<ShopReserveSetDTO> doRetrieve(DTO search) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int doSave(ShopNoticeDTO param) {
+	public int doSave(ShopReserveSetDTO param) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int doUpdate(ShopNoticeDTO param) {
+	public int doUpdate(ShopReserveSetDTO param) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public int doDelete(ShopNoticeDTO param) {
+	public int doDelete(ShopReserveSetDTO param) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
 	@Override
-	public ShopNoticeDTO doSelectOne(ShopNoticeDTO param) {
+	public ShopReserveSetDTO doSelectOne(ShopReserveSetDTO param) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public int doUpdateReadCnt(ShopNoticeDTO param) {
+	public int doUpdateReadCnt(ShopReserveSetDTO param) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
-
+	
 }

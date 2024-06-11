@@ -4,9 +4,9 @@ import java.util.List;
 
 import com.pcwk.user.ConnectionMaker;
 import com.pcwk.ehr.cmn.DTO;
-import com.pcwk.ehr.cmn.WorkDlv;
+import com.pcwk.ehr.cmn.WorkDiv;
 
-public class UserDao implements WorkDlv<UserDTO> {
+public class UserDao implements WorkDiv<UserDTO> {
 
 	private ConnectionMaker connectionMaker;
 	public UserDao() {
