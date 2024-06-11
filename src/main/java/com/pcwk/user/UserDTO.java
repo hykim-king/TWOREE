@@ -10,7 +10,7 @@ public class UserDTO extends DTO {
 	private String userEmail;
 	private String tel;
 	private String birthday;
-	private char shopAdmin;
+	private String shopAdmin;
 	private String penaltyDate;
 	
 	public UserDTO() {
@@ -18,7 +18,7 @@ public class UserDTO extends DTO {
 	}
 
 	public UserDTO(String userId, String password, String name, String userEmail, String tel, String birthday,
-			char shopAdmin, String penaltyDate) {
+			String shopAdmin, String penaltyDate) {
 		super();
 		this.userId = userId;
 		this.password = password;
@@ -78,11 +78,11 @@ public class UserDTO extends DTO {
 		this.birthday = birthday;
 	}
 
-	public char getShopAdmin() {
+	public String getShopAdmin() {
 		return shopAdmin;
 	}
 
-	public void setShopAdmin(char shopAdmin) {
+	public void setShopAdmin(String shopAdmin) {
 		this.shopAdmin = shopAdmin;
 	}
 
