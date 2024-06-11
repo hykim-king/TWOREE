@@ -4,9 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.util.List;
 
+import com.pcwk.ehr.cmn.ConnectionMaker;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.WorkDiv;
-import com.pcwk.user.ConnectionMaker;
 
 public class ShopDAO implements WorkDiv<ShopDTO>{
 
