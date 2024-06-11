@@ -1,5 +1,5 @@
 package com.pcwk.shop;
- 
+  
 import com.pcwk.ehr.cmn.PLog;
 
 public class ShopDetailMain implements PLog{
@@ -36,18 +36,44 @@ public class ShopDetailMain implements PLog{
 			log.debug("fail:{}",flag);
 		}
 	}
+	
+	public void doDelete() {
+		log.debug("doDelete()");
+		int flag = sdao.doDelete(sdto);
+		if(1 == flag) {
+			log.debug("success:{}",flag);
+			
+		}else {
+			log.debug("fail:{}",flag);
+		}
+	}
+	
+	public ShopDetailDTO deSelectOne() {
+		log.debug("doSelectOne()");  
+		ShopDetailDTO outVO = sdao.doSelectOne(sdto);
+		
+		if(null !=outVO) {
+			log.debug("success:{}"+outVO);
+		}else {
+			log.debug("fail:{}"+outVO);
+		}
+		return outVO;
+	}
+	
+	
 		 
 	
 	public static void main(String[] args) { 
 		
 		ShopDetailMain m = new ShopDetailMain();
+		//m.doSave();      //insert
+		//m.doUpdate();    //update
+		//m.doDelete();    //delete
+		
+		m.deSelectOne(); //select
+		
 		//m.doUpdateReadCnt();
-		//m.doRetrieve();
-		m.doUpdate();
-		//m.doSave();
-		//m.doDelete();
-		//m.doSelectOne();
-		//m.addAndGet();
+	  
 	}
 	
 	
