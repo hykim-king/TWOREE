@@ -8,7 +8,6 @@ public class OffDayDTO extends DTO {
 	private String closedDay;
 	public OffDayDTO() {
 		super();
-		// TODO Auto-generated constructor stub
 	}
 	public OffDayDTO(int offDaySeq, int shopNo, String clesedDay) {
 		super();
