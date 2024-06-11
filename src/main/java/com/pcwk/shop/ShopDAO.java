@@ -2,6 +2,7 @@ package com.pcwk.shop;
 
 import java.sql.Connection;
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -234,8 +235,17 @@ public class ShopDAO implements WorkDiv<ShopDTO>{
 		SearchDTO searchVO = (SearchDTO) search;
 		
 		StringBuilder sbWhere = new StringBuilder();
-//	     --WHERE shop_name LIKE :searchWord||'%' "10"
-			
+//		 --WHERE shop_name    LIKE :searchWord||'%'	"10"
+//	     --WHERE REVIEW_CNT LIKE :searchWord||'%' "20"
+//	     --WHERE SCORE   = :searchWord			"30"
+		if(null != searchVO.getSearchDiv() &&searchVO.getSearchDiv().equals("10")) {
+			sbWhere.append("WHERE shop_name LIKE ? || '%' ASC\n");
+		}else if(null != searchVO.getSearchDiv() &&searchVO.getSearchDiv().equals("20")) {
+			sbWhere.append("WHERE REVIEW_CNT LIKE ? || '%' ASC\n");
+		}else if(null != searchVO.getSearchDiv() &&searchVO.getSearchDiv().equals("30")) {
+			sbWhere.append("WHERE SCORE LIKE ? ASC\n");
+		}
+		
 		List<ShopDTO> list = new ArrayList<ShopDTO>();
 		
 		Connection conn = connectionMaker.getConnection();  //DB 연결
@@ -256,16 +266,24 @@ public class ShopDAO implements WorkDiv<ShopDTO>{
 		sb.append("					SELECT *                        \n");
 		sb.append("					FROM shop                       \n");
 		sb.append("					--WHERE                         \n");
-		sb.append("					ORDER BY shop.review_cnt ASC    \n");
+//----where-----------------------------------------------------------------------------------------------------
+		sb.append(sbWhere.toString());
+				
+//----where-----------------------------------------------------------------------------------------------------
 		sb.append("					                                \n");
 		sb.append("			)T1                                     \n");
-		sb.append("			WHERE ROWNUM <= 11                      \n");
+//		sb.append("			WHERE ROWNUM <= ( :pageSize * (:pageNo -1)+:pageSize) 			                    \n");
+		sb.append("			WHERE ROWNUM <= ( ? * (? -1) + ?)	    \n");
 		sb.append("	 )TT1                                           \n");
-		sb.append("	WHERE rnum >= 1                                 \n");
+//		sb.append("		WHERE rnum >= ( :pageSize * (:pageNo -1)+1)                                   			    \n");
+		sb.append("	WHERE rnum >= ( ? * ( ? -1) +1)                 \n");
 		sb.append(")A,(                                             \n");
 		sb.append("	SELECT COUNT (*) totalCount                     \n");
 		sb.append("		FROM shop                                   \n");
-        sb.append("                                                 \n");
+//----where-----------------------------------------------------------------------------------------------------
+		sb.append(sbWhere.toString());
+				
+//----where-----------------------------------------------------------------------------------------------------
 		sb.append(")B                                               \n");
 		
 		log.debug("1. SQL : {}", sb.toString());
@@ -275,7 +293,71 @@ public class ShopDAO implements WorkDiv<ShopDTO>{
 		try {
 			pstmt = conn.prepareStatement(sb.toString());
 			log.debug("4. pstmt : {}", pstmt);
-			
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				log.debug("4. pstmt : {}", pstmt);
+				
+				
+				//가게 이름으로 검색
+				if(null != searchVO.getSearchDiv() && searchVO.getSearchDiv().equals("10")) {
+					log.debug("4.1 searchDiv : {}", searchVO.getSearchDiv());
+					
+					pstmt.setString(1,  searchVO.getSearchWord());
+					
+					//ROWNUM
+					pstmt.setInt(2, searchVO.getPageSize());
+					pstmt.setInt(3, searchVO.getPageNo());
+					pstmt.setInt(4, searchVO.getPageSize());
+					
+					//rnum
+					pstmt.setInt(5, searchVO.getPageSize());
+					pstmt.setInt(6, searchVO.getPageNo());
+					
+					pstmt.setString(7,  searchVO.getSearchWord());
+					
+				//리뷰 갯수로 검색
+				}else if(null != searchVO.getSearchDiv() && searchVO.getSearchDiv().equals("20")) {
+					log.debug("4.2 searchDiv : {}", searchVO.getSearchDiv());
+					
+					pstmt.setString(1,  searchVO.getSearchWord());
+					
+					//ROWNUM
+					pstmt.setInt(2, searchVO.getPageSize());
+					pstmt.setInt(3, searchVO.getPageNo());
+					pstmt.setInt(4, searchVO.getPageSize());
+					
+					//rnum
+					pstmt.setInt(5, searchVO.getPageSize());
+					pstmt.setInt(6, searchVO.getPageNo());
+					
+					pstmt.setString(7,  searchVO.getSearchWord());
+					
+				//별점 순서로 검색
+				}else if(null != searchVO.getSearchDiv() && searchVO.getSearchDiv().equals("30")) {
+					log.debug("4.3 searchDiv : {}", searchVO.getSearchDiv());
+					
+					pstmt.setString(1,  searchVO.getSearchWord());
+					
+					//ROWNUM
+					pstmt.setInt(2, searchVO.getPageSize());
+					pstmt.setInt(3, searchVO.getPageNo());
+					pstmt.setInt(4, searchVO.getPageSize());
+					
+					//rnum
+					pstmt.setInt(5, searchVO.getPageSize());
+					pstmt.setInt(6, searchVO.getPageNo());
+					
+					pstmt.setString(7,  searchVO.getSearchWord());
+				}else {
+					//ROWNUM
+					pstmt.setInt(1, searchVO.getPageSize());
+					pstmt.setInt(2, searchVO.getPageNo());
+					pstmt.setInt(3, searchVO.getPageSize());
+					
+					//rnum
+					pstmt.setInt(4, searchVO.getPageSize());
+					pstmt.setInt(5, searchVO.getPageNo());				
+				}
 			//select 실행
 			rs = pstmt.executeQuery(); 
 			log.debug("5. rs : {}", rs);
