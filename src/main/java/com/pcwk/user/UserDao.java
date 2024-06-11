@@ -2,7 +2,7 @@ package com.pcwk.user;
 
 import java.util.List;
 
-import com.pcwk.user.ConnectionMaker;
+import com.pcwk.ehr.cmn.ConnectionMaker;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.WorkDiv;
 
