@@ -11,6 +11,7 @@ import java.util.List;
 import com.pcwk.ehr.cmn.ConnectionMaker;
 import com.pcwk.ehr.cmn.DBUtil;
 import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.cmn.Log4j2Main;
 import com.pcwk.ehr.cmn.PLog;
 import com.pcwk.ehr.cmn.SearchDTO;
 import com.pcwk.ehr.cmn.WorkDiv;
@@ -32,13 +33,13 @@ public class reviewDao implements WorkDiv<reviewDTO>, PLog{
 	}
 	public Connection getConnection() {
 		Connection conn = null;
-		Log.debug("1");
+		log.debug("1");
 		try {
 			Class.forName(DB_DRIVER);
-			Log.debug("2");
+			log.debug("2");
 			
 			conn = DriverManager.getConnection(DB_URL, DB_USER, DB_PASSWORD);
-			Log.debug("3 conn: {}", conn);
+			log.debug("3 conn: {}", conn);
 		}catch(ClassNotFoundException e) {
 			e.printStackTrace();
 		}catch(SQLException e) {
@@ -46,6 +47,7 @@ public class reviewDao implements WorkDiv<reviewDTO>, PLog{
 		}
 		return conn;
 	}
+	
 	@Override
 	public int dosave(reviewDTO param) {
 		int flag = 0;
@@ -53,6 +55,25 @@ public class reviewDao implements WorkDiv<reviewDTO>, PLog{
 		PreparedStatement pstmt = null;
 		StringBuilder sb = new StringBuilder();
 		
+		sb.append("INSERT INTO review ( /n");
+		sb.append("    review_no,       /n");
+		sb.append("    shop_no,         /n");
+		sb.append("    user_id,         /n");
+		sb.append("    review_wrt_date, /n");
+		sb.append("    review_mod_date, /n");
+		sb.append("    review_content,  /n");
+		sb.append("    score            /n");
+		sb.append(") VALUES (           /n");
+		sb.append("    :v0,             /n");
+		sb.append("    :v1,             /n");
+		sb.append("    :v2,             /n");
+		sb.append("    :v3,             /n");
+		sb.append("    :v4,             /n");
+		sb.append("    SYSDATE,         /n");
+		sb.append("    SYSDATE          /n");
+		sb.append(");                   /n");
+		
+		log.debug("");
 	}
 	
 }

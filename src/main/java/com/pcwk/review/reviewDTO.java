@@ -6,20 +6,20 @@ public class reviewDTO {
 	
 	private int reviewNo; 					//리뷰 고유 번호
 	private String shopNo; 					// 리뷰 작성받은 가게
-	private String reviewId; 				// 유저 아이디
-	private String userId; 					//리뷰 작성자 아이디
+	private String userId; 				// 유저 아이디
+	private String writerId;					//리뷰 작성자 아이디
 	private String reviewWrtDate; 			//리뷰 작성 날짜
 	private String reviewModDate; 			// 리뷰 수정 시간
 	private String reviewContent; 			// 리뷰 내용
 	private int score; 						// 점수 (1 ~5점)
 	
-	public reviewDTO(int reviewNo, String shopNo, String reviewId, String userId, String reviewWrtDate,
-		String reviewModDate, String reviewContent, int score) {
+	public reviewDTO(int reviewNo, String shopNo, String userId, String writerId, String reviewWrtDate,
+			String reviewModDate, String reviewContent, int score) {
 		super();
 		this.reviewNo = reviewNo;
 		this.shopNo = shopNo;
-		this.reviewId = reviewId;
 		this.userId = userId;
+		this.writerId = writerId;
 		this.reviewWrtDate = reviewWrtDate;
 		this.reviewModDate = reviewModDate;
 		this.reviewContent = reviewContent;
@@ -42,20 +42,20 @@ public class reviewDTO {
 		this.shopNo = shopNo;
 	}
 
-	public String getReviewId() {
-		return reviewId;
-	}
-
-	public void setReviewId(String reviewId) {
-		this.reviewId = reviewId;
-	}
-
 	public String getUserId() {
 		return userId;
 	}
 
 	public void setUserId(String userId) {
 		this.userId = userId;
+	}
+
+	public String getWriterId() {
+		return writerId;
+	}
+
+	public void setWriterId(String writerId) {
+		this.writerId = writerId;
 	}
 
 	public String getReviewWrtDate() {
@@ -92,13 +92,15 @@ public class reviewDTO {
 
 	@Override
 	public String toString() {
-		return "reviewDTO [reviewNo=" + reviewNo + ", shopNo=" + shopNo + ", reviewId=" + reviewId + ", userId="
-				+ userId + ", reviewWrtDate=" + reviewWrtDate + ", reviewModDate=" + reviewModDate + ", reviewContent="
-				+ reviewContent + ", score=" + score + "]";
+		return "reviewDTO [reviewNo=" + reviewNo + ", shopNo=" + shopNo + ", userId=" + userId + ", writerId="
+				+ writerId + ", reviewWrtDate=" + reviewWrtDate + ", reviewModDate=" + reviewModDate
+				+ ", reviewContent=" + reviewContent + ", score=" + score + "]";
 	}
-
-
+	
+	
 	
 }
+
+
 
 
