@@ -3,9 +3,9 @@ package com.pcwk.reserve;
 import java.util.List;
 
 import com.pcwk.ehr.cmn.DTO;
-import com.pcwk.ehr.cmn.WorkDlv;
+import com.pcwk.ehr.cmn.WorkDiv;
 
-public class ReserveDao implements WorkDlv<ReserveDTO> {
+public class ReserveDao implements WorkDiv<ReserveDTO> {
 
 	@Override
 	public List<ReserveDTO> doRetrieve(DTO search) {

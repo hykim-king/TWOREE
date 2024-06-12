@@ -4,6 +4,7 @@ import com.pcwk.ehr.cmn.PLog;
 
 public class UserMain implements PLog {
 	
+
 	UserDao uao;
 	UserDTO udto;
 
@@ -56,6 +57,7 @@ public class UserMain implements PLog {
 			log.debug("실패:{}",flag);
 		}
 	}
+	
 	public UserDTO doSelectOne() {
 		log.debug("doSelectOne()");
 		UserDTO outVO = uao.doSelectOne(udto);
@@ -68,13 +70,13 @@ public class UserMain implements PLog {
 		return outVO;
 	}
 	
-	public static void main(String[] args) {
 	
+	public static void main(String[] args) {
+		
 		UserMain m = new UserMain();
 		//m.doSave();
 		//m.doUpdate();
 		//m.doDelete();
 		m.doSelectOne();
 	}
-
 }

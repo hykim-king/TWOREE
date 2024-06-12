@@ -6,12 +6,12 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
-import com.pcwk.user.ConnectionMaker;
+import com.pcwk.ehr.cmn.ConnectionMaker;
 import com.pcwk.user.DBUtil;
 import com.pcwk.ehr.cmn.DTO;
-import com.pcwk.ehr.cmn.WorkDlv;
+import com.pcwk.ehr.cmn.WorkDiv;
 
-public class UserDao implements WorkDlv<UserDTO> {
+public class UserDao implements WorkDiv<UserDTO> {
 
 	private ConnectionMaker connectionMaker;
 	public UserDao() {
@@ -202,10 +202,9 @@ public class UserDao implements WorkDlv<UserDTO> {
 				outVO.setName(rs.getString("name"));
 				outVO.setUserEmail(rs.getString("user_email"));
 				outVO.setTel(rs.getString("tel"));
-				outVO.setBirthday(rs.getString("birthday"));
-				outVO.setShopAdmin(rs.getString("shop_admin"));
-				outVO.setPenaltyDate(rs.getString("penalty_date"));
-				log.debug("6.outVO:"+outVO);
+				outVO.setBirthday(rs.getString("user_id"));
+				outVO.setUserId(rs.getString("user_id"));
+				
 				
 			}
 			

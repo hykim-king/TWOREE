@@ -1,10 +1,8 @@
-package com.pcwk.user;
+package com.pcwk.ehr.cmn;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
-
-import com.pcwk.ehr.cmn.PLog;
 
 public class ConnectionMaker implements PLog {
 	
@@ -39,9 +37,5 @@ public class ConnectionMaker implements PLog {
 		}
 		return conn;
 	}
-	
-	
-	
-	
 
 }
