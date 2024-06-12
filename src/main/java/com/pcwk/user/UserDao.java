@@ -2,10 +2,12 @@ package com.pcwk.user;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
 import com.pcwk.user.ConnectionMaker;
+import com.pcwk.user.DBUtil;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.WorkDlv;
 
@@ -79,20 +81,147 @@ public class UserDao implements WorkDlv<UserDTO> {
 
 	@Override
 	public int doUpdate(UserDTO param) {
-		// TODO Auto-generated method stub
-		return 0;
+		int flag = 0;
+		Connection conn = connectionMaker.getConnection();
+		
+		PreparedStatement pstmt = null;
+		StringBuilder sb = new StringBuilder();
+		sb.append("UPDATE userinfo       \n");
+		sb.append("SET                   \n");
+		sb.append("     user_id = ?,     \n");
+		sb.append("     password = ?,    \n");
+		sb.append("     name = ?,        \n");
+		sb.append("     user_email = ?,  \n");
+		sb.append("     tel = ?,         \n");
+		sb.append("     birthday = ?,    \n");
+		sb.append("     shop_admin = ?,  \n");
+		sb.append("     penalty_date = ? \n");
+		sb.append(" where user_id =?     \n");
+		
+		log.debug("1. SQL : {}", sb.toString());
+		log.debug("2. Conn : {}", conn);
+		log.debug("3. param : {}", param);
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			log.debug("4. pstmt : {}", pstmt);
+		
+			pstmt.setString(1, param.getUserId());
+			pstmt.setString(2, param.getPassword());
+			pstmt.setString(3, param.getName());
+			pstmt.setString(4, param.getUserEmail());
+			pstmt.setString(5, param.getTel());
+			pstmt.setString(6, param.getBirthday());
+			pstmt.setString(7, param.getShopAdmin());
+			pstmt.setString(8, param.getPenaltyDate());
+			pstmt.setString(9, param.getUserId());
+			
+			flag = pstmt.executeUpdate();
+		
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(conn, pstmt);
+			log.debug("5. finally : conn : {} pstmt : {}", conn, pstmt);
+		}
+		log.debug("6. flag : {}", flag);	
+			return flag;
 	}
 
 	@Override
 	public int doDelete(UserDTO param) {
-		// TODO Auto-generated method stub
-		return 0;
+		int flag = 0;
+		Connection conn = connectionMaker.getConnection();
+		 
+		PreparedStatement pstmt = null;
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("DELETE FROM userinfo  \n");
+		sb.append(" where user_id =?     \n");
+		
+		log.debug("1. SQL : {}", sb.toString());
+		log.debug("2. Conn : {}", conn);
+		log.debug("3. param : {}", param);
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			log.debug("4. pstmt : {}", pstmt);
+		
+			pstmt.setString(1, param.getUserId());
+		
+			flag = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(conn, pstmt);
+			log.debug("5. finally : conn : {} pstmt : {}", conn, pstmt); //자원반납 안해주면 DB접속이 안돼용
+		}
+		log.debug("6. flag : {}", flag);
+			return flag;
 	}
 
 	@Override
 	public UserDTO doSelectOne(UserDTO param) {
-		// TODO Auto-generated method stub
-		return null;
+		UserDTO outVO = null;
+		
+		Connection conn = connectionMaker.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		
+		StringBuilder sb = new StringBuilder(1000);
+		sb.append("SELECT            \n");
+		sb.append("    user_id,      \n");
+		sb.append("    password,     \n");
+		sb.append("    name,         \n");
+		sb.append("    user_email,   \n");
+		sb.append("    tel,          \n");
+		sb.append("    birthday,     \n");
+		sb.append("    shop_admin,   \n");
+		sb.append("    penalty_date  \n");
+		sb.append("FROM userinfo     \n");
+		sb.append("WHERE user_id =?  \n");
+		
+		log.debug("1.sql:\n"+sb.toString());
+		log.debug("2.conn:"+conn);
+		log.debug("3.param:"+param);
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			log.debug("4.pstmt:"+pstmt);
+			
+			pstmt.setString(1, param.getUserId());
+			
+			rs = pstmt.executeQuery();
+			log.debug("5.rs:" +rs);
+			if(rs.next()) {
+				outVO = new UserDTO();
+				
+				outVO.setUserId(rs.getString("user_id"));
+				outVO.setPassword(rs.getString("password"));
+				outVO.setName(rs.getString("name"));
+				outVO.setUserEmail(rs.getString("user_email"));
+				outVO.setTel(rs.getString("tel"));
+				outVO.setBirthday(rs.getString("birthday"));
+				outVO.setShopAdmin(rs.getString("shop_admin"));
+				outVO.setPenaltyDate(rs.getString("penalty_date"));
+				log.debug("6.outVO:"+outVO);
+				
+			}
+			
+			
+		}catch (SQLException e) {
+			log.debug("____________________________");
+			log.debug("SQLException"+e.getMessage());
+			log.debug("____________________________");
+		}finally { 
+			DBUtil.close(conn, pstmt, rs);
+		log.debug("5. finally : conn : {} pstmt : {} rs : {}", conn, pstmt, rs);
+		}
+		log.debug("6. flag : {}", outVO);
+		
+		
+		return outVO;
 	}
 
 	@Override
