@@ -70,7 +70,7 @@ public class ShopMain implements PLog{
 		
 		//검색 구분 
 		//10 : 가게 이름으로 검색, 20 : 리뷰 갯수 검색, 30 : 별점순 검색
-		searchVO.setSearchDiv("20");
+		searchVO.setSearchDiv("30");
 		searchVO.setSearchWord("4");
 		List<ShopDTO> list = dao.doRetrieve(searchVO);
 		
