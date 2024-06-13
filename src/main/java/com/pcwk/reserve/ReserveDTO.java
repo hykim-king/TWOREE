@@ -7,7 +7,6 @@ public class ReserveDTO extends DTO {
 	private int reserveNo;
 	private String userId;
 	private int shopNo;
-	private String userNo;
 	private int people;
 	private String reserveDate;
 	private String reserveAppDate;
@@ -20,13 +19,12 @@ public class ReserveDTO extends DTO {
 		
 	}
 
-	public ReserveDTO(int reserveNo, String userId, int shopNo, String userNo, int people, String reserveDate,
+	public ReserveDTO(int reserveNo, String userId, int shopNo, int people, String reserveDate,
 			String reserveAppDate, String userTel, String reserveState, String confirmedDate, String userComment) {
 		super();
 		this.reserveNo = reserveNo;
 		this.userId = userId;
 		this.shopNo = shopNo;
-		this.userNo = userNo;
 		this.people = people;
 		this.reserveDate = reserveDate;
 		this.reserveAppDate = reserveAppDate;
@@ -58,14 +56,6 @@ public class ReserveDTO extends DTO {
 
 	public void setShopNo(int shopNo) {
 		this.shopNo = shopNo;
-	}
-
-	public String getUserNo() {
-		return userNo;
-	}
-
-	public void setUserNo(String userNo) {
-		this.userNo = userNo;
 	}
 
 	public int getPeople() {
@@ -126,8 +116,7 @@ public class ReserveDTO extends DTO {
 
 	@Override
 	public String toString() {
-		return "ReserveDTO [reserveNo=" + reserveNo + ", userId=" + userId + ", shopNo=" + shopNo + ", userNo=" + userNo
-				+ ", people=" + people + ", reserveDate=" + reserveDate + ", reserveAppDate=" + reserveAppDate
+		return "ReserveDTO [reserveNo=" + reserveNo + ", userId=" + userId + ", shopNo=" + shopNo + ", people=" + people + ", reserveDate=" + reserveDate + ", reserveAppDate=" + reserveAppDate
 				+ ", userTel=" + userTel + ", reserveState=" + reserveState + ", confirmedDate=" + confirmedDate
 				+ ", userComment=" + userComment + ", toString()=" + super.toString() + "]";
 	}
