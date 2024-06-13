@@ -72,7 +72,7 @@ public class ShopDetailDao implements WorkDiv<ShopDetailDTO> {
 		log.debug("3. param : {}", param);
 		
 		try {
-			pstmt = conn.prepareStatement(sb.toString()); //荑쇰━瑜� �꽆寃⑥빞 �맂�떎.
+			pstmt = conn.prepareStatement(sb.toString());  
 			log.debug("4. pstmt : {}", pstmt);
 			
 		 
