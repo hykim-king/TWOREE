@@ -12,6 +12,13 @@ public class AskDTO extends DTO {
 		private String askDate;
 		private String shopAnswer;
 		private String answerDate;
+		private String shopName;
+		public String getShopName() {
+			return shopName;
+		}
+		public void setShopName(String shopName) {
+			this.shopName = shopName;
+		}
 		public int getAskNo() {
 			return askNo;
 		}
@@ -65,8 +72,9 @@ public class AskDTO extends DTO {
 		public String toString() {
 			return "AskDTO [askNo=" + askNo + ", shopNo=" + shopNo + ", userId=" + userId + ", askState=" + askState
 					+ ", userAsk=" + userAsk + ", askDate=" + askDate + ", shopAnswer=" + shopAnswer + ", answerDate="
-					+ answerDate + ", toString()=" + super.toString() + "]";
+					+ answerDate + ", shopName=" + shopName + ", toString()=" + super.toString() + "]";
 		}
+		
 		
 		
 

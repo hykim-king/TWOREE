@@ -4,13 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.pcwk.ehr.cmn.ConnectionMaker;
 import com.pcwk.ehr.cmn.DBUtil;
 import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.cmn.SearchDTO;
 import com.pcwk.ehr.cmn.WorkDiv;
 import com.pcwk.menu.MenuDTO;
+import com.pcwk.review.ReviewDTO;
 
 public class AskDAO implements WorkDiv<AskDTO> {
 	ConnectionMaker connectionMaker;
@@ -28,8 +31,109 @@ public class AskDAO implements WorkDiv<AskDTO> {
 
 	@Override
 	public List<AskDTO> doRetrieve(DTO search) {
-		// TODO Auto-generated method stub
-		return null;
+        SearchDTO searchVO = (SearchDTO) search;
+		
+		StringBuilder sbWhere = new StringBuilder(300);
+		if(null != searchVO.getSearchDiv() && searchVO.getSearchDiv().equals("10")) {
+			sbWhere.append("WHERE user_id = ?  \n");
+		}else if(null != searchVO.getSearchDiv() && searchVO.getSearchDiv().equals("20")) {
+			sbWhere.append("WHERE shop_no = ?  \n");
+		}
+		
+		List<AskDTO> list = new ArrayList<AskDTO>();
+		
+		Connection conn = connectionMaker.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StringBuilder sb = new StringBuilder(1000);
+		
+		sb.append(" select a.*,b.*,c.shop_name                 \n");
+		sb.append("  from(select tt1.rnum as num,              \n");
+		sb.append("        tt1.ask_no,                         \n");
+		sb.append(" 	   tt1.shop_no,                        \n");
+		sb.append(" 	   tt1.user_id,                        \n");
+		sb.append(" 	   tt1.ask_state,                      \n");
+		sb.append(" 	   tt1.user_ask,                       \n");
+		sb.append(" 	   tt1.ask_date,                       \n");
+		sb.append(" 	   tt1.shop_answer,                    \n");
+		sb.append("        tt1.answer_Date                     \n");
+		sb.append(" 	   from (select rownum as rnum, t1.*   \n");
+		sb.append("                from  (select *             \n");
+		sb.append("                         from ask           \n");
+		sb.append(sbWhere.toString());
+		sb.append(" 		             )t1                   \n");
+		sb.append(" 	  where rownum<=(?*(?-1)+?)            \n");
+		sb.append(" 		    )tt1                           \n");
+		sb.append("       where rownum >=(?*(?-1)+1) )a,(      \n");
+		sb.append(" 		select count(*) totalCnt           \n");
+		sb.append("           from ask                         \n");
+		sb.append(sbWhere.toString());
+		sb.append("          )b, (select shop_no,              \n");
+		sb.append("                      shop_name             \n");
+		sb.append("                 from shop                  \n");
+		sb.append("              )c	                           \n");
+		sb.append("         where a.shop_no=c.shop_no		   \n");
+		sb.append("         order by ask_date desc             \n");		
+		log.debug("1. SQL : {}", sb.toString());
+		log.debug("2. Conn : {}", conn);
+		log.debug("3. param : {}", search);
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			log.debug("4. pstmt : {}", pstmt);
+			
+			if(null != searchVO.getSearchDiv() && searchVO.getSearchDiv().equals("10")) {
+				log.debug("4-1. pstmt : {}", searchVO.getSearchDiv());
+			
+				pstmt.setString(1, searchVO.getSearchWord());
+				pstmt.setInt(2, searchVO.getPageSize());
+				pstmt.setInt(3, searchVO.getPageNo());
+				pstmt.setInt(4, searchVO.getPageSize());
+				pstmt.setInt(5, searchVO.getPageSize());
+				pstmt.setInt(6, searchVO.getPageNo());
+				pstmt.setString(7, searchVO.getSearchWord());
+			
+			
+			}else if(null != searchVO.getSearchDiv() && searchVO.getSearchDiv().equals("20")) {
+				log.debug("4-1. pstmt : {}", searchVO.getSearchDiv());
+				pstmt.setInt(1, searchVO.getSearchSeq());
+				pstmt.setInt(2, searchVO.getPageSize());
+				pstmt.setInt(3, searchVO.getPageNo());
+				pstmt.setInt(4, searchVO.getPageSize());
+				pstmt.setInt(5, searchVO.getPageSize());
+				pstmt.setInt(6, searchVO.getPageNo());
+				pstmt.setInt(7, searchVO.getSearchSeq());
+			
+			}
+			rs = pstmt.executeQuery();
+			log.debug("5.rs:{}",rs);
+			
+			while(rs.next()) {
+				AskDTO outVO = new AskDTO();
+				outVO.setNum (rs.getInt("num"));
+				outVO.setAskNo(rs.getInt("ask_no"));
+				outVO.setShopNo(rs.getInt("shop_no"));
+				outVO.setUserId(rs.getString("user_id"));
+				outVO.setAskState(rs.getString("ask_state"));
+				outVO.setUserAsk(rs.getString("user_ask"));
+				outVO.setAskDate(rs.getString("ask_date"));
+				outVO.setShopAnswer(rs.getString("shop_answer"));
+				outVO.setAnswerDate(rs.getString("answer_Date"));
+				outVO.setShopName(rs.getString("shop_name"));
+				list.add(outVO);
+			
+			}
+			
+		
+		}catch (SQLException e) {
+			e.printStackTrace();
+		
+		}finally {
+			DBUtil.close(conn, pstmt);
+			log.debug("5. finally : conn : {} pstmt : {}", conn, pstmt,rs);
+		}
+		
+		return list;
 	}
 
 	
