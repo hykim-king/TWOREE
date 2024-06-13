@@ -1,6 +1,9 @@
 package com.pcwk.shop;
 
+import java.util.List;
+ 
 import com.pcwk.ehr.cmn.PLog;
+import com.pcwk.ehr.cmn.SearchDTO;
 //update 0611 0630
 public class ShopNoticeMain implements PLog {
 	ShopNoticeDao ndao;
@@ -8,7 +11,7 @@ public class ShopNoticeMain implements PLog {
 	
 	public ShopNoticeMain() {
 		ndao = new ShopNoticeDao();
-		ndto = new ShopNoticeDTO(4, 2, "공지제목", "사용안함", "공지내용","y");
+		ndto = new ShopNoticeDTO(8, 2, "공지제목", "사용안함", "공지내용","Y");
 	}
 	
 	
@@ -62,17 +65,32 @@ public class ShopNoticeMain implements PLog {
 	}
 	
 	
+	public void doRetrieve() {
+		log.debug("doRetrieve()");
+		SearchDTO searchVO = new SearchDTO();
+
+		searchVO.setSearchDiv("10");
+		searchVO.setSearchWord("2"); //shop_no로 검색
+		
+		List<ShopNoticeDTO> list = ndao.doRetrieve(searchVO);
+		int i = 0;
+		for(ShopNoticeDTO vo : list) {
+			log.debug("i: {}, vi: {}",++i,vo);
+		}
+	 
+	}  
+	
+	
 	 
 	public static void main(String[] args) { 
 		
 		ShopNoticeMain m = new ShopNoticeMain();
-		//m.doSave();      //insert
+		// m.doSave();      //insert
 		//m.doUpdate();    //update
 		//m.doDelete();    //delete
 		
-		m.deSelectOne(); //select
-		
-		//m.doUpdateReadCnt();
+		//m.deSelectOne(); //select
+		m.doRetrieve(); 
 	  
 	}
 
