@@ -1,6 +1,7 @@
 package com.pcwk.ehr.cmn;
 
 import java.io.IOException;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -9,6 +10,8 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.pcwk.shop.ShopController;
 
 //import com.pcwk.ehr.board.BoardController;
 //import com.pcwk.ehr.servlet.ConnectController;
@@ -31,6 +34,7 @@ public class FrontControllerV extends HttpServlet implements PLog {
     public FrontControllerV() {    
     	log.debug("FrontControllerV()");
     	
+    	controllerMap.put("/TWOREE/shop/shop.do", new ShopController());
 //    	controllerMap.put("/WEB02/board/board.do", new BoardController());
 //    	controllerMap.put("/WEB02/connect/connect.do", new ConnectController());
 //    	controllerMap.put("/WEB02/cookie/cookie.do", new CookieController());

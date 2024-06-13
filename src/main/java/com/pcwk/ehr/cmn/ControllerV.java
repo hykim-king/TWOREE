@@ -22,6 +22,5 @@ public interface ControllerV {
 	 */
 	public JView doWork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
 		
-	
-	
+
 }
