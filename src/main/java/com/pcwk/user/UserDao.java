@@ -7,7 +7,7 @@ import java.sql.SQLException;
 import java.util.List;
 
 import com.pcwk.ehr.cmn.ConnectionMaker;
-import com.pcwk.user.DBUtil;
+import com.pcwk.ehr.cmn.DBUtil;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.WorkDiv;
 
