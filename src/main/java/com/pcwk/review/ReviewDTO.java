@@ -1,11 +1,10 @@
 package com.pcwk.review;
 
-import java.time.LocalDateTime;
 
-public class reviewDTO {
+public class ReviewDTO {
 	
 	private int reviewNo; 					//리뷰 고유 번호
-	private String shopNo; 					// 리뷰 작성받은 가게
+	private int shopNo; 					// 리뷰 작성받은 가게
 	private String userId; 				// 유저 아이디
 	private String writerId;					//리뷰 작성자 아이디
 	private String reviewWrtDate; 			//리뷰 작성 날짜
@@ -13,7 +12,11 @@ public class reviewDTO {
 	private String reviewContent; 			// 리뷰 내용
 	private int score; 						// 점수 (1 ~5점)
 	
-	public reviewDTO(int reviewNo, String shopNo, String userId, String writerId, String reviewWrtDate,
+	public ReviewDTO() {
+		super();
+	}
+
+	public ReviewDTO(int reviewNo, int shopNo, String userId, String writerId, String reviewWrtDate,
 			String reviewModDate, String reviewContent, int score) {
 		super();
 		this.reviewNo = reviewNo;
@@ -34,11 +37,11 @@ public class reviewDTO {
 		this.reviewNo = reviewNo;
 	}
 
-	public String getShopNo() {
+	public int getShopNo() {
 		return shopNo;
 	}
 
-	public void setShopNo(String shopNo) {
+	public void setShopNo(int shopNo) {
 		this.shopNo = shopNo;
 	}
 
