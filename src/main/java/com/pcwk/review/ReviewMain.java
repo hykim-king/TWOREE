@@ -69,29 +69,30 @@ public class ReviewMain implements PLog {
 			
 		}
 		
-		/*
+		
 		public void doRetrieve() {
 			log.debug(" doRetrieve()");
 			searchVO = new SearchDTO();
 			searchVO.setPageNo(1);
 			searchVO.setPageSize(10);
 			searchVO.setSearchSeq(2);
-			//searchVO.setSearchDiv(null);
-			List <MenuDTO> list = dao.doRetrieve(searchVO);
+			searchVO.setSearchWord("user1");
+			searchVO.setSearchDiv("10");
+			List <ReviewDTO> list = dao.doRetrieve(searchVO);
 			int i = 0;
-			for (MenuDTO vo : list) {
+			for (ReviewDTO vo : list) {
 				log.debug("i: {}, vo: {}", ++i, vo);
 			}
 
 		}
-        */
+        
 	public static void main(String[] args) {
 		ReviewMain m = new ReviewMain();
 		//m.doSave();
 		//m.doDelete();
 		//m.doUpdate();
-		m.doSelectOne();
-		//m.doRetrieve();
+		//m.doSelectOne();
+		m.doRetrieve();
 	}
 
 }

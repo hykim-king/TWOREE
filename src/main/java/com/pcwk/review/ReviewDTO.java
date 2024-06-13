@@ -1,7 +1,8 @@
 package com.pcwk.review;
 
+import com.pcwk.ehr.cmn.DTO;
 
-public class ReviewDTO {
+public class ReviewDTO extends DTO{
 	
 	private int reviewNo; 					//리뷰 고유 번호
 	private int shopNo; 					// 리뷰 작성받은 가게
@@ -10,7 +11,15 @@ public class ReviewDTO {
 	private String reviewModDate; 			// 리뷰 수정 시간
 	private String reviewContent; 			// 리뷰 내용
 	private int score; 						// 점수 (1 ~5점)
-	
+	private String shopName;
+	public String getShopName() {
+		return shopName;
+	}
+
+	public void setShopName(String shopName) {
+		this.shopName = shopName;
+	}
+
 	public ReviewDTO() {
 		super();
 	}
@@ -85,10 +94,12 @@ public class ReviewDTO {
 
 	@Override
 	public String toString() {
-		return "reviewDTO [reviewNo=" + reviewNo + ", shopNo=" + shopNo + ", userId=" + userId + ", "
-				+ " reviewWrtDate=" + reviewWrtDate + ", reviewModDate=" + reviewModDate
-				+ ", reviewContent=" + reviewContent + ", score=" + score + "]";
+		return "ReviewDTO [reviewNo=" + reviewNo + ", shopNo=" + shopNo + ", userId=" + userId + ", reviewWrtDate="
+				+ reviewWrtDate + ", reviewModDate=" + reviewModDate + ", reviewContent=" + reviewContent + ", score="
+				+ score + ", shopName=" + shopName + ", toString()=" + super.toString() + "]";
 	}
+
+	
 	
 	
 	
