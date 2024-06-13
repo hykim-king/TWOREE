@@ -163,11 +163,15 @@ public class ReviewDAO implements WorkDiv<ReviewDTO> {
 		ResultSet rs = null;// SQL문의 결과
 
 		StringBuilder sb = new StringBuilder(300);
-		sb.append(" select menu_name, \n");
-		sb.append("        menu_info, \n");
-		sb.append("        price      \n");
-		sb.append("   from menu       \n");
-		sb.append(" where menu_no = ? \n");
+		sb.append(" select                   \n");
+		sb.append("         shop_no,         \n");
+		sb.append("         user_id,         \n");
+		sb.append("         review_wrt_date, \n");
+		sb.append("         review_mod_date, \n");
+		sb.append("         review_content,  \n");
+		sb.append("         score            \n");
+		sb.append("    from review           \n");
+		sb.append("   where review_no=?      \n");
 
 		log.debug("1.sql:\n" + sb.toString());
 		log.debug("2.conn:\n" + conn);
@@ -177,18 +181,20 @@ public class ReviewDAO implements WorkDiv<ReviewDTO> {
 
 			// param설정
 			pstmt = conn.prepareStatement(sb.toString());
-			//pstmt.setInt(1, param.getMenuNO());
+			pstmt.setInt(1, param.getReviewNo());
 
 			// SELECT실행
 			rs = pstmt.executeQuery();
 			log.debug("5.rs:" + rs);
 
 			if (rs.next()) {
-			//	outVO = new MenuDTO();
-			//	outVO.setMenuName(rs.getString("menu_name"));
-			//	outVO.setMenuInfo(rs.getString("menu_info"));
-			//	outVO.setPrice(rs.getInt("price"));
-				
+				outVO = new ReviewDTO();
+				outVO.setShopNo(rs.getInt("shop_no"));
+				outVO.setUserId(rs.getString("user_id"));
+				outVO.setReviewWrtDate(rs.getString("review_wrt_date"));
+				outVO.setReviewModDate(rs.getString("review_mod_date"));
+				outVO.setReviewContent(rs.getString("review_content"));
+				outVO.setScore(rs.getInt("score"));
 				log.debug("6.outVO:" + outVO);
 			}
 

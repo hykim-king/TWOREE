@@ -6,7 +6,6 @@ public class ReviewDTO {
 	private int reviewNo; 					//리뷰 고유 번호
 	private int shopNo; 					// 리뷰 작성받은 가게
 	private String userId; 				// 유저 아이디
-	private String writerId;					//리뷰 작성자 아이디
 	private String reviewWrtDate; 			//리뷰 작성 날짜
 	private String reviewModDate; 			// 리뷰 수정 시간
 	private String reviewContent; 			// 리뷰 내용
@@ -16,13 +15,12 @@ public class ReviewDTO {
 		super();
 	}
 
-	public ReviewDTO(int reviewNo, int shopNo, String userId, String writerId, String reviewWrtDate,
+	public ReviewDTO(int reviewNo, int shopNo, String userId, String reviewWrtDate,
 			String reviewModDate, String reviewContent, int score) {
 		super();
 		this.reviewNo = reviewNo;
 		this.shopNo = shopNo;
 		this.userId = userId;
-		this.writerId = writerId;
 		this.reviewWrtDate = reviewWrtDate;
 		this.reviewModDate = reviewModDate;
 		this.reviewContent = reviewContent;
@@ -52,15 +50,7 @@ public class ReviewDTO {
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
-
-	public String getWriterId() {
-		return writerId;
-	}
-
-	public void setWriterId(String writerId) {
-		this.writerId = writerId;
-	}
-
+	
 	public String getReviewWrtDate() {
 		return reviewWrtDate;
 	}
@@ -95,8 +85,8 @@ public class ReviewDTO {
 
 	@Override
 	public String toString() {
-		return "reviewDTO [reviewNo=" + reviewNo + ", shopNo=" + shopNo + ", userId=" + userId + ", writerId="
-				+ writerId + ", reviewWrtDate=" + reviewWrtDate + ", reviewModDate=" + reviewModDate
+		return "reviewDTO [reviewNo=" + reviewNo + ", shopNo=" + shopNo + ", userId=" + userId + ", "
+				+ " reviewWrtDate=" + reviewWrtDate + ", reviewModDate=" + reviewModDate
 				+ ", reviewContent=" + reviewContent + ", score=" + score + "]";
 	}
 	

@@ -55,10 +55,10 @@ public class ReviewMain implements PLog {
 			}
 			
 		}
-	    /*
+	    
 		public void doSelectOne() {
-			menu.setMenuNO(21);
-			MenuDTO outVO = dao.doSelectOne(menu);
+			review.setReviewNo(2);
+			ReviewDTO outVO = dao.doSelectOne(review);
 			if (null != outVO) {
 				log.debug("단건 조회 성공");
 			} else {
@@ -68,6 +68,8 @@ public class ReviewMain implements PLog {
 			
 			
 		}
+		
+		/*
 		public void doRetrieve() {
 			log.debug(" doRetrieve()");
 			searchVO = new SearchDTO();
@@ -87,8 +89,8 @@ public class ReviewMain implements PLog {
 		ReviewMain m = new ReviewMain();
 		//m.doSave();
 		//m.doDelete();
-		m.doUpdate();
-		//m.doSelectOne();
+		//m.doUpdate();
+		m.doSelectOne();
 		//m.doRetrieve();
 	}
 
