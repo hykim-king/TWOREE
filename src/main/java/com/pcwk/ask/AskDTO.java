@@ -9,10 +9,18 @@ public class AskDTO extends DTO {
 		private String userId;
 		private String askState;
 		private String userAsk;
+		private String askDate;
 		private String shopAnswer;
-		private String asnwerDate;
+		private String answerDate;
 		public int getAskNo() {
 			return askNo;
+		}
+		public String getAskDate() {
+			return askDate;
+		}
+		public void setAskDate(String askDate) {
+			this.askDate= askDate;
+			
 		}
 		public void setAskNo(int askNo) {
 			this.askNo = askNo;
@@ -32,14 +40,36 @@ public class AskDTO extends DTO {
 		public String getAskState() {
 			return askState;
 		}
-		
-		
+		public void setAskState(String askState) {
+			this.askState = askState;
+		}
+		public String getUserAsk() {
+			return userAsk;
+		}
+		public void setUserAsk(String userAsk) {
+			this.userAsk = userAsk;
+		}
+		public String getShopAnswer() {
+			return shopAnswer;
+		}
+		public void setShopAnswer(String shopAnswer) {
+			this.shopAnswer = shopAnswer;
+		}
+		public String getAnswerDate() {
+			return answerDate;
+		}
+		public void setAnswerDate(String answerDate) {
+			this.answerDate = answerDate;
+		}
 		@Override
 		public String toString() {
 			return "AskDTO [askNo=" + askNo + ", shopNo=" + shopNo + ", userId=" + userId + ", askState=" + askState
-					+ ", userAsk=" + userAsk + ", shopAnswer=" + shopAnswer + ", asnwerDate=" + asnwerDate + "]";
+					+ ", userAsk=" + userAsk + ", askDate=" + askDate + ", shopAnswer=" + shopAnswer + ", answerDate="
+					+ answerDate + ", toString()=" + super.toString() + "]";
 		}
 		
+		
+
 		
 		
 	}
