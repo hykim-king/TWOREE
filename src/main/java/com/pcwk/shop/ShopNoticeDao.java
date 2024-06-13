@@ -168,7 +168,7 @@ public class ShopNoticeDao implements WorkDiv<ShopNoticeDTO> {
 		sb.append("  content,                \n");
 		sb.append("  fixed                   \n");
 		sb.append("  from shop_notice        \n"); 
-		sb.append("  where shop_no = ?     \n");
+		sb.append("  where notice_no = ?     \n");
 		
 		log.debug("1.sql:\n"+sb.toString());
 		log.debug("2.conn:"+conn);
@@ -178,7 +178,7 @@ public class ShopNoticeDao implements WorkDiv<ShopNoticeDTO> {
 			pstmt = conn.prepareStatement(sb.toString());
 			log.debug("4.pstmt:"+pstmt);
 			
-			pstmt.setInt(1,param.getShopNo());
+			pstmt.setInt(1,param.getNoticeNo());
 			//pstmt.setInt(0,0);
 			
 			

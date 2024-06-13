@@ -11,7 +11,7 @@ public class ShopNoticeMain implements PLog {
 	
 	public ShopNoticeMain() {
 		ndao = new ShopNoticeDao();
-		ndto = new ShopNoticeDTO(8, 2, "공지제목", "사용안함", "공지내용","Y");
+		ndto = new ShopNoticeDTO(9, 2, "공지제목", "사용안함", "공지내용","N");
 	}
 	
 	
@@ -85,11 +85,11 @@ public class ShopNoticeMain implements PLog {
 	public static void main(String[] args) { 
 		
 		ShopNoticeMain m = new ShopNoticeMain();
-		// m.doSave();      //insert
+		//m.doSave();      //insert
 		//m.doUpdate();    //update
 		//m.doDelete();    //delete
 		
-		//m.deSelectOne(); //select
+		//deSelectOne(); //select
 		m.doRetrieve(); 
 	  
 	}
