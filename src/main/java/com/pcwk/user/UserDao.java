@@ -78,6 +78,42 @@ public class UserDao implements WorkDiv<UserDTO> {
 		log.debug("5.flag:{}",flag);
 		return flag;
 	}
+	
+	
+	public int isExistId(UserDTO param) {
+		int flag =0;
+		
+		Connection conn = connectionMaker.getConnection();
+		
+		PreparedStatement pstmt = null;
+		
+		StringBuilder sb = new StringBuilder(1000);
+		sb.append(" select *                \n");
+		sb.append("   from userInfo         \n");
+		sb.append("  where user_id =?       \n");
+		
+		log.debug("1.sql:{}",sb.toString());
+		log.debug("2.conn:{}",conn);
+		log.debug("3.param:{}",param);
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			
+			pstmt.setString(1, param.getUserId());
+			
+			
+			flag = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		
+		}finally {
+			DBUtil.close(conn, pstmt);
+			log.debug("4.finally conn:{} pstmt:{}",conn,pstmt);
+		}
+		log.debug("5.flag:{}",flag);
+		return flag;
+	}
 
 	@Override
 	public int doUpdate(UserDTO param) {

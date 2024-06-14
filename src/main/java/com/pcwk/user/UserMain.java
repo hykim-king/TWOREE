@@ -13,6 +13,16 @@ public class UserMain implements PLog {
 		udto = new UserDTO("user1","4321","찬호","ch@naver.com1","010-9999-9990","19940907","Y","");
 		
 	}
+	public void isExistId() {
+		log.debug("isExistId()");
+		int flag = uao.isExistId(udto);
+		if(1 == flag) {
+			log.debug("중복된 아이디:{}",flag);
+			
+		}else {
+			log.debug("사용가능한 아이디:{}",flag);
+		}
+	}
 	public void doSave() {
 		log.debug("doSave()");
 		int flag = uao.doSave(udto);
@@ -77,6 +87,7 @@ public class UserMain implements PLog {
 		//m.doSave();
 		//m.doUpdate();
 		//m.doDelete();
-		m.doSelectOne();
+		//m.doSelectOne();
+		m.isExistId();
 	}
 }
