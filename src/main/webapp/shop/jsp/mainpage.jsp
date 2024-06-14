@@ -1,7 +1,7 @@
 <%@page import="java.util.List"%>
 <%@page import="com.pcwk.shop.ShopDTO"%>
 <%@page import="com.pcwk.ehr.cmn.SearchDTO"%>
-<%@page import="com.pcwk.shop.ShopDAO"%>
+<%@page import="com.pcwk.shop.ShopDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%

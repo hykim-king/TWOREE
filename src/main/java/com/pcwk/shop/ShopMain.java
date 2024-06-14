@@ -8,11 +8,11 @@ import com.pcwk.ehr.cmn.SearchDTO;
 public class ShopMain implements PLog{
 	
 	ShopDTO dto;
-	ShopDAO dao;
+	ShopDao dao;
 	
 	public ShopMain() {
 		dto = new ShopDTO(1, "admin", "용인 샤브샤브", "24/06/11", 0, 0, 0, "Y");
-		dao = new ShopDAO();
+		dao = new ShopDao();
 	}
 	
 	public void doSave() {

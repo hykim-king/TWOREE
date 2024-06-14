@@ -8,10 +8,10 @@ import com.pcwk.ehr.cmn.PLog;
 
 public class ShopService implements PLog{
 	
-	private ShopDAO dao;
+	private ShopDao dao;
 
 	public ShopService() {
-		dao = new ShopDAO();
+		dao = new ShopDao();
 	}
 	
 	/*

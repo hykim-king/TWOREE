@@ -3,6 +3,7 @@ package com.pcwk.shop;
 import java.sql.Connection;
 
 
+
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -17,12 +18,12 @@ import com.pcwk.ehr.cmn.WorkDiv;
 import com.pcwk.user.UserDTO;
 import com.pcwk.user.UserDao;
 
-public class ShopDAO implements WorkDiv<ShopDTO>{
+public class ShopDao implements WorkDiv<ShopDTO>{
 
 	//connectionmaker 생성
 	private ConnectionMaker connectionMaker;
 	
-	public ShopDAO() {
+	public ShopDao() {
 		connectionMaker = new ConnectionMaker();
 		
 	}
