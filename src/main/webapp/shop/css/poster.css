@@ -35,10 +35,13 @@
     height : 20%;
     padding : 10px;
     margin : 10px 5px 20px 10px;
-    border : 1px solid lightgrey;
+    border : 3px solid #ffff9b;
+    border-radius : 25px;
   }
   li{
-    padding : 10px
+    padding : 10px;
+     border : 3px solid #ffff9b;
+    border-radius : 25px;
     
   }
   .my_page {

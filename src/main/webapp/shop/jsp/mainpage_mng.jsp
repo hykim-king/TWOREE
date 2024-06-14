@@ -5,9 +5,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="/TWOREE/css/bootstrap.css">
     <title>test</title>
-    <link rel="stylesheet" href="../css/poster.css">
+    <link rel="stylesheet" href="/TWOREE/css/poster.css">
     <script src="../js/jquery_3_7_1.js"></script>
 <title>Insert title here</title>
 </head>
@@ -36,6 +36,6 @@
 	        <li>리뷰</li>
 	    </ul>   
 	</div>
-<script src="../js/bootstrap.bundle.min.js"></script>
+<script src="/TWOREE/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
