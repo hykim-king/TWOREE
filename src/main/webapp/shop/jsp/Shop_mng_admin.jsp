@@ -114,6 +114,9 @@
         </div>
                 
     </div>
+    <p id ="shopNo" hidden="true">
+   
+    </p>
     
     <script>
         $(document).ready(function() {
@@ -151,9 +154,10 @@
                     $("#storeName").text(data.storeName);
                     $("#storePhone").text(data.storePhone);
                     $("#storeLocation").text(data.storeLocation);
+                    $("#shopNo").text(data.shopNo);
                     
                     $("#shopList").empty();
-                    $.each(data.reservations, function(index, reservation) {
+                    $.each(data.shops, function(index, shop) {
                         let row = $("<li><a class="dropdown-item" href="#"></a></li>");
                         row.append($text(shop.name));
                         $("#shopList").append(row);
