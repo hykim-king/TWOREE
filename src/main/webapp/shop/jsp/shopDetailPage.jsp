@@ -5,10 +5,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="/TWOREE/css/bootstrap.css">
     <title>test</title>
-    <link rel="stylesheet" href="../css/poster.css">
-    <script src="../js/jquery_3_7_1.js"></script>
+    <link rel="stylesheet" href="/TWOREE/css/poster.css">
+    <script src="/TWOREE/js/jquery_3_7_1.js"></script>
 <title>Insert title here</title>
 </head>
 <body>
