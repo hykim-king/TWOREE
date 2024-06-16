@@ -11,7 +11,7 @@
     <div class="container my-5">
         <h1 class="mb-4">Dynamic Content Example</h1>
         
-        <div class="border-left border-dark pl-3 mb-4">
+        <div class="p-3 bg-info  border border-info border-start-0 rounded-end" >
             <h3 class="mb-3">가게 상세 정보 관리</h3>
             <table class="table">
                 <tbody>
