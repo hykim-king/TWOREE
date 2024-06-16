@@ -10,12 +10,27 @@
      .printList {
      height : 500px;
      }
+     div {
+     padding : 10px;}
+     
+     .dropdown {
+     padding : 20px;
+     margin :20px;}
     </style>
 </head>
 <body>
     <div class="container my-5">
-        <h1 class="mb-4" id="shopName"></h1>
+        <h1 class="mb-4" id="shopName">abc</h1>
+        <div class="dropdown">
+        <button class="btn btn-primary mr-2" style="float:right" id="AddShopBtn">가게 추가</button>
+             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="float:right" id="shopSelectBtn">
+                 Dropdown button
+             </button>
+          <ul class="dropdown-menu" id ="shopList">
+          </ul>
+          
         
+        </div>
         <div class="p-3 border border-info border-start-0 rounded-end" >
             <h3 class="mb-3">가게 상세 정보 관리</h3>
             <button class="btn btn-primary mr-2" style="float:right" id="DeTailModifyBtn">상세정보설정</button>
@@ -104,8 +119,12 @@
         $(document).ready(function() {
             loadData();
             
-            $("#refreshBtn").click(function() {
+            $("#shopSelectBtn").click(function() {
                 loadData();
+            });
+            
+            $("#AddShopBtn").click(function() {
+                // 가게 추가 기능 구현
             });
             
             $("#addReservationBtn").click(function() {
@@ -127,14 +146,22 @@
                 type: "GET",
                 dataType: "json",
                 success: function(data) {
-                	$("#shpName").text(data.shopName);
+                	$("#shpoNow").text(data.storeName);
+                	$("#shpoName").text(data.storeName);
                     $("#storeName").text(data.storeName);
                     $("#storePhone").text(data.storePhone);
                     $("#storeLocation").text(data.storeLocation);
                     
+                    $("#shopList").empty();
+                    $.each(data.reservations, function(index, reservation) {
+                        let row = $("<li><a class="dropdown-item" href="#"></a></li>");
+                        row.append($text(shop.name));
+                        $("#shopList").append(row);
+                    });
+                    
                     $("#reservationList").empty();
                     $.each(data.reservations, function(index, reservation) {
-                        var row = $("<tr></tr>");
+                        let row = $("<tr></tr>");
                         row.append($("<td></td>").text(reservation.id));
                         row.append($("<td></td>").text(reservation.time));
                         row.append($("<td></td>").text(reservation.numPeople));
@@ -144,7 +171,7 @@
                     
                     $("#menuList").empty();
                     $.each(data.menus, function(index, menu) {
-                        var row = $("<tr></tr>");
+                        let row = $("<tr></tr>");
                         row.append($("<td></td>").text(menu.name));
                         row.append($("<td></td>").text(menu.price));
                         $("#menuList").append(row);
@@ -152,12 +179,12 @@
                     
                     $("#askList").empty();
                     $.each(data.ask, function(index, ask) {
-                        var row = $("<tr></tr>");
+                        let row = $("<tr></tr>");
                         row.append($("<td></td>").text(ask.content));
                         row.append($("<td></td>").text(ask.wrtId));
                         row.append($("<td></td>").text(ask.askWrtDate));
                         row.append($("<td></td>").text(ask.status));
-                        $("#inquiryList").append(row);
+                        $("#askList").append(row);
                     });
                 },
                 error: function() {
