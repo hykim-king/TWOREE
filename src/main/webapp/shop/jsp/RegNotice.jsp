@@ -1,5 +1,4 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +19,7 @@
                 <textarea class="form-control" id="content" name="content" rows="10" placeholder="내용을 입력하세요" required></textarea>
             </div>
             <div class="form-group form-check">
-                <input type="checkbox" class="form-check-input" id="important" name="important">
+                <input type="checkbox" class="form-check-input" id="important" name="important" value="Y">
                 <label class="form-check-label" for="important">중요 공지 여부</label>
             </div>
             <div class="d-flex justify-content-end">
@@ -37,22 +36,22 @@
 
             const title = document.getElementById('title').value;
             const content = document.getElementById('content').value;
-            const isImportant = document.getElementById('important').checked;
+            const important = document.getElementById('important').checked ? 'Y' : 'N';
 
             // AJAX 통신으로 데이터 전송
             const xhr = new XMLHttpRequest();
             xhr.open('POST', '/TWOREE/shop/shop.do', true);
             xhr.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded; charset=UTF-8');
             xhr.onreadystatechange = function() {
-                if (xhr.readyState === XMLHttpRequest.DONE && xhr.status === 200) {
+                if ( xhr.status === 200) {
                     // 등록 완료 페이지로 이동
-                    return;
+                    window.close();
                 } else {
                     // 에러 처리
                     alert('공지사항 등록에 실패했습니다.');
                 }
             };
-            xhr.send('title=' + encodeURIComponent(title) + '&content=' + encodeURIComponent(content) + '&important=' + isImportant+'&work_div=doSaveNotice');
+            xhr.send('title=' + encodeURIComponent(title) + '&content=' + encodeURIComponent(content) + '&important=' + important + '&work_div=doSaveNotice' +'&shop_no=2');
         });
 
         function cancelForm() {

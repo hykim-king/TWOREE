@@ -40,6 +40,7 @@ private static final long serialVersionUID = 1L;
     MenuService menuService;
     AskService askService;
     ReviewService reviewService;
+    ShopNoticeService shopNoticeService;
     public ShopController() {
     	log.debug("=====================");
 		log.debug("ShopController()");
@@ -51,6 +52,7 @@ private static final long serialVersionUID = 1L;
 		menuService = new MenuService();
 		askService = new AskService();
 		reviewService = new ReviewService();
+		shopNoticeService= new ShopNoticeService();
     }
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -181,8 +183,16 @@ private static final long serialVersionUID = 1L;
 		log.debug("=====================");
 		String title = StringUtill.nvl(req.getParameter("title"), "");
 		String content = StringUtill.nvl(req.getParameter("content"), "");
-		String fixed = StringUtill.nvl(req.getParameter("isImportant"), "");
-		log.debug("fixed:"+fixed);
+		String fixed = StringUtill.nvl(req.getParameter("important"), "");
+		String shopNo = StringUtill.nvl(req.getParameter("shop_no"), "0");
+		ShopNoticeDTO inVO = new ShopNoticeDTO();
+		inVO.setContent(content);
+		inVO.setNoticeTitle(title);
+		inVO.setFixed(fixed);
+		inVO.setShopNo(Integer.parseInt(shopNo));
+		
+		int flag =shopNoticeService.doSave(inVO);
+		res.setStatus(200);
 		return null;
 				
 	}
