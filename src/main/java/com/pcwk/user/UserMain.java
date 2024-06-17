@@ -15,6 +15,7 @@ public class UserMain implements PLog {
 	}
 	public void isExistId() {
 		log.debug("isExistId()");
+		udto.setUserId("user123");
 		int flag = uao.isExistId(udto);
 		if(1 == flag) {
 			log.debug("중복된 아이디:{}",flag);

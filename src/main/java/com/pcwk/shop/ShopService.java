@@ -73,4 +73,9 @@ public class ShopService implements PLog{
 				
 		return outVO;
 	}
+	public ShopDTO doSelectOne(ShopDTO param) {
+		ShopDTO outVO = new ShopDTO();
+		outVO=dao.doSelectOne(param);
+		return outVO;
+	}
 }

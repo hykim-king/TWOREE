@@ -1,4 +1,10 @@
+<%@page import="com.pcwk.shop.ShopDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<% String jsonShop =(String)request.getAttribute("shopVO");
+   String jsonShopDetail =(String)request.getAttribute("shopDetailVO");
+   String jsonReserveList = (String)request.getAttribute("outReserveVOList");
+   String jsonMenuList =(String)request.getAttribute("outMenuVOList"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,7 +66,7 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>예약 번호</th>
+                        <th>예약자 ID</th>
                         <th>예약 시간</th>
                         <th>예약 인원</th>
                         <th>예약 상태</th>
@@ -95,7 +101,7 @@
                         <th>답변 상태</th>
                     </tr>
                 </thead>
-                <tbody id="inquiryList"></tbody>
+                <tbody id="askList"></tbody>
             </table>
         </div>
         
@@ -109,7 +115,7 @@
                         <th>답변 상태</th>
                     </tr>
                 </thead>
-                <tbody id="askList"></tbody>
+                <tbody id="reviewList"></tbody>
             </table>
         </div>
                 
@@ -120,8 +126,8 @@
     
     <script>
         $(document).ready(function() {
+            console.log("준비됨");
             loadData();
-            
             $("#shopSelectBtn").click(function() {
                 loadData();
             });
@@ -144,45 +150,49 @@
         });
         
         function loadData() {
-            $.ajax({
-                url: "getStoreInfoServlet",
-                type: "GET",
-                dataType: "json",
-                success: function(data) {
-                	$("#shpoNow").text(data.storeName);
-                	$("#shpoName").text(data.storeName);
-                    $("#storeName").text(data.storeName);
-                    $("#storePhone").text(data.storePhone);
-                    $("#storeLocation").text(data.storeLocation);
-                    $("#shopNo").text(data.shopNo);
-                    
-                    $("#shopList").empty();
-                    $.each(data.shops, function(index, shop) {
-                        let row = $("<li><a class="dropdown-item" href="#"></a></li>");
+                  
+                  let shopObj =(<%=jsonShop %>);
+                  let shopDetailObj = <%=jsonShopDetail %>;
+                  let reserveListObj = <%=jsonReserveList%>;
+                  let menuListObj = <%=jsonMenuList%>;
+                  
+                  console.log(reserveListObj);
+                	$("#shopNow").text(shopObj.shopName);
+                	$("#shopName").text(shopObj.shopName);
+                  $("#storeName").text(shopObj.shopName);
+                  $("#storePhone").text(shopDetailObj.shopTel);
+                  $("#storeLocation").text(shopDetailObj.shopLoc);
+                  $("#shopNo").text(shopObj.shopNo);
+                  /*  
+                  $("#shopList").empty();
+                  $.each(data.shops, function(index, shop) {
+                        let row = $("<li><a class='dropdown-item' href='#'></a></li>");
                         row.append($text(shop.name));
                         $("#shopList").append(row);
-                    });
-                    
-                    $("#reservationList").empty();
-                    $.each(data.reservations, function(index, reservation) {
+                  });
+                  */
+                   
+                  $("#reservationList").empty();
+                  $.each(reserveListObj, function(index, reserve) {
                         let row = $("<tr></tr>");
-                        row.append($("<td></td>").text(reservation.id));
-                        row.append($("<td></td>").text(reservation.time));
-                        row.append($("<td></td>").text(reservation.numPeople));
-                        row.append($("<td></td>").text(reservation.reserveState));
+                        row.append($("<td></td>").text(reserve.userId));
+                        row.append($("<td></td>").text(reserve.reserveDate));
+                        row.append($("<td></td>").text(reserve.people));
+                        row.append($("<td></td>").text(reserve.reserveState));
                         $("#reservationList").append(row);
-                    });
+                  });
+                  
                     
-                    $("#menuList").empty();
-                    $.each(data.menus, function(index, menu) {
+                  $("#menuList").empty();
+                  $.each(menuListObj, function(index, menu) {
                         let row = $("<tr></tr>");
-                        row.append($("<td></td>").text(menu.name));
+                        row.append($("<td></td>").text(menu.menuName));
                         row.append($("<td></td>").text(menu.price));
                         $("#menuList").append(row);
-                    });
-                    
-                    $("#askList").empty();
-                    $.each(data.ask, function(index, ask) {
+                  });
+                  /*   
+                  $("#askList").empty();
+                  $.each(data.ask, function(index, ask) {
                         let row = $("<tr></tr>");
                         row.append($("<td></td>").text(ask.content));
                         row.append($("<td></td>").text(ask.wrtId));
@@ -190,10 +200,9 @@
                         row.append($("<td></td>").text(ask.status));
                         $("#askList").append(row);
                     });
-                },
-                error: function() {
-                }
-            });
+                 */
+                
+           
         }
     </script>
 </body>

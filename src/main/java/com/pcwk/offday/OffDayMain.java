@@ -55,9 +55,9 @@ public class OffDayMain implements PLog {
 	
 	public static void main(String[] args) {
 		OffDayMain m = new OffDayMain();
-		//m.doSave();
+		m.doSave();
 		//m.doDelete();
-		m.doRetrieve();
+		//m.doRetrieve();
 		
 
 	}

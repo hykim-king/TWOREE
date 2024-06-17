@@ -3,6 +3,7 @@ package com.pcwk.shop;
 import java.io.IOException;
 
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -21,18 +22,27 @@ import com.pcwk.ehr.cmn.JView;
 import com.pcwk.ehr.cmn.MessageVO;
 import com.pcwk.ehr.cmn.SearchDTO;
 import com.pcwk.ehr.cmn.StringUtill;
+import com.pcwk.menu.MenuDTO;
+import com.pcwk.menu.MenuService;
+import com.pcwk.reserve.ReserveDTO;
+import com.pcwk.reserve.ReserveService;
 
 public class ShopController extends HttpServlet implements ControllerV, PLog{
 private static final long serialVersionUID = 1L;
 	
-	ShopService service;
-
+	ShopService shopService;
+	ShopDetailService shopDetailService;
+    ReserveService reserveService;
+    MenuService menuService;
     public ShopController() {
     	log.debug("=====================");
 		log.debug("ShopController()");
 		log.debug("=====================");
 		
-		service = new ShopService();
+		shopService = new ShopService();
+		shopDetailService= new ShopDetailService();
+		reserveService = new ReserveService();
+		menuService = new MenuService();
     }
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -147,7 +157,7 @@ private static final long serialVersionUID = 1L;
 		inVO.setShopNo(Integer.parseInt(shopNo));
 		log.debug("inVO : "+ inVO);
 		
-		ShopDTO outVO = this.service.selectOneReadCnt(inVO);
+		ShopDTO outVO = shopService.selectOneReadCnt(inVO);
 		log.debug("outVO : "+ outVO);
 		
 		//UI 데이터 전달
@@ -155,6 +165,72 @@ private static final long serialVersionUID = 1L;
 		
 		return new JView("/shop/jsp/mainpage_mng.jsp");
 		
+	}
+	
+	public JView doMngPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("doMngPage()");
+		log.debug("=====================");
+		ShopDTO shopinVO =new ShopDTO();
+		ShopDetailDTO shopDetailinVO = new ShopDetailDTO();
+		ReserveDTO reserveVO = new ReserveDTO(); 
+		MenuDTO menuInVO = new MenuDTO();
+		
+		int shopNo = Integer.parseInt(StringUtill.nvl(req.getParameter("shop_no"), "0"));
+	
+		shopinVO.setShopNo(shopNo);
+		shopDetailinVO.setShopNo(shopNo);
+		reserveVO.setShopNo(shopNo);
+		
+		
+		SearchDTO searchReserve = new SearchDTO();
+		searchReserve.setPageNo(1);
+		searchReserve.setPageSize(30);
+		searchReserve.setSearchDiv("20");
+		searchReserve.setSearchSeq(shopNo);
+		
+		SearchDTO searchMenu = new SearchDTO();
+		searchMenu.setPageNo(1);
+		searchMenu.setPageSize(30);
+		searchMenu.setSearchSeq(shopNo);
+		
+		
+		log.debug("shopinVO : "+ shopinVO);
+		log.debug("shopDetailinVO : "+ shopDetailinVO);
+		log.debug("reserveVO : "+ reserveVO);
+		log.debug("searchMenu : "+ searchMenu);
+		
+		
+		ShopDTO outShopVO = shopService.doSelectOne(shopinVO);
+		ShopDetailDTO outShopDetailVO = shopDetailService.doSelectOne(shopDetailinVO);
+		List<ReserveDTO> outReserveVOList = reserveService.doRetrieve(searchReserve);
+		List<MenuDTO> outMenuVOList = menuService.doRetrieve(searchMenu);
+		
+		
+		//ShopDetailDTO outShopDetailVO =;
+		log.debug("outShopVO : "+ outShopVO);
+		log.debug("outShopDetailVO : "+ outShopDetailVO);
+		log.debug("outReserveVOList : "+outReserveVOList);
+		log.debug("outMenuVOList : "+outMenuVOList);
+		
+		
+		Gson gson=new Gson();
+		String jsonString = gson.toJson(outShopVO);
+        req.setAttribute("shopVO", jsonString);
+        
+        
+        jsonString = gson.toJson(outShopDetailVO);
+        req.setAttribute("shopDetailVO", jsonString);
+        
+        
+        jsonString = gson.toJson(outReserveVOList);
+        req.setAttribute("outReserveVOList", jsonString);
+        
+        jsonString = gson.toJson(outMenuVOList);
+        req.setAttribute("outMenuVOList", jsonString);
+        
+        
+		return new JView("/shop/jsp/Shop_mng_admin.jsp");
 	}
 	public JView doWork(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		log.debug("=====================");
@@ -179,6 +255,9 @@ private static final long serialVersionUID = 1L;
 //		case "doSave" :
 //			viewName = doSave(req, res);
 //			break;
+		case "shop_mng" :
+			viewName = doMngPage(req,res);
+			break;
 		case "moveToReg" :
 			viewName = moveToReg(req, res);
 			break;
@@ -222,7 +301,7 @@ private static final long serialVersionUID = 1L;
 		log.debug("inVO : {}", inVO);
 		
 		//service call
-		List<ShopDTO> list = service.doRetrieve(inVO);
+		List<ShopDTO> list = shopService.doRetrieve(inVO);
 		
 		//return ������ Ȯ��
 		int i =0;
