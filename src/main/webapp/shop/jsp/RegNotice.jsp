@@ -45,6 +45,7 @@
             xhr.onreadystatechange = function() {
                 if ( xhr.status === 200) {
                     // 등록 완료 페이지로 이동
+                    window.alert("공지사항을 등록하였습니다.");
                     window.close();
                 } else {
                     // 에러 처리
