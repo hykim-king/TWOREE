@@ -32,14 +32,14 @@ public class ShopNoticeDao implements WorkDiv<ShopNoticeDTO> {
 	    
 	    StringBuilder sb = new StringBuilder();
 	    sb.append("  INSERT INTO shop_notice (          \n");
-	    sb.append("     notice_no,                      \n");
+	    sb.append("                                     \n");
 	    sb.append("     shop_no,                        \n");
 	    sb.append("     notice_title,                   \n");
 	    sb.append("     notice_wrt_date,                \n");
 	    sb.append("     content,                        \n");
 	    sb.append("     fixed                           \n");
 	    sb.append(" ) VALUES (                          \n");
-	    sb.append("     ?,                              \n");
+	    sb.append("                                     \n");
 	    sb.append("     ?,                              \n");
 	    sb.append("     ?,                              \n");
 	    sb.append("     SYSDATE,                        \n");
