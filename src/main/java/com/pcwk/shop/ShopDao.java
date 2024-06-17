@@ -242,6 +242,8 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 			sbWhere.append("ORDER BY SCORE DESC \n");
 		}else if(null != searchVO.getSearchDiv() &&searchVO.getSearchDiv().equals("30")) {
 			sbWhere.append("ORDER BY REVIEW_CNT DESC \n");
+		}else if(null != searchVO.getSearchDiv() &&searchVO.getSearchDiv().equals("40")) {
+			sbWhere.append("WHERE manager_id = ?  \n");
 		}
 		
 		List<ShopDTO> list = new ArrayList<ShopDTO>();
@@ -325,13 +327,30 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 					pstmt.setInt(5, searchVO.getPageNo());
 					
 					
+				}if(null != searchVO.getSearchDiv() && searchVO.getSearchDiv().equals("40")) {
+					log.debug("4.1 searchDiv : 매니저 ID로 검색 {}", searchVO.getSearchDiv());
+					
+					pstmt.setString(1,  searchVO.getSearchWord());
+					
+					//ROWNUM
+					pstmt.setInt(2, searchVO.getPageSize());
+					pstmt.setInt(3, searchVO.getPageNo());
+					pstmt.setInt(4, searchVO.getPageSize());
+					
+					//rnum
+					pstmt.setInt(5, searchVO.getPageSize());
+					pstmt.setInt(6, searchVO.getPageNo());
+					
+					pstmt.setString(7,  searchVO.getSearchWord());
+					
+				//리뷰 갯수로 검색 : 20
+				//별점 갯수 순서로 검색 : 30
 				}else {
 					//ROWNUM
 					pstmt.setInt(1, searchVO.getPageSize());
 					pstmt.setInt(2, searchVO.getPageNo());
 					pstmt.setInt(3, searchVO.getPageSize());
 					
-					//rnum
 					pstmt.setInt(4, searchVO.getPageSize());
 					pstmt.setInt(5, searchVO.getPageNo());				
 				}

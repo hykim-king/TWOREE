@@ -20,7 +20,6 @@ public class ShopService implements PLog{
 	 * @return List<BoardDTO>
 	 * */
 	public List<ShopDTO> doRetrieve(DTO search) {
-		
 		return dao.doRetrieve(search);
 	}
 	

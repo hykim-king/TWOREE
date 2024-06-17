@@ -114,13 +114,13 @@ public class ReviewDAO implements WorkDiv<ReviewDTO> {
 				outVO.setReviewNo(rs.getInt("review_no"));
 				outVO.setShopNo(rs.getInt("shop_no"));
 				outVO.setUserId(rs.getString("user_id"));
+				outVO.setReviewContent(rs.getString("review_Content"));
 				outVO.setReviewWrtDate(rs.getString("review_Wrt_Date"));
 				outVO.setReviewModDate(rs.getString("review_Mod_Date"));
 				outVO.setScore(rs.getInt("score"));
 				outVO.setTotalCnt(rs.getInt("totalCnt"));
 				outVO.setShopName(rs.getString("shop_name"));
 				list.add(outVO);
-			
 			}
 			
 		

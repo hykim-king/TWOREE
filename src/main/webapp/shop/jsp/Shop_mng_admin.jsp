@@ -5,7 +5,8 @@
    String jsonReserveList = (String)request.getAttribute("outReserveVOList");
    String jsonMenuList =(String)request.getAttribute("outMenuVOList"); 
    String jsonAskList =(String)request.getAttribute("outAskVOList"); 
-   
+   String jsonReviewList = (String)request.getAttribute("outReviewVOList");
+   String jsonShopList   = (String)request.getAttribute("shopList");
 %>
 <!DOCTYPE html>
 <html>
@@ -14,6 +15,7 @@
     <title>Dynamic Content Example</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="/TWOREE/shop/js/popper.min.js"></script>
     <style>
      .printList {
      height : 500px;
@@ -28,16 +30,15 @@
 </head>
 <body>
     <div class="container my-5">
-        <h1 class="mb-4" id="shopName">abc</h1>
+        <h1 class="mb-4" id="shopName"></h1>
         <div class="dropdown">
         <button class="btn btn-primary mr-2" style="float:right" id="AddShopBtn">가게 추가</button>
              <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="float:right" id="shopSelectBtn">
-                 Dropdown button
+                 가게 선택
              </button>
-          <ul class="dropdown-menu" id ="shopList">
+          <ul class="dropdown-menu" id ="shopList">   
           </ul>
-          
-        
+                 
         </div>
         <div class="p-3 border border-info border-start-0 rounded-end" >
             <h3 class="mb-3">가게 상세 정보 관리</h3>
@@ -112,9 +113,10 @@
             <table class="table">
                 <thead>
                     <tr>
-                        <th>리뷰</th>
-                        <th>작성자 id</th>
-                        <th>답변 상태</th>
+                        <th>작성자 ID</th>
+                        <th>별점</th>
+                        <th>리뷰 내용</th>
+                        <th>리뷰 작성일</th>
                     </tr>
                 </thead>
                 <tbody id="reviewList"></tbody>
@@ -158,21 +160,23 @@
                   let reserveListObj = <%=jsonReserveList%>;
                   let menuListObj = <%=jsonMenuList%>;
                   let askListObj = <%=jsonAskList%>;
-                  
+                  let reviewListObj = <%=jsonReviewList%>
+                  let shopListObj = <%=jsonShopList%>
                 	$("#shopNow").text(shopObj.shopName);
                 	$("#shopName").text(shopObj.shopName);
                   $("#storeName").text(shopObj.shopName);
                   $("#storePhone").text(shopDetailObj.shopTel);
                   $("#storeLocation").text(shopDetailObj.shopLoc);
                   $("#shopNo").text(shopObj.shopNo);
-                  /*  
+                    
                   $("#shopList").empty();
-                  $.each(data.shops, function(index, shop) {
-                        let row = $("<li><a class='dropdown-item' href='#'></a></li>");
-                        row.append($text(shop.name));
+                  $.each(shopListObj, function(index, shop) {
+                        let row = $("<li></li>");
+                        row.append($("<a class='dropdown-item' href='#'></a>").text(shop.shopName));
+                        console.log(row);
                         $("#shopList").append(row);
                   });
-                  */
+                 
                    
                   $("#reservationList").empty();
                   $.each(reserveListObj, function(index, reserve) {
@@ -203,6 +207,15 @@
                         $("#askList").append(row);
                     });
                  
+                 $("#reviewList").empty();
+                  $.each(reviewListObj, function(index, review) {
+                        let row = $("<tr></tr>");
+                        row.append($("<td></td>").text(review.userId));
+                        row.append($("<td></td>").text(review.score));
+                        row.append($("<td></td>").text(review.reviewContent));
+                        row.append($("<td></td>").text(review.reviewWrtDate));
+                        $("#reviewList").append(row);
+                    });
                 
            
         }
