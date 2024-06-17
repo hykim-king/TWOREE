@@ -73,7 +73,7 @@ public class AskDAO implements WorkDiv<AskDTO> {
 		sb.append("                 from shop                  \n");
 		sb.append("              )c	                           \n");
 		sb.append("         where a.shop_no=c.shop_no		   \n");
-		sb.append("         order by ask_date desc             \n");		
+		sb.append("         order by ask_state desc,ask_date desc             \n");		
 		log.debug("1. SQL : {}", sb.toString());
 		log.debug("2. Conn : {}", conn);
 		log.debug("3. param : {}", search);

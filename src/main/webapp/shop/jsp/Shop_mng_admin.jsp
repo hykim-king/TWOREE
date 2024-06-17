@@ -4,6 +4,8 @@
    String jsonShopDetail =(String)request.getAttribute("shopDetailVO");
    String jsonReserveList = (String)request.getAttribute("outReserveVOList");
    String jsonMenuList =(String)request.getAttribute("outMenuVOList"); 
+   String jsonAskList =(String)request.getAttribute("outAskVOList"); 
+   
 %>
 <!DOCTYPE html>
 <html>
@@ -59,7 +61,7 @@
             </table>
         </div>
         
-        <div class="p-3 border border-info border-start-0 rounded-end printList" >
+        <div class="p-3 border border-info border-start-0 rounded-end printList overflow-auto" >
             <h3 class="mb-3">예약 현황</h3>
             <button class="btn btn-primary mr-2" style="float:right" id="reserveTimeSetBtn">예약 시간 설정</button>
             <button class="btn btn-primary mr-2" style="float:right" id="offerTimeSetBtn">영업 시간 설정</button>
@@ -76,7 +78,7 @@
             </table>
         </div>
         
-        <div class="p-3 border border-info border-start-0 rounded-end printList" >
+        <div class="p-3 border border-info border-start-0 rounded-end printList overflow-auto" >
             <h3 class="mb-3">메뉴 관리</h3>
             <button class="btn btn-primary mr-2" style="float:right" id="addMenuBtn">메뉴 추가하기</button>
             <table class="table">
@@ -90,7 +92,7 @@
             </table>
         </div>
         
-        <div class="p-3 border border-info border-start-0 rounded-end printList">
+        <div class="p-3 border border-info border-start-0 rounded-end printList overflow-auto">
             <h3 class="mb-3">고객 문의</h3>
             <table class="table">
                 <thead>
@@ -105,7 +107,7 @@
             </table>
         </div>
         
-        <div class="p-3 border border-info border-start-0 rounded-end printList">
+        <div class="p-3 border border-info border-start-0 rounded-end printList overflow-auto">
             <h3 class="mb-3">리뷰</h3>
             <table class="table">
                 <thead>
@@ -155,8 +157,8 @@
                   let shopDetailObj = <%=jsonShopDetail %>;
                   let reserveListObj = <%=jsonReserveList%>;
                   let menuListObj = <%=jsonMenuList%>;
+                  let askListObj = <%=jsonAskList%>;
                   
-                  console.log(reserveListObj);
                 	$("#shopNow").text(shopObj.shopName);
                 	$("#shopName").text(shopObj.shopName);
                   $("#storeName").text(shopObj.shopName);
@@ -190,17 +192,17 @@
                         row.append($("<td></td>").text(menu.price));
                         $("#menuList").append(row);
                   });
-                  /*   
+                     
                   $("#askList").empty();
-                  $.each(data.ask, function(index, ask) {
+                  $.each(askListObj, function(index, ask) {
                         let row = $("<tr></tr>");
-                        row.append($("<td></td>").text(ask.content));
-                        row.append($("<td></td>").text(ask.wrtId));
-                        row.append($("<td></td>").text(ask.askWrtDate));
-                        row.append($("<td></td>").text(ask.status));
+                        row.append($("<td></td>").text(ask.userAsk));
+                        row.append($("<td></td>").text(ask.userId));
+                        row.append($("<td></td>").text(ask.askDate));
+                        row.append($("<td></td>").text(ask.askState));
                         $("#askList").append(row);
                     });
-                 */
+                 
                 
            
         }

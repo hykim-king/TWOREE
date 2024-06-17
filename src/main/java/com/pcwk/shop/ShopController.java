@@ -13,6 +13,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
+import com.pcwk.ask.AskDTO;
+import com.pcwk.ask.AskService;
 import com.pcwk.ehr.cmn.ControllerV;
 import com.pcwk.ehr.cmn.PLog;
 
@@ -34,6 +36,7 @@ private static final long serialVersionUID = 1L;
 	ShopDetailService shopDetailService;
     ReserveService reserveService;
     MenuService menuService;
+    AskService askService;
     public ShopController() {
     	log.debug("=====================");
 		log.debug("ShopController()");
@@ -43,6 +46,7 @@ private static final long serialVersionUID = 1L;
 		shopDetailService= new ShopDetailService();
 		reserveService = new ReserveService();
 		menuService = new MenuService();
+		askService = new AskService();
     }
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -174,7 +178,7 @@ private static final long serialVersionUID = 1L;
 		ShopDTO shopinVO =new ShopDTO();
 		ShopDetailDTO shopDetailinVO = new ShopDetailDTO();
 		ReserveDTO reserveVO = new ReserveDTO(); 
-		MenuDTO menuInVO = new MenuDTO();
+		
 		
 		int shopNo = Integer.parseInt(StringUtill.nvl(req.getParameter("shop_no"), "0"));
 	
@@ -194,25 +198,32 @@ private static final long serialVersionUID = 1L;
 		searchMenu.setPageSize(30);
 		searchMenu.setSearchSeq(shopNo);
 		
+		SearchDTO searchAsk = new SearchDTO();
+		searchAsk.setPageNo(1);
+		searchAsk.setPageSize(30);
+		searchAsk.setSearchDiv("20");
+		searchAsk.setSearchSeq(shopNo);
+		
 		
 		log.debug("shopinVO : "+ shopinVO);
 		log.debug("shopDetailinVO : "+ shopDetailinVO);
 		log.debug("reserveVO : "+ reserveVO);
 		log.debug("searchMenu : "+ searchMenu);
+		log.debug("searchAsk : "+ searchAsk);
 		
 		
 		ShopDTO outShopVO = shopService.doSelectOne(shopinVO);
 		ShopDetailDTO outShopDetailVO = shopDetailService.doSelectOne(shopDetailinVO);
 		List<ReserveDTO> outReserveVOList = reserveService.doRetrieve(searchReserve);
 		List<MenuDTO> outMenuVOList = menuService.doRetrieve(searchMenu);
-		
+		List<AskDTO> outAskVOList = askService.doRetrieve(searchAsk);
 		
 		//ShopDetailDTO outShopDetailVO =;
 		log.debug("outShopVO : "+ outShopVO);
 		log.debug("outShopDetailVO : "+ outShopDetailVO);
 		log.debug("outReserveVOList : "+outReserveVOList);
 		log.debug("outMenuVOList : "+outMenuVOList);
-		
+		log.debug("outAskVOList : "+outAskVOList);
 		
 		Gson gson=new Gson();
 		String jsonString = gson.toJson(outShopVO);
@@ -228,6 +239,9 @@ private static final long serialVersionUID = 1L;
         
         jsonString = gson.toJson(outMenuVOList);
         req.setAttribute("outMenuVOList", jsonString);
+        
+        jsonString = gson.toJson(outAskVOList);
+        req.setAttribute("outAskVOList", jsonString);
         
         
 		return new JView("/shop/jsp/Shop_mng_admin.jsp");
