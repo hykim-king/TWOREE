@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/WEB02/a_project/bootstrap.min.css"> 
+<link rel="stylesheet" href="/TWOREE/myPage/bootstrap.min.css"> 
     <title>프로필</title>
     <style>
     	    	h5{
@@ -95,7 +95,7 @@
 <body>
     <div class="menu">
         
-        <img src="/WEB02/a_project/user_icon1.png" width= 80px><br>
+        <img src="user_icon1.png" width= 80px><br>
         <label for="uid">아이디 &nbsp</label>
         <ul>
             <li><a href="my_p.jsp">내프로필</a></li>

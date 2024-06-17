@@ -108,7 +108,7 @@
 <body>
     <div class="menu">
         
-        <img src="/WEB02/a_project/user_icon1.png" width= 80px><br>
+        <img src="user_icon1.png" width= 80px><br>
         <label for="uid">아이디 &nbsp</label>
         <ul>
             <li><a href="my_p.jsp">내프로필</a></li>
