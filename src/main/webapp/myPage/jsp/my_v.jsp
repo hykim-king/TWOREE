@@ -113,7 +113,7 @@
             <li><a href="my_p.jsp">내프로필</a></li>
             <li><a href="my_r.jsp">예약</a></li>
             <li><a href="my_v.jsp">리뷰</a></li>
-            <li><a href="my_a.jsp">고객문의</a></li>
+            <li><a href="my_m.jsp">고객문의</a></li>
         </ul>
         
          <hr>
