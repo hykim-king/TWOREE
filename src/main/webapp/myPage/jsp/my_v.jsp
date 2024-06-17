@@ -151,7 +151,7 @@
         <br>
         <h5>지난 리뷰 내역</h5>
          <button type="button" class="btn btn-dark" onClick="location.href='option_v.jsp'">전체내역보기</button> 
-        <div class="review_pass"> 
+       <div class="review_pass"> 
              <ul> 
                 <li>
                     <label for="sname">가게이름 &nbsp</label>
@@ -171,6 +171,6 @@
         
         
         
-    </div>
+    </div> --%>
 </body>
 </html>

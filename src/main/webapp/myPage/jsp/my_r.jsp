@@ -167,7 +167,7 @@
         <br>
          <h5>지난 예약 정보</h5>
          <button type="button" class="btn btn-dark" onClick="location.href='option_r.jsp'">전체내역보기</button> 
-        <div class="resever_pass"> 
+    <div class="resever_pass"> 
             <ul>
                 <li>
                     <label for="reserveId">예약번호 &nbsp</label>
@@ -190,6 +190,6 @@
         </div>
         
         
-    </div>
+    </div>   
 </body>
 </html>
