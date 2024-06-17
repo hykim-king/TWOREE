@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/WEB02/a_project/bootstrap.min.css"> 
+<link rel="stylesheet" href="/TWOREE/myPage/bootstrap.min.css"> 
     <title>예약현황</title>
     <style>
     	h5{
@@ -20,7 +20,7 @@
         body {
             display: flex;
             margin: 0;
-            padding: 150px; /* 가장자리 여백 */
+            padding: 100px; /* 가장자리 여백 */
             height: calc(100vh - 100px); /* 패딩 값을 제외한 높이 설정 */
             box-sizing: border-box;
             flex-direction: row;

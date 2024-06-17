@@ -20,7 +20,7 @@
         body {
             display: flex;
             margin: 0;
-            padding: 150px; /* 가장자리 여백 */
+            padding: 100px; /* 가장자리 여백 */
             height: calc(100vh - 100px); /* 패딩 값을 제외한 높이 설정 */
             box-sizing: border-box;
             flex-direction: row;
