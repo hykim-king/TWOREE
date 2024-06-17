@@ -159,7 +159,7 @@
         
             <ul>
                 <li>
-                    <label>관리자 &nbsp </label>
+                    <label>내 가게 &nbsp </label>
                      <!--   <div class="form-check form-switch">
                      <input class="form-check-input" type="checkbox" id="Switches" checked> 
                      <label class="form-check-label" for="Switches"></label>  
