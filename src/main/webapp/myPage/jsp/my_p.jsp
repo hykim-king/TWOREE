@@ -5,8 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/TWOREE/myPage/bootstrap.min.css"> 
-<link rel="stylesheet" href="/a_myPage/css/style_p.css" > 
+ <link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css"> ">  
     <title>프로필</title>
     <style>
      h5{
