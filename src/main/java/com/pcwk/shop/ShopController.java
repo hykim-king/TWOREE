@@ -28,6 +28,8 @@ import com.pcwk.menu.MenuDTO;
 import com.pcwk.menu.MenuService;
 import com.pcwk.reserve.ReserveDTO;
 import com.pcwk.reserve.ReserveService;
+import com.pcwk.review.ReviewDTO;
+import com.pcwk.review.ReviewService;
 
 public class ShopController extends HttpServlet implements ControllerV, PLog{
 private static final long serialVersionUID = 1L;
@@ -37,6 +39,7 @@ private static final long serialVersionUID = 1L;
     ReserveService reserveService;
     MenuService menuService;
     AskService askService;
+    ReviewService reviewService;
     public ShopController() {
     	log.debug("=====================");
 		log.debug("ShopController()");
@@ -47,6 +50,7 @@ private static final long serialVersionUID = 1L;
 		reserveService = new ReserveService();
 		menuService = new MenuService();
 		askService = new AskService();
+		reviewService = new ReviewService();
     }
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -171,20 +175,40 @@ private static final long serialVersionUID = 1L;
 		
 	}
 	
+	public JView doSaveNotice(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("doSaveNotice()");
+		log.debug("=====================");
+		String title = StringUtill.nvl(req.getParameter("title"), "");
+		String content = StringUtill.nvl(req.getParameter("content"), "");
+		String fixed = StringUtill.nvl(req.getParameter("isImportant"), "");
+		log.debug("fixed:"+fixed);
+		return null;
+				
+	}
+	
 	public JView doMngPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		log.debug("=====================");
 		log.debug("doMngPage()");
 		log.debug("=====================");
 		ShopDTO shopinVO =new ShopDTO();
 		ShopDetailDTO shopDetailinVO = new ShopDetailDTO();
-		ReserveDTO reserveVO = new ReserveDTO(); 
+		
 		
 		
 		int shopNo = Integer.parseInt(StringUtill.nvl(req.getParameter("shop_no"), "0"));
 	
 		shopinVO.setShopNo(shopNo);
 		shopDetailinVO.setShopNo(shopNo);
-		reserveVO.setShopNo(shopNo);
+        
+		String logInUser = "admin";
+		SearchDTO searchShop = new SearchDTO();
+		searchShop.setPageNo(1);
+		searchShop.setPageSize(10);
+		searchShop.setSearchDiv("40");
+		searchShop.setSearchWord(logInUser);
+		//searchWord session통해 바꾸어줘야함
+
 		
 		
 		SearchDTO searchReserve = new SearchDTO();
@@ -193,10 +217,14 @@ private static final long serialVersionUID = 1L;
 		searchReserve.setSearchDiv("20");
 		searchReserve.setSearchSeq(shopNo);
 		
+		
+		
 		SearchDTO searchMenu = new SearchDTO();
 		searchMenu.setPageNo(1);
 		searchMenu.setPageSize(30);
 		searchMenu.setSearchSeq(shopNo);
+		
+		
 		
 		SearchDTO searchAsk = new SearchDTO();
 		searchAsk.setPageNo(1);
@@ -205,11 +233,22 @@ private static final long serialVersionUID = 1L;
 		searchAsk.setSearchSeq(shopNo);
 		
 		
+		
+		SearchDTO searchReview = new SearchDTO();
+		searchReview.setPageNo(1);
+		searchReview.setPageSize(30);
+		searchReview.setSearchDiv("20");
+		searchReview.setSearchSeq(shopNo);
+		
+		
 		log.debug("shopinVO : "+ shopinVO);
+		log.debug("searchShop : "+ searchShop);
 		log.debug("shopDetailinVO : "+ shopDetailinVO);
-		log.debug("reserveVO : "+ reserveVO);
+		log.debug("searchReserve : "+ searchReserve);
 		log.debug("searchMenu : "+ searchMenu);
 		log.debug("searchAsk : "+ searchAsk);
+		log.debug("searchReview : "+ searchReview);
+		
 		
 		
 		ShopDTO outShopVO = shopService.doSelectOne(shopinVO);
@@ -217,16 +256,24 @@ private static final long serialVersionUID = 1L;
 		List<ReserveDTO> outReserveVOList = reserveService.doRetrieve(searchReserve);
 		List<MenuDTO> outMenuVOList = menuService.doRetrieve(searchMenu);
 		List<AskDTO> outAskVOList = askService.doRetrieve(searchAsk);
-		
-		//ShopDetailDTO outShopDetailVO =;
+		List<ReviewDTO> outReviewVOList = reviewService.doRetrieve(searchReview);
+		List<ShopDTO> shopList = shopService.doRetrieve(searchShop);
+
+
 		log.debug("outShopVO : "+ outShopVO);
+		log.debug("shopList : "+ shopList);
 		log.debug("outShopDetailVO : "+ outShopDetailVO);
 		log.debug("outReserveVOList : "+outReserveVOList);
 		log.debug("outMenuVOList : "+outMenuVOList);
 		log.debug("outAskVOList : "+outAskVOList);
+		log.debug("outReviewVOList : "+outReviewVOList);
+		
 		
 		Gson gson=new Gson();
-		String jsonString = gson.toJson(outShopVO);
+		String jsonString = gson.toJson(shopList);
+        req.setAttribute("shopList", jsonString);
+		
+		jsonString = gson.toJson(outShopVO);
         req.setAttribute("shopVO", jsonString);
         
         
@@ -243,6 +290,8 @@ private static final long serialVersionUID = 1L;
         jsonString = gson.toJson(outAskVOList);
         req.setAttribute("outAskVOList", jsonString);
         
+        jsonString = gson.toJson(outReviewVOList);
+        req.setAttribute("outReviewVOList", jsonString);
         
 		return new JView("/shop/jsp/Shop_mng_admin.jsp");
 	}
@@ -262,6 +311,9 @@ private static final long serialVersionUID = 1L;
 		switch(workDiv) {
 		case "doSelectOne" :
 			viewName = doSelectOne(req, res);
+			break;
+		case "doSaveNotice" :
+			viewName = doSaveNotice(req,res);
 			break;
 //		case "ajaxDoSave" :
 //			viewName = ajaxDoSave(req, res);
