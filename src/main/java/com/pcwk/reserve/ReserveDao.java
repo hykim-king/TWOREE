@@ -45,6 +45,7 @@ public class ReserveDao implements WorkDiv<ReserveDTO>,PLog {
 		sb.append("		SELECT tt1.rnum as num,                                           \n");
 		sb.append("			   tt1.user_id,                                               \n");
 		sb.append("			   tt1.shop_no,                                               \n");
+		sb.append("			   tt1.people,                                               \n");
 		sb.append("			   tt1.reserve_date,                                          \n");
 		sb.append("			   tt1.reserve_app_date,                                      \n");
 		sb.append("			   tt1.user_tel,                                              \n");
@@ -90,13 +91,13 @@ public class ReserveDao implements WorkDiv<ReserveDTO>,PLog {
 			
 			}else if(null != searchVO.getSearchDiv() && searchVO.getSearchDiv().equals("20")) {
 				log.debug("4-1. pstmt : {}", searchVO.getSearchDiv());
-				pstmt.setInt(1, Integer.parseInt(searchVO.getSearchWord()));
+				pstmt.setInt(1, searchVO.getSearchSeq());
 				pstmt.setInt(2, searchVO.getPageSize());
 				pstmt.setInt(3, searchVO.getPageNo());
 				pstmt.setInt(4, searchVO.getPageSize());
 				pstmt.setInt(5, searchVO.getPageSize());
 				pstmt.setInt(6, searchVO.getPageNo());
-				pstmt.setInt(7, Integer.parseInt(searchVO.getSearchWord()));
+				pstmt.setInt(7, searchVO.getSearchSeq());
 			
 			}
 			rs = pstmt.executeQuery();
@@ -107,6 +108,7 @@ public class ReserveDao implements WorkDiv<ReserveDTO>,PLog {
 				outVO.setNum(rs.getInt("num"));
 				outVO.setUserId(rs.getString("user_id"));
 				outVO.setShopNo(rs.getInt("shop_no"));
+				outVO.setPeople(rs.getInt("people"));
 				outVO.setReserveDate(rs.getString("reserve_date"));
 				outVO.setReserveAppDate(rs.getString("reserve_app_date"));
 				outVO.setUserTel(rs.getString("user_tel"));

@@ -1,8 +1,11 @@
 package com.pcwk.ask;
 
+import java.util.List;
+
 import com.pcwk.ehr.cmn.PLog;
 import com.pcwk.ehr.cmn.SearchDTO;
 import com.pcwk.menu.MenuDTO;
+import com.pcwk.review.ReviewDTO;
 
 public class AskMain implements PLog {
 	 AskDAO dao;
@@ -80,15 +83,30 @@ public class AskMain implements PLog {
 		log.debug(outVO);
 	}
 	
+	public void doRetrieve() {
+		log.debug(" doRetrieve()");
+		searchVO = new SearchDTO();
+		searchVO.setPageNo(1);
+		searchVO.setPageSize(10);
+		searchVO.setSearchSeq(2);
+		searchVO.setSearchWord("user1");
+		searchVO.setSearchDiv("10");
+		List <AskDTO> list = dao.doRetrieve(searchVO);
+		int i = 0;
+		for (AskDTO vo : list) {
+			log.debug("i: {}, vo: {}", ++i, vo);
+		}
+
+	}
 	
 	public static void main(String[] args) {
 
 		AskMain a = new AskMain();
-		a.doSave();	
+		//a.doSave();	
 	    //a.doDelete();
 		//a.doUpdate();
 		//a.doSelectOne();
-		//a.doRetrieve();
+		a.doRetrieve();
 
 	}
 

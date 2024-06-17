@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>예약 확인</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        .reservation-info {
+            border: 2px solid black; /* 검정 테두리 추가 */
+            padding: 10px; /* 내부 여백 설정 */
+            margin-bottom: 20px; /* 하단 마진 설정 */
+        }
+        .customer-info {
+            border: 2px solid black; /* 검정 테두리 추가 */
+            padding: 10px; /* 내부 여백 설정 */
+            margin-bottom: 20px; /* 하단 마진 설정 */
+        }
+        .customer-info input {
+            margin-bottom: 10px; /* 입력 필드 사이의 간격 설정 */
+            width: 100%; /* 입력 필드 너비 100% 설정 */
+            padding: 5px; /* 입력 필드 내부 여백 설정 */
+            box-sizing: border-box; /* 입력 필드의 너비 계산 방식 설정 */
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>예약 확인</h1>
+        <div class="reservation-info">
+            <p id="reservationText"></p>
+        </div>
+
+        <div class="customer-info">
+            <h3>예약자 정보</h3>
+            <label for="customerName">예약자:</label>
+            <input type="text" id="customerName" name="customerName">
+
+            <label for="customerPhone">연락처:</label>
+            <input type="text" id="customerPhone" name="customerPhone">
+
+            <label for="customerEmail">이메일:</label>
+            <input type="email" id="customerEmail" name="customerEmail">
+
+            <label for="customerRequest">요청사항:</label>
+            <textarea id="customerRequest" name="customerRequest" rows="4"></textarea>
+        </div>
+    </div>
+
+    <div class="content_box">
+        <button class="styled-button" onclick="location.href='index.html'">이전</button>
+        <!-- 다음 페이지에서는 다시 다음 버튼을 표시하지 않음 -->
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // localStorage에서 예약 정보 가져오기
+            const reservationData = JSON.parse(localStorage.getItem('reservation'));
+
+            if (reservationData) {
+                // 예약 정보를 화면에 표시
+                const reservationText = `일정: ${reservationData.date}, ${reservationData.time}, 인원: ${reservationData.participants}`;
+                document.getElementById('reservationText').innerText = reservationText;
+            } else {
+                // 예약 정보가 없을 경우 처리 (예: 에러 메시지 표시 등)
+                document.getElementById('reservationText').innerText = '예약 정보가 없습니다.';
+            }
+
+            // 페이지 이동 후 localStorage에서 예약 정보 삭제 (선택사항)
+            localStorage.removeItem('reservation');
+        });
+    </script>
+</body>
+</html>

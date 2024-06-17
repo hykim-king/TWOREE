@@ -1,0 +1,116 @@
+body {
+    margin: 0;
+    padding: 0;
+    background: rgb(140, 134, 134);
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    width: 50%; /* 넓이를 50%로 줄임 */
+    max-width: 800px; /* 최대 넓이를 800px로 제한 */
+    padding: 30px;
+    background: #FFF;
+    margin: 40px auto;
+    border-radius: 15px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
+    font-size: 1.8em;
+    margin-bottom: 15px;
+}
+
+p {
+    text-align: center;
+    font-size: 1.1em;
+    margin-bottom: 30px;
+}
+
+.calendar,
+.time-picker {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 15px;
+}
+
+#datePicker,
+#timePicker {
+    width: 45%;
+    padding: 8px;
+    font-size: 0.9em;
+    margin-right: 5px;
+}
+
+.participants-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+label {
+    font-size: 1.1em;
+    margin-right: 10px;
+}
+
+#participants {
+    font-size: 1.3em;
+    margin: 0 10px;
+}
+
+button {
+    padding: 8px;
+    font-size: 0.9em;
+    cursor: pointer;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+}
+
+#confirmButton {
+    display: block;
+    width: 100%;
+    padding: 12px;
+    font-size: 1.1em;
+    background: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 15px;
+}
+
+#confirmButton:hover {
+    background: #45a049;
+}
+
+.result {
+    text-align: center;
+    margin-top: 15px;
+}
+
+.content_box {
+    display: flex;
+    justify-content: center;
+    margin-top: 25px;
+}
+
+.styled-button {
+    background-color: #4CAF50;
+    border: none;
+    color: white;
+    padding: 8px 16px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    margin: 3px 8px;
+    cursor: pointer;
+    border-radius: 12px;
+}
+
+.styled-button:hover {
+    background-color: #45a049;
+}

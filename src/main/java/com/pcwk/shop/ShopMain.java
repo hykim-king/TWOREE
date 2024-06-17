@@ -8,11 +8,11 @@ import com.pcwk.ehr.cmn.SearchDTO;
 public class ShopMain implements PLog{
 	
 	ShopDTO dto;
-	ShopDAO dao;
+	ShopDao dao;
 	
 	public ShopMain() {
 		dto = new ShopDTO(1, "admin", "용인 샤브샤브", "24/06/11", 0, 0, 0, "Y");
-		dao = new ShopDAO();
+		dao = new ShopDao();
 	}
 	
 	public void doSave() {
@@ -70,8 +70,8 @@ public class ShopMain implements PLog{
 		
 		//검색 구분 
 		//10 : 가게 이름으로 검색, 20 : 리뷰 갯수 검색, 30 : 별점순 검색
-		searchVO.setSearchDiv("30");
-		searchVO.setSearchWord("4");
+		//searchVO.setSearchDiv("40");
+		//searchVO.setSearchWord("admin");
 		List<ShopDTO> list = dao.doRetrieve(searchVO);
 		
 		int i = 0;

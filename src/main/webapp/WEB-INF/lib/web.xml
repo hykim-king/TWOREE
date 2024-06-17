@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>  
+ <web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+
+xmlns="http://xmlns.jcp.org/xml/ns/javaee" 
+xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd" 
+id="WebApp_ID" version="4.0">
+  <display-name>WEB02</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+
+
+<!-- 응답 상태 코드 별로 에러메세지 지정 
+	<error-page>
+	 <exception-type>java.lang.NullPointerException</exception-type>
+	<location>/cmn/errornull.jsp</location>
+	</error-page>
+ 
+	<error-page>
+	<error-code>404</error-code>
+	<location>/cmn/error404.jsp</location>
+	</error-page>-->
+
+
+
+  <servlet>
+    <servlet-name>today</servlet-name>
+    <servlet-class>com.pcwk.ehr.servlet.TodayServlet</servlet-class>
+  </servlet>
+  
+  <servlet-mapping>
+    <servlet-name>today</servlet-name>
+    <url-pattern>/today</url-pattern>
+  </servlet-mapping>
+  
+  <context-param>
+  <description>웹</description>
+  <param-name>jsp</param-name>
+  <param-value>web</param-value> 
+  </context-param>
+  
+  
+  <context-param>
+  <description>디버깅 레벨</description>
+  <param-name>debugLevel</param-name>
+  <param-value>debug_99</param-value> 
+  </context-param>
+  
+</web-app>
