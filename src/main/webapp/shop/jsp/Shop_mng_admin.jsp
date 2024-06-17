@@ -140,6 +140,10 @@
                 // 가게 추가 기능 구현
             });
             
+            $("#RegNoticeBtn").click(function() {
+                window.open("/TWOREE/shop/jsp/RegNotice.jsp"+"?shop_no="+(<%=jsonShop %>).shopNo,"공지 등록","width=500,height=500,top=100,left=100")
+            });
+            
             $("#addReservationBtn").click(function() {
                 // 예약 추가 기능 구현
             });

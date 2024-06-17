@@ -190,7 +190,6 @@ private static final long serialVersionUID = 1L;
 		inVO.setNoticeTitle(title);
 		inVO.setFixed(fixed);
 		inVO.setShopNo(Integer.parseInt(shopNo));
-		
 		int flag =shopNoticeService.doSave(inVO);
 		res.setStatus(200);
 		return null;
