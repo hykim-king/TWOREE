@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css"> 
+<link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css">  
     <title>고객문의</title>
     <style>
     	h5{
@@ -159,7 +159,7 @@
         
         <br>
         <h5>지난 문의 내역</h5>
-         <button type="button" class="btn btn-dark" >전체내역보기</button> 
+         <button type="button" class="btn btn-dark" onClick="location.href='option_x.jsp'" >전체내역보기</button> 
         <div class="ask_pass"> 
              <ul> 
             	<li>
