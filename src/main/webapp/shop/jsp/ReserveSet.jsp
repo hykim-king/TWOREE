@@ -7,7 +7,7 @@
 <meta charset="UTF-8">
 <title>가게 예약 정보 입력</title>
 <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class="container my-5">
@@ -90,7 +90,7 @@
       $.ajax({
           type: 'POST',
           url: '/TWOREE/shop/shop.do', // 서버 측 등록 API 엔드포인트
-          data: reserveInfo, // 데이터를 JSON 형식으로 변환
+          data: JSON.stringify(reserveInfo), // 데이터를 JSON 형식으로 변환
           contentType: 'application/json; charset=utf-8', // 컨텐츠 타입 설정
           dataType: 'json', // 서버 응답 데이터 타입 설정
           success: function(response) {

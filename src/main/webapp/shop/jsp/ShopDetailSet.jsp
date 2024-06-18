@@ -12,25 +12,25 @@
         <h1 class="text-center mb-4">가게 정보 입력</h1>
         <form>
             <div class="form-group row">
-                <label for="storeName" class="col-sm-3 col-form-label">가게 소유주 성함:</label>
+                <label for="ownerName" class="col-sm-3 col-form-label">가게 소유주 성함:</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="ownerName" placeholder="사장님 성함을 입력하세요.">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="ownerName" class="col-sm-3 col-form-label">가게 전화번호:</label>
+                <label for="shopTel" class="col-sm-3 col-form-label">가게 전화번호:</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="shopTel" placeholder="가게 전화번호를 입력하세요.">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="ownerName" class="col-sm-3 col-form-label">영업 시작시간:</label>
+                <label for="openTime" class="col-sm-3 col-form-label">영업 시작시간:</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="openTime" placeholder="영업 시작 시간을 입력하세요.(ex AM10:00=>1000)">
                 </div>
             </div>
             <div class="form-group row">
-                <label for="ownerName" class="col-sm-3 col-form-label">영업 종료시간:</label>
+                <label for="ownerNcloseTimeame" class="col-sm-3 col-form-label">영업 종료시간:</label>
                 <div class="col-sm-9">
                     <input type="text" class="form-control" id="closeTime" placeholder="영업 종료 시간을 입력하세요.(ex PM10:00=>2200">
                 </div>
@@ -43,19 +43,19 @@
                 </div>
             </div>
             <div class="form-group row">
-                <label for="phoneNumber" class="col-sm-3 col-form-label">가게 규정:</label>
+                <label for="shopRule" class="col-sm-3 col-form-label">가게 규정:</label>
                 <div class="col-sm-9">
                     <textarea class="form-control" id="shopRule" rows="3"  placeholder="가게 규정을 입력하세요."></textarea>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="description" class="col-sm-3 col-form-label">주차 정보:</label>
+                <label for="parkInfo" class="col-sm-3 col-form-label">주차 정보:</label>
                 <div class="col-sm-9">
                     <textarea class="form-control" id="parkInfo" rows="3" placeholder="주차 정보를 입력하세요."></textarea>
                 </div>
             </div>
             <div class="form-group row">
-                <label for="description" class="col-sm-3 col-form-label">예약시 전할 사항:</label>
+                <label for="ReserveInfo" class="col-sm-3 col-form-label">예약시 전할 사항:</label>
                 <div class="col-sm-9">
                     <textarea class="form-control" id="ReserveInfo" rows="3" placeholder="주차 정보를 입력하세요."></textarea>
                 </div>
