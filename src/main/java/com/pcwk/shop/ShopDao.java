@@ -233,6 +233,7 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 		SearchDTO searchVO = (SearchDTO) search;
 		
 		StringBuilder sbWhere = new StringBuilder();
+		StringBuilder sbWhere2 = new StringBuilder();
 //		 --WHERE shop_name    LIKE :searchWord||'%'	"10"
 //	     --WHERE REVIEW_CNT LIKE :searchWord||'%' "20"
 //	     --WHERE SCORE   = :searchWord			"30"
@@ -243,7 +244,7 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 		}else if(null != searchVO.getSearchDiv() &&searchVO.getSearchDiv().equals("30")) {
 			sbWhere.append("ORDER BY REVIEW_CNT DESC \n");
 		}else if(null != searchVO.getSearchDiv() &&searchVO.getSearchDiv().equals("40")) {
-			sbWhere.append("WHERE manager_id = ?  \n");
+			sbWhere2.append("WHERE manager_id = ?  \n");
 		}
 		
 		List<ShopDTO> list = new ArrayList<ShopDTO>();
@@ -302,7 +303,7 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 		sb.append("	SELECT TT1.rnum AS num,                                      \n");
 		sb.append("            tt1.shop_no,                                      \n");
 		sb.append("            tt1.MANAGER_ID,                                   \n");
-		sb.append("			tt1.shop_name,                                       \n");
+		sb.append("			   tt1.shop_name,                                    \n");
 		sb.append("            TT1.REG_DATE,                                     \n");
 		sb.append("            TT1.SCORE,                                        \n");
 		sb.append("			tt1.REVIEW_CNT,                                      \n");
@@ -316,6 +317,7 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 		sb.append("					--WHERE                                      \n");
 //----where-----------------------------------------------------------------------------------------------------
 		sb.append(sbWhere.toString());
+		sb.append(sbWhere2.toString());
 //----where-----------------------------------------------------------------------------------------------------
 		sb.append("					                                             \n");
 		sb.append("			)T1                                                  \n");
@@ -389,7 +391,6 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 					pstmt.setInt(5, searchVO.getPageSize());
 					pstmt.setInt(6, searchVO.getPageNo());
 					
-					pstmt.setString(7,  searchVO.getSearchWord());
 					
 				//리뷰 갯수로 검색 : 20
 				//별점 갯수 순서로 검색 : 30
