@@ -59,7 +59,10 @@ public class ShopDetailMain implements PLog{
 		}
 		return outVO;
 	}
-	
+	public void isExist() {
+		int i=sdao.isExist(sdto);
+		System.out.println(i);
+	}
 	
 		 
 	
@@ -69,8 +72,8 @@ public class ShopDetailMain implements PLog{
 		//m.doSave();      //insert
 		//m.doUpdate();    //update
 		//m.doDelete();    //delete
-		
-		m.deSelectOne(); //select
+		m.isExist();
+		//m.deSelectOne(); //select
 		
 		//m.doUpdateReadCnt();
 	  

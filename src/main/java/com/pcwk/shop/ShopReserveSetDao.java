@@ -11,14 +11,36 @@ import com.pcwk.ehr.cmn.DBUtil;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.WorkDiv;
 
-public class ShopReserveSetDAO implements WorkDiv<ShopReserveSetDTO>{
+public class ShopReserveSetDao implements WorkDiv<ShopReserveSetDTO>{
 
 	//connectionmaker 생성
 		private ConnectionMaker connectionMaker;
 		
 	
-	public ShopReserveSetDAO() {
+	public ShopReserveSetDao() {
 		connectionMaker = new ConnectionMaker();
+	}
+	
+	public int isExist(ShopReserveSetDTO param) {
+		int flag =0;
+
+		Connection conn = connectionMaker.getConnection();
+		PreparedStatement pstmt = null;
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("select * from shop_reserve_set where shop_no=?  \n");
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());  
+			pstmt.setInt(1, param.getShopNo());
+			flag = pstmt.executeUpdate(); 
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(conn, pstmt);
+		}
+		return flag;
+		
 	}
 
 	@Override

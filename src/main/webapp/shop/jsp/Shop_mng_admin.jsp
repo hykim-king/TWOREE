@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="/TWOREE/shop/js/popper_min.js"></script>
-    <script src="/TWOREE/shop/js/popper.min.js"></script>
     <style>
      .printList {
      height : 500px;
@@ -65,8 +64,7 @@
         
         <div class="p-3 border border-info border-start-0 rounded-end printList overflow-auto" >
             <h3 class="mb-3">예약 현황</h3>
-            <button class="btn btn-primary mr-2" style="float:right" id="reserveTimeSetBtn">예약 시간 설정</button>
-            <button class="btn btn-primary mr-2" style="float:right" id="offerTimeSetBtn">영업 시간 설정</button>
+            <button class="btn btn-primary mr-2" style="float:right" id="reserveSetBtn">예약 설정</button>
             <table class="table">
                 <thead>
                     <tr>
@@ -142,21 +140,26 @@
             });
             
             $("#RegNoticeBtn").click(function() {
-                window.open("/TWOREE/shop/jsp/RegNotice.jsp"+"?shop_no="+(<%=jsonShop %>).shopNo,"공지 등록","width=500,height=500,top=100,left=100")
+                window.open("/TWOREE/shop/jsp/RegNotice.jsp"+"?shop_no="+(<%=jsonShop %>).shopNo,"공지 등록","width=500,height=700,top=100,left=100");
             });
             
-            $("#addReservationBtn").click(function() {
-                // 예약 추가 기능 구현
+            $("#reserveSetBtn").click(function() {
+                window.open("/TWOREE/shop/jsp/ReserveSet.jsp"+"?shop_no="+(<%=jsonShop %>).shopNo,"메뉴 등록","width=500,height=500,top=100,left=100");
+           
             });
             
             $("#addMenuBtn").click(function() {
-                // 메뉴 추가 기능 구현
+                window.open("/TWOREE/shop/jsp/RegMenu.jsp"+"?shop_no="+(<%=jsonShop %>).shopNo,"메뉴 등록","width=500,height=500,top=100,left=100");
             });
             
-            $("#addAskBtn").click(function() {
-                // 문의 추가 기능 구현
+            $("#DeTailModifyBtn").click(function() {
+                window.open("/TWOREE/shop/jsp/ShopDetailSet.jsp"+"?shop_no="+(<%=jsonShop %>).shopNo,"메뉴 등록","width=500,height=500,top=100,left=100");
             });
         });
+        
+        function getShopNo(){
+          return document.getElementById('shopNo');
+        }
         
         function loadData() {
                   
@@ -178,7 +181,6 @@
                   $.each(shopListObj, function(index, shop) {
                         let row = $("<li></li>");
                         row.append($("<a class='dropdown-item' href='#'></a>").text(shop.shopName));
-                        console.log(row);
                         $("#shopList").append(row);
                   });
                  
