@@ -17,6 +17,16 @@ public class ShopDetailService implements PLog {
 		return dao.doRetrieve(search);
 	}
 	
+	public int doSaveOrModify(ShopDetailDTO param) {
+		int flag =0;
+		flag=dao.isExist(param);
+		if(flag==1) {
+			dao.doUpdate(param);
+		}else {
+			dao.doSave(param);
+		}
+		return flag;
+	}
 
 	public int doSave(ShopDetailDTO param) {
 		

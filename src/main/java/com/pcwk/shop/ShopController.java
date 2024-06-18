@@ -26,6 +26,8 @@ import com.pcwk.ehr.cmn.SearchDTO;
 import com.pcwk.ehr.cmn.StringUtill;
 import com.pcwk.menu.MenuDTO;
 import com.pcwk.menu.MenuService;
+import com.pcwk.offday.OffDayDTO;
+import com.pcwk.offday.OffDayService;
 import com.pcwk.reserve.ReserveDTO;
 import com.pcwk.reserve.ReserveService;
 import com.pcwk.review.ReviewDTO;
@@ -41,6 +43,8 @@ private static final long serialVersionUID = 1L;
     AskService askService;
     ReviewService reviewService;
     ShopNoticeService shopNoticeService;
+    ShopReserveSetService shopReserveSetService;
+    OffDayService offDayService; 
     public ShopController() {
     	log.debug("=====================");
 		log.debug("ShopController()");
@@ -53,6 +57,8 @@ private static final long serialVersionUID = 1L;
 		askService = new AskService();
 		reviewService = new ReviewService();
 		shopNoticeService= new ShopNoticeService();
+		shopReserveSetService=new ShopReserveSetService();
+		offDayService = new OffDayService();
     }
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -190,11 +196,93 @@ private static final long serialVersionUID = 1L;
 		inVO.setNoticeTitle(title);
 		inVO.setFixed(fixed);
 		inVO.setShopNo(Integer.parseInt(shopNo));
-		
 		int flag =shopNoticeService.doSave(inVO);
 		res.setStatus(200);
 		return null;
 				
+	}
+	public JView doSaveMenu(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("doSaveMenu()");
+		log.debug("=====================");
+		String menuName = StringUtill.nvl(req.getParameter("menuName"), "");
+		String menuInfo = StringUtill.nvl(req.getParameter("menuDescription"), "");
+		int price = Integer.parseInt(StringUtill.nvl(req.getParameter("menuPrice"), "0"));
+		int shopNo =Integer.parseInt(StringUtill.nvl(req.getParameter("shop_no"), "0"));
+		MenuDTO inVO = new MenuDTO();
+		inVO.setMenuName(menuName);
+		inVO.setMenuInfo(menuInfo);
+		inVO.setPrice(price);
+		inVO.setShopNo(shopNo);
+		int flag = menuService.doSave(inVO);
+		res.setStatus(200);
+		return null;
+	}
+	
+	public JView modDetail(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("doSaveMenu()");
+		log.debug("=====================");
+		String ownerName = StringUtill.nvl(req.getParameter("ownerName"), "");
+		String shopTel = StringUtill.nvl(req.getParameter("shopTel"), "");
+		String openTime = StringUtill.nvl(req.getParameter("openTime"), "");
+		String closeTime = StringUtill.nvl(req.getParameter("closeTime"), "");
+		String address = StringUtill.nvl(req.getParameter("address"), "");
+		String shopRule = StringUtill.nvl(req.getParameter("shopRule"), "");
+		String parkInfo = StringUtill.nvl(req.getParameter("parkInfo"), "");
+		String ReserveInfo = StringUtill.nvl(req.getParameter("ReserveInfo"), "");
+		int shopNo = Integer.parseInt(StringUtill.nvl(req.getParameter("shop_no"), "0"));
+		ShopDetailDTO inVO = new ShopDetailDTO();
+		inVO.setShopNo(shopNo);
+		inVO.setOwnerName(ownerName);
+		inVO.setShopTel(shopTel);
+		inVO.setOpenTime(openTime);
+		inVO.setCloseTime(closeTime);
+		inVO.setShopLoc(address);
+		inVO.setShopRule(shopRule);
+		inVO.setParkInfo(parkInfo);
+		inVO.setReserverInfo(ReserveInfo);
+		int flag = shopDetailService.doSaveOrModify(inVO);
+		res.setStatus(200);
+		return null;
+				
+	}
+	
+	public JView setReserve(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("setReserve()");
+		log.debug("=====================");
+		int tableCap = Integer.parseInt(StringUtill.nvl(req.getParameter("tableCap"), "0"));
+		int peopleCap = Integer.parseInt(StringUtill.nvl(req.getParameter("peopleCap"), "0"));
+		String reserveOpenTime = StringUtill.nvl(req.getParameter("reserveOpenTime"), "");
+		String reserveCloseTime = StringUtill.nvl(req.getParameter("reserveCloseTime"), "");
+		int shopNo = Integer.parseInt(StringUtill.nvl(req.getParameter("shop_no"), "0"));
+		String offDays =req.getParameter("offDays");
+		
+		
+		
+		ShopReserveSetDTO inVO = new ShopReserveSetDTO();
+		inVO.setTableCap(tableCap);
+		inVO.setPeopleCap(peopleCap);
+		inVO.setStartTime(reserveOpenTime);
+		inVO.setEndTime(reserveCloseTime);
+		inVO.setShopNo(shopNo);
+		int flag = shopReserveSetService.doSaveOrModify(inVO);
+		
+		
+		OffDayDTO offDayInVO = new OffDayDTO();
+		offDayInVO.setShopNo(shopNo);
+		offDays=offDays.substring(1, offDays.length()-1);
+		
+		
+		String []offDay =offDays.split(",");
+		for(String str : offDay) {
+			str=str.substring(1,str.length()-1);
+			offDayInVO.setClosedDay(str);
+			offDayService.doSave(offDayInVO);
+		}
+		res.setStatus(200);
+		return null;
 	}
 	
 	public JView doMngPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
@@ -305,6 +393,8 @@ private static final long serialVersionUID = 1L;
         
 		return new JView("/shop/jsp/Shop_mng_admin.jsp");
 	}
+	
+	
 	public JView doWork(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		log.debug("=====================");
 		log.debug("doWork()");
@@ -325,12 +415,16 @@ private static final long serialVersionUID = 1L;
 		case "doSaveNotice" :
 			viewName = doSaveNotice(req,res);
 			break;
-//		case "ajaxDoSave" :
-//			viewName = ajaxDoSave(req, res);
-//			break;
-//		case "doSave" :
-//			viewName = doSave(req, res);
-//			break;
+		case "reg_Menu" :
+			viewName = doSaveMenu(req,res);
+			break;
+		case "ModDetail" :
+			viewName = modDetail(req,res);
+			break;
+		case "setReserve" :
+			viewName = setReserve(req,res);
+			break;
+
 		case "shop_mng" :
 			viewName = doMngPage(req,res);
 			break;

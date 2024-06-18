@@ -9,25 +9,12 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
-import java.util.List; 
+
 import com.pcwk.ehr.cmn.DBUtil;
 import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.WorkDiv; 
 import com.pcwk.ehr.cmn.ConnectionMaker;   
-import com.pcwk.ehr.cmn.ConnectionMaker; 
-import com.pcwk.ehr.cmn.DTO;
-import com.pcwk.ehr.cmn.WorkDiv;
 
-import com.pcwk.ehr.cmn.DBUtil;
-import com.pcwk.ehr.cmn.DTO;
-import com.pcwk.ehr.cmn.WorkDiv;
-import com.pcwk.ehr.cmn.ConnectionMaker; 
-
-import com.pcwk.ehr.cmn.WorkDiv; 
- 
-
-import com.pcwk.ehr.cmn.DTO;
-import com.pcwk.ehr.cmn.WorkDiv;
 //왜 자꾸 늘어나는거야
 public class ShopDetailDao implements WorkDiv<ShopDetailDTO> {
 
@@ -36,7 +23,24 @@ public class ShopDetailDao implements WorkDiv<ShopDetailDTO> {
 	public ShopDetailDao() { 
 		connectionMaker = new ConnectionMaker();
 	}
-	
+	public int isExist(ShopDetailDTO param) {
+		int flag =0;
+		Connection conn = connectionMaker.getConnection();
+		PreparedStatement pstmt = null;
+		StringBuilder sb = new StringBuilder();
+		sb.append("select * from shop_detail where shop_no =? \n");
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());  
+			pstmt.setInt(1, param.getShopNo());
+			flag = pstmt.executeUpdate(); 
+		}catch(SQLException e){
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(conn, pstmt);
+		}
+		return flag;
+	}
 	 
 	@Override
 	public int doSave(ShopDetailDTO param) { 

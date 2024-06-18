@@ -46,7 +46,7 @@
             </div>
         </form>
         <hr>
-        <jsp:include page="myPage.jsp" flush="false"/>
+        <jsp:include page="MyPage.jsp" flush="false"/>
         <div class="main_page">
            	 	<%for(ShopDTO vo   :list){ %>
             <ul>
@@ -56,7 +56,7 @@
             </ul>
                 <%  } %>
         </div>
-       <jsp:include page="shopDetailPage.jsp" flush="false"/>
+       <jsp:include page="ShopDetailPage.jsp" flush="false"/>
     </div>
 <script src="/TWOREE/shop/js/bootstrap.bundle.min.js"></script>
 </body>

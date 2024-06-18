@@ -32,14 +32,14 @@ public class ShopNoticeDao implements WorkDiv<ShopNoticeDTO> {
 	    
 	    StringBuilder sb = new StringBuilder();
 	    sb.append("  INSERT INTO shop_notice (          \n");
-	    sb.append("     notice_no,                      \n");
+	    sb.append("                                     \n");
 	    sb.append("     shop_no,                        \n");
 	    sb.append("     notice_title,                   \n");
 	    sb.append("     notice_wrt_date,                \n");
 	    sb.append("     content,                        \n");
 	    sb.append("     fixed                           \n");
 	    sb.append(" ) VALUES (                          \n");
-	    sb.append("     ?,                              \n");
+	    sb.append("                                     \n");
 	    sb.append("     ?,                              \n");
 	    sb.append("     ?,                              \n");
 	    sb.append("     SYSDATE,                        \n");
@@ -54,12 +54,11 @@ public class ShopNoticeDao implements WorkDiv<ShopNoticeDTO> {
 	    try {
 	        pstmt = conn.prepareStatement(sb.toString()); // PreparedStatement를 생성합니다.
 	        log.debug("4. pstmt : {}", pstmt);
-	        
-	        pstmt.setInt   (1, param.getNoticeNo());  
-	        pstmt.setInt   (2, param.getShopNo());
-	        pstmt.setString(3, param.getNoticeTitle());  
-	        pstmt.setString(4, param.getContent()); 
-	        pstmt.setString(5, param.getFixed()); 
+	         
+	        pstmt.setInt   (1, param.getShopNo());
+	        pstmt.setString(2, param.getNoticeTitle());  
+	        pstmt.setString(3, param.getContent()); 
+	        pstmt.setString(4, param.getFixed()); 
 	        
 	        flag = pstmt.executeUpdate();  
 	        

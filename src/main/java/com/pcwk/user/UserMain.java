@@ -88,7 +88,7 @@ public class UserMain implements PLog {
 		//m.doSave();
 		//m.doUpdate();
 		//m.doDelete();
-		//m.doSelectOne();
-		m.isExistId();
+		m.doSelectOne();
+		//m.isExistId();
 	}
 }

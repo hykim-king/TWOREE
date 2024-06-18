@@ -1,5 +1,20 @@
+<%@page import="com.pcwk.ehr.cmn.SearchDTO"%>
+<%@page import="com.pcwk.user.UserDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+
+	List<UserDTO> list = (List<UserDTO>)request.getAttribute("list");
+	SearchDTO searchCon = (SearchDTO)request.getAttribute("vo");
+
+%>
+    
+    
+    
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
