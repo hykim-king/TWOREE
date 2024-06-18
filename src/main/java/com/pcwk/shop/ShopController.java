@@ -213,6 +213,49 @@ private static final long serialVersionUID = 1L;
 		return null;
 	}
 	
+	public JView modDetail(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("doSaveMenu()");
+		log.debug("=====================");
+		String ownerName = StringUtill.nvl(req.getParameter("ownerName"), "");
+		String shopTel = StringUtill.nvl(req.getParameter("shopTel"), "");
+		String openTime = StringUtill.nvl(req.getParameter("openTime"), "");
+		String closeTime = StringUtill.nvl(req.getParameter("closeTime"), "");
+		String address = StringUtill.nvl(req.getParameter("address"), "");
+		String shopRule = StringUtill.nvl(req.getParameter("shopRule"), "");
+		String parkInfo = StringUtill.nvl(req.getParameter("parkInfo"), "");
+		String ReserveInfo = StringUtill.nvl(req.getParameter("ReserveInfo"), "");
+		int shopNo = Integer.parseInt(StringUtill.nvl(req.getParameter("shop_no"), "0"));
+		ShopDetailDTO inVO = new ShopDetailDTO();
+		inVO.setShopNo(shopNo);
+		inVO.setOwnerName(ownerName);
+		inVO.setShopTel(shopTel);
+		inVO.setOpenTime(openTime);
+		inVO.setCloseTime(closeTime);
+		inVO.setShopLoc(address);
+		inVO.setShopRule(shopRule);
+		inVO.setParkInfo(parkInfo);
+		inVO.setReserverInfo(ReserveInfo);
+		int flag = shopDetailService.doSaveOrModify(inVO);
+		return null;
+				
+	}
+	
+	public JView setReserve(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("setReserve()");
+		log.debug("=====================");
+		String tableCap = StringUtill.nvl(req.getParameter("tableCap"), "");
+		String peopleCap = StringUtill.nvl(req.getParameter("peopleCap"), "");
+		String reserveOpenTime = StringUtill.nvl(req.getParameter("reserveOpenTime"), "");
+		String reserveCloseTime = StringUtill.nvl(req.getParameter("reserveCloseTime"), "");
+		String[] offDays =req.getParameterValues("offDys");
+		for(String str : offDays) {
+			log.debug(str);
+		}
+		return null;
+	}
+	
 	public JView doMngPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		log.debug("=====================");
 		log.debug("doMngPage()");
@@ -334,6 +377,8 @@ private static final long serialVersionUID = 1L;
 		req.setCharacterEncoding("UTF-8");
 		
 		String workDiv = StringUtill.nvl(req.getParameter("work_div"),"");
+		String tableCap =req.getParameter("tableCap");
+		log.debug("tableCap : {}", tableCap);
 		log.debug("workDiv : {}", workDiv);
 		
 		switch(workDiv) {
@@ -346,12 +391,13 @@ private static final long serialVersionUID = 1L;
 		case "reg_Menu" :
 			viewName = doSaveMenu(req,res);
 			break;
-//		case "ajaxDoSave" :
-//			viewName = ajaxDoSave(req, res);
-//			break;
-//		case "doSave" :
-//			viewName = doSave(req, res);
-//			break;
+		case "ModDetail" :
+			viewName = modDetail(req,res);
+			break;
+		case "setReserve" :
+			viewName = setReserve(req,res);
+			break;
+
 		case "shop_mng" :
 			viewName = doMngPage(req,res);
 			break;
