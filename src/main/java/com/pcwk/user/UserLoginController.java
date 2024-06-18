@@ -24,6 +24,7 @@ public class UserLoginController implements ControllerV, PLog {
 		log.debug("-------------------");
     	log.debug("LoginController()");
     	log.debug("-------------------");
+    	service =new UserService();
     	    	
 	}
 	//로그인
@@ -33,7 +34,7 @@ public class UserLoginController implements ControllerV, PLog {
     	log.debug("-------------------");
 		UserDTO inVO = new UserDTO();
     	
-    	String userId = StringUtill.nvl(request.getParameter("user_id"),"");
+    	String userId = StringUtill.nvl(request.getParameter("userId"),"");
     	String password = StringUtill.nvl(request.getParameter("password"),"");
     	
     	inVO.setUserId(userId);
@@ -75,7 +76,7 @@ public class UserLoginController implements ControllerV, PLog {
 	
 	PrintWriter out = response.getWriter();
 	out.print(jsonString);
-	JView viewName= new JView("");
+	JView viewName= null;
 	return viewName;
 	}	
 	
