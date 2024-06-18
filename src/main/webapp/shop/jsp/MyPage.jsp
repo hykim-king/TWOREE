@@ -18,6 +18,6 @@
 			<li>소유 가게</li>  
 		</ul>
 	</div>
-<script src="/TWOREE/shop/js/bootstrap.bundle.min.js"></script>
+<script src="/TWOREE/shop/js/popper_min.js"></script>
 </body>
 </html>

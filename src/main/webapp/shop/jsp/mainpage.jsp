@@ -58,6 +58,6 @@
         </div>
        <jsp:include page="ShopDetailPage.jsp" flush="false"/>
     </div>
-<script src="/TWOREE/shop/js/bootstrap.bundle.min.js"></script>
+<script src="/TWOREE/shop/js/popper_min.js"></script>
 </body>
 </html>

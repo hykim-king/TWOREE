@@ -41,6 +41,7 @@ private static final long serialVersionUID = 1L;
     AskService askService;
     ReviewService reviewService;
     ShopNoticeService shopNoticeService;
+    
     public ShopController() {
     	log.debug("=====================");
 		log.debug("ShopController()");
