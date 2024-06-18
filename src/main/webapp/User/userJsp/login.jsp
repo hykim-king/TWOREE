@@ -134,16 +134,19 @@
       <!-- Checkbox -->
       <div class="form-check">
         <input class="form-check-input" type="checkbox" value="" id="form2Example31" checked />
-        <label class="form-check-label" for="form2Example31"> Remember me </label>
+        <label class="form-check-label" for="form2Example31"> 로그인 저장 </label>
       </div>
     </div>
   <div class ="col">
     <a href="#!">비밀번호를 잊으셨나요?</a>
   
   </div>
-</div>
+  
+  </div>
+
 
 <button id="login" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">로그인</button>
+<button id="join" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">회원가입</button>
 
 </form>
 </div>
