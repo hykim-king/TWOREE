@@ -82,6 +82,7 @@
       $.ajax({
           type: "POST",
           url: "/TWOREE/shop/shop.do", 
+          async: false,
           data: {
                 tableCap: $('#tableCap').val(),
                 peopleCap: $('#peopleCap').val(),

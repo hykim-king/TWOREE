@@ -13,9 +13,10 @@
 <head>
     <meta charset="UTF-8">
     <title>Dynamic Content Example</title>
+    <script src="/TWOREE/shop/js/bootstrap_bundle_min.js"></script>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="/TWOREE/shop/js/popper_min.js"></script>
+    
     <style>
      .printList {
      height : 500px;
@@ -33,18 +34,19 @@
         <h1 class="mb-4" id="shopName"></h1>
         <div class="dropdown">
         <button class="btn btn-primary mr-2" style="float:right" id="AddShopBtn">가게 추가</button>
-             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="float:right" id="shopSelectBtn">
+             <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false" style="float:right" id="shopNow">
                  가게 선택
              </button>
           <ul class="dropdown-menu" id ="shopList">   
           </ul>
                  
         </div>
+        
         <div class="p-3 border border-info border-start-0 rounded-end" >
             <h3 class="mb-3">가게 상세 정보 관리</h3>
             <button class="btn btn-primary mr-2" style="float:right" id="DeTailModifyBtn">상세정보설정</button>
             <button class="btn btn-primary mr-2" id="RegNoticeBtn" style="float:right">가게소식등록</button>
-            <table class="table">
+            <table class="table table-striped table-hover table-bordered">
                 <tbody>
                     <tr>
                         <td>가게 이름</td>
@@ -65,10 +67,10 @@
         <div class="p-3 border border-info border-start-0 rounded-end printList overflow-auto" >
             <h3 class="mb-3">예약 현황</h3>
             <button class="btn btn-primary mr-2" style="float:right" id="reserveSetBtn">예약 설정</button>
-            <table class="table">
+            <table class="table table-striped table-hover table-bordered">
                 <thead>
-                    <tr>
-                        <th>예약자 ID</th>
+                    <tr class="table-success">
+                        <th >예약자 ID</th>
                         <th>예약 시간</th>
                         <th>예약 인원</th>
                         <th>예약 상태</th>
@@ -81,9 +83,9 @@
         <div class="p-3 border border-info border-start-0 rounded-end printList overflow-auto" >
             <h3 class="mb-3">메뉴 관리</h3>
             <button class="btn btn-primary mr-2" style="float:right" id="addMenuBtn">메뉴 추가하기</button>
-            <table class="table">
+            <table class="table table-striped table-hover table-bordered">
                 <thead>
-                    <tr>
+                    <tr class="table-success">
                         <th>메뉴 이름</th>
                         <th>가격</th>
                     </tr>
@@ -94,9 +96,9 @@
         
         <div class="p-3 border border-info border-start-0 rounded-end printList overflow-auto">
             <h3 class="mb-3">고객 문의</h3>
-            <table class="table">
+            <table class="table table-striped table-hover table-bordered">
                 <thead>
-                    <tr>
+                    <tr class="table-success">
                         <th>문의 내용</th>
                         <th>작성자 id</th>
                         <th>작성 시간</th>
@@ -109,9 +111,9 @@
         
         <div class="p-3 border border-info border-start-0 rounded-end printList overflow-auto">
             <h3 class="mb-3">리뷰</h3>
-            <table class="table">
+            <table class="table table-striped table-hover table-bordered">
                 <thead>
-                    <tr>
+                    <tr class="table-success">
                         <th>작성자 ID</th>
                         <th>별점</th>
                         <th>리뷰 내용</th>
@@ -170,8 +172,8 @@
                   let askListObj = <%=jsonAskList%>;
                   let reviewListObj = <%=jsonReviewList%>
                   let shopListObj = <%=jsonShopList%>
-                	$("#shopNow").text(shopObj.shopName);
-                	$("#shopName").text(shopObj.shopName);
+                  $("#shopNow").text(shopObj.shopName);
+                  $("#shopName").text(shopObj.shopName);
                   $("#storeName").text(shopObj.shopName);
                   $("#storePhone").text(shopDetailObj.shopTel);
                   $("#storeLocation").text(shopDetailObj.shopLoc);
@@ -182,6 +184,7 @@
                         let row = $("<li></li>");
                         row.append($("<a class='dropdown-item' href='#'></a>").text(shop.shopName));
                         $("#shopList").append(row);
+                        console.log(row);
                   });
                  
                    
@@ -192,6 +195,7 @@
                         row.append($("<td></td>").text(reserve.reserveDate));
                         row.append($("<td></td>").text(reserve.people));
                         row.append($("<td></td>").text(reserve.reserveState));
+                        row.append($("<td hidden='true'></td>").text(reserve.reserveNo));
                         $("#reservationList").append(row);
                   });
                   
@@ -201,6 +205,7 @@
                         let row = $("<tr></tr>");
                         row.append($("<td></td>").text(menu.menuName));
                         row.append($("<td></td>").text(menu.price));
+                        row.append($("<td hidden='true'></td>").text(menu.menuNo));
                         $("#menuList").append(row);
                   });
                      
@@ -211,6 +216,7 @@
                         row.append($("<td></td>").text(ask.userId));
                         row.append($("<td></td>").text(ask.askDate));
                         row.append($("<td></td>").text(ask.askState));
+                        row.append($("<td hidden='true'></td>").text(ask.askNo));
                         $("#askList").append(row);
                     });
                  
@@ -221,6 +227,7 @@
                         row.append($("<td></td>").text(review.score));
                         row.append($("<td></td>").text(review.reviewContent));
                         row.append($("<td></td>").text(review.reviewWrtDate));
+                        row.append($("<td hidden='true'></td>").text(review.reviewNo));
                         $("#reviewList").append(row);
                     });
                 
