@@ -30,10 +30,12 @@
     </div>
 
     <script>
+        const shopNo= window.opener.getShopNo().textContent;
         const form = document.getElementById('noticeForm');
+        console.log(shopNo);
         form.addEventListener('submit', function(event) {
             event.preventDefault(); // 폼 기본 동작 막기
-
+            
             const title = document.getElementById('title').value;
             const content = document.getElementById('content').value;
             const important = document.getElementById('important').checked ? 'Y' : 'N';
@@ -52,7 +54,7 @@
                     alert('공지사항 등록에 실패했습니다.');
                 }
             };
-            xhr.send('title=' + encodeURIComponent(title) + '&content=' + encodeURIComponent(content) + '&important=' + important + '&work_div=doSaveNotice' +'&shop_no=2');
+            xhr.send('title=' + encodeURIComponent(title) + '&content=' + encodeURIComponent(content) + '&important=' + important + '&work_div=doSaveNotice' +'&shop_no='+shopNo);
         });
 
         function cancelForm() {

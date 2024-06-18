@@ -40,21 +40,23 @@
 
     <script>
         function registerMenu() {
-            var menuName = $('#menuName').val();
-            var menuDescription = $('#menuDescription').val();
-            var menuPrice = $('#menuPrice').val();
-
+            let menuName = $('#menuName').val();
+            let menuDescription = $('#menuDescription').val();
+            let menuPrice = $('#menuPrice').val();
+            let shopNo = window.opener.getShopNo().textContent;
             $.ajax({
-                url: 'registerMenu.jsp',
+                url: '/TWOREE/shop/shop.do',
                 type: 'POST',
                 data: {
                     menuName: menuName,
                     menuDescription: menuDescription,
-                    menuPrice: menuPrice
+                    menuPrice: menuPrice,
+                    work_div: 'reg_Menu',
+                    shop_no: shopNo
                 },
                 success: function(response) {
                     alert('메뉴가 등록되었습니다.');
-                    $('#menuForm')[0].reset();
+                    window.close();
                 },
                 error: function(xhr, status, error) {
                     alert('메뉴 등록 중 오류가 발생했습니다.');

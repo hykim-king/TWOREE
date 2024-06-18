@@ -195,6 +195,23 @@ private static final long serialVersionUID = 1L;
 		return null;
 				
 	}
+	public JView doSaveMenu(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("doSaveMenu()");
+		log.debug("=====================");
+		String menuName = StringUtill.nvl(req.getParameter("menuName"), "");
+		String menuInfo = StringUtill.nvl(req.getParameter("menuDescription"), "");
+		int price = Integer.parseInt(StringUtill.nvl(req.getParameter("menuPrice"), "0"));
+		int shopNo =Integer.parseInt(StringUtill.nvl(req.getParameter("shop_no"), "0"));
+		MenuDTO inVO = new MenuDTO();
+		inVO.setMenuName(menuName);
+		inVO.setMenuInfo(menuInfo);
+		inVO.setPrice(price);
+		inVO.setShopNo(shopNo);
+		int flag = menuService.doSave(inVO);
+		res.setStatus(200);
+		return null;
+	}
 	
 	public JView doMngPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		log.debug("=====================");
@@ -304,6 +321,8 @@ private static final long serialVersionUID = 1L;
         
 		return new JView("/shop/jsp/Shop_mng_admin.jsp");
 	}
+	
+	
 	public JView doWork(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		log.debug("=====================");
 		log.debug("doWork()");
@@ -323,6 +342,9 @@ private static final long serialVersionUID = 1L;
 			break;
 		case "doSaveNotice" :
 			viewName = doSaveNotice(req,res);
+			break;
+		case "reg_Menu" :
+			viewName = doSaveMenu(req,res);
 			break;
 //		case "ajaxDoSave" :
 //			viewName = ajaxDoSave(req, res);
