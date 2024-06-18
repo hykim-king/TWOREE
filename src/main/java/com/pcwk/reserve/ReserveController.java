@@ -1,36 +1,31 @@
-package com.pcwk.user;
+package com.pcwk.reserve;
+
 import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
- 
+
 import com.pcwk.ehr.cmn.ControllerV;
 import com.pcwk.ehr.cmn.JView;
 import com.pcwk.ehr.cmn.PLog;
 import com.pcwk.ehr.cmn.StringUtill;
-import com.pcwk.reserve.ReserveDTO;
-import com.pcwk.reserve.ReserveService;
 import com.pcwk.user.UserDTO;
+import com.pcwk.user.UserService;
 
-public class UserController implements ControllerV, PLog {
-
-	
-	private static final long serialVersionUID = 1L;
+public class ReserveController implements ControllerV, PLog  {
+private static final long serialVersionUID = 1L;
     
-	UserService  service;
-	ReserveService reserveService;
+	ReserveService  service;
 	//CodeService codeService;
 	
 	
-	public UserController() {
+	public ReserveController() {
 		log.debug("-------------------");
     	log.debug("LoginController()");
     	log.debug("-------------------");
-    	service = new UserService();
-    	reserveService = new ReserveService();
+    	service = new ReserveService();
     	    	
 	} 
 	public JView doSelectOne(HttpServletRequest request, HttpServletResponse response)
@@ -47,38 +42,38 @@ public class UserController implements ControllerV, PLog {
     	
     	//this.service.selectOneReadCnt(inVO);
     	
-    	UserDTO outVO = this.service.doSelectOne(inVO);
-    	log.debug("outVO:"+outVO); 
+    	//UserDTO outVO = this.service.doSelectOne(inVO);
+    	//log.debug("outVO:"+outVO); 
     	
     	
-    	request.setAttribute("outVO",outVO);
+    	//request.setAttribute("outVO",outVO);
     	
     	
     
     return new JView("/myPage/jsp/my_p.jsp");
     
     }
-	public JView doRetrieveR(HttpServletRequest request, HttpServletResponse response)
-			throws ServletException, IOException {
-	      	log.debug("-----------------");
-	    	log.debug("doRetrieve ()");
-	    	log.debug("-----------------");		
-	    	
-	    	ReserveDTO inVO = new ReserveDTO(); 
-	    	String userId = StringUtill.nvl(request.getParameter("userId"),"0");
-	    	
-	    	inVO.setUserId(userId);
-	    	log.debug("inVO:"+inVO);
-	    	
-	    	//this.service.selectOneReadCnt(inVO);
-	    	
-	    	List<ReserveDTO> list = reserveService.doRetrieve(inVO);
+	public JView doRetrieve(HttpServletRequest request, HttpServletResponse response)
+		throws ServletException, IOException {
+      	log.debug("-----------------");
+    	log.debug("doRetrieve ()");
+    	log.debug("-----------------");		
+    	
+    	ReserveDTO inVO = new ReserveDTO(); 
+    	String userId = StringUtill.nvl(request.getParameter("userId"),"0");
+    	
+    	inVO.setUserId(userId);
+    	log.debug("inVO:"+inVO);
+    	
+    	//this.service.selectOneReadCnt(inVO);
+    	
+    	List<ReserveDTO> list = this.service.doRetrieve(inVO);
 
-	    	request.setAttribute("list",list);
-			
-			 return new JView("/myPage/jsp/my_r.jsp");	
-		}
- 
+    	request.setAttribute("list",list);
+		
+		 return new JView("/myPage/jsp/my_r.jsp");	
+	}
+	
 	@Override
 	public JView doWork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.debug("-------------------");
@@ -94,7 +89,11 @@ public class UserController implements ControllerV, PLog {
     	case"doSelectOne":
     		viewName = doSelectOne(request, response);
     		break; 
-    		 
+    		
+    	case"doRetrieve ":
+    		viewName = doRetrieve (request, response);
+    		break; 
+    		
     		
     	}
     		
