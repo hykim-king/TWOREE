@@ -1,11 +1,19 @@
+<%@page import="com.pcwk.ask.AskDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+    List<AskDTO> list = (List<AskDTO>)request.getAttribute("list"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css">  
+<link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css"> 
+
+<script src="/WEB02/assets/js/jquery_3_7_1.js"></script>
+ 
     <title>고객문의</title>
     <style>
     	h5{
@@ -148,19 +156,29 @@
                  	</tr>
      	 </thead> 
     	 <tbody> 
-					<tr><td>가게이름</td>	 
-						<td>유저아이디</td>   
-						<td rowspan="2">요청사항</td> 
+    	  
+    	 <%     if(null != list && list.size()>0){
+          				for(AskDTO vo   :list){  
+		         %> 
+		         
+		         
+					<tr><td>가게이름<%=vo.getShopName()%></td>	 
+						<td>유저아이디<%=vo.getUserId()%></td>   
+						<td rowspan="2">요청사항<%=vo.getShopName()%></td> 
 						<td rowspan="2">
 						 <input type="button"  data-hidden-info="" value="수정"  class="btn btn-outline-success btn-sm "></td>
                  	</tr>  
-					<tr><td>날짜</td>	 
-						<td>문의상태</td>	  
-						       
+					<tr><td>날짜<%=vo.getAskDate()%></td>	 
+						<td>문의상태<%=vo.getAskState()%></td>	  
+			 <%  
+          		  }//for
+         		}//--if 
+      		  %> 	       
    			 </tbody>
 			 </table>
         </div>
         </div>
     </div>
+<script src="/WEB02/assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

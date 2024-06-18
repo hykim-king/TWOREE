@@ -1,11 +1,20 @@
+<%@page import="com.pcwk.review.ReviewDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%
+    List<ReviewDTO> list = (List<ReviewDTO>)request.getAttribute("list"); 
+%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css">  
+<link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css">
+
+<script src="/WEB02/assets/js/jquery_3_7_1.js"></script>
+  
     <title>리뷰</title>
     <style>
     	h5{
@@ -148,16 +157,25 @@
                  	</tr>
      	 </thead> 
     	 <tbody> 
-					<tr><td>가게이름</td>	 
-					<td>제목</td>   
-					<td>메뉴이름</td>    
-					<td>★★★☆☆</td>
+    	 
+    	 <%     if(null != list && list.size()>0){
+          				for(ReviewDTO vo   :list){  
+		         %> 
+		         
+					<tr><td>가게이름<%=vo.getShopName()%></td>	 
+					<td>가게번호<%=vo.getShopNo()%></td>   
+					<td>공백용<%=vo.getShopNo()%></td>    
+					<td>별점<%=vo.getScore()%></td>
 						<td rowspan="2">
 						 <input type="button"  data-hidden-info="" value="수정"  class="btn btn-outline-success btn-sm "></td>
-					<tr><td>날짜</td>	 
-					<td>인원수</td>	    
-					<td>가격</td>	      
-					<td>내용</td>
+					<tr><td>적은날짜<%=vo.getReviewWrtDate()%></td>	 
+					<td>확인날짜<%=vo.getReviewWrtDate()%></td>	   
+					<td>내용<%=vo.getReviewContent()%></td>
+					
+			 <%  
+          		  }//for
+         		}//--if 
+      		  %> 
    			 </tbody>
 			 </table>
         </div>
@@ -165,5 +183,6 @@
         
         
     </div>  
+<script src="/WEB02/assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
