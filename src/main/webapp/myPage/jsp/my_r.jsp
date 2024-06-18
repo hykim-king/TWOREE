@@ -1,11 +1,28 @@
+<%@page import="com.pcwk.reserve.ReserveDTO"%>
+<%@page import="com.pcwk.user.UserDTO"%>
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%
+    List<ReserveDTO> list = (List<ReserveDTO>)request.getAttribute("list"); 
+%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css">  
+
+<script src="/WEB02/assets/js/jquery_3_7_1.js"></script>
+<script>
+
+//String list = (String)request.getAttribute("vo");
+
+
+</script>
+
     <title>예약현황</title>
     <style>
     	h5{
@@ -126,22 +143,33 @@
                  	</tr>
      	 </thead> 
     	 	<tbody> 
-					<tr><td>가게이름</td>	 
-						<td>주문자</td>   
-						<td>메뉴이름</td>    
-						<td>예약상태</td>
+    	 	    <%     if(null != list && list.size()>0){
+          				for(ReserveDTO vo   :list){  
+		         %>   
+    	 	
+    	 	
+    	 	
+					<tr><td>가게이름<%=vo.getShopNo()%></td>	 
+						<td>주문자<%=vo.getShopNo()%></td>   
+						<td>전화번호<%=vo.getUserTel()%></td>    
+						<td>예약상태<%=vo.getReserveDate()%></td>
 						<td rowspan="2">
 						 <input type="button"  data-hidden-info="" value="수정"  class="btn btn-outline-success btn-sm "></td>
             
-					<tr><td>날짜</td>	 
-						<td>인원수</td>	
-						<td>가격</td>	       
-						<td>요청사항</td>
+					<tr><td>예약날짜<%=vo.getShopNo()%></td>
+						<td>마감날짜<%=vo.getConfirmedDate()%></td>	 	 
+						<td>인원수<%=vo.getPeople()%></td>	 
+						<td>요청사항<%=vo.getUserComment()%></td>
 						
+			 <%  
+          		  }//for
+         		}//--if 
+      		  %> 
    			 </tbody>
 			 </table>
         </div>
     </div>
     </div>
+<script src="/WEB02/assets/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>

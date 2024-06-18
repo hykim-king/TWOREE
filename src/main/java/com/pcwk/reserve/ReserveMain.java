@@ -82,8 +82,8 @@ public class ReserveMain implements PLog{
 		searchVO.setPageNo(1);
 		searchVO.setPageSize(10);
 	
-		searchVO.setSearchDiv("20");
-		searchVO.setSearchWord("1");
+		searchVO.setSearchDiv("10");
+		searchVO.setSearchWord("user1");
 		List<ReserveDTO> list = rao.doRetrieve(searchVO);
 		int i =0;
 		for(ReserveDTO vo : list) {
