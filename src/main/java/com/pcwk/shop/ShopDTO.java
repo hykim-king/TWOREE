@@ -13,7 +13,16 @@ public class ShopDTO extends DTO{
 	private int reviewCnt;
 	private int reserveCnt;
 	private String isVerified;
+	private String shopLoc;
 	
+	public String getShopLoc() {
+		return shopLoc;
+	}
+
+	public void setShopLoc(String shopLoc) {
+		this.shopLoc = shopLoc;
+	}
+
 	public ShopDTO() {
 		super();
 	}
@@ -99,8 +108,10 @@ public class ShopDTO extends DTO{
 	public String toString() {
 		return "ShopDTO [shopNo=" + shopNo + ", managerId=" + managerId + ", shopName=" + shopName + ", regDate="
 				+ regDate + ", score=" + score + ", reviewCnt=" + reviewCnt + ", reserveCnt=" + reserveCnt
-				+ ", isVerified=" + isVerified + "]";
+				+ ", isVerified=" + isVerified + ", shopLoc=" + shopLoc + ", toString()=" + super.toString() + "]";
 	}
+
+	
 	
 	
 }

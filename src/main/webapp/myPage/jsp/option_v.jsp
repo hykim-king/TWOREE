@@ -66,7 +66,7 @@
 					<tr><td>가게이름</td>	 <td>날짜</td>   <td>메뉴이름</td>    <td>★★★☆☆</td>
 					<tr><td>리뷰번호</td>	 <td>인원수</td>	    <td>가격</td>	      <td>내용</td>
    			 </tbody>
-			 <table>
+			 </table>
         </div>
     </div>
 </body>

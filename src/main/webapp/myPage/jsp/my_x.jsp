@@ -128,67 +128,39 @@
         
     </div>
     <div class="content">
-        <h5>현재 문의 내역</h5>
+        <h5>전체 문의 정보</h5>
         <p></p>
-        <div class="ask_now">
-            <ul> 
-            	<li>
-                    <label for="askId">문의번호 &nbsp</label>
-                    <input type="text" id="askId"   readonly> <!-- disabled는 폼값전달안됌 -->
-                    &nbsp
-                    <label for="askState">문의상태 &nbsp</label> 
-                    <input type="text" id="askState"   placeholder="문의진행중" readonly >  
-                     
-                </li> 
-            
-                <li>
-                    <label for="sname">가게이름 &nbsp</label>
-                    <input type="text" id="sname"   readonly> <!-- disabled는 폼값전달안됌 --> 
-                    &nbsp
-                    <label for="yyddmm">날짜/시간 &nbsp</label>
-                    <input type="datetime-local" id="yyddmm" placeholder="YYYY/DD/MM" required>
-                </li>
-               
-               <li>
-                    <label for="ucomment">문의내용 &nbsp</label> 
-                    <textarea style="resize: both;"></textarea> 
-                </li>  
-            </ul>  
-             <button type="button" class="btn btn-secondary" style="float: right;">문의하기</button> 
+        <div class="right-section">
+        <!-- 버튼 -->
+        <div class="mb-2 d-grid gap-2 d-md-flex justify-content-md-end"> 
+ 		  <button type="rest" class="btn btn-secondary" value="" >새로고침</button> 
+          <button type=" " class="btn btn-dark" value="" onClick="location.href='my_v.jsp'">문의하기</button>
         </div>
-        
-        <br>
-        <h5>지난 문의 내역</h5>
-         <button type="button" class="btn btn-dark" onClick="location.href='option_x.jsp'" >전체내역보기</button> 
-        <div class="ask_pass"> 
-             <ul> 
-            	<li>
-                    <label for="askId">문의번호 &nbsp</label>
-                    <input type="text" id="askId"   readonly> <!-- disabled는 폼값전달안됌 -->
-                    &nbsp
-                    <label for="askState">문의상태 &nbsp</label> 
-                    <input type="text" id="askState"   placeholder="문의완료" readonly >  
-                     
-                </li> 
-            
-                <li>
-                    <label for="sname">가게이름 &nbsp</label>
-                    <input type="text" id="sname"   readonly> <!-- disabled는 폼값전달안됌 --> 
-                    &nbsp
-                    <label for="yyddmm">날짜/시간 &nbsp</label>
-                    <input type="datetime-local" id="yyddmm" placeholder="YYYY/DD/MM" required>
-                </li>
-               
-               <li>
-                    <label for="ucomment">문의내용 &nbsp</label> 
-                    <textarea style="resize: both;"></textarea> 
-                </li>  
-            </ul>  
-             <button type="button" class="btn btn-secondary" style="float: right;">상세보기</button><br><br> 
+        <!--// 버튼 ----------------------------------------------------------------->
+       <div class="table-container">
+          <table class="table table-hover">
+          <thead>
+                    <tr class="table-dark table-hover table-bordered" id="option_reserver">
+                 	<th>문의정보</th>	
+                 	<th>개인정보</th>	
+                 	<th>옵션</th>	 
+                 	<th class="text_center col-sm-1">관리</th>
+                 	</tr>
+     	 </thead> 
+    	 <tbody> 
+					<tr><td>가게이름</td>	 
+						<td>유저아이디</td>   
+						<td rowspan="2">요청사항</td> 
+						<td rowspan="2">
+						 <input type="button"  data-hidden-info="" value="수정"  class="btn btn-outline-success btn-sm "></td>
+                 	</tr>  
+					<tr><td>날짜</td>	 
+						<td>문의상태</td>	  
+						       
+   			 </tbody>
+			 </table>
         </div>
-        
-        
-        
+        </div>
     </div>
 </body>
 </html>

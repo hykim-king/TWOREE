@@ -1,14 +1,20 @@
 <%@page import="java.util.List"%>
 <%@page import="com.pcwk.shop.ShopDTO"%>
+<%@page import="com.pcwk.shop.ShopDetailDTO"%>
 <%@page import="com.pcwk.ehr.cmn.SearchDTO"%>
 <%@page import="com.pcwk.shop.ShopDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-   List<ShopDTO> list = (List<ShopDTO>)request.getAttribute("list");   
-   SearchDTO searchCon = (SearchDTO)request.getAttribute("vo");
-   %>
-   searchCon:<%=searchCon %>
+	List<ShopDTO> list = (List<ShopDTO>)request.getAttribute("list");  
+	ShopDetailDTO dto =  (ShopDetailDTO)request.getAttribute("detailVO");
+	SearchDTO searchCon = (SearchDTO)request.getAttribute("vo");
+	SearchDTO DsearchCon = (SearchDTO)request.getAttribute("Dvo");
+%>
+   
+searchCon:<%=searchCon %>
+   
+   
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +24,11 @@
     <title>test</title>
     <link rel="stylesheet" href="/TWOREE/shop/css/poster.css">
     <script src="/TWOREE/shop/js/jquery_3_7_1.js"></script>
+    <script>
+    	
+    	
+    
+    </script>
 </head>
 <body>
     <hr>
@@ -50,9 +61,9 @@
         <div class="main_page">
            	 	<%for(ShopDTO vo   :list){ %>
             <ul>
-                <li>가게명 : <%=vo.getShopName() %></li>
-                <li>가게 주소 : <%=vo.getShopName() %> </li>
-                <li>별점 : <%=vo.getShopName() %></li> 
+                <li class="shop_name"> <%=vo.getShopName() %></li>
+                <li> <%=dto.getShopLoc()%> </li>
+                <li>별점 : <%=vo.getScore() %></li> 
             </ul>
                 <%  } %>
         </div>

@@ -2,25 +2,24 @@
 <%@page import="com.pcwk.user.UserDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    
-<%
-
-	List<UserDTO> list = (List<UserDTO>)request.getAttribute("list");
-	SearchDTO searchCon = (SearchDTO)request.getAttribute("vo");
-
-%>
-    
-    
-    
-    
-    
+    pageEncoding="UTF-8"%>   
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css">  
+
+<script src="/WEB02/assets/js/jquery_3_7_1.js"></script>
+<script src="/WEB02/assets/js/common.js"></script>
+
+
+<script>
+String outVO = (String)request.getAttribute("outVO");
+ 
+</script>
+ 
+
     <title>프로필</title>
     <style>
      h5{
@@ -134,16 +133,16 @@
         <div class="content_info">
             <ul>
                 <li>
-                    <label for="uid">아이디 &nbsp</label>
-                    <input type="text" id="uid"   placeholder="4자 ~ 10자 사이, 공백없이" required> 
+                    <label for="userId">아이디 &nbsp</label>
+                    <input type="text" id="userId"  name="userId" required value="${outVO.userId}"> 
                 </li>
                 <li>
-                    <label for="umail">이메일 &nbsp</label>
-                    <input type="email" id="umail" placeholder="ex.@naver.com" required> 
+                    <label for="userEmail">이메일 &nbsp</label>
+                    <input type="email" id="userEmail" name="userEmail" required value="${outVO.userEmail}"> 
                 </li>
                 <li>
-                    <label for="upw">비밀번호 &nbsp</label>
-                    <input type="password" id="upw" placeholder="문자와 숫자, 특수 기호 포함" required> 
+                    <label for="password">비밀번호 &nbsp</label>
+                    <input type="password" id="password" name="password"  required value="${outVO.password}"> 
                 </li> 
             </ul>  
              <button type="button" class="btn btn-secondary" style="float: right;">수정하기</button>
@@ -153,16 +152,16 @@
         
             <ul>
                 <li>
-                    <label for="uname">이름 &nbsp</label>
-                    <input type="text" id="uname"   placeholder="ex.홍길동" required> 
+                    <label for="name">이름 &nbsp</label>
+                    <input type="text" id="name"   name="name"  required value="${outVO.name}"> 
                 </li>
                 <li>
-                    <label for="utel">전화번호 &nbsp</label>
-                    <input type="email" id="utel" placeholder="ex.010-1111-1111" required> 
+                    <label for="tel">전화번호 &nbsp</label>
+                    <input type="email" id="tel" name ="tel" required value="${outVO.tel}"> 
                 </li>
                 <li>
-                    <label for="ubirth">생년월일 &nbsp</label>
-                    <input type="password" id="ubirth" placeholder="ex.990101" required> 
+                    <label for="birthday">생년월일 &nbsp</label>
+                    <input type="password" id="birthday" name="birthday" required value="${outVO.birthday}"> 
                 </li> 
             </ul>
             
@@ -205,4 +204,11 @@
         
     </div>
 </body>
+<script src="/TWOREE/assets/js/bootstrap.bundle.min.js"></script> 
+</body>
 </html>
+ 
+
+
+
+

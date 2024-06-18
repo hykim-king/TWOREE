@@ -254,37 +254,85 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 		
 		StringBuilder sb = new StringBuilder(1000);
 		
-		sb.append("SELECT A.*, B.*									\n");
-		sb.append("FROM (                                           \n");
-		sb.append("	SELECT TT1.rnum AS num,                         \n");
-		sb.append("			tt1.shop_name,                          \n");
-		sb.append("			tt1.manager_id,                         \n");
-		sb.append("			tt1.review_cnt,                         \n");
-		sb.append("			tt1.score                               \n");
-		sb.append("	FROM (                                          \n");
-		sb.append("			SELECT ROWNUM AS rnum, T1.*             \n");
-		sb.append("				FROM (                              \n");
-		sb.append("					SELECT *                        \n");
-		sb.append("					FROM shop                       \n");
-		sb.append("					--WHERE                         \n");
+//		sb.append("SELECT A.*, B.*									\n");
+//		sb.append("FROM (                                           \n");
+//		sb.append("	SELECT TT1.rnum AS num,                         \n");
+//		sb.append("			tt1.shop_name,                          \n");
+//		sb.append("			tt1.manager_id,                         \n");
+//		sb.append("			tt1.review_cnt,                         \n");
+//		sb.append("			tt1.score                               \n");
+//		sb.append("	FROM (                                          \n");
+//		sb.append("			SELECT ROWNUM AS rnum, T1.*             \n");
+//		sb.append("				FROM (                              \n");
+//		sb.append("					SELECT *                        \n");
+//		sb.append("					FROM shop                       \n");
+//		sb.append("					--WHERE                         \n");
+////----where-----------------------------------------------------------------------------------------------------
+//		sb.append(sbWhere.toString());
+////----where-----------------------------------------------------------------------------------------------------
+//		sb.append("					                                \n");
+//		sb.append("			)T1                                     \n");
+////		sb.append("			WHERE ROWNUM <= ( :pageSize * (:pageNo -1)+:pageSize) 			                    \n");
+//		sb.append("			WHERE ROWNUM <= ( ? * (? -1) + ?)	    \n");
+//		sb.append("	 )TT1                                           \n");
+////		sb.append("		WHERE rnum >= ( :pageSize * (:pageNo -1)+1)                                   			    \n");
+//		sb.append("	WHERE rnum >= ( ? * ( ? -1) +1)                 \n");
+//		sb.append(")A,(                                             \n");
+//		sb.append("	SELECT COUNT (*) totalCount                     \n");
+//		sb.append("		FROM shop                                   \n");
+////----where-----------------------------------------------------------------------------------------------------
+//		sb.append(sbWhere.toString());
+//				
+////----where-----------------------------------------------------------------------------------------------------
+//		sb.append(")B,                                               \n");
+//		
+		
+		
+		                                                                         
+		sb.append("SELECT A.SHOP_NAME,                                           \n");
+		sb.append("		  A.SHOP_NO,                                           \n");
+	    sb.append("   B.SHOP_LOC,                                                \n");
+	    sb.append("   A.MANAGER_ID,                                              \n");
+	    sb.append("   A.REG_DATE,                                                \n");
+	    sb.append("    A.SCORE,                                                  \n");
+	    sb.append("   A.REVIEW_CNT,                                              \n");
+	    sb.append("   A.RESERVE_CNT,                                             \n");
+	    sb.append("   A.IS_VERIFIED                                              \n");
+		sb.append("FROM (                                                        \n");
+		sb.append("	SELECT TT1.rnum AS num,                                      \n");
+		sb.append("            tt1.shop_no,                                      \n");
+		sb.append("            tt1.MANAGER_ID,                                   \n");
+		sb.append("			tt1.shop_name,                                       \n");
+		sb.append("            TT1.REG_DATE,                                     \n");
+		sb.append("            TT1.SCORE,                                        \n");
+		sb.append("			tt1.REVIEW_CNT,                                      \n");
+		sb.append("            TT1.RESERVE_CNT,                                  \n");
+		sb.append("            TT1.IS_VERIFIED                                   \n");
+		sb.append("	FROM (                                                       \n");
+		sb.append("			SELECT ROWNUM AS rnum, T1.*                          \n");
+		sb.append("				FROM (                                           \n");
+		sb.append("					SELECT *                                     \n");
+		sb.append("					FROM shop                                    \n");
+		sb.append("					--WHERE                                      \n");
 //----where-----------------------------------------------------------------------------------------------------
 		sb.append(sbWhere.toString());
 //----where-----------------------------------------------------------------------------------------------------
-		sb.append("					                                \n");
-		sb.append("			)T1                                     \n");
-//		sb.append("			WHERE ROWNUM <= ( :pageSize * (:pageNo -1)+:pageSize) 			                    \n");
-		sb.append("			WHERE ROWNUM <= ( ? * (? -1) + ?)	    \n");
-		sb.append("	 )TT1                                           \n");
-//		sb.append("		WHERE rnum >= ( :pageSize * (:pageNo -1)+1)                                   			    \n");
-		sb.append("	WHERE rnum >= ( ? * ( ? -1) +1)                 \n");
-		sb.append(")A,(                                             \n");
-		sb.append("	SELECT COUNT (*) totalCount                     \n");
-		sb.append("		FROM shop                                   \n");
+		sb.append("					                                             \n");
+		sb.append("			)T1                                                  \n");
+		sb.append("			WHERE ROWNUM <= ( ? * (? -1) + ?)					 \n");
+		sb.append("	 )TT1                                                        \n");
+		sb.append("	WHERE rnum >= ( ? * ( ? -1) +1)           				     \n");
+		sb.append("	)A, (                                                        \n");
+		sb.append("	    SELECT SHOP_NO,                                          \n");
+		sb.append("	        SHOP_LOC                                             \n");
+		sb.append("	    FROM SHOP_DETAIL                                         \n");
 //----where-----------------------------------------------------------------------------------------------------
 		sb.append(sbWhere.toString());
-				
+						
 //----where-----------------------------------------------------------------------------------------------------
-		sb.append(")B                                               \n");
+		sb.append("	)B                                                           \n");
+		sb.append("	WHERE A.SHOP_NO = B.SHOP_NO                                  \n");
+
 		
 		log.debug("1. SQL : {}", sb.toString());
 		log.debug("2. Conn : {}", conn);
@@ -362,20 +410,32 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 			while(rs.next()) {
 				ShopDTO outVO = new ShopDTO();
 				
-				outVO.setShopNo(rs.getInt("num"));
-				log.debug("5.1 성공! num : {}, ", rs.getString("num"));
-				
 				outVO.setShopName(rs.getString("shop_name"));
-				log.debug("5.2 성공! shopname : {}, ", rs.getString("shop_name"));
+				log.debug("5.1 성공! shopname : {}, ", rs.getString("shop_name"));
+				
+				outVO.setShopNo(rs.getInt("shop_no"));
+				log.debug("5.2 성공! shop_no : {}, ", rs.getString("shop_no"));
+				
+				outVO.setShopLoc(rs.getString("shop_loc"));
+				log.debug("5.3 성공! shop_loc : {}, ", rs.getString("shop_loc"));
 				
 				outVO.setManagerId(rs.getString("manager_id"));
-				log.debug("5.3 성공! Manager_id : {}, ", rs.getString("manager_id"));
+				log.debug("5.4 성공! Manager_id : {}, ", rs.getString("manager_id"));
 				
-				outVO.setReviewCnt(rs.getInt("review_cnt"));
-				log.debug("5.4 성공! review_cnt : {}, ", rs.getString("review_cnt"));
+				outVO.setRegDate(rs.getString("reg_date"));
+				log.debug("5.5 성공! reg_date : {}, ", rs.getString("reg_date"));
 				
 				outVO.setScore(rs.getInt("score"));
-				log.debug("5.5 성공! score : {}, ", rs.getString("score"));
+				log.debug("5.6 성공! score : {}, ", rs.getString("score"));
+				
+				outVO.setReviewCnt(rs.getInt("review_cnt"));
+				log.debug("5.7 성공! review_cnt : {}, ", rs.getString("review_cnt"));
+				
+				outVO.setReserveCnt(rs.getInt("reserve_cnt"));
+				log.debug("5.8 성공! reserve_cnt : {}, ", rs.getString("reserve_cnt"));
+				
+				outVO.setIsVerified(rs.getString("is_verified"));
+				log.debug("5.9 성공! is_verified : {}, ", rs.getString("is_verified"));
 				
 				list.add(outVO);
 				

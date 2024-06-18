@@ -51,7 +51,7 @@
     </div>
     <div class="form-group row">
       <div class="col-sm-12 text-right">
-        <button class="btn btn-primary" id ="registerButton">저장</button>
+        <button class="btn btn-primary" id ="registerButton" onclick="registerSet()">저장</button>
       </div>
     </div>
   </form>
@@ -73,7 +73,7 @@
     }
   }
   
-  $('#registerButton').click(function() {
+   function registerSet() {
       const shopNo= window.opener.getShopNo().textContent;
       const offDaysJson = JSON.stringify(dateList);
       
@@ -91,18 +91,20 @@
                 work_div:'setReserve',
                 shop_no: shopNo
           }
-          , 
-          success: function(response) {
-                    window.alert("예약 설정을 저장하였습니다.");
+          ,
+          success: function(data) {
+                   console.log("success");
+                    alert("예약 설정을 저장하였습니다.");
                     window.close();
           },
-          error: function(xhr, status, error) {
-              
+          error: function(data) {
+                   alert("예약 설정을 실패하였습니다.");
                   console.log("error"+error);
-                  window.alert("예약 설정을 실패하였습니다.");
+                  window.close();
+                 
           }
       });
-  });
+  };
 </script>
 </body>
 </html>

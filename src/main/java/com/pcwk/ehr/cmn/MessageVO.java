@@ -1,6 +1,6 @@
 package com.pcwk.ehr.cmn;
 
-public class MessageVO {
+public class MessageVO extends DTO {
 	
 	private String messageId;
 	private String msgContents;

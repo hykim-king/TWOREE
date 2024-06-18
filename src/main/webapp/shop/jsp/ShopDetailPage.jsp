@@ -1,9 +1,21 @@
+<%@page import="java.util.List"%>
+<%@page import="com.pcwk.shop.ShopDTO"%>
+<%@page import="com.pcwk.shop.ShopDetailDTO"%>
+<%@page import="com.pcwk.ehr.cmn.SearchDTO"%>
+<%@page import="com.pcwk.shop.ShopDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%
+	List<ShopDTO> list = (List<ShopDTO>)request.getAttribute("list");  
+	ShopDetailDTO dto =  (ShopDetailDTO)request.getAttribute("detailVO");
+	SearchDTO searchCon = (SearchDTO)request.getAttribute("vo");
+	SearchDTO DsearchCon = (SearchDTO)request.getAttribute("Dvo");
+%>
+   
 <body>
 	<div class="detail_page">
 	    <ul>
-	        <li>가게명</li>
+	        <li class="shop_name"></li>
 	        <li>영업시간</li>
 	        <li>가게주소</li>   
 	        <li>평점</li>

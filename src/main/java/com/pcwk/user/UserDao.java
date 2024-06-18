@@ -238,8 +238,8 @@ public class UserDao implements WorkDiv<UserDTO> {
 				outVO.setName(rs.getString("name"));
 				outVO.setUserEmail(rs.getString("user_email"));
 				outVO.setTel(rs.getString("tel"));
-				outVO.setBirthday(rs.getString("user_id"));
-				outVO.setUserId(rs.getString("user_id"));
+				outVO.setBirthday(rs.getString("birthday"));
+				outVO.setShopAdmin(rs.getString("shop_admin"));
 				
 				
 			}
@@ -258,7 +258,90 @@ public class UserDao implements WorkDiv<UserDTO> {
 		
 		return outVO;
 	}
+	
+	public int idCheck(UserDTO param) {
+		int flag = 0;
+		Connection conn = connectionMaker.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StringBuilder sb = new StringBuilder(500);
+		
+		sb.append(" SELECT COUNT(*) cnt  \n");
+		sb.append("   FROM userinfo      \n");
+		sb.append("  WHERE user_id = ?   \n");
+		
+		log.debug("1.sql:\n"+sb.toString());
+		log.debug("2.conn:"+conn);
+		log.debug("3.param:"+param);
+		
+		try {
+		pstmt = conn.prepareStatement(sb.toString());
+		log.debug("4.pstmt:"+pstmt);
+		pstmt.setString(1,param.getUserId());
+		
+		rs = pstmt.executeQuery();
+		log.debug("5.rs:" +rs);
+		
+		if(rs.next()) {
+			flag = rs.getInt("cnt");
+			log.debug("6. flag : {}", flag);
+		}
+			
+		}catch (SQLException e) {
+			log.debug("____________________________");
+			log.debug("SQLException"+e.getMessage());
+			log.debug("____________________________");
+		}finally { 
+			DBUtil.close(conn, pstmt, rs);
+		
+		}
+		
+		return flag;
+	}
+	public int idPasswordCheck(UserDTO param) {
+		int flag = 0;
+		Connection conn = connectionMaker.getConnection();
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		StringBuilder sb = new StringBuilder(500);
+		
+		sb.append(" SELECT COUNT(*) cnt  \n");
+		sb.append("   FROM userinfo      \n");
+		sb.append("  WHERE user_id = ?   \n");
+		sb.append("    AND password  = ? \n"); 	
+		 
+			log.debug("1.sql:\n"+sb.toString());
+			log.debug("2.conn:"+conn);
+			log.debug("3.param:"+param);
+			
+			try {
+				pstmt = conn.prepareStatement(sb.toString());
+				log.debug("4.pstmt:"+pstmt);
+				
+				pstmt.setString(1,param.getUserId());
+				pstmt.setString(2,param.getPassword());
+				
+				rs = pstmt.executeQuery();
+				log.debug("5.rs:" +rs);
+				
+				if(rs.next()) {
+				 flag =	rs.getInt("cnt");
+					log.debug("6. flag : {}", flag);
+				}
+					
+				}catch (SQLException e) {
+					log.debug("____________________________");
+					log.debug("SQLException"+e.getMessage());
+					log.debug("____________________________");
+				}finally { 
+					DBUtil.close(conn, pstmt, rs);
+				
+				}				
 
+		return flag;
+	}	
+	
+	
 	@Override
 	public int doUpdateReadCnt(UserDTO param) {
 		// TODO Auto-generated method stub
