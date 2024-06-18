@@ -43,6 +43,7 @@ public class ReserveDao implements WorkDiv<ReserveDTO>,PLog {
 		sb.append("SELECT t2.*, t3.*                                                      \n");
 		sb.append("  FROM(                                                                \n");
 		sb.append("		SELECT tt1.rnum as num,                                           \n");
+		sb.append("			   tt1.reserve_no,                                            \n");
 		sb.append("			   tt1.user_id,                                               \n");
 		sb.append("			   tt1.shop_no,                                               \n");
 		sb.append("			   tt1.people,                                               \n");
@@ -106,6 +107,7 @@ public class ReserveDao implements WorkDiv<ReserveDTO>,PLog {
 			while(rs.next()) {
 				ReserveDTO outVO = new ReserveDTO();
 				outVO.setNum(rs.getInt("num"));
+				outVO.setReserveNo(rs.getInt("reserve_no"));
 				outVO.setUserId(rs.getString("user_id"));
 				outVO.setShopNo(rs.getInt("shop_no"));
 				outVO.setPeople(rs.getInt("people"));

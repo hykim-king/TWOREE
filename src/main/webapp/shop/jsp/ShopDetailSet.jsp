@@ -61,7 +61,7 @@
                 </div>
             </div>
             <div class="text-center">
-                <button type="button" class="btn btn-primary" id = "registerButton">저장</button>
+                <button type="button" class="btn btn-primary" id = "registerButton" onclick="registerDetail()">저장</button>
             </div>
         </form>
     </div>
@@ -69,7 +69,13 @@
     <script>
         let shopNo = window.opener.getShopNo().textContent;
         
-        $('#registerButton').click(function() {
+        function registerDetail() {
+              let ownerName =$('#ownerName').val();
+              let shopTel =$('#shopTel').val();
+              let openTime =$('#openTime').val();
+              let closeTime= $('#closeTime').val();
+              let address =$('#address').val();
+             
             // 입력 필드 검사
               if (ownerName.trim() === '') {
                   alert('가게 소유주 성함을 입력해주세요.');
@@ -110,16 +116,16 @@
                 url: "/TWOREE/shop/shop.do",
                 data: JSON.stringify(storeInfo),
                 contentType: "application/json; charset=utf-8",
-                dataType: "json",
+                dataType: "html",
                 success: function(data) {
                     alert("가게 정보가 저장되었습니다.");
                     window.close();
                 },
-                error: function(xhr, status, error) {
+                error: function(error) {
                     alert("가게 정보 저장에 실패했습니다.");
                 }
             });
-        });
+        }
     </script>
 </body>
 </html>
