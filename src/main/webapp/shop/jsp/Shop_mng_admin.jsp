@@ -130,11 +130,15 @@
     </p>
     
     <script>
+         function forwording(num){
+        	   window.location.replace("/TWOREE/shop/shop.do?work_div=shop_mng&shop_no="+num);
+         }
+    
         $(document).ready(function() {
-            console.log("준비됨");
+            
             loadData();
-            $("#shopSelectBtn").click(function() {
-                loadData();
+            $("#shopNow").click(function() {
+            	
             });
             
             $("#AddShopBtn").click(function() {
@@ -172,6 +176,9 @@
                   let askListObj = <%=jsonAskList%>;
                   let reviewListObj = <%=jsonReviewList%>
                   let shopListObj = <%=jsonShopList%>
+                  let shopMap = new Map();
+                  
+                  
                   $("#shopNow").text(shopObj.shopName);
                   $("#shopName").text(shopObj.shopName);
                   $("#storeName").text(shopObj.shopName);
@@ -182,9 +189,9 @@
                   $("#shopList").empty();
                   $.each(shopListObj, function(index, shop) {
                         let row = $("<li></li>");
-                        row.append($("<a class='dropdown-item' href='#'></a>").text(shop.shopName));
+                        row.append($("<a class='dropdown-item' href='#' id='"+shop.shopName+"' onclick ='forwording("+shop.shopNo+")'></a>").text(shop.shopName));
                         $("#shopList").append(row);
-                        console.log(row);
+                        shopMap.set(shop.shopName,shop.shopNo);
                   });
                  
                    
