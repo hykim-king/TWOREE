@@ -1,9 +1,6 @@
 package com.pcwk.shop;
 
 import java.io.IOException;
-
-import java.io.PrintWriter;
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -16,12 +13,8 @@ import com.google.gson.Gson;
 import com.pcwk.ask.AskDTO;
 import com.pcwk.ask.AskService;
 import com.pcwk.ehr.cmn.ControllerV;
-import com.pcwk.ehr.cmn.PLog;
-
-import com.pcwk.shop.ShopDTO;
-import com.pcwk.shop.ShopService;
 import com.pcwk.ehr.cmn.JView;
-import com.pcwk.ehr.cmn.MessageVO;
+import com.pcwk.ehr.cmn.PLog;
 import com.pcwk.ehr.cmn.SearchDTO;
 import com.pcwk.ehr.cmn.StringUtill;
 import com.pcwk.menu.MenuDTO;
@@ -32,6 +25,7 @@ import com.pcwk.reserve.ReserveDTO;
 import com.pcwk.reserve.ReserveService;
 import com.pcwk.review.ReviewDTO;
 import com.pcwk.review.ReviewService;
+import com.pcwk.shop.ShopNoticeService;
 
 public class ShopController extends HttpServlet implements ControllerV, PLog{
 private static final long serialVersionUID = 1L;
@@ -168,6 +162,9 @@ private static final long serialVersionUID = 1L;
 		
 		ShopDTO inVO = new ShopDTO();
 		ShopDetailDTO detailInVO = new ShopDetailDTO();
+		ShopNoticeDTO noticeInVO = new ShopNoticeDTO();
+		MenuDTO menuInVO = new MenuDTO();
+		ReviewDTO reviewInVO = new ReviewDTO();
 		
 		String shopNo = StringUtill.nvl(req.getParameter("shop_no"), "0");
 		
@@ -177,11 +174,23 @@ private static final long serialVersionUID = 1L;
 		log.debug("detailInVO : "+ detailInVO);
 		
 		ShopDTO outVO = shopService.selectOneReadCnt(inVO);
+		ShopDetailDTO detailOutVO = shopDetailService.doSelectOne(detailInVO);
+		ShopNoticeDTO noticeOutVO = shopNoticeService.doSelectOne(noticeInVO);
+		MenuDTO menuOutVO = menuService.doSelectOne(menuInVO);
+		ReviewDTO reviewOutVO = reviewService.doSelectOne(reviewInVO);
 		//ShopDetailDTO detailOutVo = ShopDetailService.doSelectOne(detailInVO); 
 		log.debug("outVO : "+ outVO);
+		log.debug("detailOutVO : "+ detailOutVO);
+		log.debug("noticeOutVO : "+ noticeOutVO);
+		log.debug("menuOutVO : "+ menuOutVO);
+		log.debug("reviewOutVO : "+ reviewOutVO);
 		
 		//UI 데이터 전달
 		req.setAttribute("outVO", outVO);
+		req.setAttribute("detailOutVO", detailOutVO);
+		req.setAttribute("noticeOutVO", noticeOutVO);
+		req.setAttribute("menuOutVO", menuOutVO);
+		req.setAttribute("reviewOutVO", reviewOutVO);
 		
 		return new JView("/shop/jsp/mainpage_mng.jsp");
 		
@@ -454,38 +463,6 @@ private static final long serialVersionUID = 1L;
 		
 		JView viewName = null;
 		
-		ShopDetailDTO detailDTO = new ShopDetailDTO();
-		
-		int     shopNo =  Integer.parseInt(StringUtill.nvl(req.getParameter("shop_no"),"1"));      
-		String  ownerName    = StringUtill.nvl(req.getParameter("owener_name"),"");
-		String  shopTel      = StringUtill.nvl(req.getParameter("shop_tel"),"");
-		String  shopLoc      = StringUtill.nvl(req.getParameter("shop_loc"),"");
-		String  shopRule     = StringUtill.nvl(req.getParameter("shop_rule"),"");
-		String  parkInfo     = StringUtill.nvl(req.getParameter("park_info"),"");
-		String  reserverInfo = StringUtill.nvl(req.getParameter("reserver_info"),"");
-		String  openTime     = StringUtill.nvl(req.getParameter("open_time"),"");
-		String  closeTime    = StringUtill.nvl(req.getParameter("close_time"),"");
-		
-		log.debug("shopNo : "+ shopNo);
-		log.debug("ownerName : "+ ownerName);
-		log.debug("shopTel : "+ shopTel);
-		log.debug("shopLoc : "+ shopLoc);
-		log.debug("shopRule : "+ shopRule);
-		log.debug("parkInfo : "+ parkInfo);
-		log.debug("reserverInfo : "+ reserverInfo);
-		log.debug("openTime : "+ openTime);
-		log.debug("closeTime : "+ closeTime);
-		
-		detailDTO.setShopNo(shopNo);
-		detailDTO.setOwnerName(ownerName);
-		detailDTO.setShopTel(shopTel);
-		detailDTO.setShopLoc(shopLoc);
-		detailDTO.setShopRule(shopRule);
-		detailDTO.setParkInfo(parkInfo);
-		detailDTO.setReserverInfo(reserverInfo);
-		detailDTO.setOpenTime(openTime);
-		detailDTO.setCloseTime(closeTime);
-		
 		SearchDTO inVO= new SearchDTO();
 		//page_no
 		//page_size
@@ -508,9 +485,6 @@ private static final long serialVersionUID = 1L;
 		//service call
 		List<ShopDTO> list = shopService.doRetrieve(inVO);
 		
-		ShopDetailDTO detailVO =  shopDetailService.doSelectOne(detailDTO);
-		log.debug("detailVO : {}", detailVO);
-		
 		int i =0;
 		
 		for(ShopDTO vo : list) {
@@ -521,7 +495,6 @@ private static final long serialVersionUID = 1L;
 		req.setAttribute("list", list);
 		
 		req.setAttribute("vo", inVO);
-		req.setAttribute("detailVO", detailVO);
 		
 		//RequestDispatcher dispatcher = req.getRequestDispatcher("/jsp/J02/board_list.jsp");
 		//dispatcher.forward(req, res);

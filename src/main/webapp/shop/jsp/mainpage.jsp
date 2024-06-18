@@ -7,9 +7,7 @@
     pageEncoding="UTF-8"%>
 <%
 	List<ShopDTO> list = (List<ShopDTO>)request.getAttribute("list");  
-	ShopDetailDTO dto =  (ShopDetailDTO)request.getAttribute("detailVO");
 	SearchDTO searchCon = (SearchDTO)request.getAttribute("vo");
-	SearchDTO DsearchCon = (SearchDTO)request.getAttribute("Dvo");
 %>
    
 searchCon:<%=searchCon %>
@@ -62,7 +60,7 @@ searchCon:<%=searchCon %>
            	 	<%for(ShopDTO vo   :list){ %>
             <ul>
                 <li class="shop_name"> <%=vo.getShopName() %></li>
-                <li> <%=dto.getShopLoc()%> </li>
+                <li> <%=vo.getShopLoc()%> </li>
                 <li>별점 : <%=vo.getScore() %></li> 
             </ul>
                 <%  } %>

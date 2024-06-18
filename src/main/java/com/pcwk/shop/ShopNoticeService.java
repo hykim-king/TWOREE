@@ -6,6 +6,7 @@ import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.PLog;
 
 public class ShopNoticeService implements PLog {
+	
 	private ShopNoticeDao dao;
 
 	public ShopNoticeService() {
