@@ -62,11 +62,11 @@
                  	<th>옵션</th>
                  	</tr>
      	 </thead> 
-    	 <tbody> 
+    	 	<tbody> 
 					<tr><td>가게이름</td>	 <td>주문자</td>   <td>메뉴이름</td>    <td>예약상태</td>
 					<tr><td>예약번호</td>	 <td>인원수</td>	<td>가격</td>	       <td>요청사항</td>
    			 </tbody>
-			 </table>
+			 <table>
         </div>
     </div>
 </body>

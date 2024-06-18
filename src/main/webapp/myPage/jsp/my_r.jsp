@@ -48,30 +48,7 @@
             border-radius: 10px; /* 모서리를 둥글게 */
             background-color:#ccc;
         }
-        
-          .resever_now {
-          	margin-top: 10px;
-            flex-grow: 1; /* 남은 공간을 차지하도록 설정 */
-            padding: 20px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            overflow: auto; /* 내용이 넘칠 경우 스크롤 생성을 위해 */
-            border-radius: 10px; /* 모서리를 둥글게 */
-            background-color:#FFFFFF;
-        }
-        
-           .resever_pass {
-          	margin-top: 10px;
-            flex-grow: 1; /* 남은 공간을 차지하도록 설정 */
-            padding: 20px;
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            overflow: auto; /* 내용이 넘칠 경우 스크롤 생성을 위해 */
-            border-radius: 10px; /* 모서리를 둥글게 */
-            background-color:#FFFFFF;
-        }
-        
-        
+         
         .menu ul {
             list-style-type: none;
             padding: 0;
@@ -114,6 +91,7 @@
             <li><a href="my_r.jsp">예약</a></li>
             <li><a href="my_v.jsp">리뷰</a></li>
             <li><a href="my_x.jsp">고객문의</a></li>
+            
         </ul>
         
          <hr>
@@ -129,7 +107,14 @@
     <div class="content">
         <h5>전체 예약 정보</h5>
         <p></p>
-           <div class="table-container">
+     <div class="right-section">
+        <!-- 버튼 -->
+        <div class="mb-2 d-grid gap-2 d-md-flex justify-content-md-end"> 
+          <button type="reset" class="btn btn-secondary"  value="" >새로고침</button> 
+            <button type="button" class="btn btn-danger" value="" onClick="location.href=''">예약취소</button>
+        </div>
+        <!--// 버튼 ----------------------------------------------------------------->
+       <div class="table-container">
           <table class="table table-hover">
           <thead>
                     <tr class="table-warning table-hover table-bordered" id="option_reserver">
@@ -137,15 +122,26 @@
                  	<th>개인정보</th>	
                  	<th>메뉴</th>	
                  	<th>옵션</th>
+                 	<th class="text_center col-sm-1">관리</th>
                  	</tr>
      	 </thead> 
-    	 <tbody> 
-					<tr><td>가게이름</td>	 <td>주문자</td>   <td>메뉴이름</td>    <td>예약상태</td>
-					<tr><td>예약번호</td>	 <td>인원수</td>	<td>가격</td>	       <td>요청사항</td>
+    	 	<tbody> 
+					<tr><td>가게이름</td>	 
+						<td>주문자</td>   
+						<td>메뉴이름</td>    
+						<td>예약상태</td>
+						<td rowspan="2">
+						 <input type="button"  data-hidden-info="" value="수정"  class="btn btn-outline-success btn-sm "></td>
+            
+					<tr><td>날짜</td>	 
+						<td>인원수</td>	
+						<td>가격</td>	       
+						<td>요청사항</td>
+						
    			 </tbody>
 			 </table>
         </div>
-         
-    </div>   
+    </div>
+    </div>
 </body>
 </html>
