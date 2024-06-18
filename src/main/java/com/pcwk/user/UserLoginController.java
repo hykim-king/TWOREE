@@ -1,19 +1,25 @@
 package com.pcwk.user;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.google.gson.Gson;
 import com.pcwk.ehr.cmn.ControllerV;
+import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.JView;
+import com.pcwk.ehr.cmn.MessageVO;
 import com.pcwk.ehr.cmn.PLog;
 import com.pcwk.ehr.cmn.StringUtill;
 import com.pcwk.user.UserDTO;
 
 public class UserLoginController implements ControllerV, PLog {
 
+	UserService service;
+	
 	public UserLoginController() {
 		log.debug("-------------------");
     	log.debug("LoginController()");
@@ -28,37 +34,52 @@ public class UserLoginController implements ControllerV, PLog {
 		UserDTO inVO = new UserDTO();
     	
     	String userId = StringUtill.nvl(request.getParameter("user_id"),"");
-    	String userPw = StringUtill.nvl(request.getParameter("user_pw"),"");
+    	String password = StringUtill.nvl(request.getParameter("password"),"");
     	
     	inVO.setUserId(userId);
-    	inVO.setPassword(userPw);
+    	inVO.setPassword(password);
     	
-    
+    	DTO dto = service.doUserSelect(inVO);
     	
-    	String viewName ="";
+    	MessageVO message = new MessageVO();
+    	
+    	
     	//id, 비번 일치하면 Session처리
-    	if("jjj".equals(userId) && "4321".equals(userPw)) {
+    	if(dto instanceof UserDTO) {
+    		UserDTO outVO = (UserDTO) dto;
+    		log.debug("성공 outVO:{}",outVO);
+    		
     		
     		//세션 객체 생성
     		HttpSession session = request.getSession();
     		
-    		//회원 정보(세션 읽기)
-    		UserDTO member = new UserDTO();
-    		member.setUserId(userId);
-    		member.setPassword(userPw);
-    		member.setName("이상무");
-    		
-    		
-    		//세션에 데이터 저장
-    		session.setAttribute("member", member);
-    		log.debug("세션 생성");
-    		viewName = "/A_JSP/J04/j05_login_result.jsp";
-    	}
+    		session.setAttribute("user", outVO);
     	
-    	log.debug("user_id:{}",userId);
-    	log.debug("user_pw:{}",userPw);
-    	return new JView(viewName);
-	}
+    		//30, 로그인 성공
+    		message.setMessageId("30");
+    		message.setMsgContents("로그인 성공");
+    	
+    	}else {
+    		message = (MessageVO) dto;
+    		log.debug("실패 message:{}",message);
+    	}
+	
+	
+	
+	//ajax
+	Gson gson = new Gson();
+	String jsonString = gson.toJson(message);
+	log.debug("jsonString:{}"+jsonString);
+	
+	response.setContentType("text/html; charset=UTF-8");
+	
+	PrintWriter out = response.getWriter();
+	out.print(jsonString);
+	JView viewName= new JView("");
+	return viewName;
+	}	
+	
+	
 	//로그아웃
 	public JView logout(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.debug("-------------------");
@@ -66,18 +87,18 @@ public class UserLoginController implements ControllerV, PLog {
     	log.debug("-------------------");
 		
     	HttpSession session = request.getSession();
-    	//세션값을 지워버림
-    	
+
     	log.debug("session()"+session);
+    	
     	String viewName = "";
     	if(null != session) {
     		log.debug("session()"+session);
     		session.invalidate();
-    		viewName = "/A_JSP/J04/j05_login_result.jsp";
+    		viewName = "";
     	}
     	
     	
-		return null;
+		return new JView(viewName);
 	}
 	
 	
@@ -100,8 +121,11 @@ public class UserLoginController implements ControllerV, PLog {
     	case"logout":
     		viewName = logout(request, response);
     		break;
-    	}
-    		
+    	
+    	default:
+    		log.debug("작업구분을 확인 하세요. workDiv:{}",workDiv);
+    	break;
+    	}	
     	return viewName;
 	}
 	

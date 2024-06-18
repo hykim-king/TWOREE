@@ -1,5 +1,6 @@
 package com.pcwk.user;
 
+import com.pcwk.ehr.cmn.DTO;
 import com.pcwk.ehr.cmn.PLog;
 
 public class UserMain implements PLog {
@@ -10,7 +11,9 @@ public class UserMain implements PLog {
 
 	public UserMain() {
 		uao = new UserDao();
-		udto = new UserDTO("user1","4321","찬호","ch@naver.com1","010-9999-9990","19940907","Y","");
+		udto = new UserDTO();
+		udto.setUserId("hosu");
+		udto.setPassword("2852");
 		
 	}
 	public void isExistId() {
@@ -24,6 +27,55 @@ public class UserMain implements PLog {
 			log.debug("사용가능한 아이디:{}",flag);
 		}
 	}
+	
+	public void idCheck() {
+		log.debug("idCheck()");
+		int flag = uao.idCheck(udto);
+		if(1==flag) {
+			log.debug("idCheck성공:{}",flag);
+		}else {
+			log.debug("idCheck실패:{}",flag);
+		}
+		
+	}
+	
+	public void idPassworkCheck() {
+		log.debug("idPassworkCheck()");
+		int flag = uao.idPasswordCheck(udto);
+		if(1==flag) {
+			log.debug("idPassworkCheck성공:{}",flag);
+		}else {
+			log.debug("idPassworkCheck실패:{}",flag);
+		}
+		
+	}
+	
+	public int login() {
+		int result = 0;
+		int flag = uao.idCheck(udto);
+		
+		if(flag ==0) {
+			result = 10;
+			return result;
+		}
+		
+		flag = uao.idPasswordCheck(udto);
+		if(flag == 0) {
+			result = 20;
+			return result;
+		}
+		return 30;
+	}
+	
+	public DTO doUserSelect() {
+		int result = login();
+		UserDTO outVO = null;
+		if(30==result) {
+			outVO = uao.doSelectOne(udto);
+		}
+		return outVO;
+	}
+	
 	public void doSave() {
 		log.debug("doSave()");
 		int flag = uao.doSave(udto);
@@ -88,7 +140,13 @@ public class UserMain implements PLog {
 		//m.doSave();
 		//m.doUpdate();
 		//m.doDelete();
-		m.doSelectOne();
+		//m.doSelectOne();
 		//m.isExistId();
+		
+		int result = m.login();
+		log.debug("result:{}",result);
+		UserDTO user = (UserDTO) m.doUserSelect();
+		log.debug("user:{}",user);
+		
 	}
 }

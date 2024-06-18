@@ -238,8 +238,8 @@ public class UserDao implements WorkDiv<UserDTO> {
 				outVO.setName(rs.getString("name"));
 				outVO.setUserEmail(rs.getString("user_email"));
 				outVO.setTel(rs.getString("tel"));
-				outVO.setBirthday(rs.getString("user_id"));
-				outVO.setUserId(rs.getString("user_id"));
+				outVO.setBirthday(rs.getString("birthday"));
+				outVO.setShopAdmin(rs.getString("shop_admin"));
 				
 				
 			}
