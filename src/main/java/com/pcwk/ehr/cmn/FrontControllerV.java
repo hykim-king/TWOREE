@@ -13,6 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.pcwk.shop.ShopController;
 import com.pcwk.user.UserController;
+import com.pcwk.user.UserLoginController;
 
 //import com.pcwk.ehr.board.BoardController;
 //import com.pcwk.ehr.servlet.ConnectController;
@@ -35,6 +36,7 @@ public class FrontControllerV extends HttpServlet implements PLog {
     public FrontControllerV() {    
     	log.debug("FrontControllerV()");
     	
+    	controllerMap.put("/TWOREE/login/login.do", new UserLoginController());
     	controllerMap.put("/TWOREE/shop/shop.do", new ShopController());
     	controllerMap.put("/TWOREE/user/myPage.do", new UserController());
 //    	controllerMap.put("/WEB02/board/board.do", new BoardController());
