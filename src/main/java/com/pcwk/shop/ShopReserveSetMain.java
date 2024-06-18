@@ -8,11 +8,11 @@ import com.pcwk.ehr.cmn.SearchDTO;
 public class ShopReserveSetMain implements PLog {
 
 	ShopReserveSetDTO dto;
-	ShopReserveSetDAO dao;
+	ShopReserveSetDao dao;
 
 	public ShopReserveSetMain() {
 		dto = new ShopReserveSetDTO(1, 1, 1, "AM11", "PM10");
-		dao = new ShopReserveSetDAO();
+		dao = new ShopReserveSetDao();
 	}
 
 	public void doSave() {

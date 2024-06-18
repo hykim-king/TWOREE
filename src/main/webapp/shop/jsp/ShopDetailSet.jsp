@@ -61,23 +61,15 @@
                 </div>
             </div>
             <div class="text-center">
-                <button type="button" class="btn btn-primary" onclick="saveStoreInfo()">저장</button>
+                <button type="button" class="btn btn-primary" id = "registerButton">저장</button>
             </div>
         </form>
     </div>
 
     <script>
         let shopNo = window.opener.getShopNo().textContent;
-        function saveStoreInfo() {
-           let ownerName = $('#ownerName').val();
-           let shopTel = $('#shopTel').val();
-           let openTime = $('#openTime').val();
-           let closeTime = $('#closeTime').val();
-           let address = $('#address').val();
-           let shopRule = $('#shopRule').val();
-           let parkInfo = $('#parkInfo').val();
-           let ReserveInfo = $('#ReserveInfo').val();
-
+        
+        $('#registerButton').click(function() {
             // 입력 필드 검사
               if (ownerName.trim() === '') {
                   alert('가게 소유주 성함을 입력해주세요.');
@@ -127,7 +119,7 @@
                     alert("가게 정보 저장에 실패했습니다.");
                 }
             });
-        }
+        });
     </script>
 </body>
 </html>

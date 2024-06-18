@@ -26,6 +26,8 @@ import com.pcwk.ehr.cmn.SearchDTO;
 import com.pcwk.ehr.cmn.StringUtill;
 import com.pcwk.menu.MenuDTO;
 import com.pcwk.menu.MenuService;
+import com.pcwk.offday.OffDayDTO;
+import com.pcwk.offday.OffDayService;
 import com.pcwk.reserve.ReserveDTO;
 import com.pcwk.reserve.ReserveService;
 import com.pcwk.review.ReviewDTO;
@@ -41,6 +43,8 @@ private static final long serialVersionUID = 1L;
     AskService askService;
     ReviewService reviewService;
     ShopNoticeService shopNoticeService;
+    ShopReserveSetService shopReserveSetService;
+    OffDayService offDayService; 
     public ShopController() {
     	log.debug("=====================");
 		log.debug("ShopController()");
@@ -53,6 +57,8 @@ private static final long serialVersionUID = 1L;
 		askService = new AskService();
 		reviewService = new ReviewService();
 		shopNoticeService= new ShopNoticeService();
+		shopReserveSetService=new ShopReserveSetService();
+		offDayService = new OffDayService();
     }
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -245,13 +251,34 @@ private static final long serialVersionUID = 1L;
 		log.debug("=====================");
 		log.debug("setReserve()");
 		log.debug("=====================");
-		String tableCap = StringUtill.nvl(req.getParameter("tableCap"), "");
-		String peopleCap = StringUtill.nvl(req.getParameter("peopleCap"), "");
+		int tableCap = Integer.parseInt(StringUtill.nvl(req.getParameter("tableCap"), "0"));
+		int peopleCap = Integer.parseInt(StringUtill.nvl(req.getParameter("peopleCap"), "0"));
 		String reserveOpenTime = StringUtill.nvl(req.getParameter("reserveOpenTime"), "");
 		String reserveCloseTime = StringUtill.nvl(req.getParameter("reserveCloseTime"), "");
-		String[] offDays =req.getParameterValues("offDys");
-		for(String str : offDays) {
-			log.debug(str);
+		int shopNo = Integer.parseInt(StringUtill.nvl(req.getParameter("shop_no"), "0"));
+		String offDays =req.getParameter("offDays");
+		
+		
+		
+		ShopReserveSetDTO inVO = new ShopReserveSetDTO();
+		inVO.setTableCap(tableCap);
+		inVO.setPeopleCap(peopleCap);
+		inVO.setStartTime(reserveOpenTime);
+		inVO.setEndTime(reserveCloseTime);
+		inVO.setShopNo(shopNo);
+		int flag = shopReserveSetService.doSaveOrModify(inVO);
+		
+		
+		OffDayDTO offDayInVO = new OffDayDTO();
+		offDayInVO.setShopNo(shopNo);
+		offDays=offDays.substring(1, offDays.length()-1);
+		
+		
+		String []offDay =offDays.split(",");
+		for(String str : offDay) {
+			str=str.substring(1,str.length()-1);
+			offDayInVO.setClosedDay(str);
+			offDayService.doSave(offDayInVO);
 		}
 		return null;
 	}
@@ -377,8 +404,6 @@ private static final long serialVersionUID = 1L;
 		req.setCharacterEncoding("UTF-8");
 		
 		String workDiv = StringUtill.nvl(req.getParameter("work_div"),"");
-		String tableCap =req.getParameter("tableCap");
-		log.debug("tableCap : {}", tableCap);
 		log.debug("workDiv : {}", workDiv);
 		
 		switch(workDiv) {

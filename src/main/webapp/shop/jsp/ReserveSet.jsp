@@ -4,10 +4,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>가게 예약 정보 입력</title>
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+      <meta charset="UTF-8">
+      <title>가게 예약 정보 입력</title>
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+      <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
 <div class="container my-5">
@@ -55,7 +55,7 @@
       </div>
     </div>
   </form>
-</div>
+</div>  
 
 <script>
   let dateList = [];
@@ -75,30 +75,29 @@
   
   $('#registerButton').click(function() {
       const shopNo= window.opener.getShopNo().textContent;
-      // 입력된 데이터 가져오기
-      let reserveInfo = {
-          tableCap: $('#tableCap').val(),
-          peopleCap: $('#peopleCap').val(),
-          reserveOpenTime: $('#reserveOpenTime').val(),
-          reserveCloseTime: $('#reserveCloseTime').val(),
-          offDays :dateList,
-          work_div:'setReserve',
-          shop_no : shopNo
-      };
-      console.log(JSON.stringify(reserveInfo));
+      const offDaysJson = JSON.stringify(dateList);
+      
+      console.log(dateList);
       // Ajax 요청 보내기
       $.ajax({
-          type: 'POST',
-          url: '/TWOREE/shop/shop.do', // 서버 측 등록 API 엔드포인트
-          data: JSON.stringify(reserveInfo), // 데이터를 JSON 형식으로 변환
-          contentType: 'application/json; charset=utf-8', // 컨텐츠 타입 설정
-          dataType: 'json', // 서버 응답 데이터 타입 설정
+          type: "POST",
+          url: "/TWOREE/shop/shop.do", 
+          data: {
+                tableCap: $('#tableCap').val(),
+                peopleCap: $('#peopleCap').val(),
+                reserveOpenTime: $('#reserveOpenTime').val(),
+                reserveCloseTime: $('#reserveCloseTime').val(),
+                offDays:offDaysJson,
+                work_div:'setReserve',
+                shop_no: shopNo
+          }
+          , 
           success: function(response) {
                     window.alert("예약 설정을 저장하였습니다.");
                     window.close();
           },
           error: function(xhr, status, error) {
-              // 등록 실패 시 처리 로직
+              
                   console.log("error"+error);
                   window.alert("예약 설정을 실패하였습니다.");
           }
