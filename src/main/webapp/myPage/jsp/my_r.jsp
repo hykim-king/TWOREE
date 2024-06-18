@@ -46,7 +46,7 @@
             border: 1px solid #ccc;
             overflow: auto; /* 내용이 넘칠 경우 스크롤 생성을 위해 */
             border-radius: 10px; /* 모서리를 둥글게 */
-            background-color:#ECBD58;
+            background-color:#ccc;
         }
         
           .resever_now {
@@ -127,69 +127,25 @@
         
     </div>
     <div class="content">
-        <h5>현재 예약 정보</h5>
+        <h5>전체 예약 정보</h5>
         <p></p>
-        <div class="resever_now">
-            <ul>
-                <li>
-                    <label for="reserveId">예약번호 &nbsp</label>
-                    <input type="text" id="reserveId"   readonly> <!-- disabled는 폼값전달안됌 -->
-                    &nbsp
-                    <label for="reserveState">예약상태 &nbsp</label> 
-                    <input type="text" id="reserveState"   placeholder="예약진행중" required > 
-                </li>
-               
-                <li>
-                    <label for="sname">가게이름 &nbsp</label>
-                    <input type="text" id="sname"   readonly> <!-- disabled는 폼값전달안됌 --> 
-                    &nbsp
-                    <label for="yyddmm">날짜/시간 &nbsp</label>
-                    <input type="datetime-local" id="yyddmm" placeholder="YYYY/DD/MM" required>
-                </li>
-                <li>
-                    <label for="people">인원수 &nbsp</label> 
-                    <input type="text" id="people" placeholder="숫자" readonly>명
-                </li> 
-                <li>
-                	<label for="menu">메뉴 &nbsp</label>
-                    <input type="text" id="menu" placeholder="메뉴이름" readonly> &nbsp
-                    <label for="price">가격 &nbsp</label>
-                    <input type="" id=""price"" placeholder="" readonly>원
-                     </li>
-                     
-                <li>
-                    <label for="ucomment">주문 요청 사항 &nbsp</label> 
-                    <textarea style="resize: both;"></textarea> 
-                </li>    
-            </ul>  
-             <button type="button" class="btn btn-danger" style="float: right;">예약취소</button>
+           <div class="table-container">
+          <table class="table table-hover">
+          <thead>
+                    <tr class="table-warning table-hover table-bordered" id="option_reserver">
+                 	<th>예약정보</th>	
+                 	<th>개인정보</th>	
+                 	<th>메뉴</th>	
+                 	<th>옵션</th>
+                 	</tr>
+     	 </thead> 
+    	 <tbody> 
+					<tr><td>가게이름</td>	 <td>주문자</td>   <td>메뉴이름</td>    <td>예약상태</td>
+					<tr><td>예약번호</td>	 <td>인원수</td>	<td>가격</td>	       <td>요청사항</td>
+   			 </tbody>
+			 </table>
         </div>
-        <br>
-         <h5>지난 예약 정보</h5>
-         <button type="button" class="btn btn-dark" onClick="location.href='option_r.jsp'">전체내역보기</button> 
-    <div class="resever_pass"> 
-            <ul>
-                <li>
-                    <label for="reserveId">예약번호 &nbsp</label>
-                    <input type="text" id="reserveId"   readonly> <!-- disabled는 폼값전달안됌 -->
-                    &nbsp
-                    <label for="reserveState">예약상태 &nbsp</label> 
-                    <input type="text" id="reserveState"   placeholder="예약완료" required > 
-                </li>
-               
-                <li>
-                    <label for="sname">가게이름 &nbsp</label>
-                    <input type="text" id="sname"   readonly> <!-- disabled는 폼값전달안됌 --> 
-                    &nbsp
-                    <label for="yyddmm">날짜/시간 &nbsp</label>
-                    <input type="datetime-local" id="yyddmm" placeholder="YYYY/DD/MM" required>
-                </li>
-                
-            </ul>  
-             <button type="button" class="btn btn-secondary" style="float: right;">상세보기</button>
-        </div>
-        
-        
+         
     </div>   
 </body>
 </html>
