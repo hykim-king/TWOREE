@@ -243,6 +243,7 @@ private static final long serialVersionUID = 1L;
 		inVO.setParkInfo(parkInfo);
 		inVO.setReserverInfo(ReserveInfo);
 		int flag = shopDetailService.doSaveOrModify(inVO);
+		res.setStatus(200);
 		return null;
 				
 	}
@@ -280,6 +281,7 @@ private static final long serialVersionUID = 1L;
 			offDayInVO.setClosedDay(str);
 			offDayService.doSave(offDayInVO);
 		}
+		res.setStatus(200);
 		return null;
 	}
 	
