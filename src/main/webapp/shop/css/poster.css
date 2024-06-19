@@ -32,7 +32,6 @@
   ul{
     list-style: none;
     width : 400px;
-    height : 25%;
     padding : 10px;
     margin : 10px 5px 30px 10px;
     border : 3px solid #ECBD58;
@@ -56,6 +55,11 @@
     display: inline-block;
     margin-left : 25px;
   }
+
+  #main_page_ul{
+  	height : 35px;
+  }
+
   .detail_page{
     float : right;
   }
