@@ -238,7 +238,7 @@
                         row.append($("<td></td>").text(ask.askDate));
                         row.append($("<td></td>").text(ask.askState));
                         $("#askList").append(row);
-                        console.log(ask.askNo);
+          
                     });
                  
                  $("#reviewList").empty();
