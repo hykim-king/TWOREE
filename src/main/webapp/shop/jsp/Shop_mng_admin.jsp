@@ -83,7 +83,7 @@
         <div class="p-3 border border-info border-start-0 rounded-end printList overflow-auto" >
             <h3 class="mb-3">메뉴 관리</h3>
             <button class="btn btn-primary mr-2" style="float:right" id="addMenuBtn">메뉴 추가하기</button>
-            <table class="table table-striped table-hover table-bordered" id = "menuList">
+            <table class="table table-striped table-hover table-bordered">
                 <thead>
                     <tr class="table-success">
                         <th>메뉴 이름</th>
@@ -135,6 +135,11 @@
          
          function modMenu(menuNo){
              window.open("/TWOREE/shop/shop.do"+"?work_div=ModMenu&menuNo="+menuNo,"메뉴 관리","width=500,height=500,top=100,left=100");
+         }
+         
+         function modReserve(reserveNo){
+             window.open("/TWOREE/shop/shop.do"+"?work_div=ModReserve&reserveNo="+reserveNo,"예약 관리","width=500,height=700,top=100,left=100");
+             
          }
     
     
@@ -203,7 +208,7 @@
                    
                   $("#reservationList").empty();
                   $.each(reserveListObj, function(index, reserve) {
-                        let row = $("<tr></tr>");
+                        let row = $("<tr onclick='modReserve("+reserve.reserveNo+")'></tr>");
                         row.append($("<td></td>").text(reserve.userId));
                         row.append($("<td></td>").text(reserve.reserveDate));
                         row.append($("<td></td>").text(reserve.people));

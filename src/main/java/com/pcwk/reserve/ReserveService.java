@@ -29,6 +29,9 @@ public class ReserveService implements PLog {
 		return dao.doUpdate(param);
 	}
 	
+	public int updateState(ReserveDTO param) {
+		return dao.updateState(param);
+	}
 
 	public int doDelete(ReserveDTO param) {
 		

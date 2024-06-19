@@ -286,6 +286,45 @@ public class ReserveDao implements WorkDiv<ReserveDTO>,PLog {
 		
 		return flag;
 	}
+	
+	public int updateState(ReserveDTO param) {
+		int flag = 0;
+		Connection conn = connectionMaker.getConnection();
+		 
+		PreparedStatement pstmt = null;
+		
+		StringBuilder sb = new StringBuilder();
+		sb.append("UPDATE reserve                 \n");
+		sb.append("SET                            \n");
+		sb.append("        reserve_state = ?      \n");
+		sb.append("WHERE                          \n");
+		sb.append("reserve_no = ?                 \n");
+		
+		log.debug("1. SQL : {}", sb.toString());
+		log.debug("2. Conn : {}", conn);
+		log.debug("3. param : {}", param);
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			log.debug("4. pstmt : {}", pstmt);
+			
+			pstmt.setString(1, param.getReserveState());
+			pstmt.setInt(2, param.getReserveNo());
+			
+			
+			flag = pstmt.executeUpdate();
+			
+		}catch(SQLException e) {
+			e.printStackTrace();
+		}finally {
+			DBUtil.close(conn, pstmt);
+			log.debug("5. finally : conn : {} pstmt : {}", conn, pstmt);
+		}
+		log.debug("6. flag : {}", flag);
+		
+		return flag;
+		
+	}
 
 	@Override
 	public ReserveDTO doSelectOne(ReserveDTO param) {

@@ -277,6 +277,45 @@ private static final long serialVersionUID = 1L;
 		return null;
 	}
 	
+	public JView modReserve(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("modReserve()");
+		log.debug("=====================");
+		int reserveNo =Integer.parseInt(StringUtill.nvl(req.getParameter("reserveNo"), "0"));
+		ReserveDTO inVO = new ReserveDTO();
+		inVO.setReserveNo(reserveNo);
+		ReserveDTO outVO = reserveService.doSelectOne(inVO);
+		Gson gson=new Gson();
+		String jsonString = gson.toJson(outVO);
+		req.setAttribute("reserveVO", jsonString);
+		return new JView("/shop/jsp/ModReserve.jsp");
+	
+	}
+	
+	public JView  confirmReserve(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("confirmReserve()");
+		log.debug("=====================");
+		int reserveNo =Integer.parseInt(StringUtill.nvl(req.getParameter("reserveNo"), "0"));
+		ReserveDTO inVO = new ReserveDTO();
+		inVO.setReserveNo(reserveNo);
+		inVO.setReserveState("승인완료");
+		int flag = reserveService.updateState(inVO);
+		return null;
+	}
+	
+	public JView  cancelReserve(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("cancelReserve()");
+		log.debug("=====================");
+		int reserveNo =Integer.parseInt(StringUtill.nvl(req.getParameter("reserveNo"), "0"));
+		ReserveDTO inVO = new ReserveDTO();
+		inVO.setReserveNo(reserveNo);
+		inVO.setReserveState("예약거절");
+		int flag = reserveService.updateState(inVO);
+		return null;
+	}
+	
 	public JView regShop(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		log.debug("=====================");
 		log.debug("doSaveMenu()");
@@ -291,6 +330,8 @@ private static final long serialVersionUID = 1L;
 		res.setStatus(200);
 		return null;
 	}
+	
+	
 	
 	public JView modDetail(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		log.debug("=====================");
@@ -502,6 +543,15 @@ private static final long serialVersionUID = 1L;
 			break;
 		case "doModifyMenu" :
 			viewName = doModifyMenu(req,res);
+			break;
+		case "ModReserve" :
+			viewName = modReserve(req,res);
+			break;
+		case "confirmReserve" :
+			viewName = confirmReserve(req,res);
+			break;
+		case "cancelReserve" :
+			viewName = cancelReserve(req,res);
 			break;
 		case "setReserve" :
 			viewName = setReserve(req,res);

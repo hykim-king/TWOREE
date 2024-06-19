@@ -249,6 +249,43 @@ public class AskDAO implements WorkDiv<AskDTO> {
 	}
 	
 	
+	public int doUpdateAnswer(AskDTO param) {
+		int flag = 0;
+		Connection conn = getConnection();
+		PreparedStatement pstmt = null; // SQL+PARAM
+
+		StringBuilder sb = new StringBuilder(300);
+		sb.append("UPDATE ask               \n");  
+		sb.append("    set                  \n");
+		sb.append("         ask_state = ?,   \n");
+		sb.append("         shop_answer = ?, \n");
+		sb.append("         answer_date = sysdate \n");
+		sb.append("    where ask_no = ?     \n");
+		log.debug("1.sql:{}", sb.toString());
+		log.debug("2.conn:{}", conn);
+		log.debug("3.param:{}", param);
+
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			log.debug("4.pstmt:{}", pstmt);
+			pstmt.setString(1, param.getAskState());
+			pstmt.setString(2, param.getShopAnswer());
+			pstmt.setInt(3, param.getAskNo());
+			flag = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			DBUtil.close(conn, pstmt);
+
+			log.debug("5.finally conn:{} pstmt:{}", conn, pstmt);
+		}
+
+		log.debug("6.flag:{}", flag);
+
+		return flag;
+	}
+	
 	/***
 	 * 삭제 delete
 	 */

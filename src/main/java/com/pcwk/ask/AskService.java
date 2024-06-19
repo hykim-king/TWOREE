@@ -35,7 +35,9 @@ public class AskService implements PLog {
 		return dao.doDelete(param);
 	}
 
-
+    public int doWrtAnswer(AskDTO param) {
+    	return dao.doUpdateAnswer(param);
+    }
 	public AskDTO doSelectOne(AskDTO param) {
 		AskDTO outVO = new AskDTO();
 		outVO=dao.doSelectOne(param);
