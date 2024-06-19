@@ -1,7 +1,10 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>예약 확인</title>
     <link rel="stylesheet" href="style.css">
@@ -87,7 +90,7 @@
         </div>
     </div>
     <div class="content_box">
-        <button class="styled-button" onclick="location.href='index.html'">이전</button>
+        <button class="styled-button" onclick="location.href='reserve02.jsp'">이전</button>
         <button class="styled-button" id="submitReservation">동의하고 예약신청</button>
     </div>
     <script>
