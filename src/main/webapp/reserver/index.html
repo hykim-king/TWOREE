@@ -5,10 +5,76 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>피자가게 예약 시스템</title>
     <link rel="stylesheet" href="style.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .container {
+            margin: 0 auto;
+            max-width: 800px;
+            padding: 20px;
+        }
+        header, footer {
+            background-color: #9cfc88;
+            padding: 10px 20px;
+            text-align: center;
+        }
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        header h1 {
+            margin: 0;
+        }
+        header .login-button {
+            background-color: #fff;
+            border: 2px solid #4CAF50;
+            color: #4CAF50;
+            padding: 5px 10px;
+            text-decoration: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        header .login-button:hover {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .calendar, .time-picker {
+            margin-bottom: 10px;
+        }
+        .styled-button {
+            background-color: #4CAF50;
+            border: none;
+            color: white;
+            padding: 8px 16px;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 15px;
+            margin: 3px 8px;
+            cursor: pointer;
+            border-radius: 12px;
+        }
+        .styled-button:hover {
+            background-color: #45a049;
+        }
+        footer {
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
+    <header>
         <h1>피자가게 예약 시스템</h1>
+        <a href="#" class="login-button">로그인</a>
+    </header>
+    
+    <div class="container">
         <p>피자를 파는 가게입니다.</p>
         
         <div class="calendar">
@@ -18,7 +84,6 @@
             <select id="timePicker">
                 <option value="" disabled selected>시간 선택</option>
                 <option value="오전 10:00">오전 10:00</option>
-                <option value="오전 10:30">오전 10:30</option>
                 <option value="오전 10:30">오전 10:30</option>
                 <option value="오전 11:00">오전 11:00</option>
                 <option value="오전 11:30">오전 11:30</option>
@@ -54,13 +119,16 @@
         <button class="styled-button" onclick="location.href='03.html'">다음</button>
     </div>
 
+    <footer>
+        <p>&copy; 2024 피자가게 예약 시스템</p>
+    </footer>
+
     <script>
         function confirmReservation() {
             let participants = parseInt(document.getElementById('participants').textContent);
             const selectedDate = document.getElementById('datePicker').value;
             const selectedTime = document.getElementById('timePicker').value;
 
-            // 예약 정보를 localStorage에 저장
             const reservationData = {
                 date: selectedDate,
                 time: selectedTime,
@@ -68,7 +136,6 @@
             };
             localStorage.setItem('reservation', JSON.stringify(reservationData));
 
-            // 예약 정보를 화면에 보여주는 코드
             let resultText = `일정: ${selectedDate}, ${selectedTime}, 인원: ${participants}`;
             document.getElementById('resultText').innerText = resultText;
         }

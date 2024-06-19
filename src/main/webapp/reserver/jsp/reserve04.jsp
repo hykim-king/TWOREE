@@ -87,8 +87,8 @@
 
             <div class="top">
                 <ul>
-                     <li> <a href="index.html">이전화면</a> </li>
-                     <li> <a href="02.html">상세정보</a> </li>
+                     <li> <a href="reserve02.jsp">이전화면</a> </li>
+                     <li> <a href="reserve04.jsp">상세정보</a> </li>
                      <li> <a href="">리뷰</a> </li>
                        
             </ul>
@@ -117,9 +117,10 @@
                     
                     
                       
-                    
-                    </body>
+                    <!-- footer -->
+    
+    
             
         </div>
-    </body>
+   
 </html>
