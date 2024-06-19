@@ -232,6 +232,51 @@ private static final long serialVersionUID = 1L;
 		return null;
 	}
 	
+	public JView modMenu(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("modMenu()");
+		log.debug("=====================");
+		int menuNo = Integer.parseInt(StringUtill.nvl(req.getParameter("menuNo"), "0"));
+		MenuDTO inVO = new MenuDTO();
+		inVO.setmenuNo(menuNo);
+		MenuDTO outVO = menuService.doSelectOne(inVO);
+		Gson gson=new Gson();
+		String jsonString = gson.toJson(outVO);
+		req.setAttribute("menuVO", jsonString);
+		return new JView("/shop/jsp/ModMenu.jsp");
+	}
+	
+	public JView doModifyMenu(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("doModifyMenu()");
+		log.debug("=====================");
+		String menuName = StringUtill.nvl(req.getParameter("menuName"), "");
+		String menuInfo = StringUtill.nvl(req.getParameter("menuDescription"), "");
+		int price = Integer.parseInt(StringUtill.nvl(req.getParameter("menuPrice"), "0"));
+		int shopNo =Integer.parseInt(StringUtill.nvl(req.getParameter("shop_no"), "0"));
+		int menuNo =Integer.parseInt(StringUtill.nvl(req.getParameter("menuNo"), "0"));
+		MenuDTO inVO = new MenuDTO();
+		inVO.setMenuName(menuName);
+		inVO.setMenuInfo(menuInfo);
+		inVO.setPrice(price);
+		inVO.setShopNo(shopNo);
+		inVO.setmenuNo(menuNo);
+		int flag = menuService.doUpdate(inVO);
+		res.setStatus(200);
+		return null;
+	}
+	
+	public JView delMenu(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("delMenu()");
+		log.debug("=====================");
+		int menuNo = Integer.parseInt(StringUtill.nvl(req.getParameter("menuNo"), "0"));
+		MenuDTO inVO = new MenuDTO();
+		inVO.setmenuNo(menuNo);
+		int flag = menuService.doDelete(inVO);
+		return null;
+	}
+	
 	public JView regShop(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		log.debug("=====================");
 		log.debug("doSaveMenu()");
@@ -448,6 +493,15 @@ private static final long serialVersionUID = 1L;
 			break;
 		case "ModDetail" :
 			viewName = modDetail(req,res);
+			break;
+		case "ModMenu" :
+			viewName = modMenu(req,res);
+			break;
+		case "delMenu" :
+			viewName = delMenu(req,res);
+			break;
+		case "doModifyMenu" :
+			viewName = doModifyMenu(req,res);
 			break;
 		case "setReserve" :
 			viewName = setReserve(req,res);

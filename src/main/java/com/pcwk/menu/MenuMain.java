@@ -31,7 +31,7 @@ public class MenuMain implements PLog {
 	    }
 	    
 		public void doDelete() {
-			menu.setMenuNO(1);
+			menu.setmenuNo(1);
 			int flag =0;
 	    	flag=dao.doDelete(menu);
 	    	if (0 == flag) {
@@ -46,7 +46,7 @@ public class MenuMain implements PLog {
 			menu.setMenuName(menu.getMenuName() + updateStr);
 			menu.setMenuInfo(menu.getMenuInfo() + updateStr);
 			menu.setPrice(menu.getPrice()+1000);
-			menu.setMenuNO(21);
+			menu.setmenuNo(21);
 			int flag = dao.doUpdate(menu);
 			if (0 == flag) {
 				log.debug("업데이트 실패 ");
@@ -57,7 +57,7 @@ public class MenuMain implements PLog {
 		}
 	    
 		public void doSelectOne() {
-			menu.setMenuNO(21);
+			menu.setmenuNo(21);
 			MenuDTO outVO = dao.doSelectOne(menu);
 			if (null != outVO) {
 				log.debug("단건 조회 성공");

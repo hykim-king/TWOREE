@@ -79,7 +79,7 @@ public class MenuDAO implements WorkDiv<MenuDTO> {
 				MenuDTO outVO = new MenuDTO();
 
 				outVO.setNum(rs.getInt("num"));
-				outVO.setMenuNO(rs.getInt("menu_no"));
+				outVO.setmenuNo(rs.getInt("menu_no"));
 				outVO.setMenuName(rs.getString("menu_name"));
 				outVO.setMenuInfo(rs.getString("menu_info"));
 				outVO.setPrice(rs.getInt("price"));
@@ -169,7 +169,7 @@ public class MenuDAO implements WorkDiv<MenuDTO> {
 			pstmt.setString(1, param.getMenuName());
 			pstmt.setString(2, param.getMenuInfo());
 			pstmt.setInt(3, param.getPrice());
-			pstmt.setInt(4, param.getMenuNO());
+			pstmt.setInt(4, param.getmenuNo());
 			flag = pstmt.executeUpdate();
 
 		} catch (SQLException e) {
@@ -203,7 +203,7 @@ public class MenuDAO implements WorkDiv<MenuDTO> {
 			pstmt = conn.prepareStatement(sb.toString());
 			log.debug("4.pstmt:{}", pstmt);
 			
-			pstmt.setInt(1, param.getMenuNO());
+			pstmt.setInt(1, param.getmenuNo());
 			
 			
 			flag = pstmt.executeUpdate();
@@ -229,6 +229,7 @@ public class MenuDAO implements WorkDiv<MenuDTO> {
 
 		StringBuilder sb = new StringBuilder(300);
 		sb.append(" select menu_name, \n");
+		sb.append("        menu_no, \n");
 		sb.append("        menu_info, \n");
 		sb.append("        price      \n");
 		sb.append("   from menu       \n");
@@ -242,7 +243,7 @@ public class MenuDAO implements WorkDiv<MenuDTO> {
 
 			// param설정
 			pstmt = conn.prepareStatement(sb.toString());
-			pstmt.setInt(1, param.getMenuNO());
+			pstmt.setInt(1, param.getmenuNo());
 
 			// SELECT실행
 			rs = pstmt.executeQuery();
@@ -253,7 +254,7 @@ public class MenuDAO implements WorkDiv<MenuDTO> {
 				outVO.setMenuName(rs.getString("menu_name"));
 				outVO.setMenuInfo(rs.getString("menu_info"));
 				outVO.setPrice(rs.getInt("price"));
-				
+				outVO.setmenuNo(rs.getInt("menu_no"));
 				log.debug("6.outVO:" + outVO);
 			}
 

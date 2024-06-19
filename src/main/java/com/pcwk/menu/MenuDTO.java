@@ -3,7 +3,7 @@ package com.pcwk.menu;
 import com.pcwk.ehr.cmn.DTO;
 
 public class MenuDTO extends DTO {
-	private int menuNO;
+	private int menuNo;
 	private int shopNo;
 	private String menuName;
 	private String menuInfo;
@@ -12,9 +12,9 @@ public class MenuDTO extends DTO {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-	public MenuDTO(int menuNO, int shopNo, String menuName, String menuInfo, int price) {
+	public MenuDTO(int menuNo, int shopNo, String menuName, String menuInfo, int price) {
 		super();
-		this.menuNO = menuNO;
+		this.menuNo = menuNo;
 		this.shopNo = shopNo;
 		this.menuName = menuName;
 		this.menuInfo = menuInfo;
@@ -22,14 +22,14 @@ public class MenuDTO extends DTO {
 	}
 	@Override
 	public String toString() {
-		return "MenuDTO [menuNO=" + menuNO + ", shopNo=" + shopNo + ", menuName=" + menuName + ", menuInfo=" + menuInfo
+		return "MenuDTO [menuNo=" + menuNo + ", shopNo=" + shopNo + ", menuName=" + menuName + ", menuInfo=" + menuInfo
 				+ ", price=" + price + "]";
 	}
-	public int getMenuNO() {
-		return menuNO;
+	public int getmenuNo() {
+		return menuNo;
 	}
-	public void setMenuNO(int menuNO) {
-		this.menuNO = menuNO;
+	public void setmenuNo(int menuNo) {
+		this.menuNo = menuNo;
 	}
 	public int getShopNo() {
 		return shopNo;

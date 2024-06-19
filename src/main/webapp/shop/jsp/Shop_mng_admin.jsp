@@ -83,7 +83,7 @@
         <div class="p-3 border border-info border-start-0 rounded-end printList overflow-auto" >
             <h3 class="mb-3">메뉴 관리</h3>
             <button class="btn btn-primary mr-2" style="float:right" id="addMenuBtn">메뉴 추가하기</button>
-            <table class="table table-striped table-hover table-bordered">
+            <table class="table table-striped table-hover table-bordered" id = "menuList">
                 <thead>
                     <tr class="table-success">
                         <th>메뉴 이름</th>
@@ -130,6 +130,14 @@
     </p>
     
     <script>
+         
+         
+         
+         function modMenu(menuNo){
+             window.open("/TWOREE/shop/shop.do"+"?work_div=ModMenu&menuNo="+menuNo,"메뉴 관리","width=500,height=500,top=100,left=100");
+         }
+    
+    
          function forwording(num){
         	   window.location.replace("/TWOREE/shop/shop.do?work_div=shop_mng&shop_no="+num);
          }
@@ -137,9 +145,7 @@
         $(document).ready(function() {
             
             loadData();
-            $("#shopNow").click(function() {
-            	
-            });
+            
             
             $("#AddShopBtn").click(function() {
                 window.open("/TWOREE/shop/jsp/RegShop.jsp","메뉴 등록","width=500,height=500,top=100,left=100");
@@ -209,10 +215,9 @@
                     
                   $("#menuList").empty();
                   $.each(menuListObj, function(index, menu) {
-                        let row = $("<tr></tr>");
+                        let row = $("<tr onclick='modMenu("+menu.menuNo+")'></tr>");
                         row.append($("<td></td>").text(menu.menuName));
                         row.append($("<td></td>").text(menu.price));
-                        row.append($("<td hidden='true'></td>").text(menu.menuNo));
                         $("#menuList").append(row);
                   });
                      
@@ -237,9 +242,11 @@
                         row.append($("<td hidden='true'></td>").text(review.reviewNo));
                         $("#reviewList").append(row);
                     });
-                
+                 
            
         }
+        
+         
     </script>
 </body>
 </html>
