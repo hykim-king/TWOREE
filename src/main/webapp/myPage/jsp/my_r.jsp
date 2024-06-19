@@ -1,3 +1,4 @@
+<%@page import="com.pcwk.ehr.cmn.SearchDTO"%>
 <%@page import="com.pcwk.reserve.ReserveDTO"%>
 <%@page import="com.pcwk.user.UserDTO"%>
 <%@page import="java.util.List"%>
@@ -5,9 +6,9 @@
     pageEncoding="UTF-8"%>
 <%
     List<ReserveDTO> list = (List<ReserveDTO>)request.getAttribute("list"); 
+	SearchDTO searchCon = (SearchDTO)request.getAttribute("vo");
 %>
-
-
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -143,7 +144,7 @@
                  	</tr>
      	 </thead> 
     	 	<tbody> 
-    	 	    <%     if(null != list && list.size()>0){
+    	 	    <%     
           				for(ReserveDTO vo   :list){  
 		         %>   
     	 	
@@ -161,8 +162,7 @@
 						<td>인원수<%=vo.getPeople()%></td>	 
 						<td>요청사항<%=vo.getUserComment()%></td>
 						
-			 <%  
-          		  }//for
+			 <%   
          		}//--if 
       		  %> 
    			 </tbody>

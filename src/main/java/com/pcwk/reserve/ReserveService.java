@@ -16,8 +16,7 @@ public class ReserveService implements PLog {
 	public List<ReserveDTO> doRetrieve(DTO search) {
 		
 		return dao.doRetrieve(search);
-	}
-	
+	} 
 
 	public int doSave(ReserveDTO param) {
 		

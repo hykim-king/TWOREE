@@ -1,12 +1,15 @@
 package com.pcwk.user;
 import java.io.IOException;
+
 import java.util.List;
 
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
- 
+
+import com.pcwk.ehr.cmn.SearchDTO;
 import com.pcwk.ehr.cmn.ControllerV;
 import com.pcwk.ehr.cmn.JView;
 import com.pcwk.ehr.cmn.PLog;
@@ -61,20 +64,43 @@ public class UserController implements ControllerV, PLog {
 	public JView doRetrieveR(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	      	log.debug("-----------------");
-	    	log.debug("doRetrieve ()");
+	    	log.debug("doRetrieveR()");
 	    	log.debug("-----------------");		
 	    	
-	    	ReserveDTO inVO = new ReserveDTO(); 
-	    	String userId = StringUtill.nvl(request.getParameter("userId"),"0");
+	    	//HttpSession session = request.getSession();
+	    	//ReserveDTO inVO = new ReserveDTO(); 
+	    	SearchDTO searchVO = new SearchDTO();
 	    	
-	    	inVO.setUserId(userId);
-	    	log.debug("inVO:"+inVO);
+	    	String searchDiv = StringUtill.nvl( request.getParameter("search_div"),"10");
+	    	String searchWord = StringUtill.nvl(request.getParameter("search_word"),"");
 	    	
-	    	//this.service.selectOneReadCnt(inVO);
+	    	//String userId = StringUtill.nvl(request.getParameter("userId"),"");
 	    	
-	    	List<ReserveDTO> list = reserveService.doRetrieve(inVO);
-
-	    	request.setAttribute("list",list);
+	    	//inVO.setUserId(userId);
+	    	searchVO.setSearchDiv(searchDiv);
+	    	searchVO.setSearchWord(searchWord);
+	    	log.debug("searchVO: {}"+searchVO); 
+	    	
+	    	//log.debug("userId:"+userId);
+	    	log.debug("searchWord : {}", searchWord);
+			log.debug("searchDiv : {}", searchDiv);
+	    	 
+	    	
+	    	List<ReserveDTO> list = reserveService.doRetrieve(searchVO);
+	    	
+	    	int i=0;
+	    	
+			for(ReserveDTO vo :list) {
+				log.debug("i: {}, vo: {}",++i,vo);
+			}
+			
+			//UI 데이터 전달
+			request.setAttribute("list", list);
+			log.debug("list:{}",list);
+			//검색조건 UI로 전달
+			request.setAttribute("vo", searchVO);
+			
+			log.debug("searchVO:"+searchVO); 
 			
 			 return new JView("/myPage/jsp/my_r.jsp");	
 		}
@@ -94,7 +120,9 @@ public class UserController implements ControllerV, PLog {
     	case"doSelectOne":
     		viewName = doSelectOne(request, response);
     		break; 
-    		 
+    	case"doRetrieveR":
+    		viewName = doRetrieveR(request, response);
+    		break;	 
     		
     	}
     		
