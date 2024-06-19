@@ -331,6 +331,20 @@ private static final long serialVersionUID = 1L;
 		return null;
 	}
 	
+	public JView  modAsk(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("modAsk()");
+		log.debug("=====================");
+		int askNo =Integer.parseInt(StringUtill.nvl(req.getParameter("askNo"), "0"));
+		AskDTO inVO = new AskDTO();
+		inVO.setAskNo(askNo);
+		AskDTO outVO = askService.doSelectOne(inVO);
+		Gson gson=new Gson();
+		String jsonString = gson.toJson(outVO);
+		req.setAttribute("askVO", jsonString);
+		return new JView("/shop/jsp/ModAsk.jsp");
+	}
+	
 	
 	
 	public JView modDetail(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
@@ -360,6 +374,21 @@ private static final long serialVersionUID = 1L;
 		res.setStatus(200);
 		return null;
 				
+	}
+	
+	public JView saveAnswer(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("doSaveMenu()");
+		log.debug("=====================");
+		int askNo =Integer.parseInt(StringUtill.nvl(req.getParameter("askNo"), "0"));
+		String shopAnswer =StringUtill.nvl(req.getParameter("shopAnswer"), "");
+		AskDTO inVO = new AskDTO();
+		inVO.setShopAnswer(shopAnswer);
+		inVO.setAskNo(askNo);
+		inVO.setAskState("답변 완료");
+		int flag =askService.doWrtAnswer(inVO);
+		res.setStatus(200);
+	    return null;
 	}
 	
 	public JView setReserve(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
@@ -543,6 +572,12 @@ private static final long serialVersionUID = 1L;
 			break;
 		case "doModifyMenu" :
 			viewName = doModifyMenu(req,res);
+			break;
+		case "ModAsk" :
+			viewName =modAsk(req,res);
+			break;
+		case "saveAnswer" :
+			viewName = saveAnswer(req,res);
 			break;
 		case "ModReserve" :
 			viewName = modReserve(req,res);

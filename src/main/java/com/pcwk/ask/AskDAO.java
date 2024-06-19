@@ -344,7 +344,7 @@ public class AskDAO implements WorkDiv<AskDTO> {
 
 		StringBuilder sb = new StringBuilder(300);
 		sb.append("SELECT           \n");
-		sb.append("                 \n");
+		sb.append("    ask_no,      \n");
 		sb.append("    shop_no,     \n");
 		sb.append("    user_id,     \n");
 		sb.append("    ask_state,   \n");
@@ -374,6 +374,7 @@ public class AskDAO implements WorkDiv<AskDTO> {
 			if (rs.next()) {
 				
 				outVO = new AskDTO();
+				outVO.setAskNo(rs.getInt("ask_no"));
 				outVO.setShopNo(rs.getInt("shop_no"));
 				outVO.setUserId(rs.getString("user_id"));
 				outVO.setAskState(rs.getString("ask_state"));

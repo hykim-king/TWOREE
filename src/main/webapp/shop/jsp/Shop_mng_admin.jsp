@@ -146,6 +146,11 @@
          function forwording(num){
         	   window.location.replace("/TWOREE/shop/shop.do?work_div=shop_mng&shop_no="+num);
          }
+         
+         function modAsk(askNo){
+              window.open("/TWOREE/shop/shop.do"+"?work_div=ModAsk&askNo="+askNo,"문의 관리","width=900,height=900,top=100,left=100");
+              
+         }
     
         $(document).ready(function() {
             
@@ -213,7 +218,6 @@
                         row.append($("<td></td>").text(reserve.reserveDate));
                         row.append($("<td></td>").text(reserve.people));
                         row.append($("<td></td>").text(reserve.reserveState));
-                        row.append($("<td hidden='true'></td>").text(reserve.reserveNo));
                         $("#reservationList").append(row);
                   });
                   
@@ -228,13 +232,13 @@
                      
                   $("#askList").empty();
                   $.each(askListObj, function(index, ask) {
-                        let row = $("<tr></tr>");
+                        let row = $("<tr onclick='modAsk("+ask.askNo+")'></tr>");
                         row.append($("<td></td>").text(ask.userAsk));
                         row.append($("<td></td>").text(ask.userId));
                         row.append($("<td></td>").text(ask.askDate));
                         row.append($("<td></td>").text(ask.askState));
-                        row.append($("<td hidden='true'></td>").text(ask.askNo));
                         $("#askList").append(row);
+                        console.log(ask.askNo);
                     });
                  
                  $("#reviewList").empty();
@@ -244,7 +248,6 @@
                         row.append($("<td></td>").text(review.score));
                         row.append($("<td></td>").text(review.reviewContent));
                         row.append($("<td></td>").text(review.reviewWrtDate));
-                        row.append($("<td hidden='true'></td>").text(review.reviewNo));
                         $("#reviewList").append(row);
                     });
                  
