@@ -2,7 +2,8 @@
 <%@page import="com.pcwk.user.UserDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>   
+    pageEncoding="UTF-8"%>
+<%@ include file="/cmn/common.jsp" %>       
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,17 +11,91 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css">  
 
-<script src="/WEB02/assets/js/jquery_3_7_1.js"></script>
-<script src="/WEB02/assets/js/common.js"></script>
+<script src="/TWOREE/myPage/js/jquery_3_7_1.js"></script>
+<script src="/TWOREE/myPage/js/common.js"></script>
 
 
 <script>
 //String outVO = (String)request.getAttribute("outVO");
 
-
+document.addEventListener("DOMContentLoaded", function(){
+const profBtn = document.querySelector("#profBtn"); 
 const doRetrieveRtn = document.querySelector("#doRetrieveR"); 
-console.log('doRetrieveRtn:'+doRetrieveRtn);
+const doRetrieveVtn = document.querySelector("#doRetrieveV"); 
+const doRetrieveXtn = document.querySelector("#doRetrieveX");
 
+profBtn.addEventListener("click",function(event){
+	console.log('profBtn click'); 
+	window.location.replace("/TWOREE/user/myPage.do?work_div=doSelectOne&userId="+"user1"); 
+	
+});
+ 
+doRetrieveRtn.addEventListener("click",function(event){
+	console.log('doRetrieveRtn click'); 
+
+	$.ajax({
+    type: "GET", 
+    url:"/TWOREE/user/myPage.do",
+    dataType:"html",
+    data:{
+        "work_div": "doRetrieveR",
+        "userId": "user1"
+    },
+    success:function(response){//통신 성공
+        console.log("success data:"+response);
+         window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveR&userId="+"user1"); 
+    },
+    error:function(response){//실패시 처리
+            console.log("error:"+response);
+    }
+	})//-ajax
+	});//-Rtn
+	
+	doRetrieveVtn.addEventListener("click",function(event){
+		console.log('doRetrieveVtn click'); 
+
+		$.ajax({
+	    type: "GET", 
+	    url:"/TWOREE/user/myPage.do",
+	    dataType:"html",
+	    data:{
+	        "work_div": "doRetrieveV",
+	        "userId": "user1"
+	    },
+	    success:function(response){//통신 성공
+	        console.log("success data:"+response);
+	         window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveV&userId="+"user1"); 
+	    },
+	    error:function(response){//실패시 처리
+	            console.log("error:"+response);
+	    }
+		})//-ajax
+		});//-Vtn
+		
+	doRetrieveXtn.addEventListener("click",function(event){
+		console.log('doRetrieveVtn click'); 
+
+		$.ajax({
+	    type: "GET", 
+	    url:"/TWOREE/user/myPage.do",
+	    dataType:"html",
+	    data:{
+	        "work_div": "doRetrieveX",
+	        "userId": "user1"
+	    },
+	    success:function(response){//통신 성공
+	        console.log("success data:"+response);
+	         window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveX&userId="+"user1"); 
+	    },
+	    error:function(response){//실패시 처리
+	            console.log("error:"+response);
+	    }
+		})//-ajax
+		});//-xtn
+					
+		
+	
+}) ;//--document
 </script>
  
 
@@ -115,7 +190,7 @@ console.log('doRetrieveRtn:'+doRetrieveRtn);
           <img src="/TWOREE/myPage/img/user_icon1.png" width= 80px><br>
         <label for="uid">아이디 &nbsp</label>
         <ul>
-            <li><input type="button" value="내프로필" class="btn btn-light " id="" ></li>
+            <li><input type="button" value="내프로필" class="btn btn-light " id="profBtn" ></li>
             <li><input type="button" value="예약"    class="btn btn-light " id="doRetrieveR" ></li>
             <li><input type="button" value="리뷰"    class="btn btn-light " id="doRetrieveV" ></li>
             <li><input type="button" value="고객문의" class="btn btn-light " id="doRetrieveX" ></li>
@@ -208,7 +283,7 @@ console.log('doRetrieveRtn:'+doRetrieveRtn);
         
     </div>
 </body>
-<script src="/TWOREE/assets/js/bootstrap.bundle.min.js"></script> 
+ 
 </body>
 </html>
  

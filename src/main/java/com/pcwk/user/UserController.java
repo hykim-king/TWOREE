@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.pcwk.ehr.cmn.SearchDTO;
+import com.google.gson.Gson;
 import com.pcwk.ask.AskDTO;
 import com.pcwk.ask.AskService;
 import com.pcwk.ehr.cmn.ControllerV;
@@ -78,16 +79,16 @@ public class UserController implements ControllerV, PLog {
 	    	//HttpSession session = request.getSession();
 	    	//ReserveDTO inVO = new ReserveDTO(); 
 	    	SearchDTO searchVO = new SearchDTO();
-	    	String pageNo = StringUtill.nvl(request.getParameter("page_no"),"1");
-			String pageSize = StringUtill.nvl(request.getParameter("page_size"),"10");
-	    	String searchDiv = StringUtill.nvl( request.getParameter("search_div"),"10");
-	    	String searchWord = StringUtill.nvl(request.getParameter("search_word"),"");
+	    	int pageNo =1;
+	    	int pageSize = 10;
+	    	String searchDiv = "10";
+	    	String searchWord = StringUtill.nvl(request.getParameter("userId"),"");
 	    	
 	    	//String userId = StringUtill.nvl(request.getParameter("userId"),"");
 	    	
 	    	//inVO.setUserId(userId);
-	    	searchVO.setPageNo(Integer.parseInt(pageNo));
-	    	searchVO.setPageSize(Integer.parseInt(pageSize));
+	    	searchVO.setPageNo(pageNo);
+	    	searchVO.setPageSize(pageSize);
 	    	searchVO.setSearchDiv(searchDiv);
 	    	searchVO.setSearchWord(searchWord);
 	    	log.debug("searchVO: {}"+searchVO); 
@@ -106,13 +107,10 @@ public class UserController implements ControllerV, PLog {
 			}
 			
 			//UI 데이터 전달
-			request.setAttribute("list", list);
+			request.setAttribute("reserverList", list);
 			log.debug("list:{}",list);
 			//검색조건 UI로 전달
-			request.setAttribute("vo", searchVO);
-			
-			log.debug("searchVO:"+searchVO); 
-			
+					
 			 return new JView("/myPage/jsp/my_r.jsp");	
 		}
 	public JView doRetrieveV(HttpServletRequest request, HttpServletResponse response)
@@ -124,16 +122,16 @@ public class UserController implements ControllerV, PLog {
 	    	//HttpSession session = request.getSession();
 	    	//ReserveDTO inVO = new ReserveDTO(); 
 	    	SearchDTO searchVO = new SearchDTO();
-	    	String pageNo = StringUtill.nvl(request.getParameter("page_no"),"1");
-			String pageSize = StringUtill.nvl(request.getParameter("page_size"),"10");
-	    	String searchDiv = StringUtill.nvl( request.getParameter("search_div"),"10");
-	    	String searchWord = StringUtill.nvl(request.getParameter("search_word"),"");
+	    	int pageNo =1;
+	    	int pageSize = 10;
+	    	String searchDiv = "10";
+	    	String searchWord = StringUtill.nvl(request.getParameter("userId"),"");
 	    	
 	    	//String userId = StringUtill.nvl(request.getParameter("userId"),"");
 	    	
 	    	//inVO.setUserId(userId);
-	    	searchVO.setPageNo(Integer.parseInt(pageNo));
-	    	searchVO.setPageSize(Integer.parseInt(pageSize));
+	    	searchVO.setPageNo(pageNo);
+	    	searchVO.setPageSize(pageSize);
 	    	searchVO.setSearchDiv(searchDiv);
 	    	searchVO.setSearchWord(searchWord);
 	    	log.debug("searchVO: {}"+searchVO); 
@@ -152,38 +150,36 @@ public class UserController implements ControllerV, PLog {
 			}
 			
 			//UI 데이터 전달
-			request.setAttribute("list", list);
+			request.setAttribute("reviewList", list); 
 			log.debug("list:{}",list);
-			//검색조건 UI로 전달
-			request.setAttribute("vo", searchVO);
-			
-			log.debug("searchVO:"+searchVO); 
 			
 			 return new JView("/myPage/jsp/my_v.jsp");	
 		}
 	
 	public JView doRetrieveX(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-	      	log.debug("-----------------");
-	    	log.debug("doRetrieveX()");
-	    	log.debug("-----------------");		
-	    	
-	    	//HttpSession session = request.getSession();
-	    	//ReserveDTO inVO = new ReserveDTO(); 
-	    	SearchDTO searchVO = new SearchDTO();
-	    	String pageNo = StringUtill.nvl(request.getParameter("page_no"),"1");
-			String pageSize = StringUtill.nvl(request.getParameter("page_size"),"10");
-	    	String searchDiv = StringUtill.nvl( request.getParameter("search_div"),"10");
-	    	String searchWord = StringUtill.nvl(request.getParameter("search_word"),"");
-	    	
-	    	//String userId = StringUtill.nvl(request.getParameter("userId"),"");
+	    	log.debug("-----------------");
+        	log.debug("doRetrieveX()");
+        	log.debug("-----------------");		
+        	
+        	//HttpSession session = request.getSession();
+        	//ReserveDTO inVO = new ReserveDTO(); 
+        	SearchDTO searchVO = new SearchDTO();
+        	int pageNo =1;
+        	int pageSize = 10;
+        	String searchDiv = "10";
+        	String searchWord = StringUtill.nvl(request.getParameter("userId"),"");
+    	
+    	//String userId = StringUtill.nvl(request.getParameter("userId"),"");
+    	
 	    	
 	    	//inVO.setUserId(userId);
-	    	searchVO.setPageNo(Integer.parseInt(pageNo));
-	    	searchVO.setPageSize(Integer.parseInt(pageSize));
-	    	searchVO.setSearchDiv(searchDiv);
-	    	searchVO.setSearchWord(searchWord);
-	    	log.debug("searchVO: {}"+searchVO); 
+            searchVO.setPageNo(pageNo);
+            searchVO.setPageSize(pageSize);
+            searchVO.setSearchDiv(searchDiv);
+            searchVO.setSearchWord(searchWord);
+            log.debug("searchVO: {}"+searchVO); 
+            
 	    	
 	    	//log.debug("userId:"+userId);
 	    	log.debug("searchWord : {}", searchWord);
@@ -199,12 +195,8 @@ public class UserController implements ControllerV, PLog {
 			}
 			
 			//UI 데이터 전달
-			request.setAttribute("list", list);
-			log.debug("list:{}",list);
-			//검색조건 UI로 전달
-			request.setAttribute("vo", searchVO);
-			
-			log.debug("searchVO:"+searchVO); 
+			request.setAttribute("askList", list);
+			log.debug("list:{}",list); 
 			
 			 return new JView("/myPage/jsp/my_x.jsp");	
 		}
