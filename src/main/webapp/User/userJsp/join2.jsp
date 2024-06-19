@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ include file="/cmn/common.jsp" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -24,15 +25,14 @@
   const userEmail = document.querySelector("#userEmail");
   const tel = document.querySelector("#tel");
   const birthday = document.querySelector("#birthday");
-  const shopAdmin = document.querySelector("#shopAdmin").checked ? "Y" : "N";
-  
-  
   
   moveToLoginBtn.addEventListener("click", function(event){
 	  console.log('moveToLogin click event'+event);
 	  moveToLogin();
 	
   });
+ 
+  
   
   joinBtn.addEventListener("click", function(event){
 	  console.log('joinBtn click event'+event);  
@@ -45,88 +45,88 @@
 	  alert("로그인 화면으로 이동 합니다.");
 	  window.location.href = "/TWOREE/User/userJsp/login.jsp";
   }
-  
+
   function join(){
 	  console.log('join()');
 	  
-	  if(isEmpty(userId.value) == true){
-		  userId.focus();
-		  alert('아이디를 입력 하세요.');
-		  return;
-	  }
-	  if(isEmpty(password.value) == true){
-		      password.focus();
-	        alert('비밀번호를 입력 하세요.');
-	        return;
-	  }	  
-	  if(isEmpty(name.value) == true){
-		      name.focus();
-	        alert('이름을 입력 하세요.');
-	        return;
-	  }	  
-	  if(isEmpty(userEmail.value) == true){
-		      userEmail.focus();
-	        alert('이메일을 입력 하세요.');
-	        return;
-	  }     
-	  if(isEmpty(tel.value) == true){
-		      tel.focus();
-	        alert('핸드폰 번호를 입력 하세요.');
-	        return;
-	  }   	  
-	  if(isEmpty(birthday.value) == true){
-		      birthday.focus();
-	        alert('생년월일을 입력 하세요.');
-	        return;
-	  } 
+	    if(isEmpty(userId.value) == true){
+	      userId.focus();
+	      alert('아이디를 입력 하세요.');
+	      return;
+	    }
+	    if(isEmpty(password.value) == true){
+	          password.focus();
+	          alert('비밀번호를 입력 하세요.');
+	          return;
+	    }   
+	    if(isEmpty(name.value) == true){
+	          name.focus();
+	          alert('이름을 입력 하세요.');
+	          return;
+	    }   
+	    if(isEmpty(userEmail.value) == true){
+	          userEmail.focus();
+	          alert('이메일을 입력 하세요.');
+	          return;
+	    }     
+	    if(isEmpty(tel.value) == true){
+	          tel.focus();
+	          alert('핸드폰 번호를 입력 하세요.');
+	          return;
+	    }       
+	    if(isEmpty(birthday.value) == true){
+	          birthday.focus();
+	          alert('생년월일을 입력 하세요.');
+	          return;
+	    }       
 	  
 	    $.ajax({
-	        type: "POST", 
-	        url:"/TWOREE/login/login.do",
-	        dataType:"html",
-	        data:{
-	            "work_div":"join",
-	            "userId": userId.value,
-	            "password": password.value,
-	            "name": name.value,
-	            "userEmail": userEmail.value,  
-	            "tel" : tel.value,
-	            "birthday" : birthday.value,
-	            "shopAdmin" : shopAdmin
-	        },
-	        success:function(response){
-	            console.log("success data:"+response);  
-	     
-	         if(response){
-	        	 try{
-	        		  const messageVO = JSON.parse(response);
-	        		  console.log("messageVO.messageId:"+messageVO.messageId);
-	        		  console.log("messageVO.msgContents:"+messageVO.msgContents);
-	        		  
-	        		  if(isEmpty(messageVO)==false && "1"===messageVO.messageId){
-	        			alert(messageVO.msgContents);
-	        			window.location.href="/TWOREE/login/login.do";
-	        		  }else{
-	        			  alert(messageVO.msgContents); 
-	        		   }
-	        		  
-	        	    }catch(e){
-	        		   console.error("JSON 파싱 에러:",e);
-	        	    }
-	        	
-	            }else{
-	        	   console.warn("response가 null혹은 undefined.");
-	        	   alert("response가 null혹은 undefined.");
-	            }
-	        
+	          type: "POST", 
+	          url:"/TWOREE/login/login.do",
+	          asyn:"true",
+	          dataType:"html",
+	          data:{
+	              "work_div":"join",
+	              "userId": userId.value,
+	              "password": password.value,
+	              "name": name.value,
+	              "userEmail": userEmail.value,  
+	              "tel" : tel.value,
+	              "birthday" : birthday.value
+	          
 	          },
-	          error:function(data){
-	        	  console.log("error:"+data);
-	          }
-	        
- 
-    });//--ajaxend
-     
+	          success:function(response){
+	              console.log("success data:"+response);  
+	       
+	           if(response){
+	             try{
+	                const messageVO = JSON.parse(response);
+	                console.log("messageVO.messageId:"+messageVO.messageId);
+	                console.log("messageVO.msgContents:"+messageVO.msgContents);
+	                
+	                if(isEmpty(messageVO)==false && "20"===messageVO.messageId){
+	                alert(messageVO.msgContents);
+	                window.location.href="/TWOREE/login/login.do";
+	                }else{
+	                  alert(messageVO.msgContents); 
+	                 }
+	                
+	                }catch(e){
+	                 console.error("JSON 파싱 에러:",e);
+	                }
+	            
+	              }else{
+	               console.warn("response가 null혹은 undefined.");
+	               alert("response가 null혹은 undefined.");
+	              }
+	          
+	            },
+	            error:function(data){
+	              console.log("error:"+data);
+	            }
+	          
+	 
+	    });//--ajaxend
  
    }//-join end
  
@@ -149,12 +149,12 @@
   <div class="mb-2 d-grid gap-2 d-md-flex justify-content-md-end">
     <input type="button" value="뒤로가기" class="btn btn-primary" id="moveToLogin">
     <input type="button" value="가입하기" class="btn btn-primary" id="join">
-  </div>
   
+  </div>
  <!-- //버튼 end -->
  
  <!-- form -->
- <form action="#" class="form-horizontal">
+ <form action="#" class="form-horizontal" id="joinForm" name="joinForm" method="post">
   <input type="hidden" name="workDiv" id="workDiv">
   
   <div class="row mb-3">
@@ -201,9 +201,6 @@
 
 
  </form>
- <div>
- <label><input type="checkbox" value="관리자여부"  id="shopAdmin" name="shopAdmin" value="Y">관리자 여부</label>
- </div>
  
 </div>	
 </body>
