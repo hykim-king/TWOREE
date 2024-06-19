@@ -1,3 +1,5 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html lang="ko">
 <head>
@@ -6,7 +8,8 @@
     <title>예약 확인</title>
     <link rel="stylesheet" href="style.css">
         <style>
-           body {
+            
+            body {
                 margin: 0;
                 padding: 0;
                 background: rgb(126, 121, 121);
@@ -28,7 +31,6 @@
                 border-radius:0 0 20px  20px;
                 text-align: center;
             }
-            
             .h2_t40 {
             margin : 40px 0 10px 0;
             }
@@ -38,8 +40,8 @@
             .top {
                 width: 1020px;
                 padding: 20px;
+                background: rgb(251, 169, 197);
                 border-radius:20px;
-
             }
             ul {
                 overflow: hidden;
@@ -55,38 +57,28 @@
                 text-align: center;
                 font-weight: bold;
             }
-            .content_box1 {
-                width: 1020px;
-                height: 360px;
-                padding: 20px;
-                border-radius: 20px;   
-                background: rgb(236, 232, 234);  
-            }
-           
            
             a { text-decoration: none; }
             a:link { color:rgb(14, 14, 76);}
             a:visited { color:rgb(14, 14, 76);}
-            a:hover { color:rgb(133, 59, 28);}
+            a:hover { color:rgba(182, 9, 194, 0.471);}
 
-         
- 
-
-      
+            
+            
 
         </style>
     </head>
     <body>
         <div id="con_layout">
             <div class="header">
-                <h1 class="h2_t40">로쏘1924 나폴리 피자(예시)</h1>
-              
+                <h1 class="h2_t40">로쏘1924 나폴리 피자(예시) </h1>
+                <h4 class="h4_t10"></h4>네이버 예약 방문하시면 어쩌구 저쩌구 샬라샬라</h4>
             </div>
 
             <div class="top">
                 <ul>
-                     <li> <a href="index.html">이전화면</a> </li>
-                     <li> <a href="02.html">상세정보</a> </li>
+                     <li> <a href="reserve02.jsp">예약하기</a> </li>
+                     <li> <a href="reserve04.jsp">상세정보</a> </li>
                      <li> <a href="">리뷰</a> </li>
                        
             </ul>
@@ -96,27 +88,13 @@
                 <div class="content_pic01">
                    
 
-                </div>
-                        
-                    
-                        <div class="cotent_box1">
-                    
+            
+            
 
-                                        <h4>✔️영수증 리뷰 참여 시 미니 샐러드 제공</a></h4> 
-                                        <p></hr>
-                                            <h5>(예약 시 확인해 주세요)</a></h5> 
-                                            <h4>✔️주차 정보</a></h4> 
-                                            <h5>주차비 무료<h5>
-                    
-                        </div><!-- //.cotent_box1 -->   
-                    
-                       
-                           
-                    
-                    
-                      
-                    
-                    </body>
+            
+                    </div>
+                </div>
+            </div>
             
         </div>
     </body>
