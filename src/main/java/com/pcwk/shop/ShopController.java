@@ -170,14 +170,22 @@ private static final long serialVersionUID = 1L;
 		
 		inVO.setShopNo(Integer.parseInt(shopNo));
 		detailInVO.setShopNo(Integer.parseInt(shopNo));
+		noticeInVO.setShopNo(Integer.parseInt(shopNo));
+		menuInVO.setShopNo(Integer.parseInt(shopNo));
+		reviewInVO.setShopNo(Integer.parseInt(shopNo));
+		
 		log.debug("inVO : "+ inVO);
 		log.debug("detailInVO : "+ detailInVO);
+		log.debug("noticeInVO : "+ noticeInVO);
+		log.debug("menuInVO : "+ menuInVO);
+		log.debug("reviewInVO : "+ reviewInVO);
 		
 		ShopDTO outVO = shopService.selectOneReadCnt(inVO);
 		ShopDetailDTO detailOutVO = shopDetailService.doSelectOne(detailInVO);
 		ShopNoticeDTO noticeOutVO = shopNoticeService.doSelectOne(noticeInVO);
 		MenuDTO menuOutVO = menuService.doSelectOne(menuInVO);
 		ReviewDTO reviewOutVO = reviewService.doSelectOne(reviewInVO);
+		
 		//ShopDetailDTO detailOutVo = ShopDetailService.doSelectOne(detailInVO); 
 		log.debug("outVO : "+ outVO);
 		log.debug("detailOutVO : "+ detailOutVO);
@@ -192,7 +200,7 @@ private static final long serialVersionUID = 1L;
 		req.setAttribute("menuOutVO", menuOutVO);
 		req.setAttribute("reviewOutVO", reviewOutVO);
 		
-		return new JView("/shop/jsp/mainpage_mng.jsp");
+		return new JView("/shop/jsp/ShopDetailPage.jsp");
 		
 	}
 	
@@ -232,6 +240,90 @@ private static final long serialVersionUID = 1L;
 		return null;
 	}
 	
+	public JView modMenu(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("modMenu()");
+		log.debug("=====================");
+		int menuNo = Integer.parseInt(StringUtill.nvl(req.getParameter("menuNo"), "0"));
+		MenuDTO inVO = new MenuDTO();
+		inVO.setmenuNo(menuNo);
+		MenuDTO outVO = menuService.doSelectOne(inVO);
+		Gson gson=new Gson();
+		String jsonString = gson.toJson(outVO);
+		req.setAttribute("menuVO", jsonString);
+		return new JView("/shop/jsp/ModMenu.jsp");
+	}
+	
+	public JView doModifyMenu(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("doModifyMenu()");
+		log.debug("=====================");
+		String menuName = StringUtill.nvl(req.getParameter("menuName"), "");
+		String menuInfo = StringUtill.nvl(req.getParameter("menuDescription"), "");
+		int price = Integer.parseInt(StringUtill.nvl(req.getParameter("menuPrice"), "0"));
+		int shopNo =Integer.parseInt(StringUtill.nvl(req.getParameter("shop_no"), "0"));
+		int menuNo =Integer.parseInt(StringUtill.nvl(req.getParameter("menuNo"), "0"));
+		MenuDTO inVO = new MenuDTO();
+		inVO.setMenuName(menuName);
+		inVO.setMenuInfo(menuInfo);
+		inVO.setPrice(price);
+		inVO.setShopNo(shopNo);
+		inVO.setmenuNo(menuNo);
+		int flag = menuService.doUpdate(inVO);
+		res.setStatus(200);
+		return null;
+	}
+	
+	public JView delMenu(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("delMenu()");
+		log.debug("=====================");
+		int menuNo = Integer.parseInt(StringUtill.nvl(req.getParameter("menuNo"), "0"));
+		MenuDTO inVO = new MenuDTO();
+		inVO.setmenuNo(menuNo);
+		int flag = menuService.doDelete(inVO);
+		return null;
+	}
+	
+	public JView modReserve(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("modReserve()");
+		log.debug("=====================");
+		int reserveNo =Integer.parseInt(StringUtill.nvl(req.getParameter("reserveNo"), "0"));
+		ReserveDTO inVO = new ReserveDTO();
+		inVO.setReserveNo(reserveNo);
+		ReserveDTO outVO = reserveService.doSelectOne(inVO);
+		Gson gson=new Gson();
+		String jsonString = gson.toJson(outVO);
+		req.setAttribute("reserveVO", jsonString);
+		return new JView("/shop/jsp/ModReserve.jsp");
+	
+	}
+	
+	public JView  confirmReserve(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("confirmReserve()");
+		log.debug("=====================");
+		int reserveNo =Integer.parseInt(StringUtill.nvl(req.getParameter("reserveNo"), "0"));
+		ReserveDTO inVO = new ReserveDTO();
+		inVO.setReserveNo(reserveNo);
+		inVO.setReserveState("승인완료");
+		int flag = reserveService.updateState(inVO);
+		return null;
+	}
+	
+	public JView  cancelReserve(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("cancelReserve()");
+		log.debug("=====================");
+		int reserveNo =Integer.parseInt(StringUtill.nvl(req.getParameter("reserveNo"), "0"));
+		ReserveDTO inVO = new ReserveDTO();
+		inVO.setReserveNo(reserveNo);
+		inVO.setReserveState("예약거절");
+		int flag = reserveService.updateState(inVO);
+		return null;
+	}
+	
 	public JView regShop(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		log.debug("=====================");
 		log.debug("doSaveMenu()");
@@ -246,6 +338,22 @@ private static final long serialVersionUID = 1L;
 		res.setStatus(200);
 		return null;
 	}
+	
+	public JView  modAsk(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("modAsk()");
+		log.debug("=====================");
+		int askNo =Integer.parseInt(StringUtill.nvl(req.getParameter("askNo"), "0"));
+		AskDTO inVO = new AskDTO();
+		inVO.setAskNo(askNo);
+		AskDTO outVO = askService.doSelectOne(inVO);
+		Gson gson=new Gson();
+		String jsonString = gson.toJson(outVO);
+		req.setAttribute("askVO", jsonString);
+		return new JView("/shop/jsp/ModAsk.jsp");
+	}
+	
+	
 	
 	public JView modDetail(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		log.debug("=====================");
@@ -274,6 +382,21 @@ private static final long serialVersionUID = 1L;
 		res.setStatus(200);
 		return null;
 				
+	}
+	
+	public JView saveAnswer(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("doSaveMenu()");
+		log.debug("=====================");
+		int askNo =Integer.parseInt(StringUtill.nvl(req.getParameter("askNo"), "0"));
+		String shopAnswer =StringUtill.nvl(req.getParameter("shopAnswer"), "");
+		AskDTO inVO = new AskDTO();
+		inVO.setShopAnswer(shopAnswer);
+		inVO.setAskNo(askNo);
+		inVO.setAskState("답변 완료");
+		int flag =askService.doWrtAnswer(inVO);
+		res.setStatus(200);
+	    return null;
 	}
 	
 	public JView setReserve(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
@@ -449,6 +572,30 @@ private static final long serialVersionUID = 1L;
 		case "ModDetail" :
 			viewName = modDetail(req,res);
 			break;
+		case "ModMenu" :
+			viewName = modMenu(req,res);
+			break;
+		case "delMenu" :
+			viewName = delMenu(req,res);
+			break;
+		case "doModifyMenu" :
+			viewName = doModifyMenu(req,res);
+			break;
+		case "ModAsk" :
+			viewName =modAsk(req,res);
+			break;
+		case "saveAnswer" :
+			viewName = saveAnswer(req,res);
+			break;
+		case "ModReserve" :
+			viewName = modReserve(req,res);
+			break;
+		case "confirmReserve" :
+			viewName = confirmReserve(req,res);
+			break;
+		case "cancelReserve" :
+			viewName = cancelReserve(req,res);
+			break;
 		case "setReserve" :
 			viewName = setReserve(req,res);
 			break;
@@ -463,6 +610,8 @@ private static final long serialVersionUID = 1L;
 			break;
 		case "doRetrieve" :
 			viewName = doRetrieve(req, res);
+			JView secondView = null;
+			secondView = doSelectOne(req, res);
 			break;
 		default :
 			log.debug("workDiv : {}", workDiv);

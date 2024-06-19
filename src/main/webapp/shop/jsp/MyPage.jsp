@@ -12,8 +12,6 @@
 	SearchDTO searchCon = (SearchDTO)request.getAttribute("vo");
 	SearchDTO DsearchCon = (SearchDTO)request.getAttribute("Dvo");
 %>
-   
-searchCon:<%=searchCon %>
 <!DOCTYPE html>
 <html>
 <head>

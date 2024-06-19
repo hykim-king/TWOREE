@@ -1,10 +1,12 @@
+<%@page import="com.pcwk.ehr.cmn.SearchDTO"%>
 <%@page import="com.pcwk.review.ReviewDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
 <%
-    List<ReviewDTO> list = (List<ReviewDTO>)request.getAttribute("list"); 
+    List<ReviewDTO> list = (List<ReviewDTO>)request.getAttribute("list");
+	SearchDTO searchCon = (SearchDTO)request.getAttribute("vo");
 %>
 <!DOCTYPE html>
 <html>
@@ -78,7 +80,7 @@
             overflow: auto; /* 내용이 넘칠 경우 스크롤 생성을 위해 */
             border-radius: 10px; /* 모서리를 둥글게 */
             background-color:#FFFFFF;
-        }
+        } 
         
         
         .menu ul {
@@ -112,6 +114,23 @@
             gap: 100px;
             color: #dc143c;
         } 
+        
+        .star-rating {
+        	display: inline-block;
+        	font-size: 20px;
+        	color: #ccc; /* 회색 별의 색상 */
+        	position: relative;
+   		 }
+    	.star-rating .filled-stars {
+        	color: gold; /* 금색 별의 색상 */
+        	position: absolute;
+        	top: 0;
+        	left: 0;
+        	overflow: hidden;
+        	white-space: nowrap;
+    	}
+        
+        
     </style>
 </head>
 <body>
@@ -151,8 +170,7 @@
                     <tr class="table-dark table-hover table-bordered" id="option_reserver">
                  	<th>예약정보</th>	
                  	<th>리뷰정보</th>	
-                 	<th>메뉴</th>	
-                 	<th>옵션</th>
+                 	<th>메뉴</th>	 
                  	<th class="text_center col-sm-1">관리</th>
                  	</tr>
      	 </thead> 
@@ -162,16 +180,23 @@
           				for(ReviewDTO vo   :list){  
 		         %> 
 		         
-					<tr><td>가게이름<%=vo.getShopName()%></td>	 
-					<td>가게번호<%=vo.getShopNo()%></td>   
-					<td>공백용<%=vo.getShopNo()%></td>    
-					<td>별점<%=vo.getScore()%></td>
-						<td rowspan="2">
-						 <input type="button"  data-hidden-info="" value="수정"  class="btn btn-outline-success btn-sm "></td>
-					<tr><td>적은날짜<%=vo.getReviewWrtDate()%></td>	 
-					<td>확인날짜<%=vo.getReviewWrtDate()%></td>	   
-					<td>내용<%=vo.getReviewContent()%></td>
+				<tr><td rowspan="3" >[가게번호] <%=vo.getShopNo()%></td>
+					<td>[별점] 
+                             <div class="star-rating">
+                              <div class="filled-stars" style="width: <%= (vo.getScore() / 5.0) * 100 %>%;">
+                               ★★★★★ </div>
+                              <div> ☆☆☆☆☆ </div></div> </td> 
+					<td>[작성날짜] <%=vo.getReviewWrtDate()%></td>  
+					<td rowspan="3"> 
+					<input type="button"  data-hidden-info="" value="수정"  class="btn btn-outline-success   "></td>
 					
+				<tr><td>[내용] <%=vo.getReviewContent()%></td>
+				 	<td>[수정날짜] <%=vo.getReviewModDate()%></td>	   
+				 
+					
+					<tr> 
+						<td> </td> 
+						<td> </td>	 
 			 <%  
           		  }//for
          		}//--if 

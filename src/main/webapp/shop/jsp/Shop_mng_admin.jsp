@@ -130,16 +130,32 @@
     </p>
     
     <script>
+         
+         
+         
+         function modMenu(menuNo){
+             window.open("/TWOREE/shop/shop.do"+"?work_div=ModMenu&menuNo="+menuNo,"메뉴 관리","width=500,height=500,top=100,left=100");
+         }
+         
+         function modReserve(reserveNo){
+             window.open("/TWOREE/shop/shop.do"+"?work_div=ModReserve&reserveNo="+reserveNo,"예약 관리","width=500,height=700,top=100,left=100");
+             
+         }
+    
+    
          function forwording(num){
         	   window.location.replace("/TWOREE/shop/shop.do?work_div=shop_mng&shop_no="+num);
+         }
+         
+         function modAsk(askNo){
+              window.open("/TWOREE/shop/shop.do"+"?work_div=ModAsk&askNo="+askNo,"문의 관리","width=900,height=900,top=100,left=100");
+              
          }
     
         $(document).ready(function() {
             
             loadData();
-            $("#shopNow").click(function() {
-            	
-            });
+            
             
             $("#AddShopBtn").click(function() {
                 window.open("/TWOREE/shop/jsp/RegShop.jsp","메뉴 등록","width=500,height=500,top=100,left=100");
@@ -197,34 +213,32 @@
                    
                   $("#reservationList").empty();
                   $.each(reserveListObj, function(index, reserve) {
-                        let row = $("<tr></tr>");
+                        let row = $("<tr onclick='modReserve("+reserve.reserveNo+")'></tr>");
                         row.append($("<td></td>").text(reserve.userId));
                         row.append($("<td></td>").text(reserve.reserveDate));
                         row.append($("<td></td>").text(reserve.people));
                         row.append($("<td></td>").text(reserve.reserveState));
-                        row.append($("<td hidden='true'></td>").text(reserve.reserveNo));
                         $("#reservationList").append(row);
                   });
                   
                     
                   $("#menuList").empty();
                   $.each(menuListObj, function(index, menu) {
-                        let row = $("<tr></tr>");
+                        let row = $("<tr onclick='modMenu("+menu.menuNo+")'></tr>");
                         row.append($("<td></td>").text(menu.menuName));
                         row.append($("<td></td>").text(menu.price));
-                        row.append($("<td hidden='true'></td>").text(menu.menuNo));
                         $("#menuList").append(row);
                   });
                      
                   $("#askList").empty();
                   $.each(askListObj, function(index, ask) {
-                        let row = $("<tr></tr>");
+                        let row = $("<tr onclick='modAsk("+ask.askNo+")'></tr>");
                         row.append($("<td></td>").text(ask.userAsk));
                         row.append($("<td></td>").text(ask.userId));
                         row.append($("<td></td>").text(ask.askDate));
                         row.append($("<td></td>").text(ask.askState));
-                        row.append($("<td hidden='true'></td>").text(ask.askNo));
                         $("#askList").append(row);
+                        console.log(ask.askNo);
                     });
                  
                  $("#reviewList").empty();
@@ -234,12 +248,13 @@
                         row.append($("<td></td>").text(review.score));
                         row.append($("<td></td>").text(review.reviewContent));
                         row.append($("<td></td>").text(review.reviewWrtDate));
-                        row.append($("<td hidden='true'></td>").text(review.reviewNo));
                         $("#reviewList").append(row);
                     });
-                
+                 
            
         }
+        
+         
     </script>
 </body>
 </html>

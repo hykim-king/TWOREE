@@ -1,9 +1,11 @@
+<%@page import="com.pcwk.ehr.cmn.SearchDTO"%>
 <%@page import="com.pcwk.ask.AskDTO"%>
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%
-    List<AskDTO> list = (List<AskDTO>)request.getAttribute("list"); 
+    List<AskDTO> list = (List<AskDTO>)request.getAttribute("list");
+	SearchDTO searchCon = (SearchDTO)request.getAttribute("vo");
 %>
 <!DOCTYPE html>
 <html>
@@ -162,14 +164,20 @@
 		         %> 
 		         
 		         
-					<tr><td>가게이름<%=vo.getShopName()%></td>	 
-						<td>유저아이디<%=vo.getUserId()%></td>   
-						<td rowspan="2">요청사항<%=vo.getShopName()%></td> 
-						<td rowspan="2">
-						 <input type="button"  data-hidden-info="" value="수정"  class="btn btn-outline-success btn-sm "></td>
+					<tr><td rowspan="3">[가게이름] <%=vo.getShopName()%></td>	 
+						<td>[유저아이디] <%=vo.getUserId()%></td> 
+						<td>[문의상태] <%=vo.getAskState()%></td>	  
+						 
+						<td rowspan="3">
+						 <input type="button"  data-hidden-info="" value="수정"  class="btn btn-outline-success "></td>
                  	</tr>  
-					<tr><td>날짜<%=vo.getAskDate()%></td>	 
-						<td>문의상태<%=vo.getAskState()%></td>	  
+					<tr><td>[문의날짜] <%=vo.getAskDate()%></td>	 
+						<td>[요청사항] <%=vo.getShopName()%></td> 
+		 				
+						
+					<tr> 
+						<td> </td> 
+						<td> </td>	   
 			 <%  
           		  }//for
          		}//--if 

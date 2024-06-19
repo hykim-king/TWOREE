@@ -15,8 +15,12 @@
 
 
 <script>
-String outVO = (String)request.getAttribute("outVO");
- 
+//String outVO = (String)request.getAttribute("outVO");
+
+
+const doRetrieveRtn = document.querySelector("#doRetrieveR"); 
+console.log('doRetrieveRtn:'+doRetrieveRtn);
+
 </script>
  
 
@@ -111,10 +115,10 @@ String outVO = (String)request.getAttribute("outVO");
           <img src="/TWOREE/myPage/img/user_icon1.png" width= 80px><br>
         <label for="uid">아이디 &nbsp</label>
         <ul>
-            <li><a href="my_p.jsp">내프로필</a></li>
-            <li><a href="my_r.jsp">예약</a></li>
-            <li><a href="my_v.jsp">리뷰</a></li>
-            <li><a href="my_x.jsp">고객문의</a></li>
+            <li><input type="button" value="내프로필" class="btn btn-light " id="" ></li>
+            <li><input type="button" value="예약"    class="btn btn-light " id="doRetrieveR" ></li>
+            <li><input type="button" value="리뷰"    class="btn btn-light " id="doRetrieveV" ></li>
+            <li><input type="button" value="고객문의" class="btn btn-light " id="doRetrieveX" ></li>
         </ul>
         
          <hr>

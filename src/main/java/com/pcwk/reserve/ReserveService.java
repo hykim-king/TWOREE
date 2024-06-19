@@ -16,8 +16,7 @@ public class ReserveService implements PLog {
 	public List<ReserveDTO> doRetrieve(DTO search) {
 		
 		return dao.doRetrieve(search);
-	}
-	
+	} 
 
 	public int doSave(ReserveDTO param) {
 		
@@ -30,6 +29,9 @@ public class ReserveService implements PLog {
 		return dao.doUpdate(param);
 	}
 	
+	public int updateState(ReserveDTO param) {
+		return dao.updateState(param);
+	}
 
 	public int doDelete(ReserveDTO param) {
 		

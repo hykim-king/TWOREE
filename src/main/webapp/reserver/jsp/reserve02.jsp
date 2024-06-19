@@ -1,9 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<<<<<<< HEAD
+=======
+
+>>>>>>> ffedc42ed2719d9bdcc2c0368dab396100fa048f
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-    <meta charset="UTF-8">
+<meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>피자가게 예약 시스템</title>
     <link rel="stylesheet" href="style.css">
@@ -52,8 +56,13 @@
     </div>
 
     <div class="content_box">
+<<<<<<< HEAD
         <button class="styled-button" onclick="location.href='reserve01.jsp'">이전</button>
         <button class="styled-button" onclick="location.href='reserve03.jsp'">다음</button>
+=======
+        <button class="styled-button" onclick="location.href='reserve02.jsp'">이전</button>
+        <button class="styled-button" id="submitReservation">동의하고 예약신청</button>
+>>>>>>> ffedc42ed2719d9bdcc2c0368dab396100fa048f
     </div>
 
     <script>

@@ -273,7 +273,7 @@ public class ReviewDAO implements WorkDiv<ReviewDTO> {
 		sb.append("         review_content,  \n");
 		sb.append("         score            \n");
 		sb.append("    from review           \n");
-		sb.append("   where review_no=?      \n");
+		sb.append("   where shop_no=?      \n");
 
 		log.debug("1.sql:\n" + sb.toString());
 		log.debug("2.conn:\n" + conn);
