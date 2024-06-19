@@ -37,7 +37,7 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 		
 		StringBuilder sb = new StringBuilder();
 		sb.append("INSERT INTO shop (   \n");
-		sb.append("	    shop_no,        \n");
+		sb.append("	                    \n");
 		sb.append("	    manager_id,     \n");
 		sb.append("	    shop_name,      \n");
 		sb.append("	    reg_date,       \n");
@@ -46,7 +46,7 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 		sb.append("	    reserve_cnt,    \n");
 		sb.append("	    is_verified     \n");
 		sb.append("	) VALUES (          \n");
-		sb.append("	    ?,            	\n");
+		sb.append("	              	\n");
 		sb.append("	    ?,            	\n");
 		sb.append("	    ?,            	\n");
 		sb.append("	    sysdate,        \n");
@@ -65,10 +65,10 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 			log.debug("4. pstmt : {}", pstmt);
 			
 		 
-			pstmt.setInt(1, param.getShopNo());
-			pstmt.setString(2, param.getManagerId()); 
-			pstmt.setString(3, param.getShopName());
-			pstmt.setString(4, param.getIsVerified());
+			
+			pstmt.setString(1, param.getManagerId()); 
+			pstmt.setString(2, param.getShopName());
+			pstmt.setString(3, param.getIsVerified());
 			 
 			flag = pstmt.executeUpdate();  
 			

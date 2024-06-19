@@ -232,6 +232,21 @@ private static final long serialVersionUID = 1L;
 		return null;
 	}
 	
+	public JView regShop(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("doSaveMenu()");
+		log.debug("=====================");
+		String shopName = StringUtill.nvl(req.getParameter("shopName"), "");
+		String managerId = StringUtill.nvl(req.getParameter("userId"), "");
+		ShopDTO inVO = new ShopDTO();
+		inVO.setShopName(shopName);
+		inVO.setManagerId(managerId);
+		inVO.setIsVerified("N");
+		int flag = shopService.doSave(inVO);
+		res.setStatus(200);
+		return null;
+	}
+	
 	public JView modDetail(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		log.debug("=====================");
 		log.debug("doSaveMenu()");
@@ -437,7 +452,9 @@ private static final long serialVersionUID = 1L;
 		case "setReserve" :
 			viewName = setReserve(req,res);
 			break;
-
+		case "reg_Shop" :
+		    viewName = regShop(req,res);
+		    break;
 		case "shop_mng" :
 			viewName = doMngPage(req,res);
 			break;

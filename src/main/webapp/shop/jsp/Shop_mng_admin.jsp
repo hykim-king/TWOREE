@@ -142,7 +142,7 @@
             });
             
             $("#AddShopBtn").click(function() {
-                // 가게 추가 기능 구현
+                window.open("/TWOREE/shop/jsp/RegShop.jsp","메뉴 등록","width=500,height=500,top=100,left=100");
             });
             
             $("#RegNoticeBtn").click(function() {

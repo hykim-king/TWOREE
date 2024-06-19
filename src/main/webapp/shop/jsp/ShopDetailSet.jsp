@@ -97,25 +97,25 @@
                   alert('가게 주소를 입력해주세요.');
                   return;
               }
-           
-            let storeInfo = {
-                ownerName: $('#ownerName').val(),
-                shopTel: $('#shopTel').val(),
-                openTime: $('#openTime').val(),
-                closeTime: $('#closeTime').val(),
-                address: $('#address').val(),
-                shopRule: $('#shopRule').val(),
-                parkInfo: $('#parkInfo').val(),
-                ReserveInfo: $('#ReserveInfo').val(),
-                work_div :'ModDetail',
-                shop_no :shopNo
-            };
+                  
 
             $.ajax({
                 type: "POST",
                 url: "/TWOREE/shop/shop.do",
-                data: JSON.stringify(storeInfo),
-                contentType: "application/json; charset=utf-8",
+                data: {
+                     ownerName: $('#ownerName').val(),
+                     shopTel: $('#shopTel').val(),
+                     openTime: $('#openTime').val(),
+                     closeTime: $('#closeTime').val(),
+                     address: $('#address').val(),
+                     shopRule: $('#shopRule').val(),
+                     parkInfo: $('#parkInfo').val(),
+                     ReserveInfo: $('#ReserveInfo').val(),
+                     work_div :'ModDetail',
+                     shop_no :shopNo
+                    
+                    
+                },
                 dataType: "html",
                 success: function(data) {
                     alert("가게 정보가 저장되었습니다.");
