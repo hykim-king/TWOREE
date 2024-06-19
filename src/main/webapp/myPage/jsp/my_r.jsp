@@ -138,7 +138,7 @@
                     <tr class="table-warning table-hover table-bordered" id="option_reserver">
                  	<th>예약정보</th>	
                  	<th>개인정보</th>	
-                 	<th>메뉴</th>	
+                 	<th>날짜</th>	
                  	<th>옵션</th>
                  	<th class="text_center col-sm-1">관리</th>
                  	</tr>
@@ -150,18 +150,21 @@
     	 	
     	 	
     	 	
-					<tr><td>가게이름<%=vo.getShopNo()%></td>	 
-						<td>주문자<%=vo.getShopNo()%></td>   
-						<td>전화번호<%=vo.getUserTel()%></td>    
-						<td>예약상태<%=vo.getReserveDate()%></td>
-						<td rowspan="2">
-						 <input type="button"  data-hidden-info="" value="수정"  class="btn btn-outline-success btn-sm "></td>
+					<tr><td rowspan="3" >[가게번호] <%=vo.getShopNo()%></td>	 
+						<td>[주문자] <%=vo.getUserId()%></td>   
+						<td>[예약날짜] <%=vo.getReserveDate()%></td>    
+						<td>[예약상태] <%=vo.getReserveState()%></td>
+						<td rowspan="3">
+						 <input type="button"  data-hidden-info="" value="수정"  class="btn btn-outline-success "></td>
             
-					<tr><td>예약날짜<%=vo.getShopNo()%></td>
-						<td>마감날짜<%=vo.getConfirmedDate()%></td>	 	 
-						<td>인원수<%=vo.getPeople()%></td>	 
-						<td>요청사항<%=vo.getUserComment()%></td>
-						
+					<tr> 
+						<td>[인원 수] <%=vo.getPeople()%></td> 
+						<td>[확정날짜] <%=vo.getConfirmedDate()%></td>	 
+						<td>[요청사항] <%=vo.getUserComment()%></td>
+					<tr> 
+						<td> </td> 
+						<td> </td>	 
+						<td> </td>
 			 <%   
          		}//--if 
       		  %> 
