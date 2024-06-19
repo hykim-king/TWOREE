@@ -170,14 +170,22 @@ private static final long serialVersionUID = 1L;
 		
 		inVO.setShopNo(Integer.parseInt(shopNo));
 		detailInVO.setShopNo(Integer.parseInt(shopNo));
+		noticeInVO.setShopNo(Integer.parseInt(shopNo));
+		menuInVO.setShopNo(Integer.parseInt(shopNo));
+		reviewInVO.setShopNo(Integer.parseInt(shopNo));
+		
 		log.debug("inVO : "+ inVO);
 		log.debug("detailInVO : "+ detailInVO);
+		log.debug("noticeInVO : "+ noticeInVO);
+		log.debug("menuInVO : "+ menuInVO);
+		log.debug("reviewInVO : "+ reviewInVO);
 		
 		ShopDTO outVO = shopService.selectOneReadCnt(inVO);
 		ShopDetailDTO detailOutVO = shopDetailService.doSelectOne(detailInVO);
 		ShopNoticeDTO noticeOutVO = shopNoticeService.doSelectOne(noticeInVO);
 		MenuDTO menuOutVO = menuService.doSelectOne(menuInVO);
 		ReviewDTO reviewOutVO = reviewService.doSelectOne(reviewInVO);
+		
 		//ShopDetailDTO detailOutVo = ShopDetailService.doSelectOne(detailInVO); 
 		log.debug("outVO : "+ outVO);
 		log.debug("detailOutVO : "+ detailOutVO);
@@ -192,7 +200,7 @@ private static final long serialVersionUID = 1L;
 		req.setAttribute("menuOutVO", menuOutVO);
 		req.setAttribute("reviewOutVO", reviewOutVO);
 		
-		return new JView("/shop/jsp/mainpage_mng.jsp");
+		return new JView("/shop/jsp/ShopDetailPage.jsp");
 		
 	}
 	
@@ -602,6 +610,8 @@ private static final long serialVersionUID = 1L;
 			break;
 		case "doRetrieve" :
 			viewName = doRetrieve(req, res);
+			JView secondView = null;
+			secondView = doSelectOne(req, res);
 			break;
 		default :
 			log.debug("workDiv : {}", workDiv);
