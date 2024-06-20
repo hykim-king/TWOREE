@@ -120,11 +120,17 @@ public class UserLoginController implements ControllerV, PLog {
 		inVO.setBirthday(birthday);
 		inVO.setShopAdmin(shopAdmin);
 
-		int flag = this.service.doSave(inVO);
-		log.debug("falg:{}" + flag);
-		if (1 == flag) {
-			return new JView("");
-		}
+		MessageVO message = new MessageVO();
+		message=(MessageVO)this.service.join(inVO);
+		
+		Gson gson = new Gson();
+		String jsonString = gson.toJson(message);
+
+		log.debug("jsonString:{}", jsonString);
+		response.setContentType("text/html; charset=UTF-8");
+
+		PrintWriter out = response.getWriter();
+		out.print(jsonString);
 		return null;
 	}
 

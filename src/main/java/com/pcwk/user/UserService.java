@@ -62,10 +62,44 @@ public class UserService implements PLog {
 		return uao.doRetrieve(search);
 	}
 	
-	public int doSave(UserDTO param) {
-		return uao.doSave(param);
+	
+	public DTO join(UserDTO param) {
+		int result = isExistId(param);
+		MessageVO message = new MessageVO();
+		log.debug(result);
+		if(10 == result) {
+			uao.doSave(param);
+			log.debug("성공");
+			message.setMessageId(String.valueOf(result));
+		}else {
+			
+			message.setMessageId(String.valueOf(result));
+		}
+			String messageStr = "";
+			if(20 ==result) {
+				messageStr = "중복된 아이디가 있습니다.";
+			}else {
+				messageStr = "가입에 성공했습니다.";
+			}
+			
+			message.setMsgContents(messageStr);
+			log.debug("message:{}",message);
+			return message;
+		
+		
 	}
 	
+	
+	public int isExistId(UserDTO param) {
+		int result =0;
+		int flag = uao.isExistId(param);
+		
+		if(flag ==0) {
+			result = 10;
+			return result;
+		}
+		return 20;
+	}	
 	public int doUpdate(UserDTO param) {
 		return uao.doUpdate(param);
 	}

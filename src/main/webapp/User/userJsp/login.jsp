@@ -23,12 +23,25 @@
 	 const loginBtn = document.querySelector("#login");
 	 const userId   = document.querySelector("#userId");
 	 const password = document.querySelector("#password");
+	 const moveToJoinBtn  = document.querySelector("#moveToJoin");
+	 
+	 moveToJoinBtn.addEventListener("click", function(event){
+		 console.log('moveToJoinBtn click:');
+		 moveToJoin();
+	
+	 });
 	 
 	 loginBtn.addEventListener("click", function(){
 		 console.log('loginBtn click:');
 		 login();
 		 
 	 });
+	 
+	 function moveToJoin(){
+		 console.log('moveToJoin()');
+		 alert("회원가입 화면으로 이동 합니다.")
+		 window.location.href = "/TWOREE/User/userJsp/join.jsp";
+	 }
 	 
 	 function login(){
 		 console.log('login()');
@@ -146,7 +159,7 @@
 
 
 <button id="login" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">로그인</button>
-<button id="join" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">회원가입</button>
+<button id="moveToJoin" type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-primary btn-block mb-4">회원가입</button>
 
 </form>
 </div>
