@@ -97,6 +97,42 @@ doRetrieveRtn.addEventListener("click",function(event){
 	
 }) ;//--document
 </script>
+<script type="text/javascript">
+
+//Check javascript has loaded
+$(document).ready(function() {
+    // Initial setup: Show the "show" image and hide the "hide" image
+    $('#showImg').show();
+    $('#hideImg').hide();
+
+    // Click event of the showPassword button
+    $('#showPassword').on('click', function() {
+        // Get the password field
+        var passwordField = $('#password');
+
+        // Get the current type of the password field will be password or text
+        var passwordFieldType = passwordField.attr('type');
+
+        // Check to see if the type is a password field
+        if (passwordFieldType == 'password') {
+            // Change the password field to text
+            passwordField.attr('type', 'text');
+
+            // Show the "hide" image and hide the "show" image
+            $('#hideImg').show();
+            $('#showImg').hide();
+        } else {
+            // If the password field type is not a password field then set it to password
+            passwordField.attr('type', 'password');
+
+            // Show the "show" image and hide the "hide" image
+            $('#showImg').show();
+            $('#hideImg').hide();
+        }
+    });
+});
+
+</script>
  
 
     <title>프로필</title>
@@ -195,6 +231,17 @@ doRetrieveRtn.addEventListener("click",function(event){
          padding: 10px;
          border-top: 1px solid #ccc;
      }
+      #showPassword {
+            background: transparent;
+            border: none;
+            cursor: pointer;
+        }
+        .show-password-img {
+            width: 20px;
+            height: 20px;
+            display: none;
+        }
+     
      
     </style>
 </head>
@@ -223,17 +270,21 @@ doRetrieveRtn.addEventListener("click",function(event){
         <div class="content_info">
             <ul>
                 <li>
-                    <label for="userId">아이디 &nbsp</label>
-                    <input type="text" id="userId"  name="userId" required value="${outVO.userId}"> 
+                    <label for="userId">아이디 &nbsp &nbsp &nbsp</label>
+                    <input type="text" id="userId"  style="border: none; name="userId" readonly="readonly" value="${outVO.userId}"> 
                 </li>
                 <li>
-                    <label for="userEmail">이메일 &nbsp</label>
-                    <input type="email" id="userEmail" name="userEmail" required value="${outVO.userEmail}"> 
+                    <label for="userEmail">이메일 &nbsp &nbsp &nbsp</label>
+                    <input type="email" id="userEmail" style="border: none; name="userEmail" readonly="readonly" value="${outVO.userEmail}"> 
                 </li>
                 <li>
                     <label for="password">비밀번호 &nbsp</label>
-                    <input type="password" id="password" name="password"  required value="${outVO.password}"> 
-                </li> 
+                    <input type="password" id="password" style="border: none; name="password"  required value="${outVO.password}">  
+              			 <button id="showPassword">
+        				<img src="/TWOREE/myPage/img/hide.png " alt="Show" id="showImg" class="show-password-img">
+        				<img src="/TWOREE/myPage/img/show.png" alt="Hide" id="hideImg" class="show-password-img">
+   					 	</button> 	 
+                </li>     
             </ul>  
              <button type="button" class="btn btn-secondary" style="float: right;">수정하기</button>
         </div>
@@ -242,16 +293,16 @@ doRetrieveRtn.addEventListener("click",function(event){
         
             <ul>
                 <li>
-                    <label for="name">이름 &nbsp</label>
-                    <input type="text" id="name"   name="name"  required value="${outVO.name}"> 
+                    <label for="name">이름 &nbsp &nbsp &nbsp &nbsp</label>
+                    <input type="text" id="name"  style="border: none; name="name"  readonly="readonly" value="${outVO.name}"> 
                 </li>
                 <li>
                     <label for="tel">전화번호 &nbsp</label>
-                    <input type="email" id="tel" name ="tel" required value="${outVO.tel}"> 
+                    <input type="email" id="tel" style="border: none; name ="tel" required value="${outVO.tel}"> 
                 </li>
                 <li>
                     <label for="birthday">생년월일 &nbsp</label>
-                    <input type="password" id="birthday" name="birthday" required value="${outVO.birthday}"> 
+                    <input type="text" id="birthday" style="border: none; name="birthday" readonly="readonly" value="${outVO.birthday}"> 
                 </li> 
             </ul>
             
