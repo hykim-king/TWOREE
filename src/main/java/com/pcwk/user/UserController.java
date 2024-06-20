@@ -71,6 +71,32 @@ public class UserController implements ControllerV, PLog {
     return new JView("/myPage/jsp/my_p.jsp");
     
     }
+	public JView doSelectOneR1(HttpServletRequest request, HttpServletResponse response)
+	    	throws ServletException, IOException {
+	      	log.debug("-----------------");
+	    	log.debug("doSelectOneR1()");
+	    	log.debug("-----------------");		
+	    	
+	    	ReviewDTO inVO = new ReviewDTO(); 
+	    	String shopNo = StringUtill.nvl(request.getParameter("shopNo"),"0");
+	    	
+	    	inVO.setShopNo(Integer.parseInt(shopNo));
+	    	log.debug("inVO:"+inVO);
+	    	
+	    	//this.service.selectOneReadCnt(inVO);
+	    	
+	    	ReviewDTO outVO = reviewService.doSelectOne(inVO);
+	    	log.debug("outVO:"+outVO); 
+	    	
+	    	
+	    	request.setAttribute("outVO",outVO);
+	    	
+	    	
+	    
+	    return new JView("/myPage/jsp/review_write.jsp");
+	    
+	    }
+	
 	public JView doRetrieveR(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	      	log.debug("-----------------");
@@ -357,6 +383,11 @@ public class UserController implements ControllerV, PLog {
     	case"doSelectOne":
     		viewName = doSelectOne(request, response);
     		break; 
+    		
+    	case"doSelectOneR1":
+    		viewName = doSelectOneR1(request, response);
+    		break; 
+    		
     	case"doRetrieveR":
     		viewName = doRetrieveR(request, response);
     		break;

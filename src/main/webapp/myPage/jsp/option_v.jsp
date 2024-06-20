@@ -108,30 +108,20 @@ List<ReserveDTO> list = (List<ReserveDTO>)request.getAttribute("reserverList");
     			 console.log('hiddenInfo:'+hiddenInfo);
     		 }); 
     	});
-    	//이벤트 핸들러
-    	  rows.forEach(function(row){
-    		  //double click
-    		  row.addEventListener('dblclick',function(){
-    			  console.log('row click');
-    			  //this(tr) 자식 (td: 마지막 위치)
-    			  let seqValue = this.querySelector('td:last-child').textContent.trim();
-    			  console.log('seqValue:'+seqValue);
-    			  
-    			  // 폼 요소 선택
-    			  let frm = document.getElementById("board_frm");
-    			  // 폼 데이터 설정
-    			  frm.work_div.value = "doSelectOne";  
-    			  
-    			  //seq
-    			  frm.seq.value = seqValue;
-    			  frm.action = "<%=cPath%>" + "/user/myPage.do";
-    			  
-    			  // 폼 제출
-    			  frm.submit();		  
-    		  });
-    		  
-    	  });
-    	    
+       	//이벤트 핸들러
+  	  rows.forEach(function(row){
+  		  //double click
+  		  row.addEventListener('click',function(){
+  			  console.log('row click');
+  			  //this(tr) 자식 (td: 마지막 위치)
+  			 
+  			  let seqValue = this.querySelector('td:first-child').textContent.trim();
+  			  console.log('seqValue:'+seqValue);
+  			     		  });
+  		  
+  	  });
+ 
+    	  
     	
     });//docunment end
     
