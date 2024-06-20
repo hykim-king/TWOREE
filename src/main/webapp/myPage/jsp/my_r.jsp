@@ -24,6 +24,10 @@ const profBtn = document.querySelector("#profBtn");
 const doRetrieveRtn = document.querySelector("#doRetrieveR"); 
 const doRetrieveVtn = document.querySelector("#doRetrieveV"); 
 const doRetrieveXtn = document.querySelector("#doRetrieveX");
+const doSelectOne = document.querySelector("#doSelectOne");
+const userId = document.querySelector("#userId");
+
+
 
 profBtn.addEventListener("click",function(event){
 	console.log('profBtn click'); 
@@ -198,10 +202,11 @@ doRetrieveRtn.addEventListener("click",function(event){
 </head>
 <jsp:include page="/reserver/jsp/header.jsp"></jsp:include>
 <div class ="body">
-<body>
+<body>  
     <div class="menu"> 
-        <img src="/TWOREE/myPage/img/user_icon1.png" width= 80px><br>
-        <label for="uid">아이디 &nbsp</label>
+        <img src="/TWOREE/myPage/img/user_icon1.png" width= 80px><br> 
+       <p class="text-success"><strong><%= list.get(0).getUserId()%></strong></p>  
+       
        <ul>
             <li><input type="button" value="내프로필" class="btn btn-light " id="profBtn" ></li>
             <li><input type="button" value="예약"    class="btn btn-outline-success " id="doRetrieveR" ></li>
@@ -240,8 +245,7 @@ doRetrieveRtn.addEventListener("click",function(event){
     	 	    <%     
           				for(ReserveDTO vo   :list){  
 		         %>   
-    	 	
-    	 	
+    	 	 
     	 	
 					<tr><td rowspan="3" >[가게번호] <%=vo.getShopNo()%></td>	 
 						<td>[주문자] <%=vo.getUserId()%></td>   

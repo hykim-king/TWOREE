@@ -29,7 +29,7 @@ const userId = document.querySelector("#userId");
 const password = document.querySelector("#password");   //password
 const name = document.querySelector("#name");
 const userEmail = document.querySelector("#userEmail");
-const tel = document.querySelector("#tel");
+const tel = document.querySelector("#tel"); 
 const birthday = document.querySelector("#birthday");
 //const shopAdmin = document.querySelector("#shopAdmin");
 //const penaltyDate = document.querySelector("#penaltyDate");
@@ -216,8 +216,50 @@ $(document).ready(function() {
 });
 
 </script>
- 
+ <script type="text/javascript">
+ $(function() {
+	    $("#tel").keyup(function(){
+	        var val = $(this).val().replace(/[^0-9]/g, '');
 
+	        // Truncate the value if it exceeds 12 characters
+	        if(val.length > 11) {
+	            val = val.substring(0, 11);
+	        }
+
+	        if(val.length > 3 && val.length < 6){
+	            var tmp = val.substring(0,2);
+	            if(tmp == "02"){
+	                $(this).val(val.substring(0,2) + "-" + val.substring(2));
+	            } else {
+	                $(this).val(val.substring(0,3) + "-" + val.substring(3));
+	            }
+	        } else if (val.length > 6){
+	            var tmp = val.substring(0,2);
+	            var tmp2 = val.substring(0,4);
+	            if(tmp == "02"){
+	                if(val.length == "10"){
+	                    $(this).val(val.substring(0,2) + "-" + val.substring(2, 6) + "-" + val.substring(6));
+	                } else {
+	                    $(this).val(val.substring(0,2) + "-" + val.substring(2, 5) + "-" + val.substring(5));
+	                }
+	            } else if(tmp2 == "0505"){
+	                if(val.length == "12"){
+	                    $(this).val(val.substring(0,4) + "-" + val.substring(4, 8) + "-" + val.substring(8));
+	                } else {
+	                    $(this).val(val.substring(0,4) + "-" + val.substring(4, 7) + "-" + val.substring(7));
+	                }
+	            } else {
+	                if(val.length == "11"){
+	                    $(this).val(val.substring(0,3) + "-" + val.substring(3, 7) + "-" + val.substring(7));
+	                } else {
+	                    $(this).val(val.substring(0,3) + "-" + val.substring(3, 6) + "-" + val.substring(6));
+	                }
+	            }
+	        }
+	    });
+	});
+
+</script>
     <title>프로필</title>
     <style>
      h5 {
@@ -330,10 +372,11 @@ $(document).ready(function() {
 </head>
 <jsp:include page="/reserver/jsp/header.jsp"></jsp:include>
 <div class ="body"> 
-<body> 
+<body>  
     <div class="menu">
-          <img src="/TWOREE/myPage/img/user_icon1.png" width= 80px><br>
-        <label for="uid">아이디 &nbsp</label>
+          <img src="/TWOREE/myPage/img/user_icon1.png" width= 80px><br> 
+       	 <p class="text-success"> <strong> ${outVO.userId}</strong></p>
+         
         <ul>
             <li><input type="button" value="내프로필" class="btn btn-outline-success " id="profBtn" ></li>
             <li><input type="button" value="예약"    class="btn btn-light " id="doRetrieveR" ></li>
@@ -368,28 +411,21 @@ $(document).ready(function() {
         				<img src="/TWOREE/myPage/img/show.png" alt="Hide" id="hideImg" class="show-password-img">
    					 	</button> 	 
                 </li>     
-            </ul>  
-             <button type="button" class="btn btn-secondary" id ="doUpdate" style="float: right;">수정하기</button>
-        </div>
-        
-              <div class="content_info">
-        
-            <ul>
+           
                 <li>
                     <label for="name">이름 &nbsp &nbsp &nbsp &nbsp</label>
                     <input type="text" id="name"  style="border: none; name="name"  readonly="readonly" value="${outVO.name}"> 
                 </li>
                 <li>
                     <label for="tel">전화번호 &nbsp</label>
-                    <input type="email" id="tel" style="border: none; name ="tel" required value="${outVO.tel}"> 
+                    <input type="text" id="tel" style="border: none; name ="tel" required value="${outVO.tel}"> 
                 </li>
                 <li>
                     <label for="birthday">생년월일 &nbsp</label>
                     <input type="text" id="birthday" style="border: none; name="birthday" readonly="readonly" value="${outVO.birthday}"> 
                 </li> 
             </ul>
-            
-             <button type="button" class="btn btn-secondary" style="float: right;">수정하기</button>
+                  <button type="submit" class="btn btn-secondary" id ="doUpdate" style="float: right;">수정하기</button>
         </div>
         
         <div class="content_info">

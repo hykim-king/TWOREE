@@ -214,7 +214,7 @@ doRetrieveRtn.addEventListener("click",function(event){
 <body>
     <div class="menu">
         <img src="/TWOREE/myPage/img/user_icon1.png" width= 80px><br>
-        <label for="uid">아이디 &nbsp</label>
+        <p class="text-success"><strong><%= list.get(0).getUserId()%></strong></p>
        <ul>
             <li><input type="button" value="내프로필" class="btn btn-light " id="profBtn" ></li>
             <li><input type="button" value="예약"    class="btn btn-light " id="doRetrieveR" ></li>
