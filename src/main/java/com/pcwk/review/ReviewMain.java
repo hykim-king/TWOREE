@@ -74,10 +74,10 @@ public class ReviewMain implements PLog {
 			log.debug(" doRetrieve()");
 			searchVO = new SearchDTO();
 			searchVO.setPageNo(1);
-			searchVO.setPageSize(10);
-			searchVO.setSearchSeq(2);
-			searchVO.setSearchWord("user1");
-			searchVO.setSearchDiv("10");
+			searchVO.setPageSize(4);
+			searchVO.setSearchSeq(0);
+			//searchVO.setSearchWord("0");
+			searchVO.setSearchDiv("20");
 			List <ReviewDTO> list = dao.doRetrieve(searchVO);
 			int i = 0;
 			for (ReviewDTO vo : list) {

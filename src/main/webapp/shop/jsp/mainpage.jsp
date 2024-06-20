@@ -3,11 +3,12 @@
 <%@page import="com.pcwk.shop.ShopDetailDTO"%>
 <%@page import="com.pcwk.ehr.cmn.SearchDTO"%>
 <%@page import="com.pcwk.shop.ShopDao"%>
+<%@page import="com.pcwk.ehr.cmn.MessageVO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/cmn/common.jsp" %>
 <%
-	List<ShopDTO> list = (List<ShopDTO>)request.getAttribute("list");  
+	String list = (String)request.getAttribute("shopList");  
 	SearchDTO searchCon = (SearchDTO)request.getAttribute("vo");
 %>
 <!DOCTYPE html>
@@ -19,164 +20,67 @@
     <title>test</title>
     <link rel="stylesheet" href="/TWOREE/shop/css/poster.css">
     <script src="/TWOREE/shop/js/jquery_3_7_1.js"></script>
-    <script>
-    	
-    document.addEventListener("DOMContentLoaded", function(){
-  	
-		const page_ul = document.querySelectorAll("#page_ul");
-		const shopName = document.querySelector("#shopName");
-		const shopTime = document.querySelector("#shopTime");
-		const shopLoc = document.querySelector("#shopLoc");
-		const shopScore = document.querySelector("#shopScore");
-		const shopReviewCnt = document.querySelector("#shopReviewCnt");
-		const shopNotice = document.querySelector("#shopNotice");
-		const shopMenu = document.querySelector("#shopMenu");
-		const shopReview = document.querySelector("#shopReview");
+<script>
+
+document.addEventListener("DOMContentLoaded", function(){
+	console.log("DOMContentLoaded--");
+	
+	const pageListBtn = document.querySelector("#page_list");
+	console.log("pageListBtn : " + pageListBtn);
+	
+	pageListBtn.addEventListener("click", function(event){
+		console.log("pageListBtn click event" + event)
+	});
+	
+}); //"DOMContentLoaded"
+
+	const pageList = document.querySelector("#page_list");
+
+	function getShopNo(){
+        return document.getElementById('shopNo');
+      }
+	
+	const shopNo = getShopNo();
+	
+	
+	
+	function pageListBtn(shopNo){
+		console.log("pageListBtn clicked");
+		console.log("shopNo : " + shopNo);
 		
-		//예약하기 버튼
-		const reserveBtn = document.querySelector("#reserve_btn");
+		$.ajax({
+		    type: "GET", 
+		    url:"/TWOREE/shop/shop.do",
+		    contentType : "application/json; charset:UTF-8",
+		    asyn:"true",
+		    dataType:"html",
+		    data:{
+		        "work_div":"doSelectOne",
+		        "shopNo": shopNo
+		    },
+		    success:function(response){//통신 성공
+		        console.log("success data:"+response);
+		    	
+		    	//null, undefined
+		    	if(response){
+	    		    	let jsonData = JSON.parse(response);
+		    			let map = new Map(Object.entries(jsonData));
+		    			console.log(map.get("shopList"));
+	    		    	loadData(map);
+		    		
+		    	}else{
+		    		console.warn("res가 null 혹은 undefined");
+		    		alert(messageVO.msgContents);
+		    	}
+		    },
+		    error:function(response){//실패시 처리
+		            console.log("error:"+response);
+		    }
+		});//ajax end
 		
-		//문의하기 버튼
-		const askBtn = document.querySelector("#ask_btn");
-		
-		//이벤트 핸들러
-		page_ul.forEach(function(page_ul){
-			page_ul.addEventListener("click", function(){
-				console.log("page_ul click");
-				$.ajax({
-	    		    type: "GET", 
-	    		    url:"/TWOREE/shop/shop.do",
-	    		    asyn:"true",
-	    		    dataType:"html",
-	    		    data:{
-	    		        "work_div":"doSelectOne",
-	    		        "shopName": shopName.value,
-	    		        "shopTime": shopTime.value,
-	    		        "shopLoc": shopLoc.value,
-	    		        "shopScore": shopScore.value,
-	    		        "shopReviewCnt": shopReviewCnt.value,
-	    		        "shopNotice": shopNotice.value,
-	    		        "shopMenu": shopMenu.value,
-	    		        "shopReview": shopReview.value	
-	    		    },
-	    		    success:function(response){//통신 성공
-	    		        console.log("success data:"+response);
-	    		    
-	    		    	//null, undefined
-	    		    	if(response){
-	    		    		try{
-	    		    			const messageVO = JSON.parse(response);
-	    		    			console.log("messageVO.messageId : " + messageVO.messageId);
-	    		    			console.log("messageVO.msgContents : " + messageVO.msgContents);
-	    		    			if(isEmpty(messageVO) == false && "1" === messageVO.messageId){
-	    		    				alert(messageVO.msgContents);
-	    		    				window.location.href = "/TWOREE/shop/shop.do?work_div=doRetrieve";
-	    		    			}else{
-	    		    				alert(messageVO.msgContents);
-	    		    			}
-	    		    		}catch(e){
-	    		    			console.error("JSON Parsing error : " + e);
-	    		    		}
-	    		    		
-	    		    	}else{
-	    		    		console.warn("res가 null 혹은 undefined");
-	    		    		alert(messageVO.msgContents);
-	    		    	}
-	    		    },
-	    		    error:function(response){//실패시 처리
-	    		            console.log("error:"+response);
-	    		    }
-	    	});
-			});	
-		});
-		
-    	reserveBtn.addEventListener("click", function(event){
-    		console.log('reserveBtn click');
-    	
-    	
-    		let frm = document.getElementById("board_frm");
-    		
-    		frm.work_div.value = "reserveBtn";
-    		
-    		
-    		console.log("frm.work_div.value : " + frm.work_div.value);
-    		
-    		frm.action ="<%=cPath%>"+"/shop/shop.do";
-    		frm.submit();
-    	
-    	});
-    	
-    	askBtn.addEventListener("click", function(event){
-    		console.log('askBtn click');
-    	
-    	
-    		let frm = document.getElementById("board_frm");
-    		
-    		frm.work_div.value = "askBtn";
-    		
-    		
-    		console.log("frm.work_div.value : " + frm.work_div.value);
-    		
-    		frm.action ="<%=cPath%>"+"/shop/shop.do";
-    		frm.submit();
-    	
-    	});
-    	
-    	function doSelectOne(seqValue){
-    		
-    	    // 폼 요소 선택
-    	    let frm = document.getElementById("board_frm");
-    	    
-    	    //seq
-    	    frm.seq.value = seqValue;
-    	    
-    	    $.ajax({
-    		    type: "GET", 
-    		    url:"/WEB02/shop/shop.do",
-    		    asyn:"true",
-    		    dataType:"html",
-    		    data:{
-    		        "work_div":"doSelectOne",
-    		        "shopName": shopName.value,
-    		        "shopTime": shopTime.value,
-    		        "shopLoc": shopLoc.value,
-    		        "shopScore": shopScore.value,
-    		        "shopReviewCnt": shopReviewCnt.value,
-    		        "shopNotice": shopNotice.value,
-    		        "shopMenu": shopMenu.value,
-    		        "shopReview": shopReview.value	
-    		    },
-    		    success:function(response){//통신 성공
-    		        console.log("success data:"+response);
-    		    
-    		    	//null, undefined
-    		    	if(response){
-    		    		try{
-    		    			const messageVO = JSON.parse(response);
-    		    			console.log("messageVO.messageId : " + messageVO.messageId);
-    		    			console.log("messageVO.msgContents : " + messageVO.msgContents);
-    		    			if(isEmpty(messageVO) == false && "1" === messageVO.messageId){
-    		    				alert(messageVO.msgContents);
-    		    				window.location.href = "/TWOREE/shop/shop.do?work_div=doRetrieve";
-    		    			}else{
-    		    				alert(messageVO.msgContents);
-    		    			}
-    		    		}catch(e){
-    		    			console.error("JSON Parsing error : " + e);
-    		    		}
-    		    		
-    		    	}else{
-    		    		console.warn("res가 null 혹은 undefined");
-    		    		alert(messageVO.msgContents);
-    		    	}
-    		    },
-    		    error:function(response){//실패시 처리
-    		            console.log("error:"+response);
-    		    }
-    	});
-    };
-    });
-    </script>
+	}
+	
+</script>
 </head>
 <body>
     <hr>
@@ -205,18 +109,37 @@
             </div>
         </form>
         <hr>
-        <jsp:include page="MyPage.jsp" flush="false"/>
-        <div class="main_page">
-           	 	<%for(ShopDTO vo   :list){ %>
-            <ul class="main_page_ul" id="page_ul">
-                <li class="shop_name"> <%=vo.getShopName() %></li>
-                <li> <%=vo.getShopLoc()%> </li>
-                <li>별점 : <%=vo.getScore() %></li> 
-            </ul>
-                <%  } %>
+	<jsp:include page="/shop/jsp/MyPage.jsp" flush="false"/>
+        <div class="main_page" id ="page_list">
+           <!-- position for ul  -->
         </div>
-       <jsp:include page="ShopDetailPage.jsp" flush="false"/>
+    <jsp:include page="/shop/jsp/ShopDetailPage.jsp" flush="false"/>
     </div>
+    <script>
+    
+    
+    $(document).ready(function() {
+    	
+    	$("#pageListBtn").click(function() {
+           
+        });
+    });
+    
+   
+   	const pageListObj = (<%= list %>);
+   	
+	    $("#page_list").empty();
+	    $.each(pageListObj, function(index, page) {
+	    	let row = $("<ul onclick ='pageListBtn("+page.shopNo+")'></ul>");
+	          row.append($("<li class='shop_name'></li>").text(page.shopName));
+	          row.append($("<li></li>").text(page.shopLoc));
+	          row.append($("<li></li>").text(page.reviewCnt));
+	          //row.append($("<li></li>").text(page.shopNo));
+	          $("#page_list").append(row);
+	      });
+   
+	    
+    </script>
 <script src="/TWOREE/shop/js/popper_min.js"></script>
 </body>
 </html>

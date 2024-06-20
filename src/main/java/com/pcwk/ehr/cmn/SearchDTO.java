@@ -6,7 +6,7 @@ public class SearchDTO extends DTO {
 	
 	private String searchDiv;//검색 구분
 	private String searchWord;//검색어
-	private int searchSeq;
+	private int searchSeq;	
 	
 	public int getSearchSeq() {
 		return searchSeq;

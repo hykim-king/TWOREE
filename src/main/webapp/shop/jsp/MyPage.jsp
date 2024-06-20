@@ -6,7 +6,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-	List<ShopDTO> list = (List<ShopDTO>)request.getAttribute("list");  
+    List<ShopDTO> list = (List<ShopDTO>)request.getAttribute("list");  
 	ShopDetailDTO detailDTO =  (ShopDetailDTO)request.getAttribute("detailVO");
 	ShopDTO shopDTO =  (ShopDTO)request.getAttribute("shopDTO");
 	SearchDTO searchCon = (SearchDTO)request.getAttribute("vo");

@@ -9,40 +9,102 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/cmn/common.jsp" %>
-    <%
-    
-    ShopDTO shopOutVO = (ShopDTO)request.getAttribute("outVO");
-    ShopDetailDTO detailOutVO = (ShopDetailDTO)request.getAttribute("detailOutVO");
-    ShopNoticeDTO noticeOutVO = (ShopNoticeDTO)request.getAttribute("noticeOutVO");
-    MenuDTO menuOutVO = (MenuDTO)request.getAttribute("menuOutVO");
-    ReviewDTO reviewOutVO = (ReviewDTO)request.getAttribute("reviewOutVO");
-%>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="/TWOREE/shop/css/bootstrap.css">
+    <title>test</title>
+    <link rel="stylesheet" href="/TWOREE/shop/css/poster.css">
+    <script src="/TWOREE/shop/js/jquery_3_7_1.js"></script>
+</head>    
 <body>
-	<div class="detail_page">
-	    <ul>
-	        <li class="shop_name" id="shopName"> <%= shopOutVO.getShopName() %> </li>
-	        <li id="shopTime">영업시간 : <%="오전" + detailOutVO.getOpenTime() + "/ 오후" + detailOutVO.getCloseTime()%></li>
-	        <li id="shopLoc"><%=detailOutVO.getShopLoc() %></li>   
-	        <li id="shopScore">별점 : <%=shopOutVO.getScore() %></li>
-	        <li id="shopReviewCnt">리뷰갯수 : <%=shopOutVO.getReviewCnt() %></li>
+	<div class="detail_page" id="detail_page">
+	    <ul id="shopList">
+	        <li class="shop_name" id="shopName"></li>
+	        <li id="shopOpenTime"></li>
+	        <li id="shopCloseTime"></li>
+	        <li id="shopLoc"></li>
+	        <span>
+		        <li class="shop_name">별점</li>
+		        <li id="shopScore"></li>
+	        </span>
+	        <span>
+		        <li class="shop_name">리뷰갯수 :</li>
+		        <li id="shopReviewCnt"></li>
+		   	</span>
 	    <hr>
 	        <input type="button" class="main_btn" id="reserve_btn" name="reserve_btn" value="예약하기">
 	        <input type="button" class="main_btn" id="ask_btn" name="ask_btn" value="문의하기">
 	    <hr>
 	        <li class="shop_name">소개 및 공지</li>
-	        <li id="shopNotice"> <%=noticeOutVO.getContent() %></li>
+	        <li id="shopNotice"></li>
 	    <hr>
-	    	<li class="shop_name">메뉴</li>
-	    	 <% for(int i=0; i<=4; i++){ %>
-	        <li id="shopMenu"><%=menuOutVO.getMenuName() %></li>
-	        <% } %>
+	    	<li class="shop_name" id="menuList">메뉴</li>
+	    	 <span>
+		        <li id="shopMenu"></li>
+		        <li id="menuInfo"></li>
+		        <li id="price"></li>
+	    	 </span>
 	    <hr>
-	    	<li class="shop_name">리뷰</li>
-	    	<% for(int i=0; i<=4; i++){ %>          
-	        <li id="shopReview"><%= reviewOutVO.getReviewContent()%></li>
-	         <% } %>
+	    	<li class="shop_name" >리뷰</li>        
+	        <li id="shopReview"></li>
 	    </ul>   
 	</div>
+<script>
+	
+	const detailPageDiv = document.querySelector("#detail_page");
+	
+	function loadData(data) {
+		
+		let shopListObj =data.get("shopList");
+		let detailListObj =data.get("detailList");
+		let noticeListObj =data.get("noticeList");
+		let menuListObj =data.get("menuList");
+		let reviewListObj =data.get("reviewList");
+		
+		console.log("shopListObj : "+ shopListObj);
+		console.log("detailListObj : "+ detailListObj);
+		console.log("noticeListObj : "+ noticeListObj);
+		console.log("menuListObj : "+ menuListObj);
+		console.log("reviewListObj : "+ reviewListObj);
+		 
+		 $("#shopName").text(shopListObj.shopName);
+         $("#shopOpenTime").text(detailListObj.openTime);
+         $("#shopCloseTime").text(detailListObj.closeTime);
+         $("#shopLoc").text(detailListObj.shopLoc);
+         $("#shopScore").text(shopListObj.score);
+         $("#shopReviewCnt").text(shopListObj.reviewCnt);
+         
+         $("#shopNotice").empty();
+         $.each(noticeListObj, function(index, notice) {
+               let li = $("<li></li>");
+               li.append($("<li></li>").text(notice.content));
+               $("#shopNotice").append(li);
+         });
+        
+         $("#menuList").empty();
+         $.each(menuListObj, function(index, menu) {
+               let li = $("<li></li>");
+               li.append($("<li></li>").text(menu.menuName));
+               li.append($("<li></li>").text(menu.menuInfo));
+               li.append($("<li></li>").text(menu.price));
+               $("#menuList").append(li);
+         });
+         
+         $("#reviewList").empty();
+         $.each(reviewListObj, function(index, review) {
+               let li = $("<li></li>");
+               li.append($("<li></li>").text(review.userId));
+               li.append($("<li></li>").text(review.reviewContent));
+               $("#shopReview").append(li);
+           });
+	}
+	
+	
+	
+</script>
 <script src="/TWOREE/shop/js/popper_min.js"></script>
 </body>
 </html>

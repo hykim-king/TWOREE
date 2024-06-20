@@ -85,11 +85,11 @@ public class MenuMain implements PLog {
 
 	public static void main(String[] args) {
 		MenuMain m = new MenuMain();
-		m.doSave();
+		//m.doSave();
 		//m.doDelete();
 		//m.doUpdate();
 		//m.doSelectOne();
-		//m.doRetrieve();
+		m.doRetrieve();
 	}
 
 }

@@ -1,7 +1,10 @@
 package com.pcwk.shop;
 
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -25,7 +28,8 @@ import com.pcwk.reserve.ReserveDTO;
 import com.pcwk.reserve.ReserveService;
 import com.pcwk.review.ReviewDTO;
 import com.pcwk.review.ReviewService;
-import com.pcwk.shop.ShopNoticeService;
+
+
 
 public class ShopController extends HttpServlet implements ControllerV, PLog{
 private static final long serialVersionUID = 1L;
@@ -75,133 +79,6 @@ private static final long serialVersionUID = 1L;
 		log.debug("=====================");
 
 		return new JView("/board/board_reg.jsp");
-	}
-	
-//	public JView doSave(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-//		log.debug("=====================");
-//		log.debug("doSave()");
-//		log.debug("=====================");
-//		ShopDTO inVO = new ShopDTO();
-//		
-//		String shopNo = StringUtill.nvl(req.getParameter("shop_no"), "");
-//		String managerId = StringUtill.nvl(req.getParameter("manager_id"), "");
-//		String shopName = StringUtill.nvl(req.getParameter("shop_name"), "");
-//		String isVerified = StringUtill.nvl(req.getParameter("is_verified"), "");
-//		
-//		log.debug("title : {}", shopNo);
-//		log.debug("regId : {}", managerId);
-//		log.debug("contents : {}", shopName);
-//		log.debug("isVerified : {}", isVerified);
-//		
-//		inVO.setShopNo(Integer.parseInt(shopNo));
-//		inVO.setManagerId(managerId);
-//		inVO.setShopName(shopName);
-//		inVO.setIsVerified(isVerified);
-//		
-//		int flag = this.service.doSave(inVO);
-//		log.debug("flag : {}", flag);
-//		
-//		if(1 == flag) {
-//			return new JView("/board/board.do?work_div=doRetrieve");
-//		}
-//		
-//		return null;
-//	}
-//	public JView ajaxDoSave(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-//		log.debug("=====================");
-//		log.debug("ajaxDoSave()");
-//		log.debug("=====================");
-//		ShopDTO inVO = new ShopDTO();
-//		
-//		String title = StringUtill.nvl(req.getParameter("title"), "");
-//		String regId = StringUtill.nvl(req.getParameter("regId"), "");
-//		String contents = StringUtill.nvl(req.getParameter("contents"), "");
-//		
-//		log.debug("title : {}", title);
-//		log.debug("regId : {}", regId);
-//		log.debug("contents : {}", contents);
-//		
-//		inVO.setTitle(title);
-//		inVO.setContents(contents);
-//		inVO.setRegId(regId);
-//		inVO.setModId(regId);
-//		
-//		System.out.println("dsmakm");
-//		int flag = this.service.doSave(inVO);
-//		log.debug("flag : {}", flag);
-//		
-//		String message = "";
-//		if(flag == 1) {
-//			message = "등록성공";
-//		}else {
-//			message = "등록실패";
-//		}
-//		MessageVO messageVO = new MessageVO();
-//		messageVO.setMessageId(String.valueOf(flag));
-//		messageVO.setMsgContents(message);
-//		
-//		log.debug("messageVO : {}", messageVO);
-//		
-//		Gson gson = new Gson();
-//		String jsonString = gson.toJson(messageVO);
-//		
-//		log.debug("jsonString : {}", jsonString);
-//		
-//		res.setContentType("text/html; charset=UTF-8");
-//		
-//		PrintWriter out = res.getWriter();
-//		out.print(jsonString);
-//		
-//		
-//		return null;
-//	}
-	public JView doSelectOne(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
-		log.debug("=====================");
-		log.debug("doSelectOne()");
-		log.debug("=====================");
-		
-		ShopDTO inVO = new ShopDTO();
-		ShopDetailDTO detailInVO = new ShopDetailDTO();
-		ShopNoticeDTO noticeInVO = new ShopNoticeDTO();
-		MenuDTO menuInVO = new MenuDTO();
-		ReviewDTO reviewInVO = new ReviewDTO();
-		
-		String shopNo = StringUtill.nvl(req.getParameter("shop_no"), "0");
-		
-		inVO.setShopNo(Integer.parseInt(shopNo));
-		detailInVO.setShopNo(Integer.parseInt(shopNo));
-		noticeInVO.setShopNo(Integer.parseInt(shopNo));
-		menuInVO.setShopNo(Integer.parseInt(shopNo));
-		reviewInVO.setShopNo(Integer.parseInt(shopNo));
-		
-		log.debug("inVO : "+ inVO);
-		log.debug("detailInVO : "+ detailInVO);
-		log.debug("noticeInVO : "+ noticeInVO);
-		log.debug("menuInVO : "+ menuInVO);
-		log.debug("reviewInVO : "+ reviewInVO);
-		
-		ShopDTO outVO = shopService.selectOneReadCnt(inVO);
-		ShopDetailDTO detailOutVO = shopDetailService.doSelectOne(detailInVO);
-		ShopNoticeDTO noticeOutVO = shopNoticeService.doSelectOne(noticeInVO);
-		MenuDTO menuOutVO = menuService.doSelectOne(menuInVO);
-		ReviewDTO reviewOutVO = reviewService.doSelectOne(reviewInVO);
-		
-		//ShopDetailDTO detailOutVo = ShopDetailService.doSelectOne(detailInVO); 
-		log.debug("outVO : "+ outVO);
-		log.debug("detailOutVO : "+ detailOutVO);
-		log.debug("noticeOutVO : "+ noticeOutVO);
-		log.debug("menuOutVO : "+ menuOutVO);
-		log.debug("reviewOutVO : "+ reviewOutVO);
-		
-		//UI 데이터 전달
-		req.setAttribute("outVO", outVO);
-		req.setAttribute("detailOutVO", detailOutVO);
-		req.setAttribute("noticeOutVO", noticeOutVO);
-		req.setAttribute("menuOutVO", menuOutVO);
-		req.setAttribute("reviewOutVO", reviewOutVO);
-		
-		return new JView("/shop/jsp/ShopDetailPage.jsp");
-		
 	}
 	
 	public JView doSaveNotice(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
@@ -560,9 +437,6 @@ private static final long serialVersionUID = 1L;
 		log.debug("workDiv : {}", workDiv);
 		
 		switch(workDiv) {
-		case "doSelectOne" :
-			viewName = doSelectOne(req, res);
-			break;
 		case "doSaveNotice" :
 			viewName = doSaveNotice(req,res);
 			break;
@@ -610,8 +484,9 @@ private static final long serialVersionUID = 1L;
 			break;
 		case "doRetrieve" :
 			viewName = doRetrieve(req, res);
-			JView secondView = null;
-			secondView = doSelectOne(req, res);
+			break;
+		case "doSelectOne" :
+			viewName = doSelectOne(req, res);
 			break;
 		default :
 			log.debug("workDiv : {}", workDiv);
@@ -657,8 +532,11 @@ private static final long serialVersionUID = 1L;
 			log.debug("i : {}, vo : {} :", ++i, vo);
 		}
 		
+		Gson gson=new Gson();
+		String jsonString = gson.toJson(list);
+        req.setAttribute("shopList", jsonString);
 		
-		req.setAttribute("list", list);
+		//req.setAttribute("list", list);
 		
 		req.setAttribute("vo", inVO);
 		
@@ -666,5 +544,83 @@ private static final long serialVersionUID = 1L;
 		//dispatcher.forward(req, res);
 		
 		return viewName = new JView("/shop/jsp/mainpage.jsp");
+	}
+	
+	public JView doSelectOne(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("doSelectOne()");
+		log.debug("=====================");
+			
+		ShopDTO shopInVO = new ShopDTO();
+		ShopDetailDTO detailInVO = new ShopDetailDTO();
+		
+		String shopNo = StringUtill.nvl(req.getParameter("shopNo"), "0");
+		
+		ShopNoticeDTO noticeInVO = new ShopNoticeDTO();
+		SearchDTO searchNotice= new SearchDTO();
+		searchNotice.setSearchDiv("10");
+		searchNotice.setSearchWord(shopNo);
+		
+		MenuDTO menuInVO = new MenuDTO();
+		SearchDTO searchMenu= new SearchDTO();
+		searchMenu.setPageNo(1);
+		searchMenu.setPageSize(4);
+		searchMenu.setSearchSeq(Integer.parseInt(shopNo));
+		
+		ReviewDTO reviewInVO = new ReviewDTO();
+		SearchDTO searchReview= new SearchDTO();
+		searchReview.setPageNo(1);
+		searchReview.setPageSize(4);
+		searchReview.setSearchDiv("20");
+		searchReview.setSearchSeq(Integer.parseInt(shopNo));
+		
+		shopInVO.setShopNo(Integer.parseInt(shopNo));
+		detailInVO.setShopNo(Integer.parseInt(shopNo));
+		noticeInVO.setShopNo(Integer.parseInt(shopNo));
+		menuInVO.setShopNo(Integer.parseInt(shopNo));
+		reviewInVO.setShopNo(Integer.parseInt(shopNo));
+		
+		log.debug("shopInVO : "+ shopInVO);
+		log.debug("detailInVO : "+ detailInVO);
+		log.debug("noticeInVO : "+ noticeInVO);
+		log.debug("menuInVO : "+ menuInVO);
+		log.debug("reviewInVO : "+ reviewInVO);
+		
+		ShopDTO shopOutVO = shopService.selectOneReadCnt(shopInVO);
+		ShopDetailDTO detailOutVO = shopDetailService.doSelectOne(detailInVO);
+		List<ShopNoticeDTO> noticeOutVO = shopNoticeService.doRetrieve(searchNotice);
+		List<MenuDTO> menuOutVO = menuService.doRetrieve(searchMenu);
+		List<ReviewDTO> reviewOutVO = reviewService.doRetrieve(searchReview);
+		
+		int i =0;
+		for(ShopNoticeDTO vo : noticeOutVO) {
+			log.debug("i : {}, vo : {} :", ++i, vo);
+		}
+		for(MenuDTO vo : menuOutVO) {
+			log.debug("i : {}, vo : {} :", ++i, vo);
+		}
+		for(ReviewDTO vo : reviewOutVO) {
+			log.debug("i : {}, vo : {} :", ++i, vo);
+		}
+		
+		//UI 데이터 전달
+		res.setContentType("text/html; charset=UTF-8");
+		Gson gson=new Gson();
+		
+		Map<String, Object> responseMap = new HashMap<>();
+		
+		responseMap.put("shopList", shopOutVO);
+		responseMap.put("detailList", detailOutVO);
+		responseMap.put("noticeList", noticeOutVO);
+		responseMap.put("menuList", menuOutVO);
+		responseMap.put("reviewList", reviewOutVO);
+		
+		String jsonResponse = gson.toJson(responseMap);
+		PrintWriter out = res.getWriter();
+		
+		out.print(jsonResponse);
+		
+        return null;
+		
 	}
 }
