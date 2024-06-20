@@ -24,6 +24,89 @@ const doRetrieveRtn = document.querySelector("#doRetrieveR");
 const doRetrieveVtn = document.querySelector("#doRetrieveV"); 
 const doRetrieveXtn = document.querySelector("#doRetrieveX");
 
+const doUpdateBtn = document.querySelector("#doUpdate");
+const userId = document.querySelector("#userId");
+const password = document.querySelector("#password");   //password
+const name = document.querySelector("#name");
+const userEmail = document.querySelector("#userEmail");
+const tel = document.querySelector("#tel");
+const birthday = document.querySelector("#birthday");
+//const shopAdmin = document.querySelector("#shopAdmin");
+//const penaltyDate = document.querySelector("#penaltyDate");
+
+
+doUpdateBtn.addEventListener("click", function(event){
+	console.log('doUpdateBtn click event'+event);
+	doUpdate();
+});
+
+       function doUpdate(){
+       	console.log('doUpdate()');
+       	console.log("userId:"+userId.value);
+       	console.log("name:"+name.value);
+       	console.log("password:"+password.value);
+       	console.log("userEmail:"+userEmail.value);
+       	console.log("tel:"+tel.value);
+       	console.log("birthday:"+birthday.value);
+       	//console.log("shopAdmin:"+shopAdmin.value);
+       	//console.log("penaltyDate:"+penaltyDate.value);
+       
+       	if( isEmpty(password.value) ==true){
+           alert('password를 확인 하세요.');
+           return;
+       } 
+       $.ajax({
+           type: "POST", 
+           url:"/TWOREE/user/myPage.do",
+           asyn:"true",
+           dataType:"html",
+           data:{
+               "work_div":"doUpdate",
+               "userId": userId.value,
+               "password": password.value,
+               "name": name.value,
+               "userEmail": userEmail.value,
+               "tel": tel.value,
+               "birthday": birthday.value,
+               "userId": userId.value
+               
+           },
+           success:function(response){//통신 성공
+               console.log("success data:"+response);
+           
+               //null, undefined처리
+               if(response){
+               	try{
+               		const messageVO = JSON.parse(response);
+               		console.log("messageVO.messageId:"+messageVO.messageId);
+                   console.log("messageVO.msgContents:"+messageVO.msgContents);
+                   
+                   if(isEmpty(messageVO) == false &&  "1" === messageVO.messageId){
+                   	alert(messageVO.msgContents); 
+                   }else{
+                   	alert(messageVO.msgContents);
+                   }
+               		
+               	}catch(e){    
+               		console.error("JSON 파싱 에러:",e);
+               	}
+               	
+               	
+               }else{
+               	console.warn("response가 null혹은 undefined.");
+               	alert("response가 null혹은 undefined.");
+               }
+           
+           },
+           error:function(data){//실패시 처리
+                   console.log("error:"+data);
+           }
+       });    
+       
+       }//--doUpdate() end
+       
+
+
 profBtn.addEventListener("click",function(event){
 	console.log('profBtn click'); 
 	window.location.replace("/TWOREE/user/myPage.do?work_div=doSelectOne&userId="+"user1"); 
@@ -286,7 +369,7 @@ $(document).ready(function() {
    					 	</button> 	 
                 </li>     
             </ul>  
-             <button type="button" class="btn btn-secondary" style="float: right;">수정하기</button>
+             <button type="button" class="btn btn-secondary" id ="doUpdate" style="float: right;">수정하기</button>
         </div>
         
               <div class="content_info">

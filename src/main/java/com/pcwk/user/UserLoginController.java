@@ -119,7 +119,7 @@ public class UserLoginController implements ControllerV, PLog {
 		inVO.setTel(tel);
 		inVO.setBirthday(birthday);
 		inVO.setShopAdmin(shopAdmin);
-
+		
 		MessageVO message = new MessageVO();
 		message=(MessageVO)this.service.join(inVO);
 		

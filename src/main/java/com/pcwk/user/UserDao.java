@@ -129,9 +129,7 @@ public class UserDao implements WorkDiv<UserDTO> {
 		sb.append("     name = ?,        \n");
 		sb.append("     user_email = ?,  \n");
 		sb.append("     tel = ?,         \n");
-		sb.append("     birthday = ?,    \n");
-		sb.append("     shop_admin = ?,  \n");
-		sb.append("     penalty_date = ? \n");
+		sb.append("     birthday = ?    \n"); 
 		sb.append(" where user_id =?     \n");
 		
 		log.debug("1. SQL : {}", sb.toString());
@@ -147,10 +145,8 @@ public class UserDao implements WorkDiv<UserDTO> {
 			pstmt.setString(3, param.getName());
 			pstmt.setString(4, param.getUserEmail());
 			pstmt.setString(5, param.getTel());
-			pstmt.setString(6, param.getBirthday());
-			pstmt.setString(7, param.getShopAdmin());
-			pstmt.setString(8, param.getPenaltyDate());
-			pstmt.setString(9, param.getUserId());
+			pstmt.setString(6, param.getBirthday()); 
+			pstmt.setString(7, param.getUserId());
 			
 			flag = pstmt.executeUpdate();
 		

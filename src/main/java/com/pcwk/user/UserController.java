@@ -1,6 +1,6 @@
 package com.pcwk.user;
 import java.io.IOException;
-
+import java.io.PrintWriter;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -15,6 +15,7 @@ import com.pcwk.ask.AskDTO;
 import com.pcwk.ask.AskService;
 import com.pcwk.ehr.cmn.ControllerV;
 import com.pcwk.ehr.cmn.JView;
+import com.pcwk.ehr.cmn.MessageVO;
 import com.pcwk.ehr.cmn.PLog;
 import com.pcwk.ehr.cmn.StringUtill;
 import com.pcwk.reserve.ReserveDTO;
@@ -200,7 +201,58 @@ public class UserController implements ControllerV, PLog {
 			
 			 return new JView("/myPage/jsp/my_x.jsp");	
 		}
- 
+	
+	public JView doUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		log.debug("-----------------");
+		log.debug("doUpdate()");
+		log.debug("-----------------");
+		
+		UserDTO  inVO=new UserDTO();
+		
+		String userId = StringUtill.nvl(request.getParameter("userId"),"");
+		String password = StringUtill.nvl(request.getParameter("password"),"");
+		String name = StringUtill.nvl(request.getParameter("name"),"");
+		String userEmail = StringUtill.nvl(request.getParameter("userEmail"),"");
+		String tel = StringUtill.nvl(request.getParameter("tel"),"");
+		String birthday = StringUtill.nvl(request.getParameter("birthday"),"");
+		//String shopAdmin = StringUtill.nvl(request.getParameter("shopAdmin"),"");
+		//String penaltyDate = StringUtill.nvl(request.getParameter("penaltyDate"),"0");
+		
+		
+		inVO.setUserId(userId);
+		inVO.setPassword(password);
+		inVO.setName(name);
+		inVO.setUserEmail(userEmail);
+		inVO.setTel(tel);
+		inVO.setBirthday(birthday);
+		//inVO.setUserId((userId));
+		
+		log.debug("inVO:"+inVO);
+		int flag = service.doUpdate(inVO);
+		String message = "";
+		log.debug("flag:"+flag);
+		
+		if(1==flag) {
+			message = "수정 되었습니다.";
+		}else {
+			message = "수정 실패!";
+		}
+		
+		MessageVO  messageVO=new MessageVO();
+		messageVO.setMessageId(String.valueOf(flag));
+		messageVO.setMsgContents(message);
+		
+		Gson  gson=new Gson();
+		String jsonString = gson.toJson(messageVO);
+		
+		log.debug("jsonString:"+jsonString);
+		response.setContentType("text/html; charset=UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		out.print(jsonString);
+		
+		return null;
+	} 
 	@Override
 	public JView doWork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		log.debug("-------------------");
@@ -226,6 +278,10 @@ public class UserController implements ControllerV, PLog {
     	case"doRetrieveX":
     		viewName = doRetrieveX(request, response);
     		break;	
+    		
+    	case"doUpdate":
+    		viewName = doUpdate(request, response);
+    		break;		
     		
     	}
     		
