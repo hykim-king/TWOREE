@@ -4,6 +4,7 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
+    <link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
         header {
@@ -35,7 +36,7 @@
 <body>
     <header>
         <h1>TWOREE</h1>
-        <button class="login-btn">로그아웃</button>
+        <button class="btn btn-success">로그아웃</button>
     </header>
 </body>
 </html>

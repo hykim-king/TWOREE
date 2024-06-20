@@ -196,6 +196,7 @@ doRetrieveRtn.addEventListener("click",function(event){
      }
     </style>
 </head>
+<jsp:include page="/reserver/jsp/header.jsp"></jsp:include>
 <div class ="body">
 <body>
     <div class="menu"> 

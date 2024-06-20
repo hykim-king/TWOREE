@@ -198,8 +198,9 @@ doRetrieveRtn.addEventListener("click",function(event){
      
     </style>
 </head>
-<div class ="body">
-<body>
+<jsp:include page="/reserver/jsp/header.jsp"></jsp:include>
+<div class ="body"> 
+<body> 
     <div class="menu">
           <img src="/TWOREE/myPage/img/user_icon1.png" width= 80px><br>
         <label for="uid">아이디 &nbsp</label>
