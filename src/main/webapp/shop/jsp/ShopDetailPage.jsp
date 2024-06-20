@@ -53,6 +53,7 @@
 	    </ul>   
 	</div>
 <script>
+
 	
 	const detailPageDiv = document.querySelector("#detail_page");
 	
@@ -100,7 +101,40 @@
                li.append($("<li></li>").text(review.reviewContent));
                $("#shopReview").append(li);
            });
+         
+       //예약하기 버튼
+     	const moveToReserveBtn = document.querySelector("#reserve_btn");
+     	
+     	moveToReserveBtn.addEventListener("click", function(event){
+     		console.log("moveToReserveBtn click event" + event)
+     		moveToReserve();
+     	});
+     	
+     	function moveToReserve(){
+     		console.log('moveToReserve()');
+     		let shopNo = shopListObj.shopNo;
+     		console.log("shopNo : " + shopNo);
+     		window.open("/TWOREE/shop/shop.do"+"?work_div=reserve&shopNo="+shopNo,"예약","width=700,height=700,top=100,left=100");
+     		//window.location.href = "/TWOREE/shop/shop.do?work_div=";
+     	}
+     	
+     	//문의하기 버튼
+     	const askBtn = document.querySelector("#ask_btn");
+     	
+     	askBtn.addEventListener("click", function(event){
+     		console.log("askBtn click event" + event)
+     		ask();
+     	});
+     	
+     	function ask(){
+     		console.log('ask()');
+     		let shopNo = shopListObj.shopNo;
+     		console.log("shopNo : " + shopNo);
+     		//window.location.href = "/TWOREE/shop/shop.do?work_div=";
+     	}
 	}
+	
+	
 	
 	
 	

@@ -1,3 +1,4 @@
+<%@page import="com.pcwk.user.UserDTO"%>
 <%@page import="java.util.List"%>
 <%@page import="com.pcwk.shop.ShopDTO"%>
 <%@page import="com.pcwk.shop.ShopDetailDTO"%>
@@ -6,11 +7,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%
-    List<ShopDTO> list = (List<ShopDTO>)request.getAttribute("list");  
-	ShopDetailDTO detailDTO =  (ShopDetailDTO)request.getAttribute("detailVO");
-	ShopDTO shopDTO =  (ShopDTO)request.getAttribute("shopDTO");
-	SearchDTO searchCon = (SearchDTO)request.getAttribute("vo");
-	SearchDTO DsearchCon = (SearchDTO)request.getAttribute("Dvo");
+    UserDTO user= (UserDTO)session.getAttribute("user");
+	
 %>
 <!DOCTYPE html>
 <html>
@@ -26,7 +24,7 @@
 <body>
 	<div class="my_page">
 		<ul>
-			<li class="shop_name">이름</li>
+			<li class="shop_name"><%=user.getName() %></li>
 			<li>소유 가게</li>  
 		</ul>
 	</div>

@@ -313,6 +313,13 @@ private static final long serialVersionUID = 1L;
 		return null;
 	}
 	
+	public JView doReserve(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("setReserve()");
+		log.debug("=====================");
+		return new JView("/reserver/jsp/reserve.jsp");
+	}
+	
 	public JView doMngPage(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		log.debug("=====================");
 		log.debug("doMngPage()");
@@ -423,6 +430,8 @@ private static final long serialVersionUID = 1L;
 	}
 	
 	
+	
+	
 	public JView doWork(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		log.debug("=====================");
 		log.debug("doWork()");
@@ -487,6 +496,9 @@ private static final long serialVersionUID = 1L;
 			break;
 		case "doSelectOne" :
 			viewName = doSelectOne(req, res);
+			break;
+		case "reserve" :
+			viewName = doReserve(req,res);
 			break;
 		default :
 			log.debug("workDiv : {}", workDiv);

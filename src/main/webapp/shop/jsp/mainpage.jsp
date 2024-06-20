@@ -22,18 +22,6 @@
     <script src="/TWOREE/shop/js/jquery_3_7_1.js"></script>
 <script>
 
-document.addEventListener("DOMContentLoaded", function(){
-	console.log("DOMContentLoaded--");
-	
-	const pageListBtn = document.querySelector("#page_list");
-	console.log("pageListBtn : " + pageListBtn);
-	
-	pageListBtn.addEventListener("click", function(event){
-		console.log("pageListBtn click event" + event)
-	});
-	
-}); //"DOMContentLoaded"
-
 	const pageList = document.querySelector("#page_list");
 
 	function getShopNo(){
@@ -41,8 +29,6 @@ document.addEventListener("DOMContentLoaded", function(){
       }
 	
 	const shopNo = getShopNo();
-	
-	
 	
 	function pageListBtn(shopNo){
 		console.log("pageListBtn clicked");
@@ -79,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function(){
 		});//ajax end
 		
 	}
-	
 </script>
 </head>
 <body>

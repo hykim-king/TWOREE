@@ -85,7 +85,8 @@
          alert(messageVO.msgContents);
          password.focus();                   
         }else if(isEmpty(messageVO) == false &&  "30" === messageVO.messageId){
-         alert(messageVO.msgContents);
+               alert(messageVO.msgContents);
+               
 			   window.location.href = "/TWOREE/shop/shop.do?work_div=doRetrieve";
 			 
 			 }
