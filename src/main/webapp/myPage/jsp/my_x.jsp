@@ -100,114 +100,28 @@ doRetrieveRtn.addEventListener("click",function(event){
 </script>
 
 
-  <title>프로필</title>
+  <title>고객문의</title>
   <style>
-   h5{
-  	color: white;
-  	}
-  	 textarea {
- 		 	width: 100%;
-  		height: 4em; 
-  		resize: none;
-		}
-  	
-      body {
-          display: flex;
-          margin: 0;
-          padding: 100px; /* 가장자리 여백 */
-          height: calc(100vh - 100px); /* 패딩 값을 제외한 높이 설정 */
-          box-sizing: border-box;
-          flex-direction: row;
-          gap: 20px;  
-      }
-      .menu { 
-          display: flex;
-          flex-direction: column;
-          width: 350px;
-          min-width: 100px;
-          background-color: white;
-          border: 1px solid #ccc;
-          padding: 20px;
-          box-shadow: 2px 0 5px rgba(0,0,0,0.1);
-          box-sizing: border-box;
-          align-items: center; /* 메뉴를 수평 가운데 정렬 */
-          border-radius: 10px; /* 모서리를 둥글게 */
-      }
-      .content {
-          flex-grow: 1; /* 남은 공간을 차지하도록 설정 */
-          padding: 20px; 
-          box-sizing: border-box;
-          border: 1px solid #ccc;
-          overflow: auto; /* 내용이 넘칠 경우 스크롤 생성을 위해 */
-          border-radius: 10px; /* 모서리를 둥글게 */
-          background-color:#ccc;
-      }
-      
-        .content_info {
-        	margin-top: 10px;
-          flex-grow: 1; /* 남은 공간을 차지하도록 설정 */
-          padding: 20px;
-          box-sizing: border-box;
-          border: 1px solid #ccc;
-          overflow: auto; /* 내용이 넘칠 경우 스크롤 생성을 위해 */
-          border-radius: 10px; /* 모서리를 둥글게 */
-          background-color:#FFFFFF;
-      }
-      .menu ul {
-          list-style-type: none;
-          padding: 0;
-          text-align: left; /* 왼쪽 정렬 */
-          width: 100%; /* ul 요소가 전체 너비를 차지하게 설정 */
-      }
-      .menu ul li {
-          margin: 10px 0;
-      }
-      .menu ul li a {
-          text-decoration: none;
-          color: #333;
-      }
-      .menu ul li a:hover {
-          text-decoration: underline;
-      }
-      
-      .content ul {
-          list-style: none;
-          padding-left: 0;
-      }
-      .content ul li {
-          margin:10px;
-      }
-
-      .onboarding {
-          display: flex;
-          justify-content: center;
-          gap: 100px;
-          color: #dc143c;
-      }
-  </style>
-  
- 
-    <title>고객문의</title>
-    <style>
-    	h5{
-    	color: white;
-    	}
-    	 textarea {
-   		 	width: 100%;
-    		height: 4em; 
-    		resize: none;
-  		}
-    	
-        body {
+  h5 {
+       	 color: white;
+        }
+        textarea {
+            width: 100%;
+            height: 4em;
+            resize: none;
+        }
+        
+        .body {
             display: flex;
             margin: 0;
             padding: 100px; /* 가장자리 여백 */
             height: calc(100vh - 100px); /* 패딩 값을 제외한 높이 설정 */
             box-sizing: border-box;
             flex-direction: row;
-            gap: 20px;  
+            gap: 20px;
         }
-        .menu { 
+        
+        .body .menu { 
             display: flex;
             flex-direction: column;
             width: 350px;
@@ -220,63 +134,56 @@ doRetrieveRtn.addEventListener("click",function(event){
             align-items: center; /* 메뉴를 수평 가운데 정렬 */
             border-radius: 10px; /* 모서리를 둥글게 */
         }
-        .content {
-            flex-grow: 1; /* 남은 공간을 차지하도록 설정 */
-            padding: 20px; 
-            box-sizing: border-box;
-            border: 1px solid #ccc;
-            overflow: auto; /* 내용이 넘칠 경우 스크롤 생성을 위해 */
-            border-radius: 10px; /* 모서리를 둥글게 */
-            background-color:#ccc;
-        }
         
-          .ask_now {
-          	margin-top: 10px;
+        .body .content {
             flex-grow: 1; /* 남은 공간을 차지하도록 설정 */
             padding: 20px;
             box-sizing: border-box;
             border: 1px solid #ccc;
             overflow: auto; /* 내용이 넘칠 경우 스크롤 생성을 위해 */
             border-radius: 10px; /* 모서리를 둥글게 */
-            background-color:#FFFFFF;
+            background-color: #ccc;
         }
         
-           .ask_pass {
-          	margin-top: 10px;
+        .body .content_info {
+            margin-top: 10px;
             flex-grow: 1; /* 남은 공간을 차지하도록 설정 */
             padding: 20px;
             box-sizing: border-box;
             border: 1px solid #ccc;
             overflow: auto; /* 내용이 넘칠 경우 스크롤 생성을 위해 */
             border-radius: 10px; /* 모서리를 둥글게 */
-            background-color:#FFFFFF;
+            background-color: #FFFFFF;
         }
         
-        
-        .menu ul {
+        .body .menu ul {
             list-style-type: none;
             padding: 0;
             text-align: left; /* 왼쪽 정렬 */
             width: 100%; /* ul 요소가 전체 너비를 차지하게 설정 */
         }
-        .menu ul li {
+        
+        .body .menu ul li {
             margin: 10px 0;
         }
-        .menu ul li a {
+        
+        .body .menu ul li a {
             text-decoration: none;
             color: #333;
         }
-        .menu ul li a:hover {
+        
+        .body .menu ul li a:hover {
             text-decoration: underline;
         }
         
-        .content ul {
+        .body .content ul {
             list-style: none;
             padding-left: 0;
         }
-        .content ul li {
-            margin:10px;
-        }
+        
+        .body .content ul li {
+            margin: 10px;
+        } 
 
         .onboarding {
             display: flex;
@@ -284,8 +191,9 @@ doRetrieveRtn.addEventListener("click",function(event){
             gap: 100px;
             color: #dc143c;
         } 
-    </style>
+  </style> 
 </head>
+<div class ="body">
 <body>
     <div class="menu">
         
@@ -295,17 +203,12 @@ doRetrieveRtn.addEventListener("click",function(event){
             <li><input type="button" value="내프로필" class="btn btn-light " id="profBtn" ></li>
             <li><input type="button" value="예약"    class="btn btn-light " id="doRetrieveR" ></li>
             <li><input type="button" value="리뷰"    class="btn btn-light " id="doRetrieveV" ></li>
-            <li><input type="button" value="고객문의" class="btn btn-light " id="doRetrieveX" ></li>
+            <li><input type="button" value="고객문의" class="btn btn-outline-success " id="doRetrieveX" ></li>
         </ul>
         
          <hr>
           <hr>
-           <hr>
-       
-        <ul class="onboarding">
-           <button type="button" class="btn btn-light">홈</button>
-           <button type="button" class="btn btn-light">로그아웃</button>
-        </ul>
+           <hr> 
         
     </div>
     <div class="content">
@@ -360,4 +263,6 @@ doRetrieveRtn.addEventListener("click",function(event){
     </div>
 <script src="/WEB02/assets/js/bootstrap.bundle.min.js"></script>
 </body>
+</div>
+   <jsp:include page="/reserver/jsp/footer.jsp"></jsp:include>
 </html>
