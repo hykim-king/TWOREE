@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css"> 
-<title>예약현황</title>
+<title>리뷰쓰기</title>
 <style>
     h5{
         color: white;
@@ -42,8 +42,8 @@
 </head>
 <body>
     <div class="left-section">
-        <h2>전체</h2> 
-        <h2>예약내역</h2>
+        <h2>리뷰</h2> 
+        <h2>작성</h2>
     </div>
     <div class="right-section">
         <!-- 버튼 -->
@@ -55,7 +55,7 @@
        <div class="table-container">
           <table class="table table-hover">
           <thead>
-                    <tr class="table-warning table-hover table-bordered" id="option_reserver">
+                    <tr class="table-dark table-hover table-bordered" id="option_reserver">
                  	<th>예약정보</th>	
                  	<th>개인정보</th>	
                  	<th>메뉴</th>	
