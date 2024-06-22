@@ -28,23 +28,23 @@
 	<div class="my_page">
 		<ul>
 			<li class="shop_name"><%=user.getName()%></li>
-			<input type="button" class="main_btn" id="reserve_confirm" value="가게 예약 내역">
+			<input type="button" class="main_btn" id="to_my_page" value="My page">
 		</ul>
 	</div>
 <script src="/TWOREE/shop/js/popper_min.js"></script>
     <script>
     
     $(document).ready(function() {
-		const reserveConfirmBtn = document.querySelector("#reserve_confirm");
+		const reserveConfirmBtn = document.querySelector("#to_my_page");
 		     	
 		reserveConfirmBtn.addEventListener("click", function(event){
-	     		console.log("reserveConfirmBtn click event" + event)
-	     		reserveConfirm();
+	     		console.log("to_my_page click event" + event)
+	     		to_my_page();
 	     	});
 		
-    	function reserveConfirm(){
-    		console.log('reserveConfirm()');
-    		window.open("/TWOREE/myPage/jsp/my_p.jsp");
+    	function to_my_page(){
+    		console.log('to_my_page()');
+    		window.open("/TWOREE/user/myPage.do?work_div=doSelectOne");
     		//window.location.href = "/TWOREE/shop/shop.do?work_div=";
     	}
     });

@@ -53,9 +53,8 @@ public class UserController implements ControllerV, PLog {
     	log.debug("-----------------");		
     	
     	UserDTO inVO = new UserDTO(); 
-    	String userId = StringUtill.nvl(request.getParameter("userId"),"0");
-    	
-    	inVO.setUserId(userId);
+    	HttpSession session=request.getSession();
+    	inVO=(UserDTO)session.getAttribute("user");
     	log.debug("inVO:"+inVO);
     	
     	//this.service.selectOneReadCnt(inVO);
