@@ -45,6 +45,7 @@ private static final long serialVersionUID = 1L;
     ShopNoticeService shopNoticeService;
     ShopReserveSetService shopReserveSetService;
     OffDayService offDayService;
+    UserService userService;
     
     public ShopController() {
     	log.debug("=====================");
@@ -60,6 +61,7 @@ private static final long serialVersionUID = 1L;
 		shopNoticeService= new ShopNoticeService();
 		shopReserveSetService=new ShopReserveSetService();
 		offDayService = new OffDayService();
+		userService= new UserService();
     }
 
 	protected void doGet(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
@@ -332,11 +334,12 @@ private static final long serialVersionUID = 1L;
 		log.debug("=====================");
 		ShopDTO shopinVO =new ShopDTO();
 		ShopDetailDTO shopDetailinVO = new ShopDetailDTO();
+		HttpSession session = req.getSession();
+		UserDTO user = (UserDTO)session.getAttribute("user");
 		
 		
-		
-		int shopNo = Integer.parseInt(StringUtill.nvl(req.getParameter("shop_no"), "0"));
-	
+		int shopNo = userService.getMyShopNo(user);
+	    
 		shopinVO.setShopNo(shopNo);
 		shopDetailinVO.setShopNo(shopNo);
         

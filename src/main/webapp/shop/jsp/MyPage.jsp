@@ -44,7 +44,7 @@
 		
     	function to_my_page(){
     		console.log('to_my_page()');
-    		window.open("/TWOREE/user/myPage.do?work_div=doSelectOne");
+    		window.location.replace("/TWOREE/user/myPage.do?work_div=doSelectOne");
     		//window.location.href = "/TWOREE/shop/shop.do?work_div=";
     	}
     });

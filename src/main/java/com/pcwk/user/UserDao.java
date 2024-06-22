@@ -23,7 +23,55 @@ public class UserDao implements WorkDiv<UserDTO> {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+    
+	
+	public int getMyShopNo(UserDTO param){
+		
+		Connection conn = connectionMaker.getConnection();
+		ResultSet rs = null;
+		PreparedStatement pstmt = null;
+		StringBuilder sb = new StringBuilder(100);
+		int shopNo=0;
+		sb.append(" select shop_no      \n");
+		sb.append(" from shop           \n");
+		sb.append(" where manager_id=?  \n");
+		
+		log.debug("1.sql:\n"+sb.toString());
+		log.debug("2.conn:"+conn);
+		log.debug("3.param:"+param);
+		
+		try {
+			pstmt = conn.prepareStatement(sb.toString());
+			log.debug("4.pstmt:"+pstmt);
+			
+			pstmt.setString(1, param.getUserId());
+			
+			rs = pstmt.executeQuery();
+			log.debug("5.rs:" +rs);
+			if(null==rs) {
+				return 0;
+			}
+			if(rs.next()) {
+				shopNo = rs.getInt("shop_no");
+					
+			}
+			
+			
+		}catch (SQLException e) {
+			log.debug("____________________________");
+			log.debug("SQLException"+e.getMessage());
+			log.debug("____________________________");
+		}finally { 
+			DBUtil.close(conn, pstmt, rs);
+		log.debug("5. finally : conn : {} pstmt : {} rs : {}", conn, pstmt, rs);
+		}
+		log.debug("6. flag : {}", shopNo);
+		
+		
+		return shopNo;
+	}
+	
+	
 	@Override
 	public int doSave(UserDTO param) {
 		int flag =0;

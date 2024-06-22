@@ -134,7 +134,8 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 		log.debug("6. flag : {}", flag);
 		return flag;
 	}
-
+    
+	
 	@Override
 	public int doDelete(ShopDTO param) {
 		int flag = 0;

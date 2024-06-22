@@ -18,6 +18,10 @@ public class UserService implements PLog {
 		return uao.idCheck(param);
 	}
 	
+	public int getMyShopNo(UserDTO param){
+	    return uao.getMyShopNo(param);
+	}
+	
 	public int loginStatus(UserDTO param) {
 		int result = 0;
 		int flag = uao.idCheck(param);
