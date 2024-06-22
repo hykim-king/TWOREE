@@ -1,7 +1,7 @@
 package com.pcwk.ehr.cmn;
 
 import java.io.IOException;
-
+import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -19,8 +19,9 @@ public interface ControllerV {
 	 * @param response
 	 * @throws ServletException
 	 * @throws IOException
+	 * @throws NoSuchAlgorithmException 
 	 */
-	public JView doWork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException;
+	public JView doWork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NoSuchAlgorithmException;
 		
 
 }

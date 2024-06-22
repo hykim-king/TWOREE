@@ -1,7 +1,7 @@
 package com.pcwk.ehr.cmn;
 
 import java.io.IOException;
-
+import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,15 +68,28 @@ public class FrontControllerV extends HttpServlet implements PLog {
 		
 		//각각의 dowork를 호출한다. 
 		log.debug("service:1");
-		JView jview = controller.doWork(request, response);
-		log.debug("service:2");
-		log.debug("jview:{}",jview);  
-		
-		//각각의 컨트롤러가 forward 로직을 제대로 수행하고 있는지 하나하나
-		//신경쓸 필요가 없고 JView 객체만 제대로 반환한다면 무리없이 작동한다.
-		if(null != jview && jview.getViewName().length()>1) {
-			jview.render(request, response);
+		JView jview;
+		try {
+			jview = controller.doWork(request, response);
+			log.debug("service:2");
+			log.debug("jview:{}",jview);  
+			
+			//각각의 컨트롤러가 forward 로직을 제대로 수행하고 있는지 하나하나
+			//신경쓸 필요가 없고 JView 객체만 제대로 반환한다면 무리없이 작동한다.
+			if(null != jview && jview.getViewName().length()>1) {
+				jview.render(request, response);
+			}
+		} catch (NoSuchAlgorithmException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (ServletException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
+		
 	}
 
 }

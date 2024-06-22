@@ -1,6 +1,7 @@
 package com.pcwk.user;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.servlet.RequestDispatcher;
@@ -14,6 +15,7 @@ import com.google.gson.Gson;
 import com.pcwk.ask.AskDTO;
 import com.pcwk.ask.AskService;
 import com.pcwk.ehr.cmn.ControllerV;
+import com.pcwk.ehr.cmn.EncryptUtil;
 import com.pcwk.ehr.cmn.JView;
 import com.pcwk.ehr.cmn.MessageVO;
 import com.pcwk.ehr.cmn.PLog;
@@ -316,7 +318,7 @@ public class UserController implements ControllerV, PLog {
 			 return new JView("/myPage/jsp/my_x.jsp");	
 		}
 	
-	public JView doUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public JView doUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NoSuchAlgorithmException {
 		log.debug("-----------------");
 		log.debug("doUpdate()");
 		log.debug("-----------------");
@@ -324,7 +326,7 @@ public class UserController implements ControllerV, PLog {
 		UserDTO  inVO=new UserDTO();
 		
 		String userId = StringUtill.nvl(request.getParameter("userId"),"");
-		String password = StringUtill.nvl(request.getParameter("password"),"");
+		String password = EncryptUtil.Encrypt(StringUtill.nvl(request.getParameter("password"),""));
 		String name = StringUtill.nvl(request.getParameter("name"),"");
 		String userEmail = StringUtill.nvl(request.getParameter("userEmail"),"");
 		String tel = StringUtill.nvl(request.getParameter("tel"),"");
@@ -368,7 +370,7 @@ public class UserController implements ControllerV, PLog {
 		return null;
 	} 
 	@Override
-	public JView doWork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public JView doWork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NoSuchAlgorithmException {
 		log.debug("-------------------");
     	log.debug("doWork()");
     	log.debug("-------------------");
