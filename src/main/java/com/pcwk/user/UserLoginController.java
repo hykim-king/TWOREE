@@ -32,14 +32,14 @@ public class UserLoginController implements ControllerV, PLog {
 	}
 
 	// 로그인
-	public JView login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public JView login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NoSuchAlgorithmException {
 		log.debug("-------------------");
 		log.debug("login()");
 		log.debug("-------------------");
 		UserDTO inVO = new UserDTO();
 
 		String userId = StringUtill.nvl(request.getParameter("userId"), "");
-		String password = StringUtill.nvl(request.getParameter("password"), "");
+		String password = EncryptUtil.Encrypt(StringUtill.nvl(request.getParameter("password"), ""));
 
 		inVO.setUserId(userId);
 		inVO.setPassword(password);
@@ -90,11 +90,10 @@ public class UserLoginController implements ControllerV, PLog {
 
 		log.debug("session()" + session);
 
-		String viewName = "";
+		String viewName = "/User/userJsp/login.jsp";
 		if (null != session) {
 			log.debug("session()" + session);
 			session.invalidate();
-			viewName = "";
 		}
 
 		return new JView(viewName);

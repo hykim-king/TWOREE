@@ -2,6 +2,20 @@
     pageEncoding="UTF-8"%>
     <!DOCTYPE html>
 <html lang="ko">
+<script>
+const logOutBtn = document.querySelector("#logOut");
+logOutBtn.addEventListener("click", function(event){
+	console.log('logOut click event'+event);
+	logOut();
+});
+
+function logOut(){
+	console.log('logOut');
+	window.location.replace("/TWOREE/login/login.do?work_div=logout");
+}
+
+
+</script>
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css"> 
@@ -36,7 +50,7 @@
 <body>
     <header>
         <h1>TWOREE</h1>
-        <button class="btn btn-success">로그아웃</button>
+        <button class="btn btn-success" id="logOut">로그아웃</button>
     </header>
 </body>
 </html>
