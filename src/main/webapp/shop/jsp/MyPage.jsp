@@ -6,8 +6,11 @@
 <%@page import="com.pcwk.shop.ShopDao"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    <%
+<%
+    
     UserDTO user= (UserDTO)session.getAttribute("user");
+    String myPageList = (String)request.getAttribute("myPageList");  
+	SearchDTO searchCon = (SearchDTO)request.getAttribute("vo");
 	
 %>
 <!DOCTYPE html>
@@ -24,10 +27,28 @@
 <body>
 	<div class="my_page">
 		<ul>
-			<li class="shop_name"><%=user.getName() %></li>
-			<li>소유 가게</li>  
+			<li class="shop_name"><%=user.getName()%></li>
+			<input type="button" class="main_btn" id="reserve_confirm" value="가게 예약 내역">
 		</ul>
 	</div>
 <script src="/TWOREE/shop/js/popper_min.js"></script>
+    <script>
+    
+    $(document).ready(function() {
+		const reserveConfirmBtn = document.querySelector("#reserve_confirm");
+		     	
+		reserveConfirmBtn.addEventListener("click", function(event){
+	     		console.log("reserveConfirmBtn click event" + event)
+	     		reserveConfirm();
+	     	});
+		
+    	function reserveConfirm(){
+    		console.log('reserveConfirm()');
+    		window.open("/TWOREE/myPage/jsp/my_p.jsp");
+    		//window.location.href = "/TWOREE/shop/shop.do?work_div=";
+    	}
+    });
+    	
+    </script>
 </body>
 </html>

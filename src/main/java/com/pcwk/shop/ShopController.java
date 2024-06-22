@@ -28,6 +28,8 @@ import com.pcwk.reserve.ReserveDTO;
 import com.pcwk.reserve.ReserveService;
 import com.pcwk.review.ReviewDTO;
 import com.pcwk.review.ReviewService;
+import com.pcwk.user.UserDTO;
+import com.pcwk.user.UserService;
 
 
 
@@ -42,7 +44,8 @@ private static final long serialVersionUID = 1L;
     ReviewService reviewService;
     ShopNoticeService shopNoticeService;
     ShopReserveSetService shopReserveSetService;
-    OffDayService offDayService; 
+    OffDayService offDayService;
+    
     public ShopController() {
     	log.debug("=====================");
 		log.debug("ShopController()");
@@ -205,9 +208,12 @@ private static final long serialVersionUID = 1L;
 		log.debug("=====================");
 		log.debug("doSaveMenu()");
 		log.debug("=====================");
+		
 		String shopName = StringUtill.nvl(req.getParameter("shopName"), "");
 		String managerId = StringUtill.nvl(req.getParameter("userId"), "");
+		
 		ShopDTO inVO = new ShopDTO();
+		
 		inVO.setShopName(shopName);
 		inVO.setManagerId(managerId);
 		inVO.setIsVerified("N");
@@ -512,6 +518,7 @@ private static final long serialVersionUID = 1L;
 		log.debug("=====================");
 		log.debug("doRetrieve()");
 		log.debug("=====================");
+		
 		HttpSession session = req.getSession();
 		
 		JView viewName = null;
@@ -524,6 +531,8 @@ private static final long serialVersionUID = 1L;
 		String searchWord = StringUtill.nvl(req.getParameter("search_word"),"");
 		String searchDiv = StringUtill.nvl(req.getParameter("search_div"),"");
 		
+		SearchDTO myPageListInVO= new SearchDTO();
+		
 		log.debug("pageNO : {}", pageNo);
 		log.debug("pageSize : {}", pageSize);
 		log.debug("searchWord : {}", searchWord);
@@ -535,8 +544,15 @@ private static final long serialVersionUID = 1L;
 		inVO.setSearchDiv(searchDiv);
 		log.debug("inVO : {}", inVO);     
 		
+		myPageListInVO.setPageNo(Integer.parseInt(pageNo));
+		myPageListInVO.setPageSize(40);
+		myPageListInVO.setSearchWord("admin");
+		myPageListInVO.setSearchDiv(searchDiv);
+		log.debug("myPageListInVO : {}", myPageListInVO);     
+		
 		//service call
 		List<ShopDTO> list = shopService.doRetrieve(inVO);
+		List<ShopDTO> myPageList = shopService.doRetrieve(myPageListInVO);
 		
 		int i =0;
 		
@@ -544,9 +560,16 @@ private static final long serialVersionUID = 1L;
 			log.debug("i : {}, vo : {} :", ++i, vo);
 		}
 		
+		for(ShopDTO vo : myPageList) {
+			log.debug("i : {}, vo : {} :", ++i, vo);
+		}
+		
 		Gson gson=new Gson();
 		String jsonString = gson.toJson(list);
-        req.setAttribute("shopList", jsonString);
+        req.setAttribute("mainPageList", jsonString);
+        
+        jsonString = gson.toJson(list);
+        req.setAttribute("myPageList", jsonString);
 		
 		//req.setAttribute("list", list);
 		
@@ -635,4 +658,5 @@ private static final long serialVersionUID = 1L;
         return null;
 		
 	}
+
 }

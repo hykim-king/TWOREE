@@ -8,7 +8,7 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/cmn/common.jsp" %>
 <%
-	String list = (String)request.getAttribute("shopList");  
+	String list = (String)request.getAttribute("mainPageList");  
 	SearchDTO searchCon = (SearchDTO)request.getAttribute("vo");
 %>
 <!DOCTYPE html>

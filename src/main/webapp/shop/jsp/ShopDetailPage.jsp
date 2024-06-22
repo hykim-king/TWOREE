@@ -134,10 +134,6 @@
      	}
 	}
 	
-	
-	
-	
-	
 </script>
 <script src="/TWOREE/shop/js/popper_min.js"></script>
 </body>
