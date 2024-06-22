@@ -68,8 +68,9 @@
 </script>
 </head>
 <body>
-    <hr>
     <div class="container">
+	    <jsp:include page="/reserver/jsp/header.jsp"></jsp:include>
+	    <hr>
         <form action="/TWOREE/shop/shop.do" name="board_frm" method="get" id="board_frm"  class="row g-2 align-items-center">
             <div class="col-sm-4">
             <input type="hidden" name="work_div"  id="work_div" placeholder="작업구분">
@@ -94,12 +95,15 @@
             </div>
         </form>
         <hr>
-	<jsp:include page="/shop/jsp/MyPage.jsp" flush="false"/>
-        <div class="main_page" id ="page_list">
-           <!-- position for ul  -->
+        <div class="page_div">
+			<jsp:include page="/shop/jsp/MyPage.jsp" flush="false"/>
+		        <div class="main_page" id ="page_list">
+		           <!-- position for ul  -->
+		        </div>
+		    <jsp:include page="/shop/jsp/ShopDetailPage.jsp" flush="false"/>
         </div>
-    <jsp:include page="/shop/jsp/ShopDetailPage.jsp" flush="false"/>
     </div>
+    <jsp:include page="/reserver/jsp/footer.jsp"></jsp:include>
     <script>
     
     
@@ -127,4 +131,5 @@
     </script>
 <script src="/TWOREE/shop/js/popper_min.js"></script>
 </body>
+<jsp:include page="/reserver/jsp/footer.jsp"></jsp:include>
 </html>

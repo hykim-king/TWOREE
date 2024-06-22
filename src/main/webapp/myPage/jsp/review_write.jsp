@@ -21,6 +21,7 @@
 <script src="/WEB02/assets/js/jquery_3_7_1.js"></script>
 </head>
 <body>
+<jsp:include page="/reserver/jsp/header.jsp"></jsp:include>
 		<div class="container my-5">
         <h1 class="mb-4">리뷰쓰기</h1>
         <form id="menuForm">
@@ -64,5 +65,6 @@
             </div>
         </form>
     </div>
+    <jsp:include page="/reserver/jsp/footer.jsp"></jsp:include>
 </body>
 </html>

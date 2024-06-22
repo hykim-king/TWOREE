@@ -1,23 +1,7 @@
-  * {
-    margin: 0;
-    padding: 0;
-  }    
   
-  table{
-     width: 600px;
-     border-collapse: collapse; 
-  }
-  
-  td,th {
-     border-bottom: 1px solid lightgrey;
-     padding: 5px;
-  }
-  
-  th {
-     background: gray;
-     color: #fff;
-  }
-  
+  .container{
+  	width :
+  }   
   .txt_left {
     text-align: left;
   }
@@ -31,7 +15,7 @@
   }
   ul{
     list-style: none;
-    width : 400px;
+    width : 300px;
     padding : 10px;
     margin : 10px 5px 30px 10px;
     border : 3px solid #ECBD58;
@@ -48,6 +32,9 @@
     font-weight: bold;
     color: grey;
   }
+  .page_div{
+  	
+  }
   .my_page {
     float : left;
   }
@@ -55,14 +42,13 @@
     display: inline-block;
     margin-left : 25px;
   }
+  .detail_page{
+  }
 
   #main_page_ul{
   	height : 35px;
   }
 
-  .detail_page{
-    float : right;
-  }
   .main_btn{
     width : 100px;
     height : 40px;
