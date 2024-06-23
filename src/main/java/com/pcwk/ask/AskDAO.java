@@ -1,4 +1,4 @@
-package com.pcwk.ask;
+ package com.pcwk.ask;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -203,7 +203,7 @@ public class AskDAO implements WorkDiv<AskDTO> {
 	
 	
 	/***
-	 * 수정 update
+	 * �닔�젙 update
 	 */
 	@Override
 	public int doUpdate(AskDTO param) {
@@ -287,7 +287,7 @@ public class AskDAO implements WorkDiv<AskDTO> {
 	}
 	
 	/***
-	 * 삭제 delete
+	 * �궘�젣 delete
 	 */
 	@Override
 	public int doDelete(AskDTO param) {
@@ -332,15 +332,15 @@ public class AskDAO implements WorkDiv<AskDTO> {
 	
 	
 	/***
-	 * 단건조회
+	 * �떒嫄댁“�쉶
 	 * 
 	 */
 	@Override
 	public AskDTO doSelectOne(AskDTO param) {
-		AskDTO outVO = null; // 단건조회 결과
+		AskDTO outVO = null; // �떒嫄댁“�쉶 寃곌낵
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null; // SQL+PARAM
-		ResultSet rs = null;// SQL문의 결과
+		ResultSet rs = null;// SQL臾몄쓽 寃곌낵
 
 		StringBuilder sb = new StringBuilder(300);
 		sb.append("SELECT           \n");
@@ -362,11 +362,11 @@ public class AskDAO implements WorkDiv<AskDTO> {
 
 		try {
 
-			// param설정
+			// param�꽕�젙
 			pstmt = conn.prepareStatement(sb.toString());
 
 			pstmt.setInt(1, param.getAskNo());
-			// SELECT실행
+			// SELECT�떎�뻾
 			rs = pstmt.executeQuery();
 			
 			log.debug("5.rs:" + rs);
@@ -382,14 +382,15 @@ public class AskDAO implements WorkDiv<AskDTO> {
 				outVO.setAskDate(rs.getString("ask_date"));
 				outVO.setShopAnswer(rs.getString("shop_answer"));
 				outVO.setAnswerDate(rs.getString("answer_date "));
+				outVO.setAskNo(rs.getInt("ask_no"));
 				
 				log.debug("6.outVO:" + outVO);
 			}
 
 		} catch (SQLException e) {
-			log.debug("────────────────");
+			log.debug("---------------------");
 			log.debug("SQLException:" + e.getMessage());
-			log.debug("────────────────");
+			log.debug("---------------------");
 		} finally {
 
 			DBUtil.close(conn, pstmt,rs);

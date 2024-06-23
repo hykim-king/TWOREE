@@ -22,17 +22,17 @@ public class AskMain implements PLog {
 	    	int flag =0;
 	    	ask.setShopNo(2);
 	    	ask.setUserId("user1");
-	    	ask.setAskState("문의 요청");
-	    	ask.setUserAsk("고객 문의");
+	    	ask.setAskState("臾몄쓽 �슂泥�");
+	    	ask.setUserAsk("怨좉컼 臾몄쓽");
 	    	ask.setAskDate("20240611");
-	    	ask.setShopAnswer("답변");
+	    	ask.setShopAnswer("�떟蹂�");
 	    	ask.setAnswerDate("20240611");
 	    	
 	    	flag=dao.doSave(ask);
 	    	if (0 == flag) {
-				log.debug("등록 실패 :{}", flag);
+				log.debug("�벑濡� �떎�뙣 :{}", flag);
 			} else {
-				log.debug("등록 성공 :{}", flag);
+				log.debug("�벑濡� �꽦怨� :{}", flag);
 			}
 	    }
 	
@@ -44,9 +44,9 @@ public class AskMain implements PLog {
     	flag=dao.doDelete(ask);
     	
     	if (0 == flag) {
-			log.debug("삭제 실패 :{}", flag);
+			log.debug("�궘�젣 �떎�뙣 :{}", flag);
 		} else {
-			log.debug("삭제 성공 :{}", flag);
+			log.debug("�궘�젣 �꽦怨� :{}", flag);
 		}
 	
 	}
@@ -64,9 +64,9 @@ public class AskMain implements PLog {
     	
 		int flag = dao.doUpdate(ask);
 		if (0 == flag) {
-			log.debug("업데이트 실패 ");
+			log.debug("�뾽�뜲�씠�듃 �떎�뙣 ");
 		} else {
-			log.debug("업데이트 성공 ");
+			log.debug("�뾽�뜲�씠�듃 �꽦怨� ");
 		}
 		
 	}
@@ -76,9 +76,9 @@ public class AskMain implements PLog {
 		ask.setAskNo(42);
 		AskDTO outVO = dao.doSelectOne(ask);
 		if (null != outVO) {
-			log.debug("단건 조회 성공");
+			log.debug("�떒嫄� 議고쉶 �꽦怨�");
 		} else {
-			log.debug("단건 조회 실패");
+			log.debug("�떒嫄� 議고쉶 �떎�뙣");
 		}
 		log.debug(outVO);
 	}
@@ -105,8 +105,8 @@ public class AskMain implements PLog {
 		//a.doSave();	
 	    //a.doDelete();
 		//a.doUpdate();
-		//a.doSelectOne();
-		a.doRetrieve();
+		a.doSelectOne();
+		//a.doRetrieve();
 
 	}
 

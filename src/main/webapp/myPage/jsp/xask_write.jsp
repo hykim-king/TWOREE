@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@page import="com.pcwk.user.UserDTO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -7,8 +8,7 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css">
-<script >
- 	
+<script > 
 	const userId = document.querySelector("#userId");    
 
 
@@ -25,7 +25,7 @@
             
                 <label for="shopNo" class="col-sm-2 col-form-label" >가게번호 :</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="shopNo" disabled="disabled"  value="${outVO.shopNo}"    >
+                    <input type="text" class="form-control" id="shopNo"   value="${outVO.shopNo}"    >
                 </div>
             </div>
             
