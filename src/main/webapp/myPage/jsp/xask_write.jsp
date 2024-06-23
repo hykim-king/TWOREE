@@ -14,7 +14,14 @@
 <script src="/TWOREE/myPage/js/common.js"></script>
 <script > 
 document.addEventListener("DOMContentLoaded", function(){
-	const userId = document.querySelector("#userId");   
+	const workDiv = document.querySelector("#workDiv"); 
+	const shopNo = document.querySelector("#shopNo");
+	const userId = document.querySelector("#userId");
+	const userAsk = document.querySelector("#userAsk"); 
+	
+	const saveBtn = document.querySelector("#saveBtn"); 
+	const toAsk = document.querySelector("#toAsk");
+	
 	
 	toAsk.addEventListener("click",function(event){
 		console.log('toReview click'); 
@@ -37,6 +44,79 @@ document.addEventListener("DOMContentLoaded", function(){
 	    }
 		})//-ajax
 		});//-Vtn
+		
+		
+	saveBtn.addEventListener("click", function(event){
+			console.log('saveBtn click event'+event); 
+			askSave();
+		});
+		
+		
+		function askSave() {
+			console.log('askSave' ); 
+			
+			
+			 if(isEmpty(shopNo.value) == true){
+				 shopNo.focus();
+			      alert('가게번호를 입력 하세요.');
+			      return;
+			    }
+			 if(isEmpty(userId.value) == true){
+				 userId.focus();
+			      alert('유저이름를 입력 하세요.');
+			      return;
+			    }
+			 if(isEmpty(userAsk.value) == true){
+				 userAsk.focus();
+			      alert('내용를 입력 하세요.');
+			      return;
+			    }
+			 $.ajax({
+			        type: "POST", 
+			        url:"/TWOREE/user/myPage.do",
+			        dataType:"html",
+			        data:{
+			            "work_div":"doSaveAsk",
+			            "shopNo": shopNo.value,
+			            "userId": userId.value,
+			            "userAsk": userAsk.value
+			        },
+			        success:function(response){
+			            console.log("success data:"+response);  
+			     
+			         if(response){
+			        	 try{
+			        		  const messageVO = JSON.parse(response);
+			        		  console.log("messageVO.messageId:"+messageVO.messageId);
+			        		  console.log("messageVO.msgContents:"+messageVO.msgContents);
+			        		  
+			        		  if(isEmpty(messageVO)==false && "1"===messageVO.messageId){
+			        			alert(messageVO.msgContents);
+			        			window.location.href="/TWOREE/user/myPage.do";
+			        		  }else{
+			        			  alert(messageVO.msgContents); 
+			        		   }
+			        		  
+			        	    }catch(e){
+			        		   console.error("JSON 파싱 에러:",e);
+			        	    }
+			        	
+			            }else{
+			        	   console.warn("response가 null혹은 undefined.");
+			        	   alert("response가 null혹은 undefined.");
+			            }
+			        
+			          },
+			          error:function(data){
+			        	  console.log("error:"+data);
+			          }
+			 
+			 });//--ajaxend
+			
+		}//-save end
+	 
+		
+		
 	}) ;//--document
 
 
@@ -52,22 +132,22 @@ document.addEventListener("DOMContentLoaded", function(){
             
                 <label for="shopNo" class="col-sm-2 col-form-label" >가게번호 :</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="shopNo"   value="${outVO.shopNo}"    >
+                    <input type="text" class="form-control" name="shopNo" id="shopNo"       >
                 </div>
             </div>
             
              <br>
             <div class="form-group row">
-                <label for="userID" class="col-sm-2 col-form-label">문의자 :</label>
+                <label for="userId" class="col-sm-2 col-form-label">문의자 :</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="userId" disabled="disabled"  value="${outVO.userId}" >
+                    <input type="text" class="form-control"name="userId"  id="userId" value="${outVO.userId}" >
                 </div>
             </div> 
             <br>
             <div class="form-group row">
-                <label for="reviewContent" class="col-sm-2 col-form-label">문의 내용:</label>
+                <label for="userAsk" class="col-sm-2 col-form-label">문의 내용:</label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" id="reviewContent" rows="4"  value="${outVO.reviewContent}"  ></textarea>
+                    <textarea class="form-control" id="userAsk" name="userAsk" rows="4"   ></textarea>
                 </div>
             </div>
             
@@ -77,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function(){
            
             <div class="form-group row">
                 <div class="col-sm-10 offset-sm-2">
-                    <button type="button" class="btn btn-primary" onclick="submitAnswer()">답변 작성</button>
+                    <button type="button" class="btn btn-primary" id="saveBtn">답변 작성</button>
                     <button type="reset" class="btn btn-secondary" id="toAsk" >취소</button>
                 </div>
             </div>

@@ -48,6 +48,50 @@ public class UserController implements ControllerV, PLog {
     	askService = new AskService();
     	    	
 	} 
+	
+	public JView doSaveAsk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NoSuchAlgorithmException {
+		log.debug("-----------------");
+		log.debug("doSaveAsk()");
+		log.debug("-----------------");
+        
+		AskDTO inVO = new AskDTO();
+		  
+		String shopNo = StringUtill.nvl(request.getParameter("shopNo"), "");
+		String userAsk = StringUtill.nvl(request.getParameter("userAsk"), "");
+		String userId = StringUtill.nvl(request.getParameter("userId"), "");
+		  
+		inVO.setShopNo(Integer.parseInt(shopNo));
+		inVO.setUserId(userId);
+		inVO.setUserAsk(userAsk);
+		  
+		log.debug("inVO:"+inVO);
+		int flag = askService.doSave(inVO);
+		String message = "";
+		log.debug("flag:"+flag);
+		
+		if(1==flag) {
+			message = "success";
+		}else {
+			message = "fail";
+		}
+		
+		MessageVO  messageVO=new MessageVO();
+		messageVO.setMessageId(String.valueOf(flag));
+		messageVO.setMsgContents(message);
+		
+		Gson  gson=new Gson();
+		String jsonString = gson.toJson(messageVO);
+		
+		log.debug("jsonString:"+jsonString);
+		response.setContentType("text/html; charset=UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		out.print(jsonString);
+		
+		return null;
+	}
+
+	
 	public JView doSelectOne(HttpServletRequest request, HttpServletResponse response)
     	throws ServletException, IOException {
       	log.debug("-----------------");
@@ -411,6 +455,11 @@ public class UserController implements ControllerV, PLog {
     	log.debug("workDiv:{}",workDiv);
     	
     	switch(workDiv) {
+    	
+    	case"doSaveAsk":
+    		viewName = doSaveAsk(request, response);
+    		break;
+    		
     	case"doSelectOne":
     		viewName = doSelectOne(request, response);
     		break; 
