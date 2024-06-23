@@ -24,8 +24,6 @@ const doRetrieveRtn = document.querySelector("#doRetrieveR");
 const doRetrieveVtn = document.querySelector("#doRetrieveV"); 
 const doRetrieveXtn = document.querySelector("#doRetrieveX");
 
-const mngButton = document.querySelector("#mngButton");
-
 const doUpdateBtn = document.querySelector("#doUpdate");
 const userId = document.querySelector("#userId");
 const password = document.querySelector("#password");   //password
@@ -37,16 +35,6 @@ const birthday = document.querySelector("#birthday");
 //const penaltyDate = document.querySelector("#penaltyDate");
 
 
-mngButton.addEventListener("click", function(event){
-	console.log('mngButton click event'+event);
-	toMngPage();
-});
-
-
-function toMngPage(){
-	console.log('toMngPage function ');
-	window.location.replace("/TWOREE/shop/shop.do?work_div=shop_mng");
-}
 doUpdateBtn.addEventListener("click", function(event){
 	console.log('doUpdateBtn click event'+event);
 	doUpdate();
@@ -449,7 +437,7 @@ $(document).ready(function() {
                      <input class="form-check-input" type="checkbox" id="Switches" checked> 
                      <label class="form-check-label" for="Switches"></label>  
                       </div>--> 
-                    <button type="button" class="btn btn-success" style="float: right;" id ="mngButton">관리하기</button>
+                    <button type="button" class="btn btn-success" style="float: right;">관리하기</button>
                 </li>
                  
             </ul>
