@@ -8,41 +8,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css">
 <script >
-document.addEventListener("DOMContentLoaded", function(){
-	const shopNo = document.querySelector("#shopNo");//contents
-	const userId = document.querySelector("#userId"); 
-	const reviewContent = document.querySelector("#reviewContent"); 
-	const score  = document.querySelector("#score"); 
+ 	
+	const userId = document.querySelector("#userId");    
 
-	toReview.addEventListener("click",function(event){
-		console.log('toReview click'); 
 
-		$.ajax({
-	    type: "GET", 
-	    url:"/TWOREE/user/myPage.do",
-	    dataType:"html",
-	    data:{
-	        "work_div": "doRetrieveR1",
-	        "userId": "user1"
-	    },
-	    success:function(response){//통신 성공
-	        console.log("success data:"+response);
-	         window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveR1&userId="+"user1"); 
-	    },
-	    error:function(response){//실패시 처리
-	            console.log("error:"+response);
-	    }
-		})//-ajax
-		});//-Vtn
-	}) ;//--document
 
 </script>
-<script src="/TWOREE/myPage/js/jquery_3_7_1.js"></script>
-<script src="/TWOREE/myPage/js/common.js"></script>
+
+<script src="/WEB02/assets/js/jquery_3_7_1.js"></script>
 </head>
 <body>
 		<div class="container my-5">
-        <h1 class="mb-4">리뷰쓰기</h1>
+        <h1 class="mb-4">문의 쓰기</h1>
         <form id="menuForm">
             <div class="form-group row">
             
@@ -68,18 +45,13 @@ document.addEventListener("DOMContentLoaded", function(){
             </div>
             
              <br>
-            <div class="form-group row">
-                <label for="score" class="col-sm-2 col-form-label">별점 :</label>
-                <div class="col-sm-10">
-                  <input type="text" class="form-control" id="score"   value="${outVO.score}" >
-                </div>
-            </div>
+            
             
            
             <div class="form-group row">
                 <div class="col-sm-10 offset-sm-2">
                     <button type="button" class="btn btn-primary" onclick="submitAnswer()">답변 작성</button>
-                    <button type="reset" class="btn btn-secondary"  id="toReview" >취소</button>
+                    <button type="reset" class="btn btn-secondary" >취소</button>
                 </div>
             </div>
         </form>

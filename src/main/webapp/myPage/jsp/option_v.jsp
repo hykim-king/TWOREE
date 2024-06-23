@@ -7,8 +7,7 @@
  <%@ include file="/cmn/common.jsp" %>        
 <%
 List<ReserveDTO> list = (List<ReserveDTO>)request.getAttribute("reserverList"); 
-%>
-
+%> 
 
 <!DOCTYPE html>
 <html>
@@ -16,6 +15,37 @@ List<ReserveDTO> list = (List<ReserveDTO>)request.getAttribute("reserverList");
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css"> 
+<script src="/TWOREE/myPage/js/jquery_3_7_1.js"></script>
+<script src="/TWOREE/myPage/js/common.js"></script>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
+const toReview= document.querySelector("#toReview"); 
+
+toReview.addEventListener("click",function(event){
+	console.log('toReview click'); 
+
+	$.ajax({
+    type: "GET", 
+    url:"/TWOREE/user/myPage.do",
+    dataType:"html",
+    data:{
+        "work_div": "doRetrieveV",
+        "userId": "user1"
+    },
+    success:function(response){//통신 성공
+        console.log("success data:"+response);
+         window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveV&userId="+"user1"); 
+    },
+    error:function(response){//실패시 처리
+            console.log("error:"+response);
+    }
+	})//-ajax
+	});//-Vtn
+}) ;//--document
+
+
+</script>
+
 <title>리뷰쓰기</title>
 <style>
     h5{
@@ -50,7 +80,7 @@ List<ReserveDTO> list = (List<ReserveDTO>)request.getAttribute("reserverList");
     }
 </style>
 </head>
-<body>
+<body> 
     <div class="left-section">
         <h2>리뷰</h2> 
         <h2>작성</h2>
@@ -58,8 +88,9 @@ List<ReserveDTO> list = (List<ReserveDTO>)request.getAttribute("reserverList");
   <div class="right-section">
         <!-- 버튼 --> 
         <div class="mb-2 d-grid gap-2 d-md-flex justify-content-md-end"> 
-            <button type="reset" class="btn btn-secondary" value="" >새로고침</button>  
-        </div>
+            <button type="reset" class="btn btn-secondary" value="" >새로고침</button>   
+            <button type="button" class="btn btn-info" id="toReview" >뒤로가기</button>
+        </div> 
         <!--// 버튼 ----------------------------------------------------------------->
        <div class="table-container">
           <table class="table table-hover" id="boardList">
@@ -102,10 +133,17 @@ List<ReserveDTO> list = (List<ReserveDTO>)request.getAttribute("reserverList");
      	
     	const buttons = document.querySelectorAll(".btn-outlne-success");
     	
+    	const shopNo = document.querySelector("#shopNo");
+    	const userId = document.querySelector("#userId");
+    	
+    	const rwrite = document.querySelectorAll("rwrite");
+    	
+    	
     	buttons.forEach(function(button){
     		 button.addEventListener('click',function(){
     			 let hiddenInfo = this.getAttribute('data-hidden-info');
     			 console.log('hiddenInfo:'+hiddenInfo);
+    			 doSelectOne(hiddenInfo);
     		 }); 
     	});
        	//이벤트 핸들러
@@ -115,11 +153,36 @@ List<ReserveDTO> list = (List<ReserveDTO>)request.getAttribute("reserverList");
   			  console.log('row click');
   			  //this(tr) 자식 (td: 마지막 위치)
   			 
-  			  let seqValue = this.querySelector('td:first-child').textContent.trim();
-  			  console.log('seqValue:'+seqValue);
-  			     		  });
+  			  let shopValue = this.querySelector('td:first-child').textContent.trim();
+  			  console.log('shopValue:'+shopValue); 
+  			  
+  			  doSelectOne(shopValue);
+  			   });
   		  
-  	  });
+  	  });//-row
+  	  
+  	  function doSelectOne(shopValue){
+  		
+  		  $.ajax({
+            type: "GET", 
+            url:"/TWOREE/user/myPage.do",
+            asyn:"true",
+            dataType:"html",
+            data:{
+                "work_div":"doSelectOneR1", 
+                "shopNo": "2"
+                
+            },success:function(response){//통신 성공
+                console.log("success data:"+response);
+                window.location.replace("/TWOREE/user/myPage.do?work_div=doSelectOneR1&shopNo="+"2"); 
+           },
+           error:function(response){//실패시 처리
+                   console.log("error:"+response);
+           }
+       	})//-ajax
+  	  };
+ 
+ 
  
     	  
     	

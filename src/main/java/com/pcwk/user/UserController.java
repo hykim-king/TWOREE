@@ -78,9 +78,11 @@ public class UserController implements ControllerV, PLog {
 	    	log.debug("-----------------");		
 	    	
 	    	ReviewDTO inVO = new ReviewDTO(); 
-	    	String shopNo = StringUtill.nvl(request.getParameter("shopNo"),"0");
+	    	String shopNo = StringUtill.nvl(request.getParameter("shopNo"),""); 
+	    	String userId = StringUtill.nvl(request.getParameter("userId"),"");
 	    	
-	    	inVO.setShopNo(Integer.parseInt(shopNo));
+	    	inVO.setShopNo(Integer.parseInt(shopNo)); 
+	    	inVO.setUserId(userId);
 	    	log.debug("inVO:"+inVO);
 	    	
 	    	//this.service.selectOneReadCnt(inVO);
@@ -94,6 +96,31 @@ public class UserController implements ControllerV, PLog {
 	    	
 	    
 	    return new JView("/myPage/jsp/review_write.jsp");
+	    
+	    }
+	public JView doSelectOneX1(HttpServletRequest request, HttpServletResponse response)
+	    	throws ServletException, IOException {
+	      	log.debug("-----------------");
+	    	log.debug("doSelectOneX1()");
+	    	log.debug("-----------------");		
+	    	
+	    	AskDTO inVO = new AskDTO();  
+	    	String userId = StringUtill.nvl(request.getParameter("userId"),"");
+	    	 
+	    	inVO.setUserId(userId);
+	    	log.debug("inVO:"+inVO);
+	    	
+	    	//this.service.selectOneReadCnt(inVO);
+	    	
+	    	AskDTO outVO = askService.doSelectOne(inVO);
+	    	log.debug("outVO:"+outVO); 
+	    	
+	    	
+	    	request.setAttribute("outVO",outVO);
+	    	
+	    	
+	    
+	    return new JView("/myPage/jsp/xask_write.jsp");
 	    
 	    }
 	
@@ -133,10 +160,10 @@ public class UserController implements ControllerV, PLog {
 				log.debug("i: {}, vo: {}",++i,vo);
 			}
 			
-			//UI 데이터 전달
+			//UI �뜲�씠�꽣 �쟾�떖
 			request.setAttribute("reserverList", list);
 			log.debug("list:{}",list);
-			//검색조건 UI로 전달
+			//寃��깋議곌굔 UI濡� �쟾�떖
 					
 			 return new JView("/myPage/jsp/my_r.jsp");	
 		}
@@ -177,10 +204,10 @@ public class UserController implements ControllerV, PLog {
 				log.debug("i: {}, vo: {}",++i,vo);
 			}
 			
-			//UI 데이터 전달
+			//UI �뜲�씠�꽣 �쟾�떖
 			request.setAttribute("reserverList", list);
 			log.debug("list:{}",list);
-			//검색조건 UI로 전달
+			//寃��깋議곌굔 UI濡� �쟾�떖
 					
 			 return new JView("/myPage/jsp/option_v.jsp");	
 		}
@@ -222,7 +249,7 @@ public class UserController implements ControllerV, PLog {
 				log.debug("i: {}, vo: {}",++i,vo);
 			}
 			
-			//UI 데이터 전달
+			//UI �뜲�씠�꽣 �쟾�떖
 			request.setAttribute("reviewList", list); 
 			log.debug("list:{}",list);
 			
@@ -264,7 +291,7 @@ public class UserController implements ControllerV, PLog {
 				log.debug("i: {}, vo: {}",++i,vo);
 			}
 			
-			//UI 데이터 전달
+			//UI �뜲�씠�꽣 �쟾�떖
 			request.setAttribute("reviewList", list); 
 			log.debug("list:{}",list);
 			
@@ -310,7 +337,7 @@ public class UserController implements ControllerV, PLog {
 				log.debug("i: {}, vo: {}",++i,vo);
 			}
 			
-			//UI 데이터 전달
+			//UI �뜲�씠�꽣 �쟾�떖
 			request.setAttribute("askList", list);
 			log.debug("list:{}",list); 
 			
@@ -348,9 +375,9 @@ public class UserController implements ControllerV, PLog {
 		log.debug("flag:"+flag);
 		
 		if(1==flag) {
-			message = "수정 되었습니다.";
+			message = "�닔�젙 �릺�뿀�뒿�땲�떎.";
 		}else {
-			message = "수정 실패!";
+			message = "�닔�젙 �떎�뙣!";
 		}
 		
 		MessageVO  messageVO=new MessageVO();
@@ -387,6 +414,9 @@ public class UserController implements ControllerV, PLog {
     	case"doSelectOneR1":
     		viewName = doSelectOneR1(request, response);
     		break; 
+    	case"doSelectOneX1":
+    		viewName = doSelectOneX1(request, response);
+    		break; 	
     		
     	case"doRetrieveR":
     		viewName = doRetrieveR(request, response);

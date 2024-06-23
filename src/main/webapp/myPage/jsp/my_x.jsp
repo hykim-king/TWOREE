@@ -12,10 +12,9 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css"> 
-<script src="/WEB02/assets/js/jquery_3_7_1.js">
 
-
-<script src="/WEB02/assets/js/jquery_3_7_1.js"></script>
+<script src="/TWOREE/myPage/js/jquery_3_7_1.js"></script>
+<script src="/TWOREE/myPage/js/common.js"></script>
 <script>
 //String outVO = (String)request.getAttribute("outVO");
 
