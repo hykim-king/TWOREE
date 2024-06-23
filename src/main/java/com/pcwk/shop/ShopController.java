@@ -603,7 +603,7 @@ private static final long serialVersionUID = 1L;
 		log.debug("searchDiv : {}", searchDiv);
 		
 		inVO.setPageNo(Integer.parseInt(pageNo));
-		inVO.setPageSize(Integer.parseInt(pageSize));
+		inVO.setPageSize(Integer.parseInt("5"));
 		inVO.setSearchWord(searchWord);
 		inVO.setSearchDiv(searchDiv);
 		log.debug("inVO : {}", inVO);     
@@ -642,7 +642,7 @@ private static final long serialVersionUID = 1L;
 		//RequestDispatcher dispatcher = req.getRequestDispatcher("/jsp/J02/board_list.jsp");
 		//dispatcher.forward(req, res);
 		
-		return viewName = new JView("/shop/jsp/mainpage.jsp");
+		return viewName = new JView("/shop/edit/copy_mainpage.jsp");
 	}
 	
 	public JView doSelectOne(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
