@@ -14,9 +14,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css">
 
-<script src="/WEB02/assets/js/jquery_3_7_1.js">
-
-<script src="/WEB02/assets/js/jquery_3_7_1.js"></script>
+<script src="/TWOREE/myPage/js/jquery_3_7_1.js"></script>
+<script src="/TWOREE/myPage/js/common.js"></script>
 <script>
 //String outVO = (String)request.getAttribute("outVO");
 
@@ -26,13 +25,37 @@ const doRetrieveRtn = document.querySelector("#doRetrieveR");
 const doRetrieveVtn = document.querySelector("#doRetrieveV"); 
 const doRetrieveXtn = document.querySelector("#doRetrieveX");
 
+const doReviewBtn = document.querySelector("#doRetrieveR1");
+
 profBtn.addEventListener("click",function(event){
 	console.log('profBtn click'); 
 	window.location.replace("/TWOREE/user/myPage.do?work_div=doSelectOne&userId="+"user1"); 
 	
 });
+
+	doReviewBtn.addEventListener("click",function(event){
+	console.log('doReviewBtn click'); 
+
+	$.ajax({
+    type: "GET", 
+    url:"/TWOREE/user/myPage.do",
+    dataType:"html",
+    data:{
+        "work_div": "doRetrieveR1",
+        "userId": "user1"
+    },
+    success:function(response){//통신 성공
+        console.log("success data:"+response);
+         window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveR1&userId="+"user1"); 
+    },
+    error:function(response){//실패시 처리
+            console.log("error:"+response);
+    }
+	})//-ajax
+	});//-doReviewBtn
+	
  
-doRetrieveRtn.addEventListener("click",function(event){
+	doRetrieveRtn.addEventListener("click",function(event){
 	console.log('doRetrieveRtn click'); 
 
 	$.ajax({
@@ -235,7 +258,7 @@ doRetrieveRtn.addEventListener("click",function(event){
         <!-- 버튼 --> 
         <div class="mb-2 d-grid gap-2 d-md-flex justify-content-md-end"> 
             <button type="reset" class="btn btn-secondary" value="" >새로고침</button> 
-            <button type=" " class="btn btn-dark" value="" onClick="location.href='my_v.jsp'">리뷰쓰기</button>
+            <button type="button" class="btn btn-dark"   id="doRetrieveR1">리뷰쓰기</button>
         </div>
         <!--// 버튼 ----------------------------------------------------------------->
        <div class="table-container">
