@@ -67,8 +67,9 @@ public class ShopMain implements PLog{
 		SearchDTO searchVO = new SearchDTO();
 		searchVO.setPageNo(1);
 		searchVO.setPageSize(10);
-		searchVO.setSearchDiv("10");
-		searchVO.setSearchWord("aabb");
+		searchVO.setSearchDiv("40");
+		searchVO.setSearchWord("admin");
+		
 		//검색 구분 
 		//10 : 가게 이름으로 검색, 20 : 리뷰 갯수 검색, 30 : 별점순 검색
 		//searchVO.setSearchDiv("40");

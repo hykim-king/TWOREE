@@ -1,3 +1,4 @@
+
 package com.pcwk.shop;
 
 import java.sql.Connection;
@@ -239,7 +240,7 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 //	     --WHERE REVIEW_CNT LIKE :searchWord||'%' "20"
 //	     --WHERE SCORE   = :searchWord			"30"
 		if(null != searchVO.getSearchDiv() &&searchVO.getSearchDiv().equals("10")) {
-			sbWhere2.append("WHERE shop_name = ? \n");
+			sbWhere.append("WHERE shop_name LIKE '%' || ? || '%' \n");
 		}else if(null != searchVO.getSearchDiv() &&searchVO.getSearchDiv().equals("20")) {
 			sbWhere.append("ORDER BY SCORE DESC \n");
 		}else if(null != searchVO.getSearchDiv() &&searchVO.getSearchDiv().equals("30")) {
@@ -294,14 +295,9 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 		sb.append("	    SELECT SHOP_NO,                                          \n");
 		sb.append("	        SHOP_LOC                                             \n");
 		sb.append("	    FROM SHOP_DETAIL                                         \n");
-//----where-----------------------------------------------------------------------------------------------------
-		sb.append(sbWhere.toString());
-						
-//----where-----------------------------------------------------------------------------------------------------
 		sb.append("	)B                                                           \n");
 		sb.append("	WHERE A.SHOP_NO = B.SHOP_NO                                  \n");
 
-		
 		log.debug("1. SQL : {}", sb.toString());
 		log.debug("2. Conn : {}", conn);
 		log.debug("3. param : {}", search);
@@ -313,7 +309,7 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 				//가게 이름으로 검색
 				if(null != searchVO.getSearchDiv() && searchVO.getSearchDiv().equals("10")) {
 					log.debug("4.1 searchDiv : 가게명으로 검색 {}", searchVO.getSearchDiv());
-					log.debug("4.1 SearchWord : 가게명으로 검색 {}", searchVO.getSearchWord());
+					
 					pstmt.setString(1,  searchVO.getSearchWord());
 					
 					//ROWNUM
@@ -342,7 +338,7 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 					pstmt.setInt(5, searchVO.getPageNo());
 					
 					
-				}if(null != searchVO.getSearchDiv() && searchVO.getSearchDiv().equals("40")) {
+				}else if(null != searchVO.getSearchDiv() && searchVO.getSearchDiv().equals("40")) {
 					log.debug("4.1 searchDiv : 매니저 ID로 검색 {}", searchVO.getSearchDiv());
 					
 					pstmt.setString(1,  searchVO.getSearchWord());
@@ -375,7 +371,7 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 			
 			while(rs.next()) {
 				ShopDTO outVO = new ShopDTO();
-				
+				log.debug("5.0 성공! outVO : {}, ", outVO);
 				outVO.setShopName(rs.getString("shop_name"));
 				log.debug("5.1 성공! shopname : {}, ", rs.getString("shop_name"));
 				

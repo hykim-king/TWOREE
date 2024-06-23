@@ -8,7 +8,8 @@
     pageEncoding="UTF-8"%>
 <%@ include file="/cmn/common.jsp" %>
 <%
-	String list = (String)request.getAttribute("mainPageList");  
+	String list = (String)request.getAttribute("mainPageList");
+	String searchData = (String)request.getAttribute("myPageList");
 	SearchDTO searchCon = (SearchDTO)request.getAttribute("vo");
 %>
 <!DOCTYPE html>
@@ -23,7 +24,36 @@
 <script>
 
 	const pageList = document.querySelector("#page_list");
-
+	
+	const workDiv = document.querySelector('#work_div');
+	const pageSize = document.querySelector('#page_size');
+	const searchDiv = document.querySelector('#search_div');
+	
+	$(document).ready(function() {
+        document.addEventListener('keydown', function(event) {
+            if (event.keyCode === 13) {
+                event.preventDefault();
+                
+            	
+              let frm = document.getElementById("board_frm");
+      		  // 폼 데이터 설정
+      		  frm.work_div.value = "doRetrieve";
+      		  frm.page_size.value = "";
+      		  
+      		  console.log(" frm.work_div.value: " +  frm.work_div.value);
+      		  console.log(" frm.search_word.value: " +  frm.search_word.value);
+      		  console.log(" frm.shop_no.value: " +  frm.shop_no.value);
+      		
+      		  //seq
+      		  frm.action = "<%=cPath%>" + "/shop/shop.do";
+      		  
+      		  // 폼 제출
+      		  frm.submit();	
+            }
+        }, true);
+    });
+	
+	
 	function getShopNo(){
         return document.getElementById('shopNo');
       }
@@ -71,11 +101,11 @@
     <div class="container">
 	    <jsp:include page="/reserver/jsp/header.jsp"></jsp:include>
 	    <hr>
-        <form action="/TWOREE/shop/shop.do" name="board_frm" method="get" id="board_frm"  class="row g-2 align-items-center">
+        <form action="#" name="board_frm" method="get" id="board_frm"  class="row g-2 align-items-center">
             <div class="col-sm-4">
             <input type="hidden" name="work_div"  id="work_div" placeholder="작업구분">
-            <input type="hidden" name="page_no"   id="page_no"  placeholder="페이지 번호">        
-            <input type="hidden" name="seq"       id="seq"      placeholder="순번">
+            <input type="hidden" name="page_size"   id="page_size"  placeholder="페이지 번호">        
+            <input type="hidden" name="shop_no"       id="shop_no"      placeholder="순번">
             </div>
             <div class="row mb-2">
                 <label for="search_div" class="col-sm-2 col-form-label">구분</label>
@@ -112,9 +142,10 @@
     	$("#pageListBtn").click(function() {
            
         });
+    	
     });
     
-   
+
    	const pageListObj = (<%= list %>);
    	
 	    $("#page_list").empty();
@@ -127,7 +158,6 @@
 	          $("#page_list").append(row);
 	      });
    
-	    
     </script>
 <script src="/TWOREE/shop/js/popper_min.js"></script>
 </body>
