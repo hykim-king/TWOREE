@@ -5,15 +5,15 @@
 <!DOCTYPE html>
 <html>
 <head>
-<jsp:include page="/reserver/jsp/header.jsp"></jsp:include>
+
     <meta charset="UTF-8">
     <title>메뉴 관리</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-
-    <div class="container my-5">
+    <jsp:include page="/reserver/jsp/header.jsp"></jsp:include>
+    <div class="container my-5"style ="padding:30px;">
         <h1 class="mb-4">메뉴 관리</h1>
         <form id="menuForm">
             <div class="form-group row">

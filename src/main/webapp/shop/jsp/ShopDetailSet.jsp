@@ -9,7 +9,7 @@
 </head>
 <jsp:include page="/reserver/jsp/header.jsp"></jsp:include>
 <body>
-    <div class="container my-5">
+    <div class="container my-5" style ="padding:30px;">
         <h1 class="text-center mb-4">가게 정보 입력</h1>
         <form>
             <div class="form-group row">

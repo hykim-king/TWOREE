@@ -11,9 +11,9 @@
 </head>
 <body>
 <jsp:include page="/reserver/jsp/header.jsp"></jsp:include>
-    <div class="container my-5">
+    <div class="container my-5" style ="padding:30px;">
         <h1 class="mb-4">문의 관리</h1>
-        <form id="menuForm">
+        <form id="askform">
             <div class="form-group row">
                 <label for="askId" class="col-sm-2 col-form-label" >문의자 Id :</label>
                 <div class="col-sm-10">

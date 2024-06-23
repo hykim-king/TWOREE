@@ -15,6 +15,7 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
+            width : 100%;
         }
         header h1 {
             margin: 0;
@@ -22,7 +23,7 @@
             text-align: center;
             font-size: 1.5rem;
         }
-        .login-btn {
+        #logOut {
             background-color: #4CAF50;
             color: white;
             border: none;
@@ -31,13 +32,14 @@
             text-decoration: none;
             font-size: 16px;
             cursor: pointer;
+            float : right;
         }
     </style>
 </head>
 <body>
     <header>
         <h1>TWOREE</h1>
-        <button class="btn btn-success" id="logOut">로그아웃</button>
+        <button class="btn btn-success" id="logOut" >로그아웃</button>
     </header>
 </body>
 <script>
