@@ -239,7 +239,7 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 //	     --WHERE REVIEW_CNT LIKE :searchWord||'%' "20"
 //	     --WHERE SCORE   = :searchWord			"30"
 		if(null != searchVO.getSearchDiv() &&searchVO.getSearchDiv().equals("10")) {
-			sbWhere.append("WHERE shop_name LIKE ? || '%' \n");
+			sbWhere2.append("WHERE shop_name = ? \n");
 		}else if(null != searchVO.getSearchDiv() &&searchVO.getSearchDiv().equals("20")) {
 			sbWhere.append("ORDER BY SCORE DESC \n");
 		}else if(null != searchVO.getSearchDiv() &&searchVO.getSearchDiv().equals("30")) {
@@ -313,7 +313,7 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 				//가게 이름으로 검색
 				if(null != searchVO.getSearchDiv() && searchVO.getSearchDiv().equals("10")) {
 					log.debug("4.1 searchDiv : 가게명으로 검색 {}", searchVO.getSearchDiv());
-					
+					log.debug("4.1 SearchWord : 가게명으로 검색 {}", searchVO.getSearchWord());
 					pstmt.setString(1,  searchVO.getSearchWord());
 					
 					//ROWNUM
@@ -325,7 +325,6 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 					pstmt.setInt(5, searchVO.getPageSize());
 					pstmt.setInt(6, searchVO.getPageNo());
 					
-					pstmt.setString(7,  searchVO.getSearchWord());
 					
 				//리뷰 갯수로 검색 : 20
 				//별점 갯수 순서로 검색 : 30
