@@ -23,12 +23,32 @@ const profBtn = document.querySelector("#profBtn");
 const doRetrieveRtn = document.querySelector("#doRetrieveR"); 
 const doRetrieveVtn = document.querySelector("#doRetrieveV"); 
 const doRetrieveXtn = document.querySelector("#doRetrieveX");
-
+const AskBtn = document.querySelector("#AskBtn");
 profBtn.addEventListener("click",function(event){
 	console.log('profBtn click'); 
 	window.location.replace("/TWOREE/user/myPage.do?work_div=doSelectOne&userId="+"user1"); 
 	
 });
+	AskBtn.addEventListener("click",function(event){ 
+
+	$.ajax({
+    type: "GET", 
+    url:"/TWOREE/user/myPage.do",
+    dataType:"html",
+    data:{
+        "work_div": "doRetrieveX1",
+        //"askNo": "42",
+        "userId": "user1"
+    },
+    success:function(response){//통신 성공
+        console.log("success data:"+response);
+         window.location.replace("/TWOREE/user/myPage.do?work_div=doSelectOneX1&userId="+"user1"); 
+    },
+    error:function(response){//실패시 처리
+            console.log("error:"+response);
+    }
+	})//-ajax
+	});//-Rtn
  
 doRetrieveRtn.addEventListener("click",function(event){
 	console.log('doRetrieveRtn click'); 
@@ -218,7 +238,7 @@ doRetrieveRtn.addEventListener("click",function(event){
         <!-- 버튼 -->
         <div class="mb-2 d-grid gap-2 d-md-flex justify-content-md-end"> 
  		  <button type="rest" class="btn btn-secondary" value="" >새로고침</button> 
-          <button type=" " class="btn btn-dark" value="" onClick="location.href='my_v.jsp'">문의하기</button>
+          <button type="button" class="btn btn-dark" value="" id="AskBtn">문의하기</button>
         </div>
         <!--// 버튼 ----------------------------------------------------------------->
        <div class="table-container">

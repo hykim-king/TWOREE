@@ -105,9 +105,12 @@ public class UserController implements ControllerV, PLog {
 	    	log.debug("doSelectOneX1()");
 	    	log.debug("-----------------");		
 	    	
-	    	AskDTO inVO = new AskDTO();  
+	     	AskDTO inVO = new AskDTO();  
+	     	//String askNo = StringUtill.nvl(request.getParameter("askNo"),""); 
 	    	String userId = StringUtill.nvl(request.getParameter("userId"),"");
-	    	 
+	    	
+	    	//inVO.setShopNo(Integer.parseInt(shopNo)); 
+	    	//inVO.setAskNo(Integer.parseInt(askNo));
 	    	inVO.setUserId(userId);
 	    	log.debug("inVO:"+inVO);
 	    	
@@ -161,10 +164,10 @@ public class UserController implements ControllerV, PLog {
 				log.debug("i: {}, vo: {}",++i,vo);
 			}
 			
-			//UI �뜲�씠�꽣 �쟾�떖
+			//UI 占쎈쑓占쎌뵠占쎄숲 占쎌읈占쎈뼎
 			request.setAttribute("reserverList", list);
 			log.debug("list:{}",list);
-			//寃��깋議곌굔 UI濡� �쟾�떖
+			//野껓옙占쎄퉳鈺곌퀗援� UI嚥∽옙 占쎌읈占쎈뼎
 					
 			 return new JView("/myPage/jsp/my_r.jsp");	
 		}
@@ -205,10 +208,10 @@ public class UserController implements ControllerV, PLog {
 				log.debug("i: {}, vo: {}",++i,vo);
 			}
 			
-			//UI �뜲�씠�꽣 �쟾�떖
+			//UI 占쎈쑓占쎌뵠占쎄숲 占쎌읈占쎈뼎
 			request.setAttribute("reserverList", list);
 			log.debug("list:{}",list);
-			//寃��깋議곌굔 UI濡� �쟾�떖
+			//野껓옙占쎄퉳鈺곌퀗援� UI嚥∽옙 占쎌읈占쎈뼎
 					
 			 return new JView("/myPage/jsp/option_v.jsp");	
 		}
@@ -250,7 +253,7 @@ public class UserController implements ControllerV, PLog {
 				log.debug("i: {}, vo: {}",++i,vo);
 			}
 			
-			//UI �뜲�씠�꽣 �쟾�떖
+			//UI 占쎈쑓占쎌뵠占쎄숲 占쎌읈占쎈뼎
 			request.setAttribute("reviewList", list); 
 			log.debug("list:{}",list);
 			
@@ -292,7 +295,7 @@ public class UserController implements ControllerV, PLog {
 				log.debug("i: {}, vo: {}",++i,vo);
 			}
 			
-			//UI �뜲�씠�꽣 �쟾�떖
+			//UI 占쎈쑓占쎌뵠占쎄숲 占쎌읈占쎈뼎
 			request.setAttribute("reviewList", list); 
 			log.debug("list:{}",list);
 			
@@ -338,7 +341,7 @@ public class UserController implements ControllerV, PLog {
 				log.debug("i: {}, vo: {}",++i,vo);
 			}
 			
-			//UI �뜲�씠�꽣 �쟾�떖
+			//UI 占쎈쑓占쎌뵠占쎄숲 占쎌읈占쎈뼎
 			request.setAttribute("askList", list);
 			log.debug("list:{}",list); 
 			
@@ -376,9 +379,9 @@ public class UserController implements ControllerV, PLog {
 		log.debug("flag:"+flag);
 		
 		if(1==flag) {
-			message = "�닔�젙 �릺�뿀�뒿�땲�떎.";
+			message = "占쎈땾占쎌젟 占쎈┷占쎈�占쎈뮸占쎈빍占쎈뼄.";
 		}else {
-			message = "�닔�젙 �떎�뙣!";
+			message = "占쎈땾占쎌젟 占쎈뼄占쎈솭!";
 		}
 		
 		MessageVO  messageVO=new MessageVO();

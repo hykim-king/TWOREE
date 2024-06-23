@@ -1,6 +1,8 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="com.pcwk.user.UserDTO"%>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,14 +10,39 @@
 <title>Insert title here</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css">
+<script src="/TWOREE/myPage/js/jquery_3_7_1.js"></script>
+<script src="/TWOREE/myPage/js/common.js"></script>
 <script > 
-	const userId = document.querySelector("#userId");    
+document.addEventListener("DOMContentLoaded", function(){
+	const userId = document.querySelector("#userId");   
+	
+	toAsk.addEventListener("click",function(event){
+		console.log('toReview click'); 
+
+		$.ajax({
+	    type: "GET", 
+	    url:"/TWOREE/user/myPage.do",
+	    dataType:"html",
+	    data:{
+	        "work_div": "doRetrieveX",
+	        "askNo": "42",
+	        "userId": "user1"
+	    },
+	    success:function(response){//통신 성공
+	        console.log("success data:"+response);
+	         window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveX&userId="+"user1"); 
+	    },
+	    error:function(response){//실패시 처리
+	            console.log("error:"+response);
+	    }
+		})//-ajax
+		});//-Vtn
+	}) ;//--document
 
 
 
 </script>
-
-<script src="/WEB02/assets/js/jquery_3_7_1.js"></script>
+ 
 </head>
 <body>
 		<div class="container my-5">
@@ -51,7 +78,7 @@
             <div class="form-group row">
                 <div class="col-sm-10 offset-sm-2">
                     <button type="button" class="btn btn-primary" onclick="submitAnswer()">답변 작성</button>
-                    <button type="reset" class="btn btn-secondary" >취소</button>
+                    <button type="reset" class="btn btn-secondary" id="toAsk" >취소</button>
                 </div>
             </div>
         </form>

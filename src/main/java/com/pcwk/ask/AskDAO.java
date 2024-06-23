@@ -203,7 +203,7 @@ public class AskDAO implements WorkDiv<AskDTO> {
 	
 	
 	/***
-	 * �닔�젙 update
+	 * 占쎈땾占쎌젟 update
 	 */
 	@Override
 	public int doUpdate(AskDTO param) {
@@ -287,7 +287,7 @@ public class AskDAO implements WorkDiv<AskDTO> {
 	}
 	
 	/***
-	 * �궘�젣 delete
+	 * 占쎄텣占쎌젫 delete
 	 */
 	@Override
 	public int doDelete(AskDTO param) {
@@ -332,15 +332,15 @@ public class AskDAO implements WorkDiv<AskDTO> {
 	
 	
 	/***
-	 * �떒嫄댁“�쉶
+	 * 占쎈뼊椰꾨똻�쒙옙�돳
 	 * 
 	 */
 	@Override
 	public AskDTO doSelectOne(AskDTO param) {
-		AskDTO outVO = null; // �떒嫄댁“�쉶 寃곌낵
+		AskDTO outVO = null; // 占쎈뼊椰꾨똻�쒙옙�돳 野껉퀗�궢
 		Connection conn = getConnection();
 		PreparedStatement pstmt = null; // SQL+PARAM
-		ResultSet rs = null;// SQL臾몄쓽 寃곌낵
+		ResultSet rs = null;// SQL�눧紐꾩벥 野껉퀗�궢
 
 		StringBuilder sb = new StringBuilder(300);
 		sb.append("SELECT           \n");
@@ -362,11 +362,11 @@ public class AskDAO implements WorkDiv<AskDTO> {
 
 		try {
 
-			// param�꽕�젙
+			// param占쎄퐬占쎌젟
 			pstmt = conn.prepareStatement(sb.toString());
 
 			pstmt.setInt(1, param.getAskNo());
-			// SELECT�떎�뻾
+			// SELECT占쎈뼄占쎈뻬
 			rs = pstmt.executeQuery();
 			
 			log.debug("5.rs:" + rs);

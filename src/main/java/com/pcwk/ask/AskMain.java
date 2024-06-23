@@ -22,17 +22,17 @@ public class AskMain implements PLog {
 	    	int flag =0;
 	    	ask.setShopNo(2);
 	    	ask.setUserId("user1");
-	    	ask.setAskState("臾몄쓽 �슂泥�");
-	    	ask.setUserAsk("怨좉컼 臾몄쓽");
+	    	ask.setAskState("�눧紐꾩벥 占쎌뒄筌ｏ옙");
+	    	ask.setUserAsk("�⑥쥒而� �눧紐꾩벥");
 	    	ask.setAskDate("20240611");
-	    	ask.setShopAnswer("�떟蹂�");
+	    	ask.setShopAnswer("占쎈뼗癰귨옙");
 	    	ask.setAnswerDate("20240611");
 	    	
 	    	flag=dao.doSave(ask);
 	    	if (0 == flag) {
-				log.debug("�벑濡� �떎�뙣 :{}", flag);
+				log.debug("占쎈쾻嚥∽옙 占쎈뼄占쎈솭 :{}", flag);
 			} else {
-				log.debug("�벑濡� �꽦怨� :{}", flag);
+				log.debug("占쎈쾻嚥∽옙 占쎄쉐�⑨옙 :{}", flag);
 			}
 	    }
 	
@@ -44,9 +44,9 @@ public class AskMain implements PLog {
     	flag=dao.doDelete(ask);
     	
     	if (0 == flag) {
-			log.debug("�궘�젣 �떎�뙣 :{}", flag);
+			log.debug("占쎄텣占쎌젫 占쎈뼄占쎈솭 :{}", flag);
 		} else {
-			log.debug("�궘�젣 �꽦怨� :{}", flag);
+			log.debug("占쎄텣占쎌젫 占쎄쉐�⑨옙 :{}", flag);
 		}
 	
 	}
@@ -64,9 +64,9 @@ public class AskMain implements PLog {
     	
 		int flag = dao.doUpdate(ask);
 		if (0 == flag) {
-			log.debug("�뾽�뜲�씠�듃 �떎�뙣 ");
+			log.debug("success");
 		} else {
-			log.debug("�뾽�뜲�씠�듃 �꽦怨� ");
+			log.debug("fail ");
 		}
 		
 	}
@@ -76,9 +76,9 @@ public class AskMain implements PLog {
 		ask.setAskNo(42);
 		AskDTO outVO = dao.doSelectOne(ask);
 		if (null != outVO) {
-			log.debug("�떒嫄� 議고쉶 �꽦怨�");
+			log.debug("success");
 		} else {
-			log.debug("�떒嫄� 議고쉶 �떎�뙣");
+			log.debug("fail");
 		}
 		log.debug(outVO);
 	}
