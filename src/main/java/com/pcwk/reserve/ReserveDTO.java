@@ -11,6 +11,15 @@ public class ReserveDTO extends DTO {
 	private String reserveDate;
 	private String reserveAppDate;
 	private String userTel;
+	private String reserveTime;
+	public String getReserveTime() {
+		return reserveTime;
+	}
+
+	public void setReserveTime(String reserveTime) {
+		this.reserveTime = reserveTime;
+	}
+
 	private String reserveState;
 	private String confirmedDate;
 	private String userComment;

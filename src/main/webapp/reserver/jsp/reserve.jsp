@@ -1,10 +1,13 @@
+<%@page import="com.pcwk.user.UserDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <% 
-     String ShopDetail =(String)request.getAttribute("shopDetailVO");  
-     String userInfo =(String)request.getAttribute("userInfoVO");
+     String shopDetail =(String)request.getAttribute("shopDetailVO");  
      String shop =(String)request.getAttribute("shopVO");
      String reserveSet =(String)request.getAttribute("reserveSetVO");
+     String userName =(String)request.getAttribute("userName");
+     String userTel =(String)request.getAttribute("userTel");
+     String userEmail =(String)request.getAttribute("userEmail");
 %>
  
 <!DOCTYPE html>
@@ -14,7 +17,8 @@
       <title> 예약 하기</title>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-      <script src="/TWOREE/shop/js/bootstrap_bundle_min.js"></script>
+      <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" >
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>  
       <link rel="stylesheet" href="/TWOREE/reserver/css/accordion.scss">
       <style>
         .accordion-button {
@@ -57,7 +61,7 @@
     
     <h3 style="margin-top:20px;">예약자 정보</h3>
     <div class="form-group row">
-      <label for="userName" class="col-sm-3 col-form-label">예약자:</label>
+      <label for="userName" class="col-sm-3 col-form-label" >예약자:</label>
       <div class="col-sm-9">
         <input type="text" class="form-control" id="userName" >
       </div>
@@ -73,7 +77,7 @@
     <div class="form-group row">
       <label for="userEamil" class="col-sm-3 col-form-label">이메일:</label>
       <div class="col-sm-9">
-           <input type="text" class="form-control" id="userEamil" >
+           <input type="text" class="form-control" id="userEamil">
       </div>
     </div>
     
@@ -116,8 +120,11 @@
 
 <script>
 
-       let shopDetail = <%=ShopDetail%>;
-       let userInfo = <%=userInfo%>;
+       let shopDetail = <%=shopDetail%>;
+       const userName = "<%=userName%>";
+       const userTel = "<%=userTel%>";
+       const userEmail = "<%=userEmail%>";
+       console.log(userEmail);
        let shop = <%=shop%>;
        let reserveSet = <%=reserveSet%>;
        
@@ -127,7 +134,7 @@
             
             
             $("#registerButton").click(function() {
-                
+            	submitReserve();
             });
             
            
@@ -137,41 +144,42 @@
         
         
    function loadData(){
-      // $("#shopName").text(shop.shopName);
-      // $("#userName").value =userInfo.name;
-      // $("#userTel").value =userInfo.tel; 
-     //  $("#userEamil").value =userInfo.userEmail; 
-      
+       $("#shopName").text(shop.shopName);
+       document.getElementById("userName").value =userName;
+       document.getElementById("userTel").value =userTel;
+       document.getElementById("userEamil").value =userEmail;
+
       
        $("#accordion-text").empty();
        let row =$("<tr></tr>");
        row.append($("<td style='width:200px;'></td>").text(" 판매자 이름 :"));
-       row.append($("<td></td>").text());
+       row.append($("<td></td>").text(shopDetail.ownerName));
         $("#accordion-text").append(row);
        row =$("<tr></tr>");
        row.append($("<td style='width:200px;'></td>").text(" 가게 전화번호 :"));
-       row.append($("<td></td>").text());
+       row.append($("<td></td>").text(shopDetail.shopTel));
         $("#accordion-text").append(row);
        row =$("<tr></tr>");
        row.append($("<td style='width:200px;'></td>").text(" 가게 위치 :"));
-       row.append($("<td></td>").text());
+       row.append($("<td></td>").text(shopDetail.shopLoc));
         $("#accordion-text").append(row);
        row =$("<tr></tr>");
        row.append($("<td style='width:200px;'></td>").text(" 주차 정보 :"));
-       row.append($("<td></td>").text());
+       row.append($("<td></td>").text(shopDetail.parkInfo));
         $("#accordion-text").append(row);
        row =$("<tr></tr>");
        row.append($("<td style='width:200px;'></td>").text(" 가게 규정 :"));
-       row.append($("<td></td>").text());
+       row.append($("<td></td>").text(shopDetail.shopRule));
         $("#accordion-text").append(row);
        row =$("<tr></tr>");
        row.append($("<td style='width:200px;'></td>").text(" 예약시 주의사항 :"));
-       row.append($("<td></td>").text());
-       
-       $("#accordion-text").append(row);
+       row.append($("<td></td>").text(shopDetail.reserverInfo));
+        $("#accordion-text").append(row);
        
        $("#reserveTime").empty();
-       let times = Number(2000)-Number(1000);
+       let times = Number(reserveSet.endTime)-Number(reserveSet.startTime);
+       console.log(times);
+       console.log(Number(reserveSet.endTime));
        let timeMap =new Map();
        timeMap.set(900, "AM 09:00");
        timeMap.set(930, "AM 09:30");
@@ -204,70 +212,55 @@
        timeMap.set(1740, "PM 11:00");
        timeMap.set(1770, "PM 11:30");
        timeMap.set(1800, "PM 12:00");    
-       times = times/30;
-       console.log(timeMap.get(1800));
-       let newRow="";
-       for(let i =0;i<times;i++){
+       times = times/50;
+       console.log(times);
+       let startTime = ((Number(reserveSet.startTime)-900)/5)*3+900; 
+       console.log("startTime :"+startTime);
+       for(let i =0;i<=times;i++){
        
-       $("#reserveTime").append($("<option value='"+timeMap.get(Number(1000)+30*i)+"'></option>").text(timeMap.get(Number(900)+30*i)));
-       
+       $("#reserveTime").append($("<option value='"+timeMap.get(startTime+30*i)+"'></option>").text(timeMap.get(startTime+30*i)));
        }
              
                   
-       /*
-       $("#reserveTime").empty();
-       let times =Number(reserveSet.endTime) - Number(reserveSet.startTime) ;
-       times = times/30;
-       for(let i =0;i<times;i++){
-       let row = "";
-       row.append($("<option></option>").text(Number(reserveSet.startTime)+30*i));
-       
-       }
-                  $.each(reserveListObj, function(index, reserve) {
-                        let row = $("<tr onclick='modReserve("+reserve.reserveNo+")'></tr>");
-                        row.append($("<td></td>").text(reserve.userId));
-                        row.append($("<td></td>").text(reserve.reserveDate));
-                        row.append($("<td></td>").text(reserve.people));
-                        row.append($("<td></td>").text(reserve.reserveState));
-                        $("#reservationList").append(row);
-                  });
-        */
         
    }
  
   
    function submitReserve() {
-      const shopNo= window.opener.getShopNo().textContent;
-     
+      const shopNo= shop.shopNo;
+      let peopleNum = $('#peopleNum').val();
+      let reservationDate = $('#reservationDate').val();
+      let reserveTime = $('#reserveTime').val();
+      let userComment = $('#userComment').val();
+      let tel =$('#userTel').val();
       
-      /*
       $.ajax({
           type: "POST",
           url: "/TWOREE/shop/shop.do", 
           async: false,
           data: {
-                tableCap: $('#tableCap').val(),
-                peopleCap: $('#peopleCap').val(),
-                reserveOpenTime: $('#reserveOpenTime').val(),
-                reserveCloseTime: $('#reserveCloseTime').val(),
-                offDays:offDaysJson,
-                work_div:'setReserve',
-                shop_no: shopNo
+        	    peopleNum: peopleNum,
+        	    reservationDate: reservationDate,
+        	    reserveTime: reserveTime,
+        	    userComment: userComment,
+                work_div:'makeReserve',
+                tel :tel,
+                shopNo: shopNo
           }
           ,
           success: function(data) {
                    console.log("success");
-                    alert("예약 설정을 저장하였습니다.");
+                    alert("예약 신청을 완료했습니다.");
                     window.close();
           },
           error: function(data) {
-                   alert("예약 설정을 실패하였습니다.");
+                   alert("예약 신청을 실패하였습니다.");
                   console.log("error"+error);
                   window.close();
                  
           }
       });
-      */
+      
   }
 </script>
 </body>

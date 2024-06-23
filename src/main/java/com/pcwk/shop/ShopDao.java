@@ -134,7 +134,8 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 		log.debug("6. flag : {}", flag);
 		return flag;
 	}
-
+    
+	
 	@Override
 	public int doDelete(ShopDTO param) {
 		int flag = 0;
@@ -254,42 +255,7 @@ public class ShopDao implements WorkDiv<ShopDTO>{
 		ResultSet rs = null;								//SQL 결과
 		
 		StringBuilder sb = new StringBuilder(1000);
-		
-//		sb.append("SELECT A.*, B.*									\n");
-//		sb.append("FROM (                                           \n");
-//		sb.append("	SELECT TT1.rnum AS num,                         \n");
-//		sb.append("			tt1.shop_name,                          \n");
-//		sb.append("			tt1.manager_id,                         \n");
-//		sb.append("			tt1.review_cnt,                         \n");
-//		sb.append("			tt1.score                               \n");
-//		sb.append("	FROM (                                          \n");
-//		sb.append("			SELECT ROWNUM AS rnum, T1.*             \n");
-//		sb.append("				FROM (                              \n");
-//		sb.append("					SELECT *                        \n");
-//		sb.append("					FROM shop                       \n");
-//		sb.append("					--WHERE                         \n");
-////----where-----------------------------------------------------------------------------------------------------
-//		sb.append(sbWhere.toString());
-////----where-----------------------------------------------------------------------------------------------------
-//		sb.append("					                                \n");
-//		sb.append("			)T1                                     \n");
-////		sb.append("			WHERE ROWNUM <= ( :pageSize * (:pageNo -1)+:pageSize) 			                    \n");
-//		sb.append("			WHERE ROWNUM <= ( ? * (? -1) + ?)	    \n");
-//		sb.append("	 )TT1                                           \n");
-////		sb.append("		WHERE rnum >= ( :pageSize * (:pageNo -1)+1)                                   			    \n");
-//		sb.append("	WHERE rnum >= ( ? * ( ? -1) +1)                 \n");
-//		sb.append(")A,(                                             \n");
-//		sb.append("	SELECT COUNT (*) totalCount                     \n");
-//		sb.append("		FROM shop                                   \n");
-////----where-----------------------------------------------------------------------------------------------------
-//		sb.append(sbWhere.toString());
-//				
-////----where-----------------------------------------------------------------------------------------------------
-//		sb.append(")B,                                               \n");
-//		
-		
-		
-		                                                                         
+                                         
 		sb.append("SELECT A.SHOP_NAME,                                           \n");
 		sb.append("		  A.SHOP_NO,                                           \n");
 	    sb.append("   B.SHOP_LOC,                                                \n");

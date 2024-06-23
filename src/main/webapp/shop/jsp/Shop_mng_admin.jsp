@@ -30,6 +30,7 @@
     </style>
 </head>
 <body>
+<jsp:include page="/reserver/jsp/header.jsp"></jsp:include>
     <div class="container my-5">
         <h1 class="mb-4" id="shopName"></h1>
         <div class="dropdown">
@@ -125,6 +126,7 @@
         </div>
                 
     </div>
+    <jsp:include page="/reserver/jsp/footer.jsp"></jsp:include>
     <p id ="shopNo" hidden="true">
    
     </p>

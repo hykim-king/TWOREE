@@ -7,8 +7,9 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
+<jsp:include page="/reserver/jsp/header.jsp"></jsp:include>
 <body>
-    <div class="container my-5">
+    <div class="container my-5" style ="padding:30px;">
         <h1 class="text-center mb-4">가게 정보 입력</h1>
         <form>
             <div class="form-group row">
@@ -65,7 +66,7 @@
             </div>
         </form>
     </div>
-
+<jsp:include page="/reserver/jsp/footer.jsp"></jsp:include>
     <script>
         let shopNo = window.opener.getShopNo().textContent;
         

@@ -152,7 +152,7 @@ public class ReserveDao implements WorkDiv<ReserveDTO>,PLog {
 		sb.append("    reserve_app_date,      \n");
 		sb.append("    user_tel,              \n");
 		sb.append("    reserve_state,         \n");
-		sb.append("    confirmed_date,        \n");
+		sb.append("    reserve_time,          \n");
 		sb.append("    user_comment           \n");
 		sb.append(") VALUES (                 \n");
 		sb.append("    reserve_seq.NEXTVAL,  \n");
@@ -160,7 +160,7 @@ public class ReserveDao implements WorkDiv<ReserveDTO>,PLog {
 		sb.append("    ?,                    \n");
 		sb.append("    ?,                    \n");
 		sb.append("    ?,                    \n");
-		sb.append("    ?,                    \n");
+		sb.append("    sysdate,              \n");
 		sb.append("    ?,                    \n");
 		sb.append("    ?,                    \n");
 		sb.append("    ?,                    \n");
@@ -179,11 +179,10 @@ public class ReserveDao implements WorkDiv<ReserveDTO>,PLog {
 			pstmt.setInt(2, param.getShopNo());
 			pstmt.setInt(3, param.getPeople());
 			pstmt.setString(4, param.getReserveDate());
-			pstmt.setString(5, param.getReserveAppDate());
-			pstmt.setString(6, param.getUserTel());
-			pstmt.setString(7, param.getReserveState());
-			pstmt.setString(8, param.getConfirmedDate());
-			pstmt.setString(9, param.getUserComment());
+			pstmt.setString(5, param.getUserTel());
+			pstmt.setString(6, param.getReserveState());
+			pstmt.setString(7, param.getReserveTime());
+			pstmt.setString(8, param.getUserComment());
 			
 			flag = pstmt.executeUpdate();
 			
@@ -296,7 +295,8 @@ public class ReserveDao implements WorkDiv<ReserveDTO>,PLog {
 		StringBuilder sb = new StringBuilder();
 		sb.append("UPDATE reserve                 \n");
 		sb.append("SET                            \n");
-		sb.append("        reserve_state = ?      \n");
+		sb.append("        reserve_state = ?,      \n");
+		sb.append("        confirmed_date = sysdate  \n");
 		sb.append("WHERE                          \n");
 		sb.append("reserve_no = ?                 \n");
 		

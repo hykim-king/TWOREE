@@ -2,6 +2,7 @@ package com.pcwk.user;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.NoSuchAlgorithmException;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
@@ -11,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import com.google.gson.Gson;
 import com.pcwk.ehr.cmn.ControllerV;
 import com.pcwk.ehr.cmn.DTO;
+import com.pcwk.ehr.cmn.EncryptUtil;
 import com.pcwk.ehr.cmn.JView;
 import com.pcwk.ehr.cmn.MessageVO;
 import com.pcwk.ehr.cmn.PLog;
@@ -30,14 +32,14 @@ public class UserLoginController implements ControllerV, PLog {
 	}
 
 	// 로그인
-	public JView login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public JView login(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NoSuchAlgorithmException {
 		log.debug("-------------------");
 		log.debug("login()");
 		log.debug("-------------------");
 		UserDTO inVO = new UserDTO();
 
 		String userId = StringUtill.nvl(request.getParameter("userId"), "");
-		String password = StringUtill.nvl(request.getParameter("password"), "");
+		String password = EncryptUtil.Encrypt(StringUtill.nvl(request.getParameter("password"), ""));
 
 		inVO.setUserId(userId);
 		inVO.setPassword(password);
@@ -88,30 +90,29 @@ public class UserLoginController implements ControllerV, PLog {
 
 		log.debug("session()" + session);
 
-		String viewName = "";
+		String viewName = "/User/userJsp/login.jsp";
 		if (null != session) {
 			log.debug("session()" + session);
 			session.invalidate();
-			viewName = "";
 		}
 
 		return new JView(viewName);
 	}
 
-	public JView join(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public JView join(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NoSuchAlgorithmException {
 		log.debug("-----------------");
 		log.debug("join()");
 		log.debug("-----------------");
-
+        
 		UserDTO inVO = new UserDTO();
 		String userId = StringUtill.nvl(request.getParameter("userId"), "");
-		String password = StringUtill.nvl(request.getParameter("password"), "");
+		String password = EncryptUtil.Encrypt(StringUtill.nvl(request.getParameter("password"), ""));
 		String name = StringUtill.nvl(request.getParameter("name"), "");
 		String userEmail = StringUtill.nvl(request.getParameter("userEmail"), "");
 		String tel = StringUtill.nvl(request.getParameter("tel"), "");
 		String birthday = StringUtill.nvl(request.getParameter("birthday"), "");
 		String shopAdmin = StringUtill.nvl(request.getParameter("shopAdmin"), "");
-
+        
 		inVO.setUserId(userId);
 		inVO.setPassword(password);
 		inVO.setName(name);
@@ -135,7 +136,7 @@ public class UserLoginController implements ControllerV, PLog {
 	}
 
 	@Override
-	public JView doWork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+	public JView doWork(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NoSuchAlgorithmException {
 		log.debug("-------------------");
 		log.debug("doWork()");
 		log.debug("-------------------");

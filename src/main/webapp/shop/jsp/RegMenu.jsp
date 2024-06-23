@@ -8,6 +8,7 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+<jsp:include page="/reserver/jsp/header.jsp"></jsp:include>
     <div class="container my-5">
         <h1 class="mb-4">메뉴 등록</h1>
         <form id="menuForm">
@@ -37,7 +38,7 @@
             </div>
         </form>
     </div>
-
+<jsp:include page="/reserver/jsp/footer.jsp"></jsp:include>
     <script>
         function registerMenu() {
             let menuName = $('#menuName').val();

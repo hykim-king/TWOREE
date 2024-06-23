@@ -16,6 +16,7 @@
             bottom: 0;
             width: 100%;
             box-sizing: border-box;
+            clear :both;
         }
         footer p {
             margin: 0;

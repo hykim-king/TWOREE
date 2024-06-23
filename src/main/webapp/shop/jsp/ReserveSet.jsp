@@ -10,6 +10,7 @@
       <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
+<jsp:include page="/reserver/jsp/header.jsp"></jsp:include>
 <div class="container my-5">
   <h1>가게 예약 정보 입력</h1>
   <form>
@@ -56,7 +57,7 @@
     </div>
   </form>
 </div>  
-
+<jsp:include page="/reserver/jsp/footer.jsp"></jsp:include>
 <script>
   let dateList = [];
 

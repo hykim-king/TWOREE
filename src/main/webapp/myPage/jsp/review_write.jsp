@@ -41,6 +41,7 @@ document.addEventListener("DOMContentLoaded", function(){
 <script src="/TWOREE/myPage/js/common.js"></script>
 </head>
 <body>
+<jsp:include page="/reserver/jsp/header.jsp"></jsp:include>
 		<div class="container my-5">
         <h1 class="mb-4">리뷰쓰기</h1>
         <form id="menuForm">
@@ -84,5 +85,6 @@ document.addEventListener("DOMContentLoaded", function(){
             </div>
         </form>
     </div>
+    <jsp:include page="/reserver/jsp/footer.jsp"></jsp:include>
 </body>
 </html>

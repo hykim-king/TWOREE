@@ -8,7 +8,8 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>
 <body>
-    <div class="container my-5">
+<jsp:include page="/reserver/jsp/header.jsp"></jsp:include>
+    <div class="container my-5" style ="padding:30px;">
         <h1 class="mb-4">가게 등록</h1>
         <form id="shopForm">
             <div class="form-group row">
@@ -45,7 +46,7 @@
             
         </form>
     </div>
-
+<jsp:include page="/reserver/jsp/footer.jsp"></jsp:include>
     <script>
         function registerShop() {
         
