@@ -321,10 +321,69 @@ private static final long serialVersionUID = 1L;
 		return null;
 	}
 	
+	public JView makeReserve(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
+		log.debug("=====================");
+		log.debug("makeReserve()");
+		log.debug("=====================");
+		HttpSession session = req.getSession();
+		ReserveDTO reserve =new ReserveDTO();
+		UserDTO user = (UserDTO)session.getAttribute("user");
+		int shopNo = Integer.parseInt(StringUtill.nvl(req.getParameter("shopNo"), "0"));
+		int peopleNum = Integer.parseInt(StringUtill.nvl(req.getParameter("peopleNum"),""));
+		String reservationDate =StringUtill.nvl(req.getParameter("reservationDate"),"");
+		String tel = StringUtill.nvl(req.getParameter("tel"),"");
+		String reserveTime = StringUtill.nvl(req.getParameter("reserveTime"),"");
+		String userComment = StringUtill.nvl(req.getParameter("userComment"),"");
+		
+		reserve.setShopNo(shopNo);
+		reserve.setUserId(user.getUserId());
+		reserve.setReserveState("예약신청");
+		reserve.setPeople(peopleNum);
+		reserve.setReserveDate(reservationDate);
+		reserve.setUserTel(tel);
+		reserve.setReserveTime(reserveTime);
+		reserve.setUserComment(userComment);
+		reserveService.doSave(reserve);
+		return null;
+	}
+	
 	public JView doReserve(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException{
 		log.debug("=====================");
-		log.debug("setReserve()");
+		log.debug("Reserve()");
 		log.debug("=====================");
+		ShopDTO shopInVO = new ShopDTO();
+		ShopDetailDTO shopDetailInVO = new ShopDetailDTO();
+		ShopReserveSetDTO shopReserveSetInVO =new ShopReserveSetDTO();
+		HttpSession session = req.getSession();
+		
+		
+		int shopNo = Integer.parseInt(StringUtill.nvl(req.getParameter("shopNo"), "0"));
+		shopInVO.setShopNo(shopNo);
+		shopDetailInVO.setShopNo(shopNo);
+		shopReserveSetInVO.setShopNo(shopNo);
+		
+		UserDTO user = (UserDTO)session.getAttribute("user");
+		ShopDTO shopVO = shopService.doSelectOne(shopInVO);
+		ShopDetailDTO shopDetailVO = shopDetailService.doSelectOne(shopDetailInVO);
+		ShopReserveSetDTO reserveSetVO =shopReserveSetService.doSelectOne(shopReserveSetInVO);
+		
+		String userName =user.getName();
+		String userTel=user.getTel();
+		String userEmail =user.getUserEmail();
+		
+		Gson gson=new Gson();
+		String jsonString = gson.toJson(shopVO);
+		req.setAttribute("shopVO", jsonString);
+		
+		jsonString = gson.toJson(shopDetailVO);
+		req.setAttribute("shopDetailVO", jsonString);
+		
+		jsonString = gson.toJson(reserveSetVO);
+		req.setAttribute("reserveSetVO", jsonString);
+		
+		req.setAttribute("userName", userName);
+		req.setAttribute("userTel", userTel);
+		req.setAttribute("userEmail", userEmail);
 		return new JView("/reserver/jsp/reserve.jsp");
 	}
 	
@@ -342,8 +401,7 @@ private static final long serialVersionUID = 1L;
 	    
 		shopinVO.setShopNo(shopNo);
 		shopDetailinVO.setShopNo(shopNo);
-        
-		String logInUser = "admin";
+		String logInUser = user.getUserId();
 		SearchDTO searchShop = new SearchDTO();
 		searchShop.setPageNo(1);
 		searchShop.setPageSize(10);
@@ -508,6 +566,9 @@ private static final long serialVersionUID = 1L;
 			break;
 		case "reserve" :
 			viewName = doReserve(req,res);
+			break;
+		case "makeReserve" :
+			viewName = makeReserve(req,res);
 			break;
 		default :
 			log.debug("workDiv : {}", workDiv);

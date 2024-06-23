@@ -48,9 +48,7 @@ public class ShopReserveSetService {
 
 
 	public ShopReserveSetDTO doSelectOne(ShopReserveSetDTO param) {
-		ShopReserveSetDTO outVO = new ShopReserveSetDTO();
-		outVO=dao.doSelectOne(param);
-		return outVO;
+		return dao.doSelectOne(param);
 	}
 
 }
