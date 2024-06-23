@@ -26,32 +26,46 @@
 	const pageList = document.querySelector("#page_list");
 	
 	const workDiv = document.querySelector('#work_div');
-	const pageSize = document.querySelector('#page_size');
 	const searchDiv = document.querySelector('#search_div');
 	
 	$(document).ready(function() {
-        document.addEventListener('keydown', function(event) {
-            if (event.keyCode === 13) {
-                event.preventDefault();
-                
-            	
-              let frm = document.getElementById("board_frm");
-      		  // 폼 데이터 설정
-      		  frm.work_div.value = "doRetrieve";
-      		  frm.page_size.value = "";
-      		  
-      		  console.log(" frm.work_div.value: " +  frm.work_div.value);
-      		  console.log(" frm.search_word.value: " +  frm.search_word.value);
-      		  console.log(" frm.shop_no.value: " +  frm.shop_no.value);
-      		
-      		  //seq
-      		  frm.action = "<%=cPath%>" + "/shop/shop.do";
-      		  
-      		  // 폼 제출
-      		  frm.submit();	
-            }
-        }, true);
-    });
+		document.addEventListener('keydown', function(event) {
+			if (event.keyCode === 13) {
+			event.preventDefault();
+			      
+			  	
+			let frm = document.getElementById("board_frm");
+			let searchDivValue = document.querySelector("#search_div");
+			
+			// 폼 데이터 설정
+			frm.work_div.value = "doRetrieve";
+			frm.page_size.value = "6";
+			frm.search_div.value = $('#search_div').val();
+			
+			      		  
+			console.log(" frm.work_div.value: " +  frm.work_div.value);
+			console.log(" frm.search_word.value: " +  frm.search_word.value);
+			console.log(" frm.search_div.value: " +  frm.search_div.value);
+			
+			frm.action = "<%=cPath%>" + "/shop/shop.do";
+			
+			// 폼 제출
+			frm.submit();
+			
+			const pageListObj = (<%= list %>);
+		   	
+		    $("#page_list").empty();
+		    $.each(pageListObj, function(index, page) {
+		    	let row = $("<ul onclick ='pageListBtn("+page.shopNo+")'></ul>");
+		          row.append($("<li class='shop_name'></li>").text(page.shopName));
+		          row.append($("<li></li>").text(page.shopLoc));
+		          row.append($("<li></li>").text(page.reviewCnt));
+		          //row.append($("<li></li>").text(page.shopNo));
+		          $("#page_list").append(row);
+		      });
+		  }
+		}, true);
+	});
 	
 	
 	function getShopNo(){
@@ -104,8 +118,7 @@
         <form action="#" name="board_frm" method="get" id="board_frm"  class="row g-2 align-items-center">
             <div class="col-sm-4">
             <input type="hidden" name="work_div"  id="work_div" placeholder="작업구분">
-            <input type="hidden" name="page_size"   id="page_size"  placeholder="페이지 번호">        
-            <input type="hidden" name="shop_no"       id="shop_no"      placeholder="순번">
+            <input type="hidden" name="page_size"   id="page_size"  placeholder="페이지 번호">
             </div>
             <div class="row mb-2">
                 <label for="search_div" class="col-sm-2 col-form-label">구분</label>
