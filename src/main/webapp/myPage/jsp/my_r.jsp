@@ -15,7 +15,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <link rel="stylesheet" href="/TWOREE/myPage/css/bootstrap.min.css">  
 
-<script src="/WEB02/assets/js/jquery_3_7_1.js"></script>
+<script src="/TWOREE/myPage/js/jquery_3_7_1.js"></script>
+<script src="/TWOREE/myPage/js/common.js"></script>
 <script>
 //String outVO = (String)request.getAttribute("outVO");
 
@@ -101,6 +102,7 @@ doRetrieveRtn.addEventListener("click",function(event){
 		
 	
 }) ;//--document
+</script>
 </script> 
     <title>예약현황</title>
     <style>
