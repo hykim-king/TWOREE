@@ -1,4 +1,5 @@
 <%@page import="java.util.List"%>
+<%@page import="com.pcwk.user.UserDTO"%>
 <%@page import="com.pcwk.shop.ShopDTO"%>
 <%@page import="com.pcwk.shop.ShopDetailDTO"%>
 <%@page import="com.pcwk.ehr.cmn.SearchDTO"%>
@@ -9,6 +10,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="/cmn/common.jsp" %>
+<%
+	
+	UserDTO user= (UserDTO)session.getAttribute("user");
+	
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -114,7 +120,7 @@
      		console.log('moveToReserve()');
      		let shopNo = shopListObj.shopNo;
      		console.log("shopNo : " + shopNo);
-     		window.open("/TWOREE/shop/shop.do"+"?work_div=reserve&shopNo="+shopNo,"예약","width=700,height=700,top=100,left=100");
+     		window.open("/TWOREE/shop/shop.do"+"?work_div=reserve&shopNo="+shopNo,"문의","width=700,height=700,top=100,left=100");
      		//window.location.href = "/TWOREE/shop/shop.do?work_div=";
      	}
      	
@@ -126,11 +132,12 @@
      		ask();
      	});
      	
+     	
      	function ask(){
      		console.log('ask()');
      		let shopNo = shopListObj.shopNo;
      		console.log("shopNo : " + shopNo);
-     		//window.location.href = "/TWOREE/shop/shop.do?work_div=";
+     		window.open("/TWOREE/user/myPage.do"+"?work_div=doSelectOneX1&shopNo="+shopNo,"예약","width=700,height=700,top=100,left=100");
      	}
 	}
 	

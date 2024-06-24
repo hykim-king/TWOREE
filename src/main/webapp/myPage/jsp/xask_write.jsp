@@ -1,8 +1,12 @@
 <%@page import="java.util.List"%>
+<%@page import="com.pcwk.ask.AskDTO"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@page import="com.pcwk.user.UserDTO"%>
- 
+<%
+	AskDTO doSelectOneX1InVO = (AskDTO)request.getAttribute("doSelectOneX1InVO");
+	UserDTO user= (UserDTO)session.getAttribute("user");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -129,10 +133,9 @@ document.addEventListener("DOMContentLoaded", function(){
         <h1 class="mb-4">문의 쓰기</h1>
         <form id="menuForm">
             <div class="form-group row">
-            
                 <label for="shopNo" class="col-sm-2 col-form-label" >가게번호 :</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="shopNo" id="shopNo"       >
+                    <input type="text" disabled="disabled" class="form-control" name="shopNo" id="shopNo" value="${doSelectOneX1InVO.shopNo}">
                 </div>
             </div>
             
@@ -140,14 +143,14 @@ document.addEventListener("DOMContentLoaded", function(){
             <div class="form-group row">
                 <label for="userId" class="col-sm-2 col-form-label">문의자 :</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control"name="userId"  id="userId" value="${outVO.userId}" >
+                    <input type="text" disabled="disabled" class="form-control" name="userId"  id="userId" value="${user.userId}"  >
                 </div>
             </div> 
             <br>
             <div class="form-group row">
                 <label for="userAsk" class="col-sm-2 col-form-label">문의 내용:</label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" id="userAsk" name="userAsk" rows="4"   ></textarea>
+                    <textarea class="form-control" id="userAsk" name="userAsk" rows="4"></textarea>
                 </div>
             </div>
             

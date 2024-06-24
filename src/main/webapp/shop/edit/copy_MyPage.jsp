@@ -10,6 +10,7 @@
 <%
 	String list = (String)request.getAttribute("mainPageList");
     UserDTO user= (UserDTO)session.getAttribute("user");
+    String userInfo = (String)request.getAttribute("userInfo");
     String myPageList = (String)request.getAttribute("myPageList");  
 	SearchDTO searchCon = (SearchDTO)request.getAttribute("vo");
 	

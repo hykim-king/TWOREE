@@ -9,6 +9,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import com.pcwk.ehr.cmn.SearchDTO;
 import com.google.gson.Gson;
@@ -157,7 +158,7 @@ public class UserController implements ControllerV, PLog {
     	
     	
     
-    return new JView("/myPage/jsp/my_p.jsp");
+    	return new JView("/myPage/jsp/my_p.jsp");
     
     }
 	public JView doSelectOneR1(HttpServletRequest request, HttpServletResponse response)
@@ -183,28 +184,19 @@ public class UserController implements ControllerV, PLog {
 	    	throws ServletException, IOException {
 	      	log.debug("-----------------");
 	    	log.debug("doSelectOneX1()");
-	    	log.debug("-----------------");		
+	    	log.debug("-----------------");
 	    	
 	     	AskDTO inVO = new AskDTO();  
-	     	//String askNo = StringUtill.nvl(request.getParameter("askNo"),""); 
-	    	String userId = StringUtill.nvl(request.getParameter("userId"),"");
+	     	String ShopNo = StringUtill.nvl(request.getParameter("shopNo"), "0");
 	    	
-	    	//inVO.setShopNo(Integer.parseInt(shopNo)); 
-	    	//inVO.setAskNo(Integer.parseInt(askNo));
-	    	inVO.setUserId(userId);
+	    	inVO.setShopNo(Integer.parseInt(ShopNo));
 	    	log.debug("inVO:"+inVO);
 	    	
 	    	//this.service.selectOneReadCnt(inVO);
 	    	
-	    	AskDTO outVO = askService.doSelectOne(inVO);
-	    	log.debug("outVO:"+outVO); 
+	    	request.setAttribute("doSelectOneX1InVO", inVO);
 	    	
-	    	
-	    	request.setAttribute("outVO",outVO);
-	    	
-	    	
-	    
-	    return new JView("/myPage/jsp/xask_write.jsp");
+	    	return new JView("/myPage/jsp/xask_write.jsp");
 	    
 	    }
 	
