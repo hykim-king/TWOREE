@@ -283,6 +283,9 @@
  </div>
  
 </div>	
+  <footer class="py-3 my-4">    
+    <p class="text-center text-muted">&copy; 2024-06 ACORN, TWOREE</p>
+  </footer>
 </body>
 <script src="/TWOREE/User/assets/js/bootstrap.bundle.min.js"></script> 
 </html>
