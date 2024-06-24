@@ -104,7 +104,7 @@
 	        		  console.log("messageVO.messageId:"+messageVO.messageId);
 	        		  console.log("messageVO.msgContents:"+messageVO.msgContents);
 	        		  
-	        		  if(isEmpty(messageVO)==false && "1"===messageVO.messageId){
+	        		  if(isEmpty(messageVO)==false && "10"===messageVO.messageId){
 	        			alert(messageVO.msgContents);
 	        			
 	        			window.location.href="/TWOREE/login/login.do?work_div=toLogin";

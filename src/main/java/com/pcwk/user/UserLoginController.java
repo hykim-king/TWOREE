@@ -157,7 +157,7 @@ public class UserLoginController implements ControllerV, PLog {
 			viewName = join(request, response);
 			break;
 		case "toLogin" :
-			viewName = new JView("/TWOREE/User/userJsp/login.jsp");
+			viewName = new JView("/User/userJsp/login.jsp");
 			break;
 		default:
 			log.debug("작업구분을 확인 하세요. workDiv:{}", workDiv);
