@@ -22,30 +22,19 @@ document.addEventListener("DOMContentLoaded", function(){
 	const reviewContent = document.querySelector("#reviewContent"); 
 	const score  = document.querySelector("#score");
 	const saveBtn = document.querySelector("#saveBtn");
-
-	toReview.addEventListener("click",function(event){
-		console.log('toReview click'); 
-
-		$.ajax({
-	    type: "GET", 
-	    url:"/TWOREE/user/myPage.do",
-	    dataType:"html",
-	    data:{
-	        "work_div": "doRetrieveR1",
-	        "userId": "user1"
-	    },
-	    success:function(response){//통신 성공
-	        console.log("success data:"+response);
-	         window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveR1&userId="+"user1"); 
-	    },
-	    error:function(response){//실패시 처리
-	            console.log("error:"+response);
-	    }
-		})//-ajax
-		});//-Vtn
+ 
+	const toReviewBtn = document.querySelector("#toReview");
+	
+	toReviewBtn.addEventListener("click",function(event){
+		toReview();
+	});
 		
-		
-		
+	function toReview(){ 
+		console.log('toReviewBtn click'); 
+		window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveR1");   
+	} 
+	
+	
 		saveBtn.addEventListener("click", function(event){
 			console.log('saveBtn click event'+event); 
 			reviewSave();
@@ -146,7 +135,7 @@ document.addEventListener("DOMContentLoaded", function(){
             <div class="form-group row">
                 <div class="col-sm-10 offset-sm-2">
                     <button type="button" class="btn btn-primary" id="saveBtn">리뷰 등록</button>
-                    <button type="reset" class="btn btn-secondary"  id="toReview" >취소</button>
+                    <button type="reset" class="btn btn-secondary"  id="toReview" name="toReview">취소</button>
                 </div>
             </div>
         </form>

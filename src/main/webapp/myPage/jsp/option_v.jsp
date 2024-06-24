@@ -27,8 +27,7 @@ document.addEventListener("DOMContentLoaded", function(){
     });
 
         function toReview(){
-    		console.log('toReview()');
-    		alert("게시 목록으로 이동 합니다.");
+    		console.log('toReview()'); 
     		window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveV2"); 
     	}  
 }); //--document
@@ -142,7 +141,7 @@ document.addEventListener("DOMContentLoaded", function(){
             }); 
         });
 
-        function doSelectOne(shopValue){
+        function doSelectOne(shopValue){   
             window.open("/TWOREE/user/myPage.do?work_div=doSelectOneR1&shopNo=" + shopValue); 
         }
     });//document end

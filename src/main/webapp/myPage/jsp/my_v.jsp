@@ -27,6 +27,15 @@ const doRetrieveXtn = document.querySelector("#doRetrieveX");
 
 const doReviewBtn = document.querySelector("#doRetrieveR1");
 
+
+doReviewBtn.addEventListener("click", function(event) {
+    console.log('doRetrieveR1 click');
+    window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveR1");
+});
+
+
+
+
 profBtn.addEventListener("click",function(event){
 	toprof();
 });
@@ -36,93 +45,22 @@ function toprof(){
 	window.location.replace("/TWOREE/user/myPage.do?work_div=doSelectOne");   
 }
 
+doRetrieveRtn.addEventListener("click", function(event) {
+    console.log('doRetrieveRtn click');
+    window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveR2");
+});
 
+doRetrieveVtn.addEventListener("click", function(event) {
+    console.log('doRetrieveVtn click');
+    window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveV2");
+});
 
+doRetrieveXtn.addEventListener("click", function(event) {
+    console.log('doRetrieveXtn click');
+    window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveX2");
+});
 
-	doReviewBtn.addEventListener("click",function(event){
-	console.log('doReviewBtn click'); 
-
-	$.ajax({
-    type: "GET", 
-    url:"/TWOREE/user/myPage.do",
-    dataType:"html",
-    data:{
-        "work_div": "doRetrieveR1",
-        "userId": "user1"
-    },
-    success:function(response){//통신 성공
-        console.log("success data:"+response);
-         window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveR1&userId="+"user1"); 
-    },
-    error:function(response){//실패시 처리
-            console.log("error:"+response);
-    }
-	})//-ajax
-	});//-doReviewBtn
-	
- 
-	doRetrieveRtn.addEventListener("click",function(event){
-	console.log('doRetrieveRtn click'); 
-
-	$.ajax({
-    type: "GET", 
-    url:"/TWOREE/user/myPage.do",
-    dataType:"html",
-    data:{
-        "work_div": "doRetrieveR",
-        "userId": "user1"
-    },
-    success:function(response){//통신 성공
-        console.log("success data:"+response);
-         window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveR&userId="+"user1"); 
-    },
-    error:function(response){//실패시 처리
-            console.log("error:"+response);
-    }
-	})//-ajax
-	});//-Rtn
-	
-	doRetrieveVtn.addEventListener("click",function(event){
-		console.log('doRetrieveVtn click'); 
-
-		$.ajax({
-	    type: "GET", 
-	    url:"/TWOREE/user/myPage.do",
-	    dataType:"html",
-	    data:{
-	        "work_div": "doRetrieveV",
-	        "userId": "user1"
-	    },
-	    success:function(response){//통신 성공
-	        console.log("success data:"+response);
-	         window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveV&userId="+"user1"); 
-	    },
-	    error:function(response){//실패시 처리
-	            console.log("error:"+response);
-	    }
-		})//-ajax
-		});//-Vtn
-		
-	doRetrieveXtn.addEventListener("click",function(event){
-		console.log('doRetrieveVtn click'); 
-
-		$.ajax({
-	    type: "GET", 
-	    url:"/TWOREE/user/myPage.do",
-	    dataType:"html",
-	    data:{
-	        "work_div": "doRetrieveX",
-	        "userId": "user1"
-	    },
-	    success:function(response){//통신 성공
-	        console.log("success data:"+response);
-	         window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveX&userId="+"user1"); 
-	    },
-	    error:function(response){//실패시 처리
-	            console.log("error:"+response);
-	    }
-		})//-ajax
-		});//-xtn
+	 
 					
 		
 	
@@ -263,7 +201,7 @@ function toprof(){
          <div class="right-section">
         <!-- 버튼 --> 
         <div class="mb-2 d-grid gap-2 d-md-flex justify-content-md-end"> 
-            <button type="reset" class="btn btn-secondary" value="" >새로고침</button> 
+            <button type="reset" class="btn btn-secondary"   >새로고침</button> 
             <button type="button" class="btn btn-dark"   id="doRetrieveR1">리뷰쓰기</button>
         </div>
         <!--// 버튼 ----------------------------------------------------------------->

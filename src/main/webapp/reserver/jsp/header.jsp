@@ -39,10 +39,25 @@
 <body>
     <header>
         <h1>TWOREE</h1>
+         <button class="btn btn-dark" id="home" > Home  </button> &nbsp &nbsp
         <button class="btn btn-success" id="logOut" >로그아웃</button>
     </header>
 </body>
 <script>
+
+const HomeBtn = document.querySelector("#home");
+HomeBtn.addEventListener("click", function(event){
+	console.log('home click event'+event);
+	home();
+});
+
+function home(){
+	console.log('home');
+	window.location.replace("/TWOREE/shop/shop.do?work_div=doRetrieve");
+}
+
+
+//--
 const logOutBtn = document.querySelector("#logOut");
 logOutBtn.addEventListener("click", function(event){
 	console.log('logOut click event'+event);
