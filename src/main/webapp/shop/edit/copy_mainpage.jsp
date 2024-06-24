@@ -94,7 +94,8 @@
 
 	        ul.append($("<li class='big_size_word'></li>").text(page.shopName));
 	        ul.append($("<li class='middle_size_word'></li>").text(page.shopLoc));
-	        ul.append($("<li class='score'></li>").text("별점: " + page.reviewCnt));
+	        ul.append($("<li class='score'></li>").text("별점 : " + page.score));
+	        ul.append($("<li class='middle_size_word'></li>").text("총 리뷰 수 : " + page.reviewCnt));
 
 	        row.append(ul);
 	        $("#page_list").append(row);
