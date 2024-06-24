@@ -23,7 +23,7 @@ const profBtn = document.querySelector("#profBtn");
 const doRetrieveRtn = document.querySelector("#doRetrieveR"); 
 const doRetrieveVtn = document.querySelector("#doRetrieveV"); 
 const doRetrieveXtn = document.querySelector("#doRetrieveX");
-
+const shopAdminBtn = document.querySelector("#shopAdmin");
 const doUpdateBtn = document.querySelector("#doUpdate");
 const userId = document.querySelector("#userId");
 const password = document.querySelector("#password");   //password
@@ -39,7 +39,14 @@ doUpdateBtn.addEventListener("click", function(event){
 	console.log('doUpdateBtn click event'+event);
 	doUpdate();
 });
-
+shopAdminBtn.addEventListener("click", function(event){
+  console.log('shopAdminBtn click event'+event);
+  doManage();
+});
+function doManage(){
+   window.location.replace("/TWOREE/shop/shop.do?work_div=shop_mng");
+ 
+ }
        function doUpdate(){
        	console.log('doUpdate()');
        	console.log("userId:"+userId.value);
@@ -437,7 +444,7 @@ $(document).ready(function() {
                      <input class="form-check-input" type="checkbox" id="Switches" checked> 
                      <label class="form-check-label" for="Switches"></label>  
                       </div>--> 
-                    <button type="button" class="btn btn-success" style="float: right;">관리하기</button>
+                    <button type="button" class="btn btn-success"  id ="shopAdmin" style="float: right;">관리하기</button>
                 </li>
                  
             </ul>
