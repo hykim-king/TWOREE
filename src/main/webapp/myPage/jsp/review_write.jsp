@@ -1,5 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+    <% String shopNo = (String)request.getAttribute("shopNo"); %>
+    <% String userId = (String)request.getAttribute("userId"); %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -49,7 +53,7 @@ document.addEventListener("DOMContentLoaded", function(){
             
                 <label for="shopNo" class="col-sm-2 col-form-label" >가게번호 :</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="shopNo" disabled="disabled"  value="${outVO.shopNo}"    >
+                    <input type="text" class="form-control" id="shopNo" disabled="disabled"  value="${shopNo}"    >
                 </div>
             </div>
             
@@ -57,14 +61,14 @@ document.addEventListener("DOMContentLoaded", function(){
             <div class="form-group row">
                 <label for="userID" class="col-sm-2 col-form-label">문의자 :</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" id="userId" disabled="disabled"  value="${outVO.userId}" >
+                    <input type="text" class="form-control" id="userId" disabled="disabled"  value="${userId}" >
                 </div>
             </div> 
             <br>
             <div class="form-group row">
                 <label for="reviewContent" class="col-sm-2 col-form-label">문의 내용:</label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" id="reviewContent" rows="4"  value="${outVO.reviewContent}"  ></textarea>
+                    <textarea class="form-control" id="reviewContent" rows="4" ></textarea>
                 </div>
             </div>
             

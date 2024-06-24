@@ -121,25 +121,15 @@ public class UserController implements ControllerV, PLog {
 	      	log.debug("-----------------");
 	    	log.debug("doSelectOneR1()");
 	    	log.debug("-----------------");		
-	    	
-	    	ReviewDTO inVO = new ReviewDTO(); 
+	    	  
 	    	String shopNo = StringUtill.nvl(request.getParameter("shopNo"),""); 
 	    	String userId = StringUtill.nvl(request.getParameter("userId"),"");
+	    	//HttpSession session = request.getSession();
 	    	
-	    	inVO.setShopNo(Integer.parseInt(shopNo)); 
-	    	inVO.setUserId(userId);
-	    	log.debug("inVO:"+inVO);
-	    	
-	    	//this.service.selectOneReadCnt(inVO);
-	    	
-	    	ReviewDTO outVO = reviewService.doSelectOne(inVO);
-	    	log.debug("outVO:"+outVO); 
-	    	
-	    	
-	    	request.setAttribute("outVO",outVO);
-	    	
-	    	
-	    
+	    	request.setAttribute("shopNo",shopNo);
+	    	request.setAttribute("userId",userId);
+	    	log.debug(shopNo);	
+	    	log.debug(userId);
 	    return new JView("/myPage/jsp/review_write.jsp");
 	    
 	    }
