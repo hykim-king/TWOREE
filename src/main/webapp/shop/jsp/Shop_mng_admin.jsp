@@ -146,13 +146,11 @@
     
     
          function forwording(num){
-             console.log("/TWOREE/shop/shop.do?work_div=shop_mng&shop_no="+num);
-        	   window.location.replace("/TWOREE/shop/shop.do?work_div=shop_mng&shop_no="+num);
+        	 window.location.replace("/TWOREE/shop/shop.do?work_div=shop_mng&shop_no="+num);
          }
          
          function modAsk(askNo){
               window.open("/TWOREE/shop/shop.do"+"?work_div=ModAsk&askNo="+askNo,"문의 관리","width=900,height=900,top=100,left=100");
-              
          }
     
         $(document).ready(function() {
