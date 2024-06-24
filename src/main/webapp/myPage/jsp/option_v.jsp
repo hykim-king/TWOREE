@@ -169,11 +169,12 @@ toReview.addEventListener("click",function(event){
             dataType:"html",
             data:{
                 "work_div":"doSelectOneR1", 
-                "shopNo": "2"
+                "shopNo": "2",
+                "userId": "user1"
                 
             },success:function(response){//통신 성공
                 console.log("success data:"+response);
-                window.open("/TWOREE/user/myPage.do?work_div=doSelectOneR1&shopNo="+"2"); 
+                //window.open("/TWOREE/user/myPage.do?work_div=doSelectOneR1&shopNo="+"2"); 
            
             },
            error:function(response){//실패시 처리

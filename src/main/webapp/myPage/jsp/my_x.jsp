@@ -238,7 +238,7 @@ doRetrieveRtn.addEventListener("click",function(event){
         <!-- 버튼 -->
         <div class="mb-2 d-grid gap-2 d-md-flex justify-content-md-end"> 
  		  <button type="rest" class="btn btn-secondary" value="" >새로고침</button> 
-          <button type="button" class="btn btn-dark" value="" id="AskBtn">문의하기</button>
+          
         </div>
         <!--// 버튼 ----------------------------------------------------------------->
        <div class="table-container">
