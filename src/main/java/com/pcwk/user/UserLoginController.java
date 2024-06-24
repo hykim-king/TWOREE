@@ -57,7 +57,7 @@ public class UserLoginController implements ControllerV, PLog {
 			HttpSession session = request.getSession();
 
 			session.setAttribute("user", outVO);
-
+			session.setMaxInactiveInterval(60);
 			// 30, 로그인 성공
 			message.setMessageId("30");
 			message.setMsgContents("로그인 성공");
@@ -160,6 +160,7 @@ public class UserLoginController implements ControllerV, PLog {
 			viewName = new JView("/User/userJsp/login.jsp");
 			break;
 		default:
+			viewName = logout(request, response);
 			log.debug("작업구분을 확인 하세요. workDiv:{}", workDiv);
 			break;
 		}

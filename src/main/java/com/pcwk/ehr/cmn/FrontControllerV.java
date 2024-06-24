@@ -71,13 +71,18 @@ public class FrontControllerV extends HttpServlet implements PLog {
 		log.debug("service:1");
 		JView jview;
 		try {
-			jview = controller.doWork(request, response);
-			log.debug("service:2");
-			log.debug("jview:{}",jview);  
 			HttpSession session = request.getSession();
 			if(null==session.getAttribute("user")) {
-				jview = new JView("/login/login.do?work_div=logout");
+				jview = new UserLoginController().doWork(request, response) ;
+			}else {
+				jview = controller.doWork(request, response);
 			}
+			
+			
+			log.debug("service:2");
+			log.debug("jview:{}",jview);  
+			
+			
 			//각각의 컨트롤러가 forward 로직을 제대로 수행하고 있는지 하나하나
 			//신경쓸 필요가 없고 JView 객체만 제대로 반환한다면 무리없이 작동한다.
 			if(null != jview && jview.getViewName().length()>1) {

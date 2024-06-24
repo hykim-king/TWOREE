@@ -487,14 +487,13 @@ private static final long serialVersionUID = 1L;
 		log.debug("outAskVOList : "+outAskVOList);
 		log.debug("outReviewVOList : "+outReviewVOList);
 		
-		
+		req.setAttribute("managerId", logInUser);
 		Gson gson=new Gson();
 		String jsonString = gson.toJson(shopList);
         req.setAttribute("shopList", jsonString);
 		
 		jsonString = gson.toJson(outShopVO);
         req.setAttribute("shopVO", jsonString);
-        
         
         jsonString = gson.toJson(outShopDetailVO);
         req.setAttribute("shopDetailVO", jsonString);

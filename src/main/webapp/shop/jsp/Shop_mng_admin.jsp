@@ -7,6 +7,7 @@
    String jsonAskList =(String)request.getAttribute("outAskVOList"); 
    String jsonReviewList = (String)request.getAttribute("outReviewVOList");
    String jsonShopList   = (String)request.getAttribute("shopList");
+   String managerId = (String)request.getAttribute("managerId");
 %>
 <!DOCTYPE html>
 <html>
@@ -191,10 +192,11 @@
                   let reserveListObj = <%=jsonReserveList%>;
                   let menuListObj = <%=jsonMenuList%>;
                   let askListObj = <%=jsonAskList%>;
-                  let reviewListObj = <%=jsonReviewList%>
-                  let shopListObj = <%=jsonShopList%>
+                  let reviewListObj = <%=jsonReviewList%>;
+                  let shopListObj = <%=jsonShopList%>;
+                  let managerId = "<%=managerId%>";
                   let shopMap = new Map();
-                  
+                  let shopCheck =0;
                   
                   $("#shopNow").text(shopObj.shopName);
                   $("#shopName").text(shopObj.shopName);
@@ -209,8 +211,15 @@
                         row.append($("<a class='dropdown-item' href='#' id='"+shop.shopName+"' onclick ='forwording("+shop.shopNo+")'></a>").text(shop.shopName));
                         $("#shopList").append(row);
                         shopMap.set(shop.shopName,shop.shopNo);
+                        if(managerId ==shop.managerId){
+                        	shopCheck=1;
+                        }
+                        
                   });
-                 
+                  if(shopCheck ==0){
+                	  alert("가게 관리 페이지에 접근 할 수 없습니다.");
+                	  window.location.replace("/TWOREE/login/login.do?work_div=logout");
+                  }
                    
                   $("#reservationList").empty();
                   $.each(reserveListObj, function(index, reserve) {
