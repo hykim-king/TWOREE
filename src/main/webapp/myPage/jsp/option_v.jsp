@@ -165,19 +165,20 @@ toReview.addEventListener("click",function(event){
   		  $.ajax({
             type: "GET", 
             url:"/TWOREE/user/myPage.do",
-            asyn:"false",
+            asyn:"true",
             dataType:"html",
             data:{
                 "work_div":"doSelectOneR1", 
                 "shopNo": shopValue,
                 "userId": "user1"
                 
-            },success:function(data){//통신 성공
-               
+            },success:function(response){//통신 성공
+                console.log("success data:"+response);
+                window.open("/TWOREE/user/myPage.do?work_div=doSelectOneR1&shopNo="+"2"); 
            
             },
-           error:function(data){//실패시 처리
-                  
+           error:function(response){//실패시 처리
+                   console.log("error:"+response);
            }
        	})//-ajax
   	  };
