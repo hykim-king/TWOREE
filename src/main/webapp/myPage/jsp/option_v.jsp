@@ -109,7 +109,7 @@ toReview.addEventListener("click",function(event){
 		         %>   
     	 	 
     	 	
-					<tr><td>[가게번호] <%=vo.getShopNo()%></td>	 
+					<tr><td> <%=vo.getShopNo()%></td>	 
 						<td>[주문자] <%=vo.getUserId()%></td>   
 						<td> <%=vo.getReserveDate()%></td>    
 						<td> <%=vo.getReserveState()%></td>
@@ -162,25 +162,8 @@ toReview.addEventListener("click",function(event){
   	  
   	  function doSelectOne(shopValue){
   		
-  		  $.ajax({
-            type: "GET", 
-            url:"/TWOREE/user/myPage.do",
-            asyn:"true",
-            dataType:"html",
-            data:{
-                "work_div":"doSelectOneR1", 
-                "shopNo": shopValue,
-                "userId": "user1"
-                
-            },success:function(response){//통신 성공
-                console.log("success data:"+response);
-                window.open("/TWOREE/user/myPage.do?work_div=doSelectOneR1&shopNo="+"2"); 
-           
-            },
-           error:function(response){//실패시 처리
-                   console.log("error:"+response);
-           }
-       	})//-ajax
+         window.open("/TWOREE/user/myPage.do?work_div=doSelectOneR1&shopNo="+shopValue); 
+          
   	  };
  
  

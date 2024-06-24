@@ -47,7 +47,51 @@ public class UserController implements ControllerV, PLog {
     	reviewService = new ReviewService();
     	askService = new AskService();
     	    	
-	} 
+	}
+	public JView doSaveReview(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NoSuchAlgorithmException {
+		log.debug("-----------------");
+		log.debug("doSaveReview()");
+		log.debug("-----------------");
+        
+		ReviewDTO inVO = new ReviewDTO();
+		  
+		String shopNo = StringUtill.nvl(request.getParameter("shopNo"), ""); 
+		String userId = StringUtill.nvl(request.getParameter("userId"), "");
+		String reviewContent =  StringUtill.nvl(request.getParameter("reviewContent"), "");
+		String score =  StringUtill.nvl(request.getParameter("score"), "");
+		
+		
+		inVO.setShopNo(Integer.parseInt(shopNo));
+		inVO.setUserId(userId);
+		inVO.setReviewContent(reviewContent);
+		inVO.setScore(Integer.parseInt(score)); 
+		
+		log.debug("inVO:"+inVO);
+		int flag = reviewService.doSave(inVO);
+		String message = "";
+		log.debug("flag:"+flag);
+		
+		if(1==flag) {
+			message = "success";
+		}else {
+			message = "fail";
+		}
+		
+		MessageVO  messageVO=new MessageVO();
+		messageVO.setMessageId(String.valueOf(flag));
+		messageVO.setMsgContents(message);
+		
+		Gson  gson=new Gson();
+		String jsonString = gson.toJson(messageVO);
+		
+		log.debug("jsonString:"+jsonString);
+		response.setContentType("text/html; charset=UTF-8");
+		
+		PrintWriter out = response.getWriter();
+		out.print(jsonString);
+		
+		return null;
+	}
 	
 	public JView doSaveAsk(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NoSuchAlgorithmException {
 		log.debug("-----------------");
@@ -124,10 +168,12 @@ public class UserController implements ControllerV, PLog {
 	    	  
 	    	String shopNo = StringUtill.nvl(request.getParameter("shopNo"),""); 
 	    	String userId = StringUtill.nvl(request.getParameter("userId"),"");
-	    	//HttpSession session = request.getSession();
+	    	HttpSession session = request.getSession();
+	    	
+	    	UserDTO user = (UserDTO)session.getAttribute("user");
 	    	
 	    	request.setAttribute("shopNo",shopNo);
-	    	request.setAttribute("userId",userId);
+	    	request.setAttribute("userId",user.getUserId());
 	    	log.debug(shopNo);	
 	    	log.debug(userId);
 	    return new JView("/myPage/jsp/review_write.jsp");
@@ -448,6 +494,9 @@ public class UserController implements ControllerV, PLog {
     	
     	case"doSaveAsk":
     		viewName = doSaveAsk(request, response);
+    		break;
+    	case"doSaveReview":
+    		viewName = doSaveReview(request, response);
     		break;
     		
     	case"doSelectOne":

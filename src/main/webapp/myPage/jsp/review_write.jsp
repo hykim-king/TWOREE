@@ -1,6 +1,7 @@
+<%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@page import="com.pcwk.user.UserDTO"%>
     
     <% String shopNo = (String)request.getAttribute("shopNo"); %>
     <% String userId = (String)request.getAttribute("userId"); %>
@@ -15,10 +16,12 @@
 <script src="/TWOREE/myPage/js/common.js"></script>
 <script >
 document.addEventListener("DOMContentLoaded", function(){
+	const workDiv = document.querySelector("#workDiv"); 
 	const shopNo = document.querySelector("#shopNo");//contents
 	const userId = document.querySelector("#userId"); 
 	const reviewContent = document.querySelector("#reviewContent"); 
-	const score  = document.querySelector("#score"); 
+	const score  = document.querySelector("#score");
+	const saveBtn = document.querySelector("#saveBtn");
 
 	toReview.addEventListener("click",function(event){
 		console.log('toReview click'); 
@@ -40,6 +43,65 @@ document.addEventListener("DOMContentLoaded", function(){
 	    }
 		})//-ajax
 		});//-Vtn
+		
+		
+		
+		saveBtn.addEventListener("click", function(event){
+			console.log('saveBtn click event'+event); 
+			reviewSave();
+		});
+		
+		
+		function reviewSave() {
+			console.log('reviewSave' ); 
+		
+			 
+			 $.ajax({
+			        type: "POST", 
+			        url:"/TWOREE/user/myPage.do",
+			        dataType:"html",
+			        data:{
+			            "work_div":"doSaveReview",
+			            "shopNo": shopNo.value,
+			            "userId": userId.value,
+			            "reviewContent": reviewContent.value,
+			            "score": score.value
+			        },
+			        success:function(response){
+			            console.log("success data:"+response);  
+			     
+			         if(response){
+			        	 try{
+			        		  const messageVO = JSON.parse(response);
+			        		  console.log("messageVO.messageId:"+messageVO.messageId);
+			        		  console.log("messageVO.msgContents:"+messageVO.msgContents);
+			        		  
+			        		  if(isEmpty(messageVO)==false && "1"===messageVO.messageId){
+			        			alert(messageVO.msgContents);
+			        			 window.close(); 
+			        		  }else{
+			        			  alert(messageVO.msgContents); 
+			        		   }
+			        		  
+			        	    }catch(e){
+			        		   console.error("JSON 파싱 에러:",e);
+			        	    }
+			        	
+			            }else{
+			        	   console.warn("response가 null혹은 undefined.");
+			        	   alert("response가 null혹은 undefined.");
+			            }
+			        
+			          },
+			          error:function(data){
+			        	  console.log("error:"+data);
+			          }
+			 
+			 });//--ajaxend
+			
+		}//-save end	
+		
+		
 	}) ;//--document
 
 </script> 
@@ -68,7 +130,7 @@ document.addEventListener("DOMContentLoaded", function(){
             <div class="form-group row">
                 <label for="reviewContent" class="col-sm-2 col-form-label">문의 내용:</label>
                 <div class="col-sm-10">
-                    <textarea class="form-control" id="reviewContent" rows="4" ></textarea>
+                    <textarea class="form-control" id="reviewContent" name="reviewContent" rows="4"    ></textarea>
                 </div>
             </div>
             
@@ -76,14 +138,14 @@ document.addEventListener("DOMContentLoaded", function(){
             <div class="form-group row">
                 <label for="score" class="col-sm-2 col-form-label">별점 :</label>
                 <div class="col-sm-10">
-                  <input type="text" class="form-control" id="score"   value="${outVO.score}" >
+                  <input type="text" class="form-control" id="score"  name="score"   >
                 </div>
             </div>
             
            
             <div class="form-group row">
                 <div class="col-sm-10 offset-sm-2">
-                    <button type="button" class="btn btn-primary" onclick="submitAnswer()">답변 작성</button>
+                    <button type="button" class="btn btn-primary" id="saveBtn">답변 작성</button>
                     <button type="reset" class="btn btn-secondary"  id="toReview" >취소</button>
                 </div>
             </div>
