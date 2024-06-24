@@ -283,9 +283,10 @@
  </div>
  
 </div>	
-  <footer class="py-3 my-4">    
-    <p class="text-center text-muted">&copy; 2024-06 ACORN, TWOREE</p>
-  </footer>
+    <footer>
+        <p>&copy; 이성연, 엄기은, 임강혁, 박수연, 이무원</p>
+        <p class="contact-info">Contact us: contact@tworee.com | +1-234-567-890</p>
+    </footer>
 </body>
 <script src="/TWOREE/User/assets/js/bootstrap.bundle.min.js"></script> 
 </html>

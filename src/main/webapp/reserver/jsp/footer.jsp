@@ -29,7 +29,7 @@
 </head>
 <body>
     <footer>
-        <p>&copy; 이성연, 엄기은, 임강혁, 박수연, 이무원</p>
+        <p>&copy; 이성연, 엄기은, 임강혁, 박수연, 이무원, 황찬호</p>
         <p class="contact-info">Contact us: contact@tworee.com | +1-234-567-890</p>
     </footer>
 </body>

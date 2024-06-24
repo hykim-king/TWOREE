@@ -18,6 +18,25 @@
         height: 100%;
         margin-top: 100px; /* Adjust this value to move the form down */
     }
+        footer {
+            background-color: #333;
+            color: white;
+            padding: 10px;
+            text-align: center;
+            bottom: 0;
+            width: 100%;
+            box-sizing: border-box;
+            clear :both;
+        }
+        footer p {
+            margin: 0;
+            font-size: 1rem;
+        }
+        .contact-info {
+            text-align: right;
+            font-size: 0.8rem;
+        }
+
 </style>
 <title>TWOREE 로그인</title>
 <script src = "/TWOREE/User/assets/js/jquery_3_7_1.js"> </script>
@@ -182,9 +201,10 @@
 </form>
 </div>
 <!-- //container end --------------------------------->
-  <footer class="py-3 my-4">    
-    <p class="text-center text-muted">&copy; 2024-06 ACORN, TWOREE</p>
-  </footer>
+    <footer>
+        <p>&copy; 이성연, 엄기은, 임강혁, 박수연, 이무원</p>
+        <p class="contact-info">Contact us: contact@tworee.com | +1-234-567-890</p>
+    </footer>
 </body>
 <script src="/TWOREE/User/assets/js/bootstrap.bundle.min.js"></script> 
 </html>
