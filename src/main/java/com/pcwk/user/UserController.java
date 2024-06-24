@@ -204,20 +204,20 @@ public class UserController implements ControllerV, PLog {
 			throws ServletException, IOException {
 	      	log.debug("-----------------");
 	    	log.debug("doRetrieveR()");
-	    	log.debug("-----------------");		
-	    	
-	    	HttpSession session = request.getSession(); 
-	    	UserDTO user = (UserDTO)session.getAttribute("user"); 
-	    	request.setAttribute("userId",user.getUserId());
+	    	log.debug("-----------------");		 
 	    	 
 	    	//ReserveDTO inVO = new ReserveDTO(); 
 	    	SearchDTO searchVO = new SearchDTO();
+	    	HttpSession session = request.getSession(); 
+	    	UserDTO user = (UserDTO)session.getAttribute("user"); 
 	    	int pageNo =1;
 	    	int pageSize = 10;
 	    	String searchDiv = "10";
-	    	String searchWord = StringUtill.nvl(request.getParameter("userId"),"");
+	    	String searchWord = user.getUserId();
 	    	
 	    	//String userId = StringUtill.nvl(request.getParameter("userId"),"");
+	    	
+	    	
 	    	
 	    	//inVO.setUserId(userId);
 	    	searchVO.setPageNo(pageNo);
@@ -242,7 +242,34 @@ public class UserController implements ControllerV, PLog {
 			request.setAttribute("reserverList", list);
 			log.debug("list:{}",list); 
 					
-			 return new JView("/myPage/jsp/my_r.jsp");	
+			request.setAttribute("reserverList", list);
+			log.debug("list:{}",list); 
+			
+			int flag = (list != null && !list.isEmpty()) ? 1 : 0; 
+			String message = "";
+
+			log.debug("flag:" + flag);
+
+			if (1 == flag) {
+			    message = "예약넘어가기 성공";
+			} else {
+			    message = "예약넘어가기 실패";
+			}
+			
+			MessageVO  messageVO=new MessageVO();
+			messageVO.setMessageId(String.valueOf(flag));
+			messageVO.setMsgContents(message);
+			
+			Gson  gson=new Gson();
+			String jsonString = gson.toJson(messageVO);
+			
+			log.debug("jsonString:"+jsonString);
+			response.setContentType("text/html; charset=UTF-8");
+			
+			PrintWriter out = response.getWriter();
+			out.print(jsonString);
+			
+			return null;
 		}
 	
 	public JView doRetrieveR1(HttpServletRequest request, HttpServletResponse response)

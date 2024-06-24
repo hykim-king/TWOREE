@@ -244,7 +244,7 @@ doRetrieveRtn.addEventListener("click",function(event){
                  	</tr>
      	 </thead> 
     	 	<tbody> 
-    	 	    <%     
+    	 	    <%     if(null != list && list.size()>0){
           				for(ReserveDTO vo   :list){  
 		         %>   
     	 	 
@@ -265,6 +265,7 @@ doRetrieveRtn.addEventListener("click",function(event){
 						<td> </td>	 
 						<td> </td>
 			 <%   
+          				 }//for
          		}//--if 
       		  %> 
    			 </tbody>
