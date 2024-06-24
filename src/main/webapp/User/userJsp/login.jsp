@@ -9,8 +9,14 @@
 <link rel="stylesheet" href="/TWOREE/User/assets/css/bootstrap.css">
 <style >
     .container {
-      max-width: 400px; /* Adjust the width as needed */
-      margin: auto; /* Center the form */
+        max-width: 400px; /* Adjust the width as needed */
+        margin: auto; /* Center the form */
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100%;
+        margin-top: 100px; /* Adjust this value to move the form down */
     }
 </style>
 <title>TWOREE 로그인</title>

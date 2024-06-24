@@ -7,6 +7,13 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link rel="shortcut icon" href="/TWOREE/User/assets/images/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="/TWOREE/User/assets/css/bootstrap.css">
+<style> 
+    .container{
+        max-width: 600px;
+        margin: auto;
+        margin-top: 100px; /* Adjust this value to move the form down */
+    }
+</style>
 <title>회원가입</title>
 <script src = "/TWOREE/User/assets/js/jquery_3_7_1.js"> </script>
 <script src="/TWOREE/User/assets/js/common.js"></script> 
