@@ -57,7 +57,13 @@
 		      password.focus();
 	        alert('비밀번호를 입력 하세요.');
 	        return;
-	  }	  
+	        
+	  }	
+	  if(password.value.length<8 || password.value.length >16){
+		    password.focus();
+		    alert('비밀번호는 8~16자리여야 합니다.')
+		    return;
+	  }
 	  if(isEmpty(name.value) == true){
 		      name.focus();
 	        alert('이름을 입력 하세요.');
@@ -67,7 +73,13 @@
 		      userEmail.focus();
 	        alert('이메일을 입력 하세요.');
 	        return;
-	  }     
+	  
+	  } 
+    if (!isValidEmail(userEmail.value)) {
+          userEmail.focus();
+          alert('올바른 이메일 형식을 입력하세요.');
+          return;
+    }	  
 	  if(isEmpty(tel.value) == true){
 		      tel.focus();
 	        alert('핸드폰 번호를 입력 하세요.');
@@ -134,7 +146,11 @@
      
  
    }//-join end
- 
+   
+   function isValidEmail(email) {
+       const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+       return emailPattern.test(email);
+   }
  
 });//Docoment end
 
@@ -172,7 +188,7 @@
   <div class="row mb-3">
     <label for="password" class="col-sm-2 col-form-label">비밀번호</label>
     <div class="col-sm-10">
-     <input  type="password" class="form-control" name="password" id="password" placeholder="비밀번호 8~16자리를 입력해주세요." required="required">
+     <input  type="password" class="form-control" name="password" id="password" placeholder="비밀번호 8~16자리를 입력해주세요." required="required" pattern=".{8,16}" title="비밀번호는 8~16자리여야 합니다.">
     </div>
   </div> 
 

@@ -25,6 +25,16 @@
 	 const password = document.querySelector("#password");
 	 const moveToJoinBtn  = document.querySelector("#moveToJoin");
 	 
+	 $(loginBtn).ready(function() {
+	     document.addEventListener("keydown", function(){
+	       if (event.keyCode === 13) {
+	        event.preventDefault();
+	         console.log('loginBtn click:');
+	         login();
+	       }
+	     });
+	   });
+	 
 	 moveToJoinBtn.addEventListener("click", function(event){
 		 console.log('moveToJoinBtn click:');
 		 moveToJoin();
@@ -151,11 +161,12 @@
         <label class="form-check-label" for="form2Example31"> 로그인 저장 </label>
       </div>
     </div>
+<!-- 
   <div class ="col">
     <a href="#!">비밀번호를 잊으셨나요?</a>
   
   </div>
-  
+-->  
   </div>
 
 
