@@ -112,7 +112,7 @@ document.addEventListener("DOMContentLoaded", function(){
         <h1 class="mb-4">리뷰쓰기</h1>
         <form id="menuForm">
             <div class="form-group row">
-            
+             
                 <label for="shopNo" class="col-sm-2 col-form-label" >가게번호 :</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="shopNo" disabled="disabled"  value="${shopNo}"    >
@@ -136,7 +136,7 @@ document.addEventListener("DOMContentLoaded", function(){
             
              <br>
             <div class="form-group row">
-                <label for="score" class="col-sm-2 col-form-label">별점 :</label>
+                <label for="score" class="col-sm-2 col-form-label">별점 : (10점만점)</label>
                 <div class="col-sm-10">
                   <input type="text" class="form-control" id="score"  name="score"   >
                 </div>
@@ -145,7 +145,7 @@ document.addEventListener("DOMContentLoaded", function(){
            
             <div class="form-group row">
                 <div class="col-sm-10 offset-sm-2">
-                    <button type="button" class="btn btn-primary" id="saveBtn">답변 작성</button>
+                    <button type="button" class="btn btn-primary" id="saveBtn">리뷰 등록</button>
                     <button type="reset" class="btn btn-secondary"  id="toReview" >취소</button>
                 </div>
             </div>

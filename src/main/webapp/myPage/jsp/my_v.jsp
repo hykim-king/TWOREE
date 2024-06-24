@@ -267,8 +267,7 @@ profBtn.addEventListener("click",function(event){
                     <tr class="table-dark table-hover table-bordered" id="option_reserver">
                  	<th>예약정보</th>	
                  	<th>리뷰정보</th>	
-                 	<th>메뉴</th>	 
-                 	<th class="text_center col-sm-1">관리</th>
+                 	<th>메뉴</th>	  
                  	</tr>
      	 </thead> 
     	 <tbody> 
@@ -278,14 +277,13 @@ profBtn.addEventListener("click",function(event){
 		         %> 
 		         
 				<tr><td rowspan="3" >[가게번호] <%=vo.getShopNo()%></td>
-					<td>[별점] 
+					<td>[별점]  
                              <div class="star-rating">
-                              <div class="filled-stars" style="width: <%= (vo.getScore() / 5.0) * 100 %>%;">
+                              <div class="filled-stars" style="width: <%= (vo.getScore() / 10.0) * 100 %>%;">
                                ★★★★★ </div>
                               <div> ☆☆☆☆☆ </div></div> </td> 
 					<td>[작성날짜] <%=vo.getReviewWrtDate()%></td>  
-					<td rowspan="3"> 
-					<input type="button"  data-hidden-info="" value="수정"  class="btn btn-outline-success   "></td>
+					 
 					
 				<tr><td>[내용] <%=vo.getReviewContent()%></td>
 				 	<td>[수정날짜] <%=vo.getReviewModDate()%></td>	   

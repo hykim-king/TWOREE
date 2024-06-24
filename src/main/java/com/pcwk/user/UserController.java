@@ -73,9 +73,9 @@ public class UserController implements ControllerV, PLog {
 		log.debug("flag:"+flag);
 		
 		if(1==flag) {
-			message = "success";
+			message = "리뷰가 등록되었습니다.";
 		}else {
-			message = "fail";
+			message = "다시시도해주십시오.";
 		}
 		
 		MessageVO  messageVO=new MessageVO();

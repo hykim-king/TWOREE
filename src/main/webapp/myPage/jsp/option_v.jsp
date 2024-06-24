@@ -4,7 +4,7 @@
 <%@page import="java.util.List"%>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- <%@ include file="/cmn/common.jsp" %>        
+<%@ include file="/cmn/common.jsp" %>        
 <%
 List<ReserveDTO> list = (List<ReserveDTO>)request.getAttribute("reserverList"); 
 %> 
@@ -19,36 +19,36 @@ List<ReserveDTO> list = (List<ReserveDTO>)request.getAttribute("reserverList");
 <script src="/TWOREE/myPage/js/common.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function(){
-const toReview= document.querySelector("#toReview"); 
+    const toReview = document.querySelector("#toReview"); 
 
-toReview.addEventListener("click",function(event){
-	console.log('toReview click'); 
+    toReview.addEventListener("click", function(event){
+        console.log('toReview click'); 
 
-	$.ajax({
-    type: "GET", 
-    url:"/TWOREE/user/myPage.do",
-    dataType:"html",
-    data:{
-        "work_div": "doRetrieveV",
-        "userId": "user1"
-    },
-    success:function(response){//통신 성공
-        console.log("success data:"+response);
-         window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveV&userId="+"user1"); 
-    },
-    error:function(response){//실패시 처리
-            console.log("error:"+response);
-    }
-	})//-ajax
-	});//-Vtn
-}) ;//--document
+        $.ajax({
+            type: "GET", 
+            url:"/TWOREE/user/myPage.do",
+            dataType:"html",
+            data:{
+                "work_div": "doRetrieveV",
+                "userId": "user1"
+            },
+            success:function(response){//통신 성공
+                console.log("success data:" + response);
+                window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveV&userId=" + "user1"); 
+            },
+            error:function(response){//실패시 처리
+                console.log("error:" + response);
+            }
+        }); //-ajax
+    }); //-Vtn
+}); //--document
 
 
 </script>
 
 <title>리뷰쓰기</title>
 <style>
-    h5{
+    h5 {
         color: white;
     }
     textarea {
@@ -66,7 +66,7 @@ toReview.addEventListener("click",function(event){
         gap: 20px;
     }
     .left-section {
-        flex:1;
+        flex: 1;
     }
     .right-section {
         flex: 3;
@@ -84,95 +84,78 @@ toReview.addEventListener("click",function(event){
     <div class="left-section">
         <h2>리뷰</h2> 
         <h2>작성</h2>
+        
     </div>
-  <div class="right-section">
-        <!-- 버튼 --> 
+    <div class="right-section">
+        <!-- 버튼 -->
+              <a>[안내] 방문완료일 경우 리뷰를 작성하실 수 있습니다.</a> 
         <div class="mb-2 d-grid gap-2 d-md-flex justify-content-md-end"> 
+        
             <button type="reset" class="btn btn-secondary" value="" >새로고침</button>   
             <button type="button" class="btn btn-info" id="toReview" >뒤로가기</button>
         </div> 
         <!--// 버튼 ----------------------------------------------------------------->
-       <div class="table-container">
-          <table class="table table-hover" id="boardList">
-          <thead>
+        <div class="table-container">
+            <table class="table table-hover" id="boardList">
+                <thead>
                     <tr class="table-info table-hover table-bordered" id="option_reserver">
-                 	<th>방문정보</th>	
-                 	<th>개인정보</th>	
-                 	<th>날짜</th>	
-                 	<th>예약현황</th>
-                 	<th class="text_center col-sm-1">관리</th>
-                 	</tr>
-     	 </thead> 
-    	 	<tbody> 
-    	 	    <%     
-          				for(ReserveDTO vo   :list){  
-		         %>   
-    	 	 
-    	 	
-					<tr><td> <%=vo.getShopNo()%></td>	 
-						<td>[주문자] <%=vo.getUserId()%></td>   
-						<td> <%=vo.getReserveDate()%></td>    
-						<td> <%=vo.getReserveState()%></td>
-						<td>
-					   <div>
-           			   <input type="button"  data-hidden-info="<%=vo.getUserId() %>" value="쓰기"  class="btn btn-outline-success btn-sm ">
-            			</div>
-					  <td style="display: none;"><%=vo.getReserveDate() %></td>
-					  </tr>
-			
-			 <%   
-         		}//--if 
-      		  %> 
-   			 </tbody>
-			 </table>
+                        <th>가게번호</th>    
+                        <th>개인정보</th>    
+                        <th>날짜</th>    
+                        <th>예약현황</th>
+                      
+                    </tr>
+                </thead> 
+                <tbody> 
+                    <%     
+                        for(ReserveDTO vo : list) {  
+                    %>   
+                    <tr<% if (!"방문완료".equals(vo.getReserveState())) { %> class="disabled-row"<% } %>>
+                        <td> <%=vo.getShopNo()%></td>    
+                        <td>[주문자] <%=vo.getUserId()%></td>   
+                        <td> <%=vo.getReserveDate()%></td>    
+                        <td> <%=vo.getReserveState()%></td>
+                        <td>
+                            <div>
+                                
+                            </div>
+                        </td>
+                        <td style="display: none;"><%=vo.getReserveDate()%></td>
+                    </tr>
+                    <%   
+                        }
+                    %> 
+                </tbody>
+            </table>
+            
         </div>
     </div> 
     <script>
     document.addEventListener("DOMContentLoaded", function(){
-    	const rows = document.querySelectorAll("#boardList tbody tr");
-     	
-    	const buttons = document.querySelectorAll(".btn-outlne-success");
-    	
-    	const shopNo = document.querySelector("#shopNo");
-    	const userId = document.querySelector("#userId");
-    	
-    	const rwrite = document.querySelectorAll("rwrite");
-    	    	
-    	buttons.forEach(function(button){
-    		 button.addEventListener('click',function(){
-    			 let hiddenInfo = this.getAttribute('data-hidden-info');
-    			 console.log('hiddenInfo:'+hiddenInfo);
-    			 doSelectOne(hiddenInfo);
-    		 }); 
-    	});
-       	//이벤트 핸들러
-  	  rows.forEach(function(row){
-  		  //double click
-  		  row.addEventListener('click',function(){
-  			  console.log('row click');
-  			  //this(tr) 자식 (td: 마지막 위치)
-  			 
-  			  let shopValue = this.querySelector('td:first-child').textContent.trim();
-  			  console.log('shopValue:'+shopValue); 
-  			  
-  			  doSelectOne(shopValue);
-  			   });
-  		  
-  	  });//-row
-  	  
-  	  function doSelectOne(shopValue){
-  		
-         window.open("/TWOREE/user/myPage.do?work_div=doSelectOneR1&shopNo="+shopValue); 
-          
-  	  };
- 
- 
- 
-    	  
-    	
-    });//docunment end
-    
-    
+        const rows = document.querySelectorAll("#boardList tbody tr:not(.disabled-row)");
+        const buttons = document.querySelectorAll(".btn-outline-success:not([disabled])");
+
+        rows.forEach(function(row){
+            row.addEventListener('click', function(){
+                console.log('row click');
+                let shopValue = this.querySelector('td:first-child').textContent.trim();
+                console.log('shopValue:' + shopValue); 
+                doSelectOne(shopValue);
+            });
+        });
+
+        buttons.forEach(function(button){
+            button.addEventListener('click', function(){
+                let hiddenInfo = this.getAttribute('data-hidden-info');
+                console.log('hiddenInfo:' + hiddenInfo);
+                doSelectOne(hiddenInfo);
+            }); 
+        });
+
+        function doSelectOne(shopValue){
+            window.open("/TWOREE/user/myPage.do?work_div=doSelectOneR1&shopNo=" + shopValue); 
+        }
+    });//document end
     </script> 
 </body>   
 </html>
