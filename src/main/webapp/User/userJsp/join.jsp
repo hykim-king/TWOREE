@@ -13,6 +13,25 @@
         margin: auto;
         margin-top: 100px; /* Adjust this value to move the form down */
     }
+     footer {
+        background-color: #333;
+        color: white;
+        padding: 10px;
+        text-align: center;
+        width: 100%;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+    }
+    footer p {
+        margin: 0;
+        font-size: 1rem;
+    }
+    .contact-info {
+        text-align: right;
+        font-size: 0.8rem;
+    }   
+    
 </style>
 <title>회원가입</title>
 <script src = "/TWOREE/User/assets/js/jquery_3_7_1.js"> </script>
@@ -284,7 +303,7 @@
  
 </div>	
     <footer>
-        <p>&copy; 이성연, 엄기은, 임강혁, 박수연, 이무원</p>
+        <p>&copy; 이성연, 엄기은, 임강혁, 박수연, 이무원, 황찬호</p>
         <p class="contact-info">Contact us: contact@tworee.com | +1-234-567-890</p>
     </footer>
 </body>
