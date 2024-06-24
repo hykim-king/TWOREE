@@ -25,7 +25,16 @@
   const tel = document.querySelector("#tel");
   const birthday = document.querySelector("#birthday");
   
-  
+
+  $(joinBtn).ready(function() {
+      document.addEventListener("keydown", function(){
+        if (event.keyCode === 13) {
+         event.preventDefault();
+          console.log('joinBtn click:');
+          join();
+        }
+      });
+    });
   
   moveToLoginBtn.addEventListener("click", function(event){
 	  console.log('moveToLogin click event'+event);
@@ -68,7 +77,12 @@
 		      name.focus();
 	        alert('이름을 입력 하세요.');
 	        return;
-	  }	  
+	  }
+    if (!isValidKoreanName(name.value)) {
+          name.focus();
+          alert('이름은 한글로만 입력해야 합니다.');
+          return;
+    }
 	  if(isEmpty(userEmail.value) == true){
 		      userEmail.focus();
 	        alert('이메일을 입력 하세요.');
@@ -84,12 +98,22 @@
 		      tel.focus();
 	        alert('핸드폰 번호를 입력 하세요.');
 	        return;
-	  }   	  
+	  }
+    if (!isValidPhoneNumber(tel.value)) {
+          tel.focus();
+          alert('올바른 핸드폰 번호 형식을 입력하세요.');
+          return;
+    }
 	  if(isEmpty(birthday.value) == true){
 		      birthday.focus();
 	        alert('생년월일을 입력 하세요.');
 	        return;
 	  } 
+    if (!isValidBirthday(birthday.value)) {
+          birthday.focus();
+          alert('올바른 생년월일 형식을 입력하세요.');
+          return;
+    }
 	  const shopAdmin = document.querySelector("#shopAdmin").checked ? "Y" : "N";
 	    
 	  $.ajax({
@@ -151,6 +175,30 @@
        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
        return emailPattern.test(email);
    }
+   
+   function isValidPhoneNumber(phoneNumber) {
+	    const phonePattern = /^(010|011|016|017|018|019)-?\d{3,4}-?\d{4}$/;
+	    return phonePattern.test(phoneNumber);
+	}
+   function isValidBirthday(birthday) {
+	    const birthdayPattern = /^(19|20)\d{2}(0[1-9]|1[0-2])(0[1-9]|[12][0-9]|3[01])$/;
+
+	    if (!birthdayPattern.test(birthday)) {
+	        return false;
+	    }
+
+	    const year = parseInt(birthday.substring(0, 4), 10);
+	    const month = parseInt(birthday.substring(4, 6), 10);
+	    const day = parseInt(birthday.substring(6, 8), 10);
+
+	    const date = new Date(year, month - 1, day);
+
+	    return date.getFullYear() === year && date.getMonth() + 1 === month && date.getDate() === day;
+	}
+   function isValidKoreanName(name) {
+	    const koreanNamePattern = /^[가-힣]+$/;
+	    return koreanNamePattern.test(name);
+	}   
  
 });//Docoment end
 
@@ -197,6 +245,7 @@
     <div class="col-sm-10">
      <input type="text" class="form-control" name="name" id="name" placeholder="ex)홍길동" required="required">
     </div>
+    
   </div> 
 
   <div class="row mb-3">
@@ -209,7 +258,7 @@
   <div class="row mb-3">
     <label for="tel" class="col-sm-2 col-form-label">전화번호</label>
     <div class="col-sm-10">
-     <input  type="tel" class="form-control" name="tel" id="tel" placeholder="ex)010-0000-0000" required="required">
+     <input  type="tel" class="form-control" name="tel" id="tel" placeholder="ex)01012345678" required="required">
     </div>
   </div> 
 
