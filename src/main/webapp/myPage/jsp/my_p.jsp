@@ -405,7 +405,7 @@ $(document).ready(function() {
                 </li>
                 <li>
                     <label for="password">비밀번호 &nbsp</label>
-                    <input type="password" id="password" style="border: none; name="password"  required value="${outVO.password}">  
+                    <input type="password" id="password" style="border: none; name="password"  required">  
               			 <button id="showPassword">
         				<img src="/TWOREE/myPage/img/hide.png " alt="Show" id="showImg" class="show-password-img">
         				<img src="/TWOREE/myPage/img/show.png" alt="Hide" id="hideImg" class="show-password-img">

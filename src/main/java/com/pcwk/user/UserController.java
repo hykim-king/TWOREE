@@ -451,9 +451,9 @@ public class UserController implements ControllerV, PLog {
 		log.debug("flag:"+flag);
 		
 		if(1==flag) {
-			message = "占쎈땾占쎌젟 占쎈┷占쎈�占쎈뮸占쎈빍占쎈뼄.";
+			message = "성공";
 		}else {
-			message = "占쎈땾占쎌젟 占쎈뼄占쎈솭!";
+			message = "실패";
 		}
 		
 		MessageVO  messageVO=new MessageVO();
