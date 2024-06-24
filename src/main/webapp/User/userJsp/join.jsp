@@ -17,14 +17,13 @@
   const joinBtn = document.querySelector("#join");
   const moveToLoginBtn = document.querySelector("#moveToLogin")
   
-  const workDiv = document.querySelector("#workDiv");
+  const workDiv = document.querySelector("#work_div");
   const userId = document.querySelector("#userId");
   const password = document.querySelector("#password");
   const name = document.querySelector("#name");
   const userEmail = document.querySelector("#userEmail");
   const tel = document.querySelector("#tel");
   const birthday = document.querySelector("#birthday");
-  const shopAdmin = document.querySelector("#shopAdmin").checked ? "Y" : "N";
   
   
   
@@ -43,7 +42,7 @@
   function moveToLogin(){
 	  console.log('moveToLogin()');
 	  alert("로그인 화면으로 이동 합니다.");
-	  window.location.href = "/TWOREE/User/userJsp/login.jsp";
+	  window.location.href = "/TWOREE/login/login.do?work_div=toLogin";
   }
   
   function join(){
@@ -79,8 +78,9 @@
 	        alert('생년월일을 입력 하세요.');
 	        return;
 	  } 
-	  
-	    $.ajax({
+	  const shopAdmin = document.querySelector("#shopAdmin").checked ? "Y" : "N";
+	    
+	  $.ajax({
 	        type: "POST", 
 	        url:"/TWOREE/login/login.do",
 	        dataType:"html",
@@ -96,7 +96,8 @@
 	        },
 	        success:function(response){
 	            console.log("success data:"+response);  
-	     
+	            
+	           
 	         if(response){
 	        	 try{
 	        		  const messageVO = JSON.parse(response);
@@ -105,10 +106,12 @@
 	        		  
 	        		  if(isEmpty(messageVO)==false && "1"===messageVO.messageId){
 	        			alert(messageVO.msgContents);
-	        			window.location.href="/TWOREE/login/login.do";
+	        			
+	        			window.location.href="/TWOREE/login/login.do?work_div=toLogin";
+	        		  
 	        		  }else{
 	        			  alert(messageVO.msgContents); 
-	        		   }
+	        		  }
 	        		  
 	        	    }catch(e){
 	        		   console.error("JSON 파싱 에러:",e);
@@ -122,7 +125,9 @@
 	          },
 	          error:function(data){
 	        	  console.log("error:"+data);
-	          }
+	          
+	        
+	       }
 	        
  
     });//--ajaxend
@@ -160,49 +165,49 @@
   <div class="row mb-3">
     <label for="userId" class="col-sm-2 col-form-label">아이디</label>
     <div class="col-sm-10">
-     <input type="text" class="form-control" name="userId" id="userId" placeholder="아이디를 입력해주세요.">
+     <input type="text" class="form-control" name="userId" id="userId" placeholder="아이디를 입력해주세요." required="required">
     </div>
   </div>
 
   <div class="row mb-3">
     <label for="password" class="col-sm-2 col-form-label">비밀번호</label>
     <div class="col-sm-10">
-     <input  type="password" class="form-control" name="password" id="password" placeholder="비밀번호 8~16자리를 입력해주세요.">
+     <input  type="password" class="form-control" name="password" id="password" placeholder="비밀번호 8~16자리를 입력해주세요." required="required">
     </div>
   </div> 
 
   <div class="row mb-3">
     <label for="name" class="col-sm-2 col-form-label">이름</label>
     <div class="col-sm-10">
-     <input type="text" class="form-control" name="name" id="name" placeholder="ex)홍길동">
+     <input type="text" class="form-control" name="name" id="name" placeholder="ex)홍길동" required="required">
     </div>
   </div> 
 
   <div class="row mb-3">
     <label for="userEmail" class="col-sm-2 col-form-label">이메일</label>
     <div class="col-sm-10">
-     <input  type="email" class="form-control" name="userEmail" id="userEmail" placeholder="ex)ooo123@naver.com">
+     <input type="email" class="form-control" name="userEmail" id="userEmail" placeholder="ex)ooo123@naver.com" required="required">
     </div>
   </div>  
 
   <div class="row mb-3">
     <label for="tel" class="col-sm-2 col-form-label">전화번호</label>
     <div class="col-sm-10">
-     <input  type="tel" class="form-control" name="tel" id="tel" placeholder="ex)010-0000-0000">
+     <input  type="tel" class="form-control" name="tel" id="tel" placeholder="ex)010-0000-0000" required="required">
     </div>
   </div> 
 
   <div class="row mb-3">
     <label for="birthday" class="col-sm-2 col-form-label">생년월일</label>
     <div class="col-sm-10">
-     <input  type="text" class="form-control" name="birthday" id="birthday" placeholder="ex)19940000">
+     <input  type="text" class="form-control" name="birthday" id="birthday" placeholder="ex)19940000" required="required">
     </div>
   </div> 
 
 
  </form>
  <div>
- <label><input type="checkbox" value="관리자여부"  id="shopAdmin" name="shopAdmin" value="Y">관리자 여부</label>
+ <label><input type="checkbox" id="shopAdmin" name="shopAdmin" value="Y">관리자 여부</label>
  </div>
  
 </div>	
