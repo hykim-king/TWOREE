@@ -19,28 +19,18 @@ List<ReserveDTO> list = (List<ReserveDTO>)request.getAttribute("reserverList");
 <script src="/TWOREE/myPage/js/common.js"></script>
 <script>
 document.addEventListener("DOMContentLoaded", function(){
-    const toReview = document.querySelector("#toReview"); 
+    const toReviewBtn = document.querySelector("#toReview"); 
+    const userId = document.querySelector("#userId");
 
-    toReview.addEventListener("click", function(event){
-        console.log('toReview click'); 
+    toReviewBtn.addEventListener("click", function(event){
+    	toReview();
+    });
 
-        $.ajax({
-            type: "GET", 
-            url:"/TWOREE/user/myPage.do",
-            dataType:"html",
-            data:{
-                "work_div": "doRetrieveV",
-                "userId": "user1"
-            },
-            success:function(response){//통신 성공
-                console.log("success data:" + response);
-                window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveV&userId=" + "user1"); 
-            },
-            error:function(response){//실패시 처리
-                console.log("error:" + response);
-            }
-        }); //-ajax
-    }); //-Vtn
+        function toReview(){
+    		console.log('toReview()');
+    		alert("게시 목록으로 이동 합니다.");
+    		window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveV2"); 
+    	}  
 }); //--document
 
 
@@ -92,7 +82,7 @@ document.addEventListener("DOMContentLoaded", function(){
         <div class="mb-2 d-grid gap-2 d-md-flex justify-content-md-end"> 
         
             <button type="reset" class="btn btn-secondary" value="" >새로고침</button>   
-            <button type="button" class="btn btn-info" id="toReview" >뒤로가기</button>
+            <button type="button" class="btn btn-info" id="toReview" name="toReview" >뒤로가기</button>
         </div> 
         <!--// 버튼 ----------------------------------------------------------------->
         <div class="table-container">

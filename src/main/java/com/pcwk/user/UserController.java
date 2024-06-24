@@ -253,7 +253,7 @@ public class UserController implements ControllerV, PLog {
 			if (1 == flag) {
 			    message = "예약넘어가기 성공";
 			} else {
-			    message = "예약넘어가기 실패";
+			    message = "예약내역이 존재하지 않습니다.";
 			}
 			
 			MessageVO  messageVO=new MessageVO();
@@ -281,10 +281,13 @@ public class UserController implements ControllerV, PLog {
 	    	//HttpSession session = request.getSession();
 	    	//ReserveDTO inVO = new ReserveDTO(); 
 	    	SearchDTO searchVO = new SearchDTO();
+	    	
+	    	HttpSession session = request.getSession(); 
+	    	UserDTO user = (UserDTO)session.getAttribute("user"); 
 	    	int pageNo =1;
 	    	int pageSize = 10;
 	    	String searchDiv = "10";
-	    	String searchWord = StringUtill.nvl(request.getParameter("userId"),"");
+	    	String searchWord = user.getUserId();
 	    	
 	    	//String userId = StringUtill.nvl(request.getParameter("userId"),"");
 	    	
@@ -314,7 +317,52 @@ public class UserController implements ControllerV, PLog {
 			 return new JView("/myPage/jsp/option_v.jsp");	
 		}
 	
-	
+	public JView doRetrieveR2(HttpServletRequest request, HttpServletResponse response) {
+		log.debug("-----------------");
+    	log.debug("doRetrieveR2()");
+    	log.debug("-----------------");		 
+    	 
+    	//ReserveDTO inVO = new ReserveDTO(); 
+    	SearchDTO searchVO = new SearchDTO();
+    	HttpSession session = request.getSession(); 
+    	UserDTO user = (UserDTO)session.getAttribute("user"); 
+    	int pageNo =1;
+    	int pageSize = 10;
+    	String searchDiv = "10";
+    	String searchWord = user.getUserId();
+    	
+    	//String userId = StringUtill.nvl(request.getParameter("userId"),"");
+    	
+    	
+    	
+    	//inVO.setUserId(userId);
+    	searchVO.setPageNo(pageNo);
+    	searchVO.setPageSize(pageSize);
+    	searchVO.setSearchDiv(searchDiv);
+    	searchVO.setSearchWord(searchWord);
+    	log.debug("searchVO: {}"+searchVO); 
+    	
+    	//log.debug("userId:"+userId);
+    	log.debug("searchWord : {}", searchWord);
+		log.debug("searchDiv : {}", searchDiv);
+    	 
+    	
+    	List<ReserveDTO> list = reserveService.doRetrieve(searchVO);
+    	
+    	int i=0;
+    	
+		for(ReserveDTO vo :list) {
+			log.debug("i: {}, vo: {}",++i,vo);
+		}
+		 
+		request.setAttribute("reserverList", list);
+		log.debug("list:{}",list); 
+				
+		request.setAttribute("reserverList", list);
+		log.debug("list:{}",list); 
+		
+		return new JView("/myPage/jsp/my_r.jsp");
+        }
 	public JView doRetrieveV(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 	      	log.debug("-----------------");
@@ -324,10 +372,12 @@ public class UserController implements ControllerV, PLog {
 	    	//HttpSession session = request.getSession();
 	    	//ReserveDTO inVO = new ReserveDTO(); 
 	    	SearchDTO searchVO = new SearchDTO();
+	    	HttpSession session = request.getSession(); 
+	    	UserDTO user = (UserDTO)session.getAttribute("user"); 
 	    	int pageNo =1;
 	    	int pageSize = 10;
 	    	String searchDiv = "10";
-	    	String searchWord = StringUtill.nvl(request.getParameter("userId"),"");
+	    	String searchWord = user.getUserId();
 	    	
 	    	//String userId = StringUtill.nvl(request.getParameter("userId"),"");
 	    	
@@ -351,10 +401,35 @@ public class UserController implements ControllerV, PLog {
 				log.debug("i: {}, vo: {}",++i,vo);
 			}
 			 
-			request.setAttribute("reviewList", list); 
-			log.debug("list:{}",list);
+			request.setAttribute("reviewList", list);
+			log.debug("list:{}",list); 
+					 
 			
-			 return new JView("/myPage/jsp/my_v.jsp");	
+			int flag = (list != null && !list.isEmpty()) ? 1 : 0; 
+			String message = "";
+
+			log.debug("flag:" + flag);
+
+			if (1 == flag) {
+			    message = "리뷰 넘어가기 성공";
+			} else {
+			    message = "리뷰 내역이 존재하지 않습니다.";
+			}
+			
+			MessageVO  messageVO=new MessageVO();
+			messageVO.setMessageId(String.valueOf(flag));
+			messageVO.setMsgContents(message);
+			
+			Gson  gson=new Gson();
+			String jsonString = gson.toJson(messageVO);
+			
+			log.debug("jsonString:"+jsonString);
+			response.setContentType("text/html; charset=UTF-8");
+			
+			PrintWriter out = response.getWriter();
+			out.print(jsonString);
+			
+			return null;
 		}
 	public JView doRetrieveV1(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
@@ -398,6 +473,50 @@ public class UserController implements ControllerV, PLog {
 			
 			 return new JView(" ");	
 		}
+	public JView doRetrieveV2(HttpServletRequest request, HttpServletResponse response) {
+		log.debug("-----------------");
+    	log.debug("doRetrieveV2()");
+    	log.debug("-----------------");		 
+    	 
+    	//ReserveDTO inVO = new ReserveDTO(); 
+    	SearchDTO searchVO = new SearchDTO();
+    	HttpSession session = request.getSession(); 
+    	UserDTO user = (UserDTO)session.getAttribute("user"); 
+    	int pageNo =1;
+    	int pageSize = 10;
+    	String searchDiv = "10";
+    	String searchWord = user.getUserId();
+    	
+    	//String userId = StringUtill.nvl(request.getParameter("userId"),"");
+    	
+    	
+    	
+    	//inVO.setUserId(userId);
+    	searchVO.setPageNo(pageNo);
+    	searchVO.setPageSize(pageSize);
+    	searchVO.setSearchDiv(searchDiv);
+    	searchVO.setSearchWord(searchWord);
+    	log.debug("searchVO: {}"+searchVO); 
+    	
+    	//log.debug("userId:"+userId);
+    	log.debug("searchWord : {}", searchWord);
+		log.debug("searchDiv : {}", searchDiv);
+    	 
+    	
+    	List<ReviewDTO> list = reviewService.doRetrieve(searchVO);
+    	
+    	int i=0;
+    	
+		for(ReviewDTO vo :list) {
+			log.debug("i: {}, vo: {}",++i,vo);
+		}
+		 
+		request.setAttribute("reviewList", list);
+		log.debug("list:{}",list); 
+				 
+		return new JView("/myPage/jsp/my_v.jsp");
+        }
+	
 	
 	
 	public JView doRetrieveX(HttpServletRequest request, HttpServletResponse response)
@@ -409,11 +528,13 @@ public class UserController implements ControllerV, PLog {
         	//HttpSession session = request.getSession();
         	//ReserveDTO inVO = new ReserveDTO(); 
         	SearchDTO searchVO = new SearchDTO();
-        	int pageNo =1;
-        	int pageSize = 10;
-        	String searchDiv = "10";
-        	String searchWord = StringUtill.nvl(request.getParameter("userId"),"");
-    	
+        	HttpSession session = request.getSession(); 
+	    	UserDTO user = (UserDTO)session.getAttribute("user"); 
+	    	int pageNo =1;
+	    	int pageSize = 10;
+	    	String searchDiv = "10";
+	    	String searchWord = user.getUserId();
+	    	
     	//String userId = StringUtill.nvl(request.getParameter("userId"),"");
     	
 	    	
@@ -441,8 +562,77 @@ public class UserController implements ControllerV, PLog {
 			request.setAttribute("askList", list);
 			log.debug("list:{}",list); 
 			
-			 return new JView("/myPage/jsp/my_x.jsp");	
+			
+			int flag = (list != null && !list.isEmpty()) ? 1 : 0; 
+			String message = "";
+
+			log.debug("flag:" + flag);
+
+			if (1 == flag) {
+			    message = "문의 넘어가기 성공";
+			} else {
+			    message = "문의 내역이 존재하지 않습니다.";
+			}
+			
+			MessageVO  messageVO=new MessageVO();
+			messageVO.setMessageId(String.valueOf(flag));
+			messageVO.setMsgContents(message);
+			
+			Gson  gson=new Gson();
+			String jsonString = gson.toJson(messageVO);
+			
+			log.debug("jsonString:"+jsonString);
+			response.setContentType("text/html; charset=UTF-8");
+			
+			PrintWriter out = response.getWriter();
+			out.print(jsonString);
+			
+			return null;
 		}
+	
+	public JView doRetrieveX2(HttpServletRequest request, HttpServletResponse response) {
+		log.debug("-----------------");
+    	log.debug("doRetrieveV2()");
+    	log.debug("-----------------");		 
+    	 
+    	//ReserveDTO inVO = new ReserveDTO(); 
+    	SearchDTO searchVO = new SearchDTO();
+    	HttpSession session = request.getSession(); 
+    	UserDTO user = (UserDTO)session.getAttribute("user"); 
+    	int pageNo =1;
+    	int pageSize = 10;
+    	String searchDiv = "10";
+    	String searchWord = user.getUserId();
+    	
+    	//String userId = StringUtill.nvl(request.getParameter("userId"),"");
+    	
+    	
+    	
+    	//inVO.setUserId(userId);
+    	searchVO.setPageNo(pageNo);
+    	searchVO.setPageSize(pageSize);
+    	searchVO.setSearchDiv(searchDiv);
+    	searchVO.setSearchWord(searchWord);
+    	log.debug("searchVO: {}"+searchVO); 
+    	
+    	//log.debug("userId:"+userId);
+    	log.debug("searchWord : {}", searchWord);
+		log.debug("searchDiv : {}", searchDiv);
+    	 
+    	
+		List<AskDTO> list = askService.doRetrieve(searchVO);
+    	
+    	int i=0;
+    	
+		for(AskDTO vo :list) {
+			log.debug("i: {}, vo: {}",++i,vo);
+		}
+		 
+		request.setAttribute("askList", list);
+		log.debug("list:{}",list); 
+		
+		 return new JView("/myPage/jsp/my_x.jsp");	
+        }
 	
 	public JView doUpdate(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException, NoSuchAlgorithmException {
 		log.debug("-----------------");
@@ -533,17 +723,27 @@ public class UserController implements ControllerV, PLog {
     	case"doRetrieveR1":
     		viewName = doRetrieveR1(request, response);
     		break;
-    		
+    	case"doRetrieveR2":
+    		viewName = doRetrieveR2(request, response);
+    		break;
     	case"doRetrieveV":
     		viewName = doRetrieveV(request, response);
-    		break;
+    		break; 
     		
     	case"doRetrieveV1":
     		viewName = doRetrieveV1(request, response);
     		break;
+    		
+    	case"doRetrieveV2":
+    		viewName = doRetrieveV2(request, response);
+    		break;
+    	
     	case"doRetrieveX":
     		viewName = doRetrieveX(request, response);
-    		break;	
+    		break;
+    	case"doRetrieveX2":
+    		viewName = doRetrieveX2(request, response);
+    		break;		
     		
     	case"doUpdate":
     		viewName = doUpdate(request, response);

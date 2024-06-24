@@ -207,6 +207,7 @@ doRetrieveRtn.addEventListener("click",function(event){
 <body>  
     <div class="menu"> 
         <img src="/TWOREE/myPage/img/user_icon1.png" width= 80px><br> 
+        
        <p class="text-success"><strong><%= list.get(0).getUserId()%></strong></p>  
        
        <ul>

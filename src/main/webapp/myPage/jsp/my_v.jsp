@@ -20,7 +20,7 @@
 //String outVO = (String)request.getAttribute("outVO");
 
 document.addEventListener("DOMContentLoaded", function(){
-const profBtn = document.querySelector("#profBtn"); 
+const profBtn = document.querySelector("#toprof"); 
 const doRetrieveRtn = document.querySelector("#doRetrieveR"); 
 const doRetrieveVtn = document.querySelector("#doRetrieveV"); 
 const doRetrieveXtn = document.querySelector("#doRetrieveX");
@@ -28,10 +28,16 @@ const doRetrieveXtn = document.querySelector("#doRetrieveX");
 const doReviewBtn = document.querySelector("#doRetrieveR1");
 
 profBtn.addEventListener("click",function(event){
-	console.log('profBtn click'); 
-	window.location.replace("/TWOREE/user/myPage.do?work_div=doSelectOne&userId="+"user1"); 
-	
+	toprof();
 });
+	
+function toprof(){ 
+	console.log('profBtn click'); 
+	window.location.replace("/TWOREE/user/myPage.do?work_div=doSelectOne");   
+}
+
+
+
 
 	doReviewBtn.addEventListener("click",function(event){
 	console.log('doReviewBtn click'); 
@@ -237,9 +243,9 @@ profBtn.addEventListener("click",function(event){
 <body>
     <div class="menu">
         <img src="/TWOREE/myPage/img/user_icon1.png" width= 80px><br>
-        <p class="text-success"><strong><%= list.get(0).getUserId()%></strong></p>
+          <p class="text-success"><strong><%= list.get(0).getUserId()%></strong></p>  
        <ul>
-            <li><input type="button" value="내프로필" class="btn btn-light " id="profBtn" ></li>
+            <li><input type="button" value="내프로필" class="btn btn-light " id="toprof" ></li>
             <li><input type="button" value="예약"    class="btn btn-light " id="doRetrieveR" ></li>
             <li><input type="button" value="리뷰"    class="btn btn-outline-success " id="doRetrieveV" ></li>
             <li><input type="button" value="고객문의" class="btn btn-light " id="doRetrieveX" ></li>
