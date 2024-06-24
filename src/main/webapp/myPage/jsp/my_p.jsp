@@ -122,11 +122,11 @@ doRetrieveRtn.addEventListener("click",function(event){
     dataType:"html",
     data:{
         "work_div": "doRetrieveR",
-        "userId": "user1"
+        "userId": userId.value
     },
     success:function(response){//통신 성공
         console.log("success data:"+response);
-         window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveR&userId="+"user1"); 
+         window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveR"); 
     },
     error:function(response){//실패시 처리
             console.log("error:"+response);

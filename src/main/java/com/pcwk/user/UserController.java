@@ -206,7 +206,10 @@ public class UserController implements ControllerV, PLog {
 	    	log.debug("doRetrieveR()");
 	    	log.debug("-----------------");		
 	    	
-	    	//HttpSession session = request.getSession();
+	    	HttpSession session = request.getSession(); 
+	    	UserDTO user = (UserDTO)session.getAttribute("user"); 
+	    	request.setAttribute("userId",user.getUserId());
+	    	 
 	    	//ReserveDTO inVO = new ReserveDTO(); 
 	    	SearchDTO searchVO = new SearchDTO();
 	    	int pageNo =1;
@@ -235,11 +238,9 @@ public class UserController implements ControllerV, PLog {
 			for(ReserveDTO vo :list) {
 				log.debug("i: {}, vo: {}",++i,vo);
 			}
-			
-			//UI 占쎈쑓占쎌뵠占쎄숲 占쎌읈占쎈뼎
+			 
 			request.setAttribute("reserverList", list);
-			log.debug("list:{}",list);
-			//野껓옙占쎄퉳鈺곌퀗援� UI嚥∽옙 占쎌읈占쎈뼎
+			log.debug("list:{}",list); 
 					
 			 return new JView("/myPage/jsp/my_r.jsp");	
 		}
@@ -279,11 +280,9 @@ public class UserController implements ControllerV, PLog {
 			for(ReserveDTO vo :list) {
 				log.debug("i: {}, vo: {}",++i,vo);
 			}
-			
-			//UI 占쎈쑓占쎌뵠占쎄숲 占쎌읈占쎈뼎
+			 
 			request.setAttribute("reserverList", list);
-			log.debug("list:{}",list);
-			//野껓옙占쎄퉳鈺곌퀗援� UI嚥∽옙 占쎌읈占쎈뼎
+			log.debug("list:{}",list); 
 					
 			 return new JView("/myPage/jsp/option_v.jsp");	
 		}
@@ -324,8 +323,7 @@ public class UserController implements ControllerV, PLog {
 			for(ReviewDTO vo :list) {
 				log.debug("i: {}, vo: {}",++i,vo);
 			}
-			
-			//UI 占쎈쑓占쎌뵠占쎄숲 占쎌읈占쎈뼎
+			 
 			request.setAttribute("reviewList", list); 
 			log.debug("list:{}",list);
 			
@@ -412,8 +410,7 @@ public class UserController implements ControllerV, PLog {
 			for(AskDTO vo :list) {
 				log.debug("i: {}, vo: {}",++i,vo);
 			}
-			
-			//UI 占쎈쑓占쎌뵠占쎄숲 占쎌읈占쎈뼎
+			 
 			request.setAttribute("askList", list);
 			log.debug("list:{}",list); 
 			
