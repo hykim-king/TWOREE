@@ -28,27 +28,7 @@ profBtn.addEventListener("click",function(event){
 	console.log('profBtn click'); 
 	window.location.replace("/TWOREE/user/myPage.do?work_div=doSelectOne&userId="+"user1"); 
 	
-});
-	AskBtn.addEventListener("click",function(event){ 
-
-	$.ajax({
-    type: "GET", 
-    url:"/TWOREE/user/myPage.do",
-    dataType:"html",
-    data:{
-        "work_div": "doRetrieveX1",
-        //"askNo": "42",
-        "userId": "user1"
-    },
-    success:function(response){//통신 성공
-        console.log("success data:"+response);
-         window.location.replace("/TWOREE/user/myPage.do?work_div=doSelectOneX1&userId="+"user1"); 
-    },
-    error:function(response){//실패시 처리
-            console.log("error:"+response);
-    }
-	})//-ajax
-	});//-Rtn
+}); 
  
 doRetrieveRtn.addEventListener("click",function(event){
 	console.log('doRetrieveRtn click'); 
