@@ -155,18 +155,14 @@ public class AskDAO implements WorkDiv<AskDTO> {
 		sb.append("     user_id,       \n");
 		sb.append("     ask_state,     \n");
 		sb.append("     user_ask,      \n");
-		sb.append("     ask_date,      \n");
-		sb.append("     shop_answer,   \n");
-		sb.append("     answer_date    \n");
+		sb.append("     ask_date       \n");
 		sb.append(" ) VALUES (         \n");
 		sb.append("                    \n");
 		sb.append("     ?,             \n");
 		sb.append("     ?,             \n");
 		sb.append("     ?,             \n");
 		sb.append("     ?,             \n");
-		sb.append("     to_date(?),    \n");
-		sb.append("     ?,             \n");
-		sb.append("      to_date(?)   \n");
+		sb.append("     SYSDATE    \n");
 		sb.append(" )                  \n");
 
 		log.debug("1.sql:{}", sb.toString());
@@ -181,9 +177,7 @@ public class AskDAO implements WorkDiv<AskDTO> {
 			pstmt.setString(2, param.getUserId());
 			pstmt.setString(3, param.getAskState());
 			pstmt.setString(4, param.getUserAsk());
-			pstmt.setString(5, param.getAskDate());
-			pstmt.setString(6, param.getShopAnswer());
-			pstmt.setString(7, param.getAnswerDate());
+
 			
 			flag = pstmt.executeUpdate();
 

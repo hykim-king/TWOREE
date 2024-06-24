@@ -63,7 +63,7 @@ public class UserController implements ControllerV, PLog {
 		inVO.setShopNo(Integer.parseInt(shopNo));
 		inVO.setUserId(userId);
 		inVO.setUserAsk(userAsk);
-		  
+		inVO.setAskState("문의 요청"); 
 		log.debug("inVO:"+inVO);
 		int flag = askService.doSave(inVO);
 		String message = "";
