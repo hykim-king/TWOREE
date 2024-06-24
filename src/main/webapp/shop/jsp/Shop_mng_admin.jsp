@@ -146,6 +146,7 @@
     
     
          function forwording(num){
+             console.log("/TWOREE/shop/shop.do?work_div=shop_mng&shop_no="+num);
         	   window.location.replace("/TWOREE/shop/shop.do?work_div=shop_mng&shop_no="+num);
          }
          

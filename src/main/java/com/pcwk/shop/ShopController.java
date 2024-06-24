@@ -394,15 +394,34 @@ private static final long serialVersionUID = 1L;
 		ShopDTO shopinVO =new ShopDTO();
 		ShopDetailDTO shopDetailinVO = new ShopDetailDTO();
 		HttpSession session = req.getSession();
+		
 		UserDTO user = (UserDTO)session.getAttribute("user");
 		
 		
-		int shopNo = userService.getMyShopNo(user);
+		int shopNo =  Integer.parseInt(StringUtill.nvl((String)req.getParameter("shop_no"),"-1"));
+		if (shopNo==-1) {
+			log.debug("--------------------------------------------");
+			log.debug("--------------------------------------------");
+			log.debug(shopNo);
+			log.debug("--------------------------------------------");
+			log.debug("--------------------------------------------");
+			log.debug("--------------------------------------------");
+			shopNo = userService.getMyShopNo(user);
+			log.debug("--------------------------------------------");
+			log.debug("--------------------------------------------");
+			log.debug(shopNo);
+			log.debug("--------------------------------------------");
+			log.debug("--------------------------------------------");
+			log.debug("--------------------------------------------");
+			
+		}
+		
 	    
 		shopinVO.setShopNo(shopNo);
 		shopDetailinVO.setShopNo(shopNo);
 		String logInUser = user.getUserId();
 		SearchDTO searchShop = new SearchDTO();
+		
 		searchShop.setPageNo(1);
 		searchShop.setPageSize(10);
 		searchShop.setSearchDiv("40");
