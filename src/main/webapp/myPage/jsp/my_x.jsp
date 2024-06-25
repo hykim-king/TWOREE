@@ -316,18 +316,22 @@ doRetrieveRtn.addEventListener("click",function(event){
 		         
 					<tr><td rowspan="3">[가게이름] <%=vo.getShopName()%></td>	 
 						<td>[유저아이디] <%=vo.getUserId()%></td> 
-						<td>[문의상태] <%=vo.getAskState()%></td>	  
+						<td>[문의상태] <%=vo.getAskState()%></td>	
+						<td rowspan="4">
+						 <input type="button"  data-hidden-info="" value="수정"  class="btn btn-outline-success "></td>  
 						 
-						<td rowspan="3">
-						 <input type="button"  data-hidden-info="" value="수정"  class="btn btn-outline-success "></td>
+						 
                  	</tr>  
 					<tr><td>[문의날짜] <%=vo.getAskDate()%></td>	 
-						<td>[요청사항] <%=vo.getUserAsk()%></td> 
-		 				
+						<td>[요청사항] <%=vo.getUserAsk()%></td>  
+					 
+		 			<tr><td>[문의답변] <%=vo.getShopAnswer()%></td>
+		 					<td></td>	 </tr>	
 						
 					<tr> 
 						<td> </td> 
-						<td> </td>	   
+						<td> </td>
+						<td></td>	   
 			 <%  
           		  }//for
          		}//--if 
