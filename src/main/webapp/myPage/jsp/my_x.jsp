@@ -322,7 +322,7 @@ doRetrieveRtn.addEventListener("click",function(event){
 						 <input type="button"  data-hidden-info="" value="수정"  class="btn btn-outline-success "></td>
                  	</tr>  
 					<tr><td>[문의날짜] <%=vo.getAskDate()%></td>	 
-						<td>[요청사항] <%=vo.getShopName()%></td> 
+						<td>[요청사항] <%=vo.getUserAsk()%></td> 
 		 				
 						
 					<tr> 
