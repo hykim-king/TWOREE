@@ -223,7 +223,7 @@
                   $.each(reserveListObj, function(index, reserve) {
                         let row = $("<tr onclick='modReserve("+reserve.reserveNo+")'></tr>");
                         row.append($("<td></td>").text(reserve.userId));
-                        row.append($("<td></td>").text(reserve.reserveDate));
+                        row.append($("<td></td>").text(reserve.reserveDate+' '+reserve.reserveTime));
                         row.append($("<td></td>").text(reserve.people));
                         row.append($("<td></td>").text(reserve.reserveState));
                         $("#reservationList").append(row);

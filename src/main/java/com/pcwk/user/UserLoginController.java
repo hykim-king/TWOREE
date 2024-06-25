@@ -57,7 +57,8 @@ public class UserLoginController implements ControllerV, PLog {
 			HttpSession session = request.getSession();
 
 			session.setAttribute("user", outVO);
-			session.setMaxInactiveInterval(60);
+			session.setMaxInactiveInterval(60);//세션 유지시간 1분
+			
 			// 30, 로그인 성공
 			message.setMessageId("30");
 			message.setMsgContents("로그인 성공");

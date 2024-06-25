@@ -47,8 +47,8 @@ public class ReserveDao implements WorkDiv<ReserveDTO>,PLog {
 		sb.append("			   tt1.user_id,                                               \n");
 		sb.append("			   tt1.shop_no,                                               \n");
 		sb.append("			   tt1.people,                                               \n");
-		sb.append("			   tt1.reserve_date,                                          \n");
-		sb.append("			   tt1.reserve_app_date,                                      \n");
+		sb.append("			   to_char(tt1.reserve_date,'YYYYMMDD') reserve_date,         \n");
+		sb.append("			   tt1.reserve_time,                                          \n");
 		sb.append("			   tt1.user_tel,                                              \n");
 		sb.append("			   tt1.reserve_state,                                         \n");
 		sb.append("			   tt1.confirmed_date,                                        \n");
@@ -112,7 +112,7 @@ public class ReserveDao implements WorkDiv<ReserveDTO>,PLog {
 				outVO.setShopNo(rs.getInt("shop_no"));
 				outVO.setPeople(rs.getInt("people"));
 				outVO.setReserveDate(rs.getString("reserve_date"));
-				outVO.setReserveAppDate(rs.getString("reserve_app_date"));
+				outVO.setReserveTime(rs.getString("reserve_time"));
 				outVO.setUserTel(rs.getString("user_tel"));
 				outVO.setReserveState(rs.getString("reserve_state"));
 				outVO.setConfirmedDate(rs.getString("confirmed_date"));
