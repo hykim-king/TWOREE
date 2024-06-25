@@ -83,8 +83,7 @@
          $("#shopNotice").empty();
          $.each(noticeListObj, function(index, notice) {
                let li = $("<li></li>");
-               li.append($("<li class='small_size_word'></li>").text(notice.openTime));
-               li.append($("<li class='small_size_word'></li>").text(notice.closeTime));
+               li.append($("<li class='big_size_word'></li>").text(notice.noticeTitle));
                li.append($("<li class='middle_size_word'></li>").text(notice.content));
                li.append($("<li class='small_size_word'></li>").text("작성날짜 : " +notice.noticeWrtDate));
                $("#shopNotice").append(li);
