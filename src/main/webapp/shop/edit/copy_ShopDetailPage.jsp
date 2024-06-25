@@ -29,10 +29,10 @@
 	<hr>
 	<div id="shop_detail_page" class="shop_detail_page">
         <ul id="shop_detail_page_ul" class="shop_notice">
-            <li class="big_size_word">공지사항 및 소식</li>
+            <li class="big_size_word">= 공지사항 및 소식 =</li>
             <li class="middle_size_word" id="shopOpenTime"></li>
             <li class="middle_size_word" id="shopCloseTime"></li>
-            <li class="middle_size_word" id="shopNotice"></li>
+            <li style="height : 200px; overflow:scroll" class="middle_size_word" id="shopNotice"></li>
         </ul>
         <ul id="shop_detail_page_ul" class="shop_detail_info">
             <li class="big_size_word" id="shopName"></li>
@@ -44,13 +44,13 @@
         </ul>
     </div>
     <div id="shop_detail_page" class="shop_detail_page">
-        <ul id="menuList" class="shop_menu">
-            
+        <ul class="shop_menu">
+            <li class='big_size_word'>= 메뉴 =</li>
+        	<li style="height : 300px; overflow:scroll" id="menuList"></li>
         </ul>
-        <ul id="shop_detail_page_ul" class="shop_review">
-            <li class="shop_name" class="big_size_word"></li>
-            <li id="shopReview" class="middle_size_word"></li>
-            <li class="score"></li>
+        <ul class="shop_review">
+        	<li class='big_size_word'>= 리뷰 =</li>
+        	<li style="height : 300px; overflow:scroll" id="shopReview"></li>
         </ul>
     </div>
     <jsp:include page="/reserver/jsp/footer.jsp"></jsp:include>
@@ -100,13 +100,13 @@
          });
          
       
-         $("#reviewList").empty();
+         $("#shopReview").empty();																// 3. 리로딩 될 때 id="shopReview" 비우기
          $.each(reviewListObj, function(index, review) {
-               let li = $("<li></li>");
-               li.append($("<li class='big_size_word'></li>").text("작성자 : " +review.userId));
+               let li = $("<li></li>");															// 0. li 선언
+               li.append($("<li class='big_size_word'></li>").text("작성자 : " +review.userId));	// 2. 추가할 내용
                li.append($("<li class='middle_size_word'></li>").text(review.reviewContent));
                li.append($("<li class='score'></li>").text("별점 : " + review.score +"점"));
-               $("#shopReview").append(li);
+               $("#shopReview").append(li); 													// 1. id="shopReview".append(li)
            });
          
        //예약하기 버튼
