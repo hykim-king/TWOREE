@@ -32,7 +32,7 @@
             <li class="big_size_word">= 공지사항 및 소식 =</li>
             <li class="middle_size_word" id="shopOpenTime"></li>
             <li class="middle_size_word" id="shopCloseTime"></li>
-            <li style="height : 200px; overflow:scroll" class="middle_size_word" id="shopNotice"></li>
+            <li style="height : 200px; overflow:scroll; border-top : 3px solid #254336; " class="middle_size_word" id="shopNotice"></li>
         </ul>
         <ul id="shop_detail_page_ul" class="shop_detail_info">
             <li class="big_size_word" id="shopName"></li>
@@ -46,11 +46,11 @@
     <div id="shop_detail_page" class="shop_detail_page">
         <ul class="shop_menu">
             <li class='big_size_word'>= 메뉴 =</li>
-        	<li style="height : 300px; overflow:scroll" id="menuList"></li>
+        	<li style="height : 300px; overflow:scroll; border-top : 3px solid #254336;" id="menuList"></li>
         </ul>
         <ul class="shop_review">
         	<li class='big_size_word'>= 리뷰 =</li>
-        	<li style="height : 300px; overflow:scroll" id="shopReview"></li>
+        	<li style="height : 300px; overflow:scroll; border-top : 3px solid #254336;" id="shopReview"></li>
         </ul>
     </div>
     <jsp:include page="/reserver/jsp/footer.jsp"></jsp:include>
@@ -85,7 +85,7 @@
                let li = $("<li></li>");
                li.append($("<li class='big_size_word'></li>").text(notice.noticeTitle));
                li.append($("<li class='middle_size_word'></li>").text(notice.content));
-               li.append($("<li class='small_size_word'></li>").text("작성날짜 : " +notice.noticeWrtDate));
+               li.append($("<li style='border-bottom : 3px solid #254336;' class='small_size_word'></li>").text("작성날짜 : " +notice.noticeWrtDate));
                $("#shopNotice").append(li);
          });
         
@@ -94,7 +94,7 @@
                let li = $("<li></li>");
                li.append($("<li class='big_size_word'></li>").text(menu.menuName));
                li.append($("<li class='middle_size_word'></li>").text(menu.menuInfo));
-               li.append($("<li class='score'></li>").text(menu.price +"원"));
+               li.append($("<li class='score' style='border-bottom : 3px solid #254336;'></li>").text(menu.price +"원"));
                $("#menuList").append(li);
          });
          
@@ -104,7 +104,7 @@
                let li = $("<li></li>");															// 0. li 선언
                li.append($("<li class='big_size_word'></li>").text("작성자 : " +review.userId));	// 2. 추가할 내용
                li.append($("<li class='middle_size_word'></li>").text(review.reviewContent));
-               li.append($("<li class='score'></li>").text("별점 : " + review.score +"점"));
+               li.append($("<li class='score' style='border-bottom : 3px solid #254336;'></li>").text("별점 : " + review.score +"점"));
                $("#shopReview").append(li); 													// 1. id="shopReview".append(li)
            });
          
