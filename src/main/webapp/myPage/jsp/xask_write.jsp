@@ -96,7 +96,7 @@ document.addEventListener("DOMContentLoaded", function(){
 			        		  
 			        		  if(isEmpty(messageVO)==false && "1"===messageVO.messageId){
 			        			alert(messageVO.msgContents);
-			        			window.location.href="/TWOREE/user/myPage.do";
+			        			window.close();
 			        		  }else{
 			        			  alert(messageVO.msgContents); 
 			        		   }
