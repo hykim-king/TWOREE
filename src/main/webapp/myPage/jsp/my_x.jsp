@@ -34,20 +34,141 @@ function toprof(){
 	window.location.replace("/TWOREE/user/myPage.do?work_div=doSelectOne");   
 }
 
-doRetrieveRtn.addEventListener("click", function(event) {
-    console.log('doRetrieveRtn click');
-    window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveR2");
-});
+doRetrieveRtn.addEventListener("click",function(event){
+	console.log('doRetrieveRtn click'); 
 
-doRetrieveVtn.addEventListener("click", function(event) {
-    console.log('doRetrieveVtn click');
-    window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveV2");
-});
+	$.ajax({
+        type: "POST", 
+        url:"/TWOREE/user/myPage.do",
+        asyn:"true",
+        dataType:"html",
+        data:{
+            "work_div":"doRetrieveR",
+            
+            
+        },
+        success:function(response){//통신 성공
+            console.log("success data:"+response);
+         
+            //null, undefined처리
+            if(response){
+            	try{
+            		const messageVO = JSON.parse(response);
+            		console.log("messageVO.messageId:"+messageVO.messageId);
+                	console.log("messageVO.msgContents:"+messageVO.msgContents);
+                
+                if(isEmpty(messageVO) == false &&  "1" === messageVO.messageId){
+                	 
+                	window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveR2"); 
+                }else{
+                	alert(messageVO.msgContents);
+                }
+            		
+            	}catch(e){    
+            		console.error("JSON 파싱 에러:",e);
+            	}
+            	
+            	
+            }else{
+            	console.warn("response가 null혹은 undefined.");
+            	alert("response가 null혹은 undefined.");
+            }
+        
+        },
+        error:function(data){//실패시 처리
+                console.log("error:"+data);
+        }
+    });    
+	});//-Rtn
+	
+	doRetrieveVtn.addEventListener("click",function(event){
+		console.log('doRetrieveVtn click'); 
 
-doRetrieveXtn.addEventListener("click", function(event) {
-    console.log('doRetrieveXtn click');
-    window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveX2");
-});
+		$.ajax({
+	    type: "POST", 
+	    url:"/TWOREE/user/myPage.do",
+	    dataType:"html",
+	    data:{
+	        "work_div": "doRetrieveV",
+	         
+	    },
+        success:function(response){//통신 성공
+            console.log("success data:"+response);
+      
+            //null, undefined처리
+            if(response){
+            	try{
+            		const messageVO = JSON.parse(response);
+            		console.log("messageVO.messageId:"+messageVO.messageId);
+                	console.log("messageVO.msgContents:"+messageVO.msgContents);
+                
+                if(isEmpty(messageVO) == false &&  "1" === messageVO.messageId){
+                	 
+                	window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveV2"); 
+                }else{
+                	alert(messageVO.msgContents);
+                }
+            		
+            	}catch(e){    
+            		console.error("JSON 파싱 에러:",e);
+            	}
+            	
+            	
+            }else{
+            	console.warn("response가 null혹은 undefined.");
+            	alert("response가 null혹은 undefined.");
+            }
+        
+        },
+        error:function(data){//실패시 처리
+                console.log("error:"+data);
+        }
+    });    
+	});//-doRetrieveVtn
+		
+	doRetrieveXtn.addEventListener("click",function(event){
+		console.log('doRetrieveVtn click'); 
+
+		$.ajax({
+	    type: "POST", 
+	    url:"/TWOREE/user/myPage.do",
+	    dataType:"html",
+	    data:{
+	        "work_div": "doRetrieveX",
+	        
+	    },
+	    success:function(response){//통신 성공
+            console.log("success data:"+response); 
+            //null, undefined처리
+            if(response){
+            	try{
+            		const messageVO = JSON.parse(response);
+            		console.log("messageVO.messageId:"+messageVO.messageId);
+                	console.log("messageVO.msgContents:"+messageVO.msgContents);
+                
+                if(isEmpty(messageVO) == false &&  "1" === messageVO.messageId){
+                	 
+                	window.location.replace("/TWOREE/user/myPage.do?work_div=doRetrieveX2"); 
+                }else{
+                	alert(messageVO.msgContents);
+                }
+            		
+            	}catch(e){    
+            		console.error("JSON 파싱 에러:",e);
+            	}
+            	
+            	
+            }else{
+            	console.warn("response가 null혹은 undefined.");
+            	alert("response가 null혹은 undefined.");
+            }
+        
+        },
+        error:function(data){//실패시 처리
+                console.log("error:"+data);
+        }
+    });    
+	});//-doRetrieveVtn
 		
 	
 }) ;//--document

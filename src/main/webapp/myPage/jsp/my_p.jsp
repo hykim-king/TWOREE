@@ -139,12 +139,12 @@ doRetrieveRtn.addEventListener("click",function(event){
         dataType:"html",
         data:{
             "work_div":"doRetrieveR",
-            "userId": userId.value 
+             
             
         },
         success:function(response){//통신 성공
             console.log("success data:"+response);
-        	console.log(userId.value);
+        	
             //null, undefined처리
             if(response){
             	try{
@@ -185,7 +185,7 @@ doRetrieveRtn.addEventListener("click",function(event){
 	    dataType:"html",
 	    data:{
 	        "work_div": "doRetrieveV",
-	        "userId": userId.value
+	        
 	    },
         success:function(response){//통신 성공
             console.log("success data:"+response);
@@ -230,11 +230,11 @@ doRetrieveRtn.addEventListener("click",function(event){
 	    dataType:"html",
 	    data:{
 	        "work_div": "doRetrieveX",
-	        "userId": userId.value
+	         
 	    },
 	    success:function(response){//통신 성공
             console.log("success data:"+response);
-        	console.log(userId.value);
+        	
             //null, undefined처리
             if(response){
             	try{
