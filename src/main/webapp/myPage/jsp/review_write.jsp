@@ -110,14 +110,14 @@ document.addEventListener("DOMContentLoaded", function(){
             
              <br>
             <div class="form-group row">
-                <label for="userID" class="col-sm-2 col-form-label">문의자 :</label>
+                <label for="userID" class="col-sm-2 col-form-label">작성자 :</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" id="userId" disabled="disabled"  value="${userId}" >
                 </div>
             </div> 
             <br>
             <div class="form-group row">
-                <label for="reviewContent" class="col-sm-2 col-form-label">문의 내용:</label>
+                <label for="reviewContent" class="col-sm-2 col-form-label">리뷰 내용:</label>
                 <div class="col-sm-10">
                     <textarea class="form-control" id="reviewContent" name="reviewContent" rows="4"    ></textarea>
                 </div>
