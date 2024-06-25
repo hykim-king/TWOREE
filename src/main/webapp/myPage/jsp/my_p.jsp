@@ -31,14 +31,23 @@ const name = document.querySelector("#name");
 const userEmail = document.querySelector("#userEmail");
 const tel = document.querySelector("#tel"); 
 const birthday = document.querySelector("#birthday");
+const adminDiv = document.querySelector("#adminDiv");
 //const shopAdmin = document.querySelector("#shopAdmin");
 //const penaltyDate = document.querySelector("#penaltyDate");
+const isAdmin = "${outVO.shopAdmin}";
+
+console.log(isAdmin);
+if(isAdmin =="N"){
+adminDiv.hidden='hidden';
+}
 
 
 doUpdateBtn.addEventListener("click", function(event){
 	console.log('doUpdateBtn click event'+event);
 	doUpdate();
 });
+
+
 shopAdminBtn.addEventListener("click", function(event){
   console.log('shopAdminBtn click event'+event);
   doManage();
@@ -509,7 +518,7 @@ $(document).ready(function() {
                   <button type="submit" class="btn btn-secondary" id ="doUpdate" style="float: right;">수정하기</button>
         </div>
         
-        <div class="content_info">
+        <div class="content_info" id='adminDiv'>
         
             <ul>
                 <li>
