@@ -324,12 +324,13 @@ doRetrieveRtn.addEventListener("click",function(event){
                  	</tr>  
 					<tr><td>[문의날짜] <%=vo.getAskDate()%></td>	 
 						<td>[요청사항] <%=vo.getUserAsk()%></td>  
-					 
-		 			<tr><td>[문의답변] <%=vo.getShopAnswer()%></td>
-		 					<td></td>	 </tr>	
-						
+					  
 					<tr> 
-						<td> </td> 
+						 <td colspan="2">[문의답변] <%= (vo.getShopAnswer() != null && !vo.getShopAnswer().isEmpty()) ? vo.getShopAnswer() : "(아직답변이 처리되지 않았습니다)" %></td>
+		 				
+		 			
+		 			<tr>	
+		 				<td></td>	
 						<td> </td>
 						<td></td>	   
 			 <%  
