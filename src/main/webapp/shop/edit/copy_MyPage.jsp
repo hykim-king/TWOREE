@@ -27,42 +27,76 @@
 <title>Insert title here</title>
 <script>
 
-$("#search_form").ready(function() {
-	document.addEventListener('keydown', function(event) {
-		if (event.keyCode === 13) {
-		event.preventDefault();
-		
-		let frm = document.getElementById("search_form");
-		
-		// 폼 데이터 설정
-		frm.work_div.value = "doRetrieve";
-		frm.page_size.value = "6";
-		frm.search_div.value = $('#search_div').val();
-		
-		      		  
-		console.log(" frm.work_div.value: " +  frm.work_div.value);
-		console.log(" frm.search_word.value: " +  frm.search_word.value);
-		console.log(" frm.search_div.value: " +  frm.search_div.value);
-		
-		frm.action = "<%=cPath%>" + "/shop/shop.do";
-		
-		// 폼 제출
-		frm.submit();
-		
-		const pageListObj = (<%= list %>);
-	   	
-	    $("#page_list").empty();
-	    $.each(pageListObj, function(index, page) {
-	    	let row = $("<ul onclick ='pageListBtn("+page.shopNo+")'></ul>");
-	          row.append($("<li class='shop_name'></li>").text(page.shopName));
-	          row.append($("<li></li>").text(page.shopLoc));
-	          row.append($("<li></li>").text(page.reviewCnt));
-	          //row.append($("<li></li>").text(page.shopNo));
-	          $("#page_list").append(row);
-	      });
-	  }
-	}, true);
-});
+		document.getElementById('search_Btn').addEventListener('click', function(event) {
+
+			console.log("searchBtn clicked");
+				let frm = document.getElementById("search_form");
+				
+				// 폼 데이터 설정
+				frm.work_div.value = "doRetrieve";
+				frm.page_size.value = "6";
+				frm.search_div.value = $('#search_div').val();
+				
+				      		  
+				console.log(" frm.work_div.value: " +  frm.work_div.value);
+				console.log(" frm.search_word.value: " +  frm.search_word.value);
+				console.log(" frm.search_div.value: " +  frm.search_div.value);
+				
+				frm.action = "<%=cPath%>" + "/shop/shop.do";
+				
+				// 폼 제출
+				frm.submit();
+				
+				const pageListObj = (<%= list %>);
+			   	
+			    $("#page_list").empty();
+			    $.each(pageListObj, function(index, page) {
+			    	let row = $("<ul onclick ='pageListBtn("+page.shopNo+")'></ul>");
+			          row.append($("<li class='shop_name'></li>").text(page.shopName));
+			          row.append($("<li></li>").text(page.shopLoc));
+			          row.append($("<li></li>").text(page.reviewCnt));
+			          //row.append($("<li></li>").text(page.shopNo));
+			          $("#page_list").append(row);
+			      });
+			  
+			});
+	
+	$("#search_form").ready(function() {
+		document.addEventListener('keydown', function(event) {
+			if (event.keyCode === 13) {
+			event.preventDefault();
+			
+			let frm = document.getElementById("search_form");
+			
+			// 폼 데이터 설정
+			frm.work_div.value = "doRetrieve";
+			frm.page_size.value = "6";
+			frm.search_div.value = $('#search_div').val();
+			
+			      		  
+			console.log(" frm.work_div.value: " +  frm.work_div.value);
+			console.log(" frm.search_word.value: " +  frm.search_word.value);
+			console.log(" frm.search_div.value: " +  frm.search_div.value);
+			
+			frm.action = "<%=cPath%>" + "/shop/shop.do";
+			
+			// 폼 제출
+			frm.submit();
+			
+			const pageListObj = (<%= list %>);
+		   	
+		    $("#page_list").empty();
+		    $.each(pageListObj, function(index, page) {
+		    	let row = $("<ul onclick ='pageListBtn("+page.shopNo+")'></ul>");
+		          row.append($("<li class='shop_name'></li>").text(page.shopName));
+		          row.append($("<li></li>").text(page.shopLoc));
+		          row.append($("<li></li>").text(page.reviewCnt));
+		          //row.append($("<li></li>").text(page.shopNo));
+		          $("#page_list").append(row);
+		      });
+		  }
+		}, true);
+	});
 	
 
 </script>
@@ -73,7 +107,7 @@ $("#search_form").ready(function() {
         <form action="/TWOREE/shop/shop.do" name="search_form" method="get" id="search_form">
             <div class="form_inside">
                 <div>
-                    <input type="hidden" name="work_div"  id="work_div" placeholder="작업구분">
+                    <input type="hidden" name="work_div"  id="work_div" value="doRetrieve" placeholder="작업구분">
                     <input type="hidden" name="page_size"   id="page_size"  placeholder="페이지 번호">        
                     <input type="hidden" name="seq"       id="seq"      placeholder="순번">
                 </div>  
@@ -89,7 +123,10 @@ $("#search_form").ready(function() {
                 </div>
                 <div>
                     <input type="search" name="search_word" class="search_word"  id="search_word" placeholder="검색어를 입력하세요  " >
-                </div>
+                </div>   
+                <div>                
+					<input type="submit" name="search_btn" class="main_btn" id="search_btn" value="검색">
+                </div>          
             </div>    
 		</form>
         <div id="user_info_page" class="user_info_page">
