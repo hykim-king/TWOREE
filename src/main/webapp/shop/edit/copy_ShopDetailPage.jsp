@@ -99,6 +99,7 @@
                $("#menuList").append(li);
          });
          
+      
          $("#reviewList").empty();
          $.each(reviewListObj, function(index, review) {
                let li = $("<li></li>");
